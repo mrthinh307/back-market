@@ -1,0 +1,88 @@
+/* =============================
+   🌍 Base Styles - Back Market
+   ============================= */
+
+/* Root Variables */
+:root {
+    --bg-color-1: #F8F9FC;
+    --bg-color-2: #FFFFFF;
+    --font-color-1: #0E1016;
+    --font-color-2: #5A5D63;
+    --primary-color: #00B34F;
+    --border-color: #D1D5DB;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'DupletOpen-Regular', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color-1);
+    color: var(--font-color-1);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+button {
+    all: unset;
+    cursor: pointer;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 1184px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+/* Responsive */
+/* @media (max-width: 1199px) {
+    .container {
+        max-width: 95%;
+    }
+}
+
+@media (max-width: 991px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        max-width: 540px;
+    }
+}
+
+@media (max-width: 575px) {
+    .container {
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+} */
