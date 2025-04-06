@@ -23,10 +23,14 @@
     font-family: 'DupletOpen-Regular', sans-serif;
 }
 
+html {
+    font-size: 62.5%;
+}
+
 body {
     background-color: var(--bg-color-1);
     color: var(--font-color-1);
-    font-size: 14px;
+    font-size: 1.4rem; /* 14px */
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
