@@ -1,0 +1,66 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'DupletOpen-Regular';
+  src: url('/fonts/DupletOpen-Regular.otf') format('opentype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DupletOpen-Bold';
+  src: url('/fonts/DupletOpen-Semibold.otf') format('opentype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DupletOpen-Light';
+  src: url('/fonts/DupletOpen-Light.otf') format('opentype');
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Custom CSS Variables for Tailwind v4 */
+@theme {
+  --font-heading: var(--font-heading, 'DupletOpen', serif);
+  --font-duplet-light: 'DupletOpen-Light', sans-serif;
+  --font-duplet-regular: 'DupletOpen-Regular', sans-serif;
+  --font-duplet-bold: 'DupletOpen-Bold', sans-serif;
+
+  --color-background: #f8f9fc;
+  --color-content: #0e1016;
+  --color-muted: #5b5d62;
+
+  --radius-sm: 0.375rem; /* 6px */
+  --radius-lg: 0.75rem; /* 12px */
+
+  --shadow-md: 0 4px 8px #00000014;
+  --shadow-lg: 0 8px 16px #0000001f;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-content font-duplet-regular;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+
+  section,
+  main {
+    @apply flex justify-center;
+  }
+}
+
+@layer utilities {
+  .container {
+    @apply max-w-full grow px-6 lg:max-w-[1184px] lg:basis-full lg:px-8;
+  }
+}

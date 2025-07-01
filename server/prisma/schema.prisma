@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+  SELLER
+}
+
+enum Condition {
+  NEW
+  REFURBISHED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  COMPLETED
+  CANCELED
+}
+
+model User {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  hash       String
+  firstName  String
+  lastName  String
+  role       Role     @default(USER)
+  createdAt  DateTime @default(now())
+
+  products   Product[]   @relation("UserProducts")
+  orders     Order[]     @relation("UserOrders")
+  reviews    Review[]
+
+  @@map("users")
+}
+
+model Product {
+  id          String         @id @default(cuid())
+  title       String
+  description String
+  price       Float
+  condition   Condition
+  createdAt   DateTime       @default(now())
+
+  category    Category?      @relation(fields: [categoryId], references: [id])
+  categoryId  String?
+
+  seller      User           @relation("UserProducts", fields: [sellerId], references: [id])
+  sellerId    String
+
+  images      ProductImage[]
+  reviews     Review[]
+
+  orders      Order[]
+
+  @@map("products")
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  url       String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+
+  @@map("product_images")
+}
+
+model Order {
+  id         String       @id @default(cuid())
+  buyer      User         @relation("UserOrders", fields: [buyerId], references: [id])
+  buyerId    String
+
+  product    Product      @relation(fields: [productId], references: [id])
+  productId  String
+
+  quantity   Int
+  totalPrice Float
+  status     OrderStatus
+  createdAt  DateTime     @default(now())
+
+  @@map("orders")
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+
+  @@map("reviews")
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  products  Product[]
+
+  @@map("categories")
+}
