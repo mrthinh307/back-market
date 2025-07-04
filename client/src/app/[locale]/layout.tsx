@@ -1,13 +1,15 @@
+import React from 'react';
 import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { headingFont } from '@/libs/Fonts';
-import { routing } from '@/libs/I18nRouting';
+
+import { routing } from '@/libs/i18n/I18nRouting';
 import '@/styles/global.css';
+import { Toaster } from '@/components/ui/sonner';
 
 export const metadata: Metadata = {
-  title: 'Refurbished tech that\'s better for the planet | Back Market',
+  title: 'Back Market',
   icons: [
     {
       rel: 'apple-touch-icon',
@@ -33,8 +35,7 @@ export const metadata: Metadata = {
 };
 
 export function generateStaticParams() {
-  return routing.locales.map(locale => ({ locale }));
-  // [{ locale: 'en' }, { locale: 'vn' }]
+  return routing.locales.map((locale) => ({ locale }));
 }
 
 export default async function RootLayout(props: {
@@ -50,11 +51,10 @@ export default async function RootLayout(props: {
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} suppressHydrationWarning className={`${headingFont.variable}`}>
+    <html lang={locale} suppressHydrationWarning className={locale}>
       <body>
-        <NextIntlClientProvider>
-          {props.children}
-        </NextIntlClientProvider>
+        <NextIntlClientProvider>{props.children}</NextIntlClientProvider>
+        <Toaster position="top-right" />
       </body>
     </html>
   );

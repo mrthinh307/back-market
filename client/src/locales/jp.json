@@ -1,0 +1,30 @@
+{
+  "RootLayout": {
+    "home_link": "Home",
+    "about_link": "About",
+    "counter_link": "Counter",
+    "portfolio_link": "Portfolio",
+    "sign_in_link": "Log in",
+    "sign_up_link": "Sign up"
+  },
+  "EmailForm": {
+    "meta_title": "ログイン",
+    "meta_description": "使いやすいログインプロセスで、スムーズにアカウントにサインインできます。",
+    "email_form_title": "どなたですか？",
+    "next_button": "次へ",
+    "continue_with_google": "Googleで続行",
+    "continue_with_apple": "Appleで続行",
+    "privacy_policy": "プライバシーポリシー",
+    "or": "または",
+    "email_label": "メールアドレス"
+  },
+  "PasswordForm": {
+    "glad_to_see_you": "おかえりなさい！また会えて嬉しいです！",
+    "enter_your_password": "情報を取得するにはパスワードを入力してください。",
+    "where_is_your_email": "あなたのメールアドレスはどこですか？=))",
+    "go_back": "メールアドレスが違いますか？戻る",
+    "password_label": "パスワード",
+    "forgot_password": "パスワードをお忘れですか？",
+    "sign_in_button": "サインイン"
+  }
+}

@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -31,7 +31,7 @@
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: #0E1016;
+  --primary: #0e1016;
   --primary-foreground: oklch(0.984 0.003 247.858);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
@@ -134,20 +134,25 @@
 
 /* Custom CSS Variables for Tailwind v4 */
 @theme {
-  --font-heading: var(--font-heading, 'DupletOpen', serif);
+  --font-heading: 'Cormorand Garamond', serif;
   --font-duplet-light: 'DupletOpen-Light', sans-serif;
   --font-duplet-regular: 'DupletOpen-Regular', sans-serif;
   --font-duplet-bold: 'DupletOpen-Bold', sans-serif;
 
   --color-background: #f8f9fc;
   --color-content: #0e1016;
-  --color-content-secondary: #2F3137;
+  --color-content-secondary: #2f3137;
   --color-muted: #5b5d62;
   --color-input-hover: #edeff3;
   --color-input-disabled: #0e1016;
   --color-input-border: #818388;
   --color-input-outline: #c3c5cb;
-  --color-button-hover: #323339; 
+  --color-dark-button-hover: #323339;
+  --color-light-button-hover: #f1f1f1;
+  --color-danger: #b71029;
+  --color-danger-secondary: hsla(2, 100%, 85%);
+  --color-success: hsl(149, 67%, 61%);
+  --color-button-disabled: #f3f3f3;
 
   --radius-sm: 0.375rem; /* 6px */
   --radius-lg: 0.75rem; /* 12px */
@@ -155,6 +160,11 @@
   --shadow-sm: 0 2px 4px #0000000d;
   --shadow-md: 0 4px 8px #00000014;
   --shadow-lg: 0 8px 16px #0000001f;
+
+  --breakpoint-2xl: 1440px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-lg: 992px;
+  --breakpoint-md: 768px;
 }
 
 @layer base {
@@ -171,12 +181,13 @@
     @apply bg-background text-content font-duplet-regular;
   }
 
+  html.jp {
+    @apply font-[500];
+  }
+
   h1,
   h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h3 {
     @apply font-heading;
   }
 
@@ -188,7 +199,7 @@
 
 @layer utilities {
   .container {
-    @apply max-w-full grow px-6 lg:max-w-[1184px] lg:basis-full lg:px-8;
+    @apply max-w-full grow px-6 xl:max-w-[1184px] xl:basis-full xl:px-8;
   }
 
   .content-center {
