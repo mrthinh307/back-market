@@ -62,6 +62,18 @@ export default antfu(
       'test/padding-around-all': 'error', // Add padding in test files
       'test/prefer-lowercase-title': 'off', // Allow using uppercase titles in test titles
       'style/jsx-quotes': 'off', // JSX code
+      'no-console': 'off', // Allow console logs
+      'style/multiline-ternary': 'off',
+      'perfectionist/sort-named-imports': 'off', // Disable sorting of array includes
+      'perfectionist/sort-exports': 'off', // Disable sorting of exports
+      'perfectionist/sort-imports': 'off', // Disable sorting of imports
+      'style/jsx-closing-tag-location': 'off', // Disable closing tag location rule
+      'style/no-trailing-spaces': 'off', // Disable trailing spaces rule
+      'style/arrow-parens': 'off', // Disable arrow parens rule
+      'prefer-arrow-callback': 'off', // Disable prefer arrow callback rule
+      'style/jsx-curly-newline': 'off', // Disable JSX curly newline rule
+      'react-hooks-extra/no-direct-set-state-in-use-effect': 'off', // Disable direct set state in useEffect
+      'style/operator-linebreak': 'off', // Disable operator linebreak rule
     },
   },
 );
