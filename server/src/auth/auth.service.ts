@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-
-import { LoginDto, SignupDto } from './dto';
-import * as argon from 'argon2';
-import { PrismaService } from '../prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import * as argon from 'argon2';
+
+import { PrismaService } from '../prisma/prisma.service';
+import { LoginDto, SignupDto } from './dto';
+import { JwtPayload, LoginResult, TokenPair } from './types';
 
 @Injectable()
 export class AuthService {
@@ -15,9 +17,10 @@ export class AuthService {
     private config: ConfigService,
   ) {}
 
-  async signup(dto: SignupDto) {
+  // SIGN UP
+  async signup(dto: SignupDto): Promise<TokenPair> {
     const hash = await argon.hash(dto.password);
-    // save the new user in the database
+
     try {
       const user = await this.prisma.user.create({
         data: {
@@ -28,73 +31,103 @@ export class AuthService {
         },
       });
 
-      // return the saved user without hash
       return this.signToken(user.id, user.email);
     } catch (error) {
-      if (error instanceof PrismaClientKnownRequestError) {
-        if (error.code === 'P2002') {
-          throw new ForbiddenException('Credentials taken');
-        }
+      if (
+        error instanceof PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ForbiddenException('Credentials taken');
       }
       throw error;
     }
   }
 
-  async login(dto: LoginDto) {
-    // find the user by email
+  // LOGIN
+  async login(dto: LoginDto): Promise<LoginResult> {
     const user = await this.prisma.user.findUnique({
-      where: {
-        email: dto.email,
-      },
+      where: { email: dto.email },
     });
 
     // Phase 1: Only email is provided
     if (!dto.password) {
-      if (!user) {
-        return {
-          action: 'signup',
-          message: 'Email not found. Forwarding to Signup form.',
-        };
-      }
       return {
-        action: 'login',
-        message: 'Email found. Forwarding to Login form.',
+        action: user ? 'login' : 'signup',
+        message: user
+          ? 'Email found. Forwarding to Login form.'
+          : 'Email not found. Forwarding to Signup form.',
       };
     }
 
-    // Phase 2: Email and password are provided
+    // Phase 2: Email + password provided
     if (!user) {
       throw new ForbiddenException(
         'User not found. Please verify your credentials.',
       );
     }
 
-    // compare the password
     const isPasswordValid = await argon.verify(user.hash, dto.password);
     if (!isPasswordValid) {
-      throw new ForbiddenException('Invalid credentials');
+      throw new ForbiddenException('Password incorrect. Please try again.');
     }
 
-    return this.signToken(user.id, user.email);
+    const tokens = await this.signToken(user.id, user.email);
+
+    const { hash: _hash, ...userWithoutPassword } = user;
+
+    return {
+      message: 'Login successful',
+      user: userWithoutPassword,
+      access_token: tokens.access_token,
+      refresh_token: tokens.refresh_token,
+    };
   }
 
-  async signToken(
-    userId: string,
-    email: string,
-  ): Promise<{ access_token: string }> {
-    const payload = {
-      sub: userId,
-      email,
-    };
-    const secret = this.config.get<string>('JWT_SECRET');
+  async signToken(userId: string, email: string): Promise<TokenPair> {
+    const payload = { sub: userId, email };
+    const secret = this.config.getOrThrow<string>('JWT_SECRET');
 
-    const token = await this.jwt.signAsync(payload, {
+    const accessToken = await this.jwt.signAsync(payload, {
       expiresIn: '15m',
-      secret: secret,
+      secret,
+    });
+
+    const refreshToken = await this.jwt.signAsync(payload, {
+      expiresIn: '7d',
+      secret,
     });
 
     return {
-      access_token: token,
+      access_token: accessToken,
+      refresh_token: refreshToken,
     };
+  }
+
+  verifyRefreshToken(token: string) {
+    return this.jwt.verify(token);
+  }
+
+  // REFRESH TOKENS
+  async refreshTokens(refreshToken: string): Promise<TokenPair> {
+    try {
+      const payload = await this.jwt.verifyAsync<JwtPayload>(refreshToken, {
+        secret: this.config.getOrThrow<string>('JWT_SECRET'),
+      });
+
+      const user = await this.prisma.user.findUnique({
+        where: { id: payload.sub },
+      });
+
+      if (!user) {
+        throw new ForbiddenException('User no longer exists');
+      }
+
+      // (Optional) Có thể kiểm tra refresh token có bị revoke hay không
+
+      return await this.signToken(user.id, user.email);
+    } catch (error) {
+      console.error('Refresh token verification failed:', error);
+      throw new ForbiddenException('Invalid refresh token: ');
+    }
   }
 }

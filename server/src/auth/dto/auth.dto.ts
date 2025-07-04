@@ -1,4 +1,10 @@
-import { IsEmail, IsString, IsNotEmpty, Length } from 'class-validator';
+import {
+  IsEmail,
+  IsString,
+  IsNotEmpty,
+  Length,
+  IsOptional,
+} from 'class-validator';
 
 // DTO cho việc login - password là optional để support 2 phases
 export class LoginDto {
@@ -6,8 +12,8 @@ export class LoginDto {
   @IsNotEmpty()
   email: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
   password?: string;
 }
 
