@@ -12,13 +12,7 @@ import { Request, Response, CookieOptions } from 'express';
 
 import { AuthService } from './auth.service';
 import { LoginDto, SignupDto } from './dto';
-import { LoginResult, LoginSuccessResponse, RequestWithCookies } from './types';
-
-function isLoginSuccessResponse(
-  result: LoginResult,
-): result is LoginSuccessResponse {
-  return 'access_token' in result;
-}
+import { RequestWithCookies } from './types';
 
 function getCookieOptions(): CookieOptions {
   return {
@@ -29,13 +23,29 @@ function getCookieOptions(): CookieOptions {
   };
 }
 
+function setAuthCookies(
+  res: Response,
+  tokens: { access_token: string; refresh_token: string },
+) {
+  res.cookie('refresh_token', tokens.refresh_token, getCookieOptions());
+}
+
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('signup')
-  signup(@Body() dto: SignupDto) {
-    return this.authService.signup(dto);
+  async signup(
+    @Body() dto: SignupDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const tokens = await this.authService.signup(dto);
+
+    setAuthCookies(res, tokens);
+
+    return {
+      access_token: tokens.access_token,
+    };
   }
 
   @HttpCode(HttpStatus.OK)
@@ -46,13 +56,11 @@ export class AuthController {
   ) {
     const result = await this.authService.login(dto);
 
-    if (isLoginSuccessResponse(result)) {
-      res.cookie('refresh_token', result.refresh_token, getCookieOptions());
-      res.cookie('access_token', result.access_token, getCookieOptions());
-
+    // Check if the result is a token pair => Successful Login
+    if (typeof result === 'object' && 'access_token' in result) {
+      setAuthCookies(res, result);
       return {
-        message: result.message,
-        user: result.user,
+        access_token: result.access_token,
       };
     }
 
@@ -73,15 +81,16 @@ export class AuthController {
     const newTokens = await this.authService.refreshTokens(refreshToken);
 
     res.cookie('refresh_token', newTokens.refresh_token, getCookieOptions());
-    res.cookie('access_token', newTokens.access_token, getCookieOptions());
 
-    return { message: 'Tokens refreshed' };
+    return { access_token: newTokens.access_token };
   }
 
   @HttpCode(HttpStatus.OK)
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
     res.clearCookie('refresh_token');
-    return { message: 'Logged out' };
+    return res.status(HttpStatus.OK).json({
+      message: 'Logged out successfully',
+    });
   }
 }

@@ -1,25 +1,40 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import * as argon from 'argon2';
 
 import { PrismaService } from '../prisma/prisma.service';
 import { LoginDto, SignupDto } from './dto';
-import { JwtPayload, LoginResult, TokenPair } from './types';
+import { JwtPayload, TokenPair, LoginPhaseResponse } from './types';
 
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwt: JwtService,
-    private config: ConfigService,
   ) {}
+
+  private async hashPassword(password: string): Promise<string> {
+    return await argon.hash(password);
+  }
+
+  private async signToken(userId: string, email: string): Promise<TokenPair> {
+    const payload = { sub: userId, email };
+
+    const accessToken = await this.jwt.signAsync(payload);
+    const refreshToken = await this.jwt.signAsync(payload, {
+      expiresIn: '7d', // 👈 override default value
+    });
+
+    return {
+      access_token: accessToken,
+      refresh_token: refreshToken,
+    };
+  }
 
   // SIGN UP
   async signup(dto: SignupDto): Promise<TokenPair> {
-    const hash = await argon.hash(dto.password);
+    const hash = await this.hashPassword(dto.password);
 
     try {
       const user = await this.prisma.user.create({
@@ -37,14 +52,14 @@ export class AuthService {
         error instanceof PrismaClientKnownRequestError &&
         error.code === 'P2002'
       ) {
-        throw new ForbiddenException('Credentials taken');
+        throw new ForbiddenException('Credential taken');
       }
       throw error;
     }
   }
 
   // LOGIN
-  async login(dto: LoginDto): Promise<LoginResult> {
+  async login(dto: LoginDto): Promise<TokenPair | LoginPhaseResponse> {
     const user = await this.prisma.user.findUnique({
       where: { email: dto.email },
     });
@@ -71,48 +86,13 @@ export class AuthService {
       throw new ForbiddenException('Password incorrect. Please try again.');
     }
 
-    const tokens = await this.signToken(user.id, user.email);
-
-    const { hash: _hash, ...userWithoutPassword } = user;
-
-    return {
-      message: 'Login successful',
-      user: userWithoutPassword,
-      access_token: tokens.access_token,
-      refresh_token: tokens.refresh_token,
-    };
-  }
-
-  async signToken(userId: string, email: string): Promise<TokenPair> {
-    const payload = { sub: userId, email };
-    const secret = this.config.getOrThrow<string>('JWT_SECRET');
-
-    const accessToken = await this.jwt.signAsync(payload, {
-      expiresIn: '15m',
-      secret,
-    });
-
-    const refreshToken = await this.jwt.signAsync(payload, {
-      expiresIn: '7d',
-      secret,
-    });
-
-    return {
-      access_token: accessToken,
-      refresh_token: refreshToken,
-    };
-  }
-
-  verifyRefreshToken(token: string) {
-    return this.jwt.verify(token);
+    return this.signToken(user.id, user.email);
   }
 
   // REFRESH TOKENS
   async refreshTokens(refreshToken: string): Promise<TokenPair> {
     try {
-      const payload = await this.jwt.verifyAsync<JwtPayload>(refreshToken, {
-        secret: this.config.getOrThrow<string>('JWT_SECRET'),
-      });
+      const payload = await this.jwt.verifyAsync<JwtPayload>(refreshToken);
 
       const user = await this.prisma.user.findUnique({
         where: { id: payload.sub },
@@ -127,7 +107,7 @@ export class AuthService {
       return await this.signToken(user.id, user.email);
     } catch (error) {
       console.error('Refresh token verification failed:', error);
-      throw new ForbiddenException('Invalid refresh token: ');
+      throw new ForbiddenException('Invalid refresh token');
     }
   }
 }
