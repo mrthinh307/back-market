@@ -7,24 +7,41 @@
     "sign_in_link": "Log in",
     "sign_up_link": "Sign up"
   },
-  "EmailForm": {
+  "AuthFormContainer": {
+    "go_back": "Not your email? Go Back",
+    "privacy_policy": "Privacy Policy"
+  },
+  "EmailCredentials": {
     "meta_title": "Log in",
     "meta_description": "Seamlessly sign in to your account with our user-friendly login process.",
     "email_form_title": "Who goes there?",
     "next_button": "Next",
     "continue_with_google": "Continue with Google",
     "continue_with_apple": "Continue with Apple",
-    "privacy_policy": "Privacy Policy",
     "or": "or",
     "email_label": "Email"
   },
-  "PasswordForm": {
+  "LoginCredentials": {
     "glad_to_see_you": "Glad to see you back again!",
     "enter_your_password": "Enter your password to retrieve your information.",
     "where_is_your_email": "Where is your email ? =))",
-    "go_back": "Not your email? Go Back",
     "password_label": "Password",
     "forgot_password": "Forgot your Password ?",
     "sign_in_button": "Sign in"
+  },
+  "SignUpCredentials": {
+    "meta_title": "Sign up",
+    "signup_title": "Open sesame. I'm signing up.",
+    "signup_subtitle": "Track orders and get access to the goodest tech.",
+    "password_label": "Password",
+    "password_description": "At least 8 characters, including 1 uppercase letter, 1 lowercase letter and 1 digit (0–9).",
+    "first_name_label": "First Name",
+    "last_name_label": "Last Name",
+    "checkbox_description": "Send me hilarious marketing emails. If I don't giggle, I'll unsubscribe.",
+    "terms_of_use_description": "By creating an account, you agree to Back Market's",
+    "terms_of_use": "Terms of Use.",  
+    "create_account": "Create Account",
+    "privacy_policy_description": "We need this info to create your account and manage your orders and trade-ins on our marketplace. Your info is processed by Back Market (JUNG SAS) to offer you our services, manage and track your orders and trade-ins, meet legal requirements, and fight and prevent fraud. You have the right to access, rectify, limit, delete your personal data and — where applicable — object to commercial prospecting. Find more info in our",
+    "privacy_policy": "Privacy Policy."
   }
 }

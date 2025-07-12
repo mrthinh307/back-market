@@ -1,7 +1,9 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
 import Image from 'next/image';
+import React, { memo, useRef, useState } from 'react';
+
+import { hidePasswordIcon, showPasswordIcon } from '@/public/assets/images';
 import clearIcon from '@/public/assets/images/clear-input.svg';
 
 type InputProps = {
@@ -22,12 +24,13 @@ const Input = ({
   icon,
   description,
   isShowDescription = false,
-  error,
+  error = false,
   value: controlledValue,
   onChange,
   className,
 }: InputProps) => {
   const [internalValue, setInternalValue] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const value = controlledValue !== undefined ? controlledValue : internalValue;
@@ -37,6 +40,10 @@ const Input = ({
       setInternalValue(e.target.value);
     }
     onChange?.(e);
+  };
+
+  const handlePasswordToggle = () => {
+    setShowPassword((prev) => !prev);
   };
 
   const handleClear = () => {
@@ -52,15 +59,17 @@ const Input = ({
   };
 
   return (
-    <div className={`relative group ${className}`}>
+    <div className={`relative mb-3 ${className}`}>
       <input
         ref={inputRef}
-        type={type || 'text'}
+        type={
+          type === 'password' ? (showPassword ? 'text' : 'password') : 'text'
+        }
         value={value}
         onChange={handleChange}
         autoComplete="off"
         placeholder=" "
-        className={`peer rounded-sm border text-content w-full h-[48px] min-w-0 relative bg-white duration-200 transition-all hover:bg-input-hover focus:bg-input-hover focus:outline-none focus:ring-2 px-3 pt-6 pb-2 group-hover:focus:bg-white ${
+        className={`peer rounded-sm border text-content w-full h-[48px] min-w-0 relative bg-white duration-200 transition-all hover:bg-input-hover focus:outline-none focus:ring-2 px-3 pt-6 pb-2 ${
           error
             ? 'border-danger focus:border-danger focus:ring-red-200'
             : 'border-input-border focus:border-content focus:ring-input-outline'
@@ -75,7 +84,7 @@ const Input = ({
         {label}
       </label>
       <div className="rounded-sm absolute right-1 top-1 z-[1] size-10 motion-safe:transition-colors motion-safe:duration-200">
-        {(type === 'password' || value) && (
+        {type !== 'password' && value && (
           <button
             type="button"
             aria-label="Clear input"
@@ -84,6 +93,24 @@ const Input = ({
             className="input-icon"
           >
             <Image src={clearIcon} alt="Clear input" />
+          </button>
+        )}
+        {type === 'password' && (
+          <button
+            className="input-icon"
+            onClick={handlePasswordToggle}
+            type="button"
+          >
+            <Image
+              src={showPasswordIcon}
+              alt="Show password"
+              className={`absolute ${showPassword ? 'opacity-0' : 'opacity-100'}`}
+            />
+            <Image
+              src={hidePasswordIcon}
+              alt="Hide password"
+              className={`absolute ${showPassword ? 'opacity-100' : 'opacity-0'}`}
+            />
           </button>
         )}
         {!value && icon && (
@@ -101,4 +128,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default memo(Input);

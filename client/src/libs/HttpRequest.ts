@@ -1,51 +1,95 @@
 import axios from 'axios';
 import type { AxiosRequestConfig } from 'axios';
-import { Env } from '@/libs/Env';
 import { toast } from 'sonner';
+import { Env } from '@/libs/Env';
 import { errorToastProps } from './toast/toast-props';
+import { getAccessToken, setAccessToken } from './token-manager';
+import { refreshToken } from '@/api/auth.api';
 
 const httpRequest = axios.create({
   baseURL: Env.NEXT_PUBLIC_NEXT_BASE_URL,
   withCredentials: true,
 });
 
+httpRequest.interceptors.request.use((config) => {
+  const token = getAccessToken();
+  if (token && config.headers) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+let isRefreshing = false;
+let failedQueue: any[] = [];
+
+const processQueue = (error: any, token: string | null = null) => {
+  failedQueue.forEach((prom) => {
+    if (error) prom.reject(error);
+    else prom.resolve(token);
+  });
+  failedQueue = [];
+};
+
 httpRequest.interceptors.response.use(
   (res) => res,
-  (err) => {
+  async (err) => {
+    const originalRequest = err.config;
     const status = err.response?.status;
     const message = err.response?.data?.message;
-    const url = err.config?.url;
 
-    switch (status) {
-      case 401:
-        console.warn('🔒 Unauthorized - Redirect to login...');
-        // logoutUser(); // clear token, redirect login
-        break;
-      case 403:
-        console.warn('❌ Forbidden Authentication');
-        toast.error('Oops!', {
-          description: message || 'Invalid credentials',
-          ...errorToastProps,
+    if (status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({
+            resolve: (token: string) => {
+              originalRequest.headers.Authorization = `Bearer ${token}`;
+              resolve(httpRequest(originalRequest));
+            },
+            reject,
+          });
         });
-        break;
-      case 500:
-        console.warn('🔥 Server error');
-        break;
-      default:
-        if (!status) {
-          console.warn('🌐 Network error');
-        } else {
-          console.warn(`⚠️ Error ${status} at ${url}`);
-        }
+      }
+
+      isRefreshing = true;
+
+      try {
+        const newTokens = await refreshToken();
+        const newAccessToken = newTokens.access_token;
+
+        setAccessToken(newAccessToken);
+        httpRequest.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
+        processQueue(null, newAccessToken);
+
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        return httpRequest(originalRequest);
+      } catch (refreshError) {
+        processQueue(refreshError, null);
+        // FIXME: Handle refresh token error
+        window.location.href = '/en/email';
+        return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
+      }
     }
 
-    // Hiển thị message nếu cần
-    // toast.error(message);
+    if (status === 403) {
+      // FIXME: Handle 403 error
+      // window.location.href = '/en/email';
+    } else if (status === 500) {
+      toast.error('Server error', { ...errorToastProps });
+    } else if (!status) {
+      toast.error('Network error', { ...errorToastProps });
+    } else {
+      toast.error(message, { ...errorToastProps });
+    }
 
     return Promise.reject(err);
   },
 );
 
+// Helper functions for GET and POST requests
 export const get = async (path: string, config?: AxiosRequestConfig) => {
   const response = await httpRequest.get(path, config);
   return response.data;

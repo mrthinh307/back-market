@@ -186,8 +186,7 @@
   }
 
   h1,
-  h2,
-  h3 {
+  h2 {
     @apply font-heading;
   }
 
@@ -208,5 +207,48 @@
 
   .input-icon {
     @apply rounded-full flex items-center justify-center shrink-0 cursor-pointer appearance-none border-0 no-underline motion-safe:transition motion-safe:duration-200 motion-safe:ease-in size-10 bg-transparent hover:bg-input-hover;
+  }
+
+  /* Custom checkbox styling */
+  input[type='checkbox'] {
+    appearance: none;
+    border: 1px solid var(--color-content);
+    border-radius: 5.5px;
+    background-color: transparent;
+    cursor: pointer;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  input[type='checkbox']:checked {
+    background-color: var(--color-content);
+    border-color: var(--color-content);
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M13 4L6 11L3 8' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 14px;
+  }
+
+  input[type='checkbox']:hover {
+    background-color: var(--color-input-hover);
+  }
+
+  input[type='checkbox']:checked {
+    background-color: var(--color-content);
+    border-color: var(--color-content);
+  }
+
+  @keyframes spin-360 {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin {
+    animation: spin-360 2.5s linear infinite;
   }
 }

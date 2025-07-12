@@ -64,9 +64,9 @@ export default antfu(
       'style/jsx-quotes': 'off', // JSX code
       'no-console': 'off', // Allow console logs
       'style/multiline-ternary': 'off',
-      'perfectionist/sort-named-imports': 'off', // Disable sorting of array includes
+      'perfectionist/sort-imports': 'on', // Enable sorting of imports
+      'perfectionist/sort-named-imports': 'on', // Enable sorting of named imports
       'perfectionist/sort-exports': 'off', // Disable sorting of exports
-      'perfectionist/sort-imports': 'off', // Disable sorting of imports
       'style/jsx-closing-tag-location': 'off', // Disable closing tag location rule
       'style/no-trailing-spaces': 'off', // Disable trailing spaces rule
       'style/arrow-parens': 'off', // Disable arrow parens rule
@@ -74,6 +74,7 @@ export default antfu(
       'style/jsx-curly-newline': 'off', // Disable JSX curly newline rule
       'react-hooks-extra/no-direct-set-state-in-use-effect': 'off', // Disable direct set state in useEffect
       'style/operator-linebreak': 'off', // Disable operator linebreak rule
+      'style/jsx-one-expression-per-line': 'off', // Disable one expression per line in JSX
     },
   },
 );

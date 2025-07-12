@@ -1,6 +1,26 @@
+'use client';
+
 import Link from 'next/link';
 
+import { logout } from '@/api/auth.api';
+import { useAuth } from '@/contexts/AuthContext';
+import { useLocale } from 'next-intl';
+
 export default function Home() {
+  const locale = useLocale();
+  const { accessToken, setAccessToken } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Logout failed:', error);
+    } finally {
+      setAccessToken(null); 
+      window.location.href = `/${locale}/email`;
+    }
+  }
+
   return (
     <div className="container mx-auto p-8">
       <h1 className="text-blue-600 text-4xl font-bold mb-4 font-heading">
@@ -17,6 +37,17 @@ export default function Home() {
           Go to Sign In Page
         </Link>
       </div>
+      <p className="text-muted mt-2">
+        Access Token: <span className="text-content">{accessToken}</span>
+      </p>
+      {accessToken && (
+        <button
+          className="cursor-pointer"
+          onClick={handleLogout}
+        >
+          Log out
+        </button>
+      )}
     </div>
   );
 }

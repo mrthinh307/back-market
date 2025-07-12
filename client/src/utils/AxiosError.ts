@@ -10,8 +10,8 @@ export const parseAxiosError = (
     const axiosErr = err as AxiosError<any>;
     return {
       status: axiosErr.response?.status,
-      message: axiosErr.response?.data?.message || 'Lỗi không xác định',
+      message: axiosErr.response?.data?.message || 'Unknown error occurred',
     };
   }
-  return { message: 'Lỗi không xác định' };
+  return { message: 'Unknown error occurred', };
 };
