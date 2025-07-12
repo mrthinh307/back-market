@@ -40,6 +40,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
     "cookie-parser": "^1.4.7",
+    "node-fetch": "2.6.7",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "prisma": "^6.10.1",
@@ -93,5 +94,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "resolutions": {
+    "node-fetch": "2.6.7",
+    "isomorphic-fetch/node-fetch": "2.6.7"
   }
 }

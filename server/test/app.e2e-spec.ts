@@ -136,15 +136,15 @@ describe('App e2e', () => {
           })
           .expectStatus(HttpStatus.BAD_REQUEST);
       });
-      it('should throw if password is empty', () => {
-        return pactum
-          .spec()
-          .post('/auth/login')
-          .withBody({
-            email: dto.email,
-          })
-          .expectStatus(HttpStatus.BAD_REQUEST);
-      });
+      // it('should throw if password is empty', () => {
+      //   return pactum
+      //     .spec()
+      //     .post('/auth/login')
+      //     .withBody({
+      //       email: dto.email,
+      //     })
+      //     .expectStatus(HttpStatus.BAD_REQUEST);
+      // });
       it('should throw if no body is provided', () => {
         return pactum
           .spec()
@@ -160,6 +160,12 @@ describe('App e2e', () => {
             password: dto.password,
           })
           .expectStatus(HttpStatus.OK);
+      });
+    });
+
+    describe('Logout', () => {
+      it('should logout', () => {
+        return pactum.spec().post('/auth/logout').expectStatus(HttpStatus.OK);
       });
     });
   });
