@@ -1,11 +1,13 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { User } from '@prisma/client';
 import * as argon from 'argon2';
 
 import { PrismaService } from '../prisma/prisma.service';
 import { LoginDto, SignupDto } from './dto';
-import { JwtPayload, TokenPair, LoginPhaseResponse } from './types';
+import { JwtPayload, TokenPair, LoginPhaseResponse } from './auth.types';
+import { OAuthUserInfo } from './auth.types';
 
 @Injectable()
 export class AuthService {
@@ -30,6 +32,23 @@ export class AuthService {
       access_token: accessToken,
       refresh_token: refreshToken,
     };
+  }
+
+  private async findOrCreateOAuthUser(params: OAuthUserInfo): Promise<User> {
+    const { email, ...rest } = params;
+
+    let user = await this.prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      user = await this.prisma.user.create({
+        data: {
+          email,
+          ...rest,
+        },
+      });
+    }
+
+    return user;
   }
 
   // SIGN UP
@@ -81,11 +100,25 @@ export class AuthService {
       );
     }
 
-    const isPasswordValid = await argon.verify(user.hash, dto.password);
-    if (!isPasswordValid) {
-      throw new ForbiddenException('Password incorrect. Please try again.');
+    if (user.hash) {
+      const isPasswordValid = await argon.verify(user.hash, dto.password);
+      if (!isPasswordValid) {
+        throw new ForbiddenException('Password incorrect. Please try again.');
+      }
     }
 
+    return this.signToken(user.id, user.email);
+  }
+
+  // GOOGLE OAUTH LOGIN
+  async googleLogin(googleUser: OAuthUserInfo): Promise<TokenPair> {
+    const user = await this.findOrCreateOAuthUser(googleUser);
+    return this.signToken(user.id, user.email);
+  }
+
+  // FACEBOOK OAUTH LOGIN
+  async facebookLogin(facebookUser: OAuthUserInfo): Promise<TokenPair> {
+    const user = await this.findOrCreateOAuthUser(facebookUser);
     return this.signToken(user.id, user.email);
   }
 
