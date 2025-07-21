@@ -25,6 +25,7 @@ import {
 import { errorToastProps, successToastProps } from '@/libs/toast/toast-props';
 import { parseAxiosError } from '@/utils/AxiosError';
 import { Env } from '@/libs/Env';
+import { fetchProfile } from '@/api/user.api';
 
 interface AuthContextType {
   accessToken: string | null;
@@ -34,6 +35,7 @@ interface AuthContextType {
   signup: (params: SignUpParams) => Promise<void>;
   loginWithGoogle: () => void;
   loginWithFacebook: () => void;
+  getMe: () => Promise<any> | undefined;
 }
 
 interface SignUpParams {
@@ -51,6 +53,7 @@ const AuthContext = createContext<AuthContextType>({
   signup: async () => {},
   loginWithGoogle: () => {},
   loginWithFacebook: () => {},
+  getMe: async () => undefined,
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -95,7 +98,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       setIsLoading(true);
 
-      if (initialEmail) {
+      if (initialEmail && password) {
         const response = await loginWithPassword(initialEmail, password);
 
         toast.success('Welcome back !', {
@@ -211,6 +214,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const getMe = async () => {
+    if (!accessToken) {
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      
+      const userData = await fetchProfile();
+      console.log('User data fetched:', userData);
+      return userData;
+    } catch (err: any) {
+      const { message } = parseAxiosError(err);
+      toast.error(message || 'Failed to fetch user data.', {
+        ...errorToastProps,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -221,6 +245,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         signup,
         loginWithGoogle,
         loginWithFacebook,
+        getMe,
       }}
     >
       {children}

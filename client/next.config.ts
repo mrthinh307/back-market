@@ -9,6 +9,15 @@ const baseConfig: NextConfig = {
   },
   poweredByHeader: false,
   reactStrictMode: true,
+  async redirects() {
+    return [
+      {
+        source: '/:locale/admin/dashboard',
+        destination: '/:locale/admin',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 // Initialize the Next-Intl plugin
