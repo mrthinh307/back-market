@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Env } from '@/libs/Env';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '../ui/button';
-import Input from './Input';
+import FormInput from './FormInput';
 
 function LoginCredentials({ email: initialEmail }: { email?: string }) {
   const t = useTranslations('LoginCredentials');
@@ -22,7 +22,7 @@ function LoginCredentials({ email: initialEmail }: { email?: string }) {
 
   return (
     <>
-      <Input
+      <FormInput
         label={t('password_label')}
         type="password"
         value={password}

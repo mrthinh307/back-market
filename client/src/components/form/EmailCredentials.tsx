@@ -11,7 +11,7 @@ import { useEmailValidation } from '@/hooks/useAuthValidation';
 import { facebookIcon, googleIcon, mailBoxIcon } from '@/public/assets/images';
 import { parseAxiosError } from '@/utils/AxiosError';
 import { useAuth } from '@/contexts/AuthContext';
-import Input from './Input';
+import Input from './FormInput';
 
 function EmailCredentials() {
   const router = useRouter();
@@ -117,9 +117,9 @@ function EmailCredentials() {
       <div>
         <div className="my-6">
           <div className="content-center">
-            <hr className="border-[#dfe1e7] border-t grow" />
+            <hr className="border-muted border-t grow" />
             <span className="text-muted mx-4 mb-0.5">or</span>
-            <hr className="border-[#dfe1e7] border-t grow" />
+            <hr className="border-muted border-t grow" />
           </div>
         </div>
         <div className="flex flex-col gap-3">
@@ -133,7 +133,7 @@ function EmailCredentials() {
             {t('continue_with_google')}
           </Button>
           <Button variant="outline" type="button" onClick={handleLoginWithFacebook}>
-            <Image src={facebookIcon} alt="Facebook icon" className="size-5.5" />
+            <Image src={facebookIcon} alt="Facebook icon" className="size-5.5 dark:invert" />
             {t('continue_with_apple')}
           </Button>
         </div>

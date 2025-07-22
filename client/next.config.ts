@@ -12,8 +12,8 @@ const baseConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/:locale/admin/dashboard',
-        destination: '/:locale/admin',
+        source: '/:locale/admin',
+        destination: '/:locale/admin/dashboard',
         permanent: true,
       },
     ];

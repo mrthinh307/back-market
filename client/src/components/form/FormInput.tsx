@@ -5,6 +5,7 @@ import React, { memo, useRef, useState } from 'react';
 
 import { hidePasswordIcon, showPasswordIcon } from '@/public/assets/images';
 import clearIcon from '@/public/assets/images/clear-input.svg';
+import { Input } from '../ui/input';
 
 type InputProps = {
   type?: 'text' | 'password';
@@ -18,7 +19,7 @@ type InputProps = {
   className?: string;
 };
 
-const Input = ({
+const FormInput = ({
   type,
   label,
   icon,
@@ -60,7 +61,7 @@ const Input = ({
 
   return (
     <div className={`relative mb-3 ${className}`}>
-      <input
+      <Input
         ref={inputRef}
         type={
           type === 'password' ? (showPassword ? 'text' : 'password') : 'text'
@@ -69,15 +70,15 @@ const Input = ({
         onChange={handleChange}
         autoComplete="off"
         placeholder=" "
-        className={`peer rounded-sm border text-content w-full h-[48px] min-w-0 relative bg-white duration-200 transition-all hover:bg-input-hover focus:outline-none focus:ring-2 px-3 pt-6 pb-2 ${
+        className={`peer rounded-sm border text-primary w-full h-[48px] min-w-0 relative duration-200 transition-all hover:bg-input-hover dark:hover:bg-[#292524] focus:outline-none focus:ring-2 px-3 pt-6 pb-3 !text-base ${
           error
-            ? 'border-danger focus:border-danger focus:ring-red-200'
-            : 'border-input-border focus:border-content focus:ring-input-outline'
+            ? 'border-destructive focus:border-destructive focus:ring-red-200'
+            : 'border-dark'
         }`}
       />
       <label
         className="absolute left-3 top-3 text-base transition-all duration-200 ease-in-out
-                   peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-content
+                   peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-primary
                    peer-focus:top-1 peer-focus:text-xs peer-focus:text-muted
                    peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-muted pointer-events-none"
       >
@@ -92,7 +93,7 @@ const Input = ({
             onClick={handleClear}
             className="input-icon"
           >
-            <Image src={clearIcon} alt="Clear input" />
+            <Image src={clearIcon} alt="Clear input" className='text-primary dark:invert' />
           </button>
         )}
         {type === 'password' && (
@@ -104,23 +105,23 @@ const Input = ({
             <Image
               src={showPasswordIcon}
               alt="Show password"
-              className={`absolute ${showPassword ? 'opacity-0' : 'opacity-100'}`}
+              className={`absolute dark:invert ${showPassword ? 'opacity-0' : 'opacity-100'}`} 
             />
             <Image
               src={hidePasswordIcon}
               alt="Hide password"
-              className={`absolute ${showPassword ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute dark:invert ${showPassword ? 'opacity-100' : 'opacity-0'}`}
             />
           </button>
         )}
         {!value && icon && (
           <div className="input-icon pointer-events-none">
-            <Image src={icon} alt="Input icon" />
+            <Image src={icon} alt="Input icon" className='dark:invert' />
           </div>
         )}
       </div>
       {isShowDescription && (
-        <p className={`text-sm mt-2 ${error ? 'text-danger' : 'text-muted'}`}>
+        <p className={`text-sm mt-2 ${error ? 'text-destructive' : 'text-muted'}`}>
           {description}
         </p>
       )}
@@ -128,4 +129,4 @@ const Input = ({
   );
 };
 
-export default memo(Input);
+export default memo(FormInput);

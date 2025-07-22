@@ -24,82 +24,94 @@
   font-display: swap;
 }
 
-/* Shadcn UI Theme Variables */
+/* Shadcn UI Theme Variables (using in shadcnUi's components) */
 :root {
   --radius: 0.625rem;
+  --background: #f8f9fc;
+  --background-secondary: #fff;
+  --foreground: #0c0a09;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
+  --popover: #fff;
+  --popover-foreground: #0c0a09;
   --primary: #0e1016;
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
+  --primary-foreground: #fff;
+  --secondary: #2f3137;
   --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
+  --muted: #5b5d62;
+  --muted-secondary: #f4f5f4;
+  --muted-foreground: #79716b;
+  --accent: #f5f5f4;
   --accent-foreground: oklch(0.208 0.042 265.755);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.929 0.013 255.508);
+  --border: #e7e5e4;
+  --border-dark: #0e1016;
   --input: oklch(0.929 0.013 255.508);
+  --input-hover: #edeff3;
   --ring: oklch(0.704 0.04 256.788);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --sidebar: #fafafa;
+  --sidebar-foreground: #0c0a09;
+  --sidebar-primary: #1c1917;
+  --sidebar-primary-foreground: #fafafa;
+  --sidebar-accent: #f5f5f4;
+  --sidebar-accent-foreground: #1c1917;
+  --sidebar-border: #e7e5e4;
+  --sidebar-ring: #a6a09b;
+  --button-hover: #323339;
 }
 
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
+  --background: #1a1a1a;
+  --background-secondary: #000000;
+  --foreground: #fff;
+  --card: #1c1917;
+  --card-foreground: #fff;
+  --popover: #1c1917;
+  --popover-foreground: #fff;
+  --primary: #f9f9f9;
+  --primary-foreground: #0e1016;
+  --secondary: #fafafa;
+  --secondary-foreground: #fafafa;
+  --muted: #a1a1aa;
+  --muted-secondary: #1c1917;
+  --muted-foreground: #a6a09b;
+  --accent: #292524;
+  --accent-foreground: oklch(0.984 0.003 200.858);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-dark: rgba(255, 255, 255, 0.1);
   --input: oklch(1 0 0 / 15%);
+  --input-hover: #292524;
   --ring: oklch(0.551 0.027 264.364);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --sidebar: #1c1917;
+  --sidebar-foreground: #fafafa;
+  --sidebar-primary: #1447e6;
+  --sidebar-primary-foreground: #fafafa;
+  --sidebar-accent: #292524;
+  --sidebar-accent-foreground: #fafafa;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #79716b;
+  --button-hover: #f1f1f1;
 }
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
   --radius-xl: calc(var(--radius) + 4px);
+
   --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -110,12 +122,15 @@
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
+  --color-muted-secondary: var(--muted-secondary);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
-  --color-border: var(--border);
   --color-input: var(--input);
+  --color-input-hover: var(--input-hover);
+  --color-border: var(--border);
+  --color-dark: var(--border-dark); /* Dark border color used in most components in Back Market */
   --color-ring: var(--ring);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -130,32 +145,13 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-}
+  --color-button-hover: var(--button-hover);
+  --color-button-hover-foreground: var(--button-hover-foreground);
 
-/* Custom CSS Variables for Tailwind v4 */
-@theme {
   --font-heading: 'Cormorand Garamond', serif;
   --font-duplet-light: 'DupletOpen-Light', sans-serif;
   --font-duplet-regular: 'DupletOpen-Regular', sans-serif;
   --font-duplet-bold: 'DupletOpen-Bold', sans-serif;
-
-  --color-background: #f8f9fc;
-  --color-content: #0e1016;
-  --color-content-secondary: #2f3137;
-  --color-muted: #5b5d62;
-  --color-input-hover: #edeff3;
-  --color-input-disabled: #0e1016;
-  --color-input-border: #818388;
-  --color-input-outline: #c3c5cb;
-  --color-dark-button-hover: #323339;
-  --color-light-button-hover: #f1f1f1;
-  --color-danger: #b71029;
-  --color-danger-secondary: hsla(2, 100%, 85%);
-  --color-success: hsl(149, 67%, 61%);
-  --color-button-disabled: #f3f3f3;
-
-  --radius-sm: 0.375rem; /* 6px */
-  --radius-lg: 0.75rem; /* 12px */
 
   --shadow-sm: 0 2px 4px #0000000d;
   --shadow-md: 0 4px 8px #00000014;
@@ -171,14 +167,9 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
 
-@layer base {
   body {
-    @apply bg-background text-content font-duplet-regular;
+    @apply bg-background text-primary font-duplet-regular;
   }
 
   html.jp {
@@ -207,36 +198,6 @@
 
   .input-icon {
     @apply rounded-full flex items-center justify-center shrink-0 cursor-pointer appearance-none border-0 no-underline motion-safe:transition motion-safe:duration-200 motion-safe:ease-in size-10 bg-transparent hover:bg-input-hover;
-  }
-
-  /* Custom checkbox styling */
-  input[type='checkbox'] {
-    appearance: none;
-    border: 1px solid var(--color-content);
-    border-radius: 5.5px;
-    background-color: transparent;
-    cursor: pointer;
-    width: 1.25rem;
-    height: 1.25rem;
-    flex-shrink: 0;
-  }
-
-  input[type='checkbox']:checked {
-    background-color: var(--color-content);
-    border-color: var(--color-content);
-    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M13 4L6 11L3 8' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 14px;
-  }
-
-  input[type='checkbox']:hover {
-    background-color: var(--color-input-hover);
-  }
-
-  input[type='checkbox']:checked {
-    background-color: var(--color-content);
-    border-color: var(--color-content);
   }
 
   @keyframes spin-360 {
