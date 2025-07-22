@@ -1,17 +1,22 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  // uncomment next line if you use Prisma <5.10
+  // directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "./erd.svg"
 }
 
 enum Role {
   USER
   ADMIN
-  SELLER
 }
 
 enum Condition {
@@ -28,64 +33,71 @@ enum OrderStatus {
 }
 
 model User {
-  id         String   @id @default(cuid())
-  email      String   @unique
-  hash       String
-  firstName  String
-  lastName  String
-  role       Role     @default(USER)
-  createdAt  DateTime @default(now())
+  id            String   @id @default(cuid())
+  email         String   @unique
+  hash          String?
+  firstName     String   @default("")
+  lastName      String   @default("")
+  avatarUrl     String?
+  provider      String?  @default("local")
+  providerId    String?
+  phoneNumber   String?
+  emailVerified Boolean  @default(false)
+  role          Role     @default(USER)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now()) @updatedAt
 
-  products   Product[]   @relation("UserProducts")
-  orders     Order[]     @relation("UserOrders")
-  reviews    Review[]
+  products Product[] @relation("UserProducts")
+  orders   Order[]   @relation("UserOrders")
+  reviews  Review[]
 
+  @@index(email)
   @@map("users")
 }
 
 model Product {
-  id          String         @id @default(cuid())
+  id          String    @id @default(cuid())
   title       String
   description String
   price       Float
   condition   Condition
-  createdAt   DateTime       @default(now())
+  createdAt   DateTime  @default(now())
 
-  category    Category?      @relation(fields: [categoryId], references: [id])
-  categoryId  String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
 
-  seller      User           @relation("UserProducts", fields: [sellerId], references: [id])
-  sellerId    String
+  seller   User   @relation("UserProducts", fields: [sellerId], references: [id])
+  sellerId String
 
-  images      ProductImage[]
-  reviews     Review[]
+  images  ProductImage[]
+  reviews Review[]
 
-  orders      Order[]
+  orders Order[]
 
   @@map("products")
 }
 
 model ProductImage {
-  id        String   @id @default(cuid())
+  id        String  @id @default(cuid())
   url       String
-  product   Product  @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
   productId String
 
   @@map("product_images")
 }
 
 model Order {
-  id         String       @id @default(cuid())
-  buyer      User         @relation("UserOrders", fields: [buyerId], references: [id])
-  buyerId    String
+  id      String @id @default(cuid())
+  buyer   User   @relation("UserOrders", fields: [buyerId], references: [id])
+  buyerId String
 
-  product    Product      @relation(fields: [productId], references: [id])
-  productId  String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
 
   quantity   Int
   totalPrice Float
   status     OrderStatus
-  createdAt  DateTime     @default(now())
+  createdAt  DateTime    @default(now())
 
   @@map("orders")
 }
@@ -96,19 +108,19 @@ model Review {
   comment   String?
   createdAt DateTime @default(now())
 
-  product   Product  @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
   productId String
 
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  String
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
 
   @@map("reviews")
 }
 
 model Category {
-  id        String    @id @default(cuid())
-  name      String    @unique
-  products  Product[]
+  id       String    @id @default(cuid())
+  name     String    @unique
+  products Product[]
 
   @@map("categories")
 }

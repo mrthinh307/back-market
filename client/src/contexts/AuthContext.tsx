@@ -15,10 +15,17 @@ import {
   getAccessToken,
   setAccessToken as setTokenGlobal,
 } from '@/libs/token-manager';
-import { loginWithPassword, refreshToken, signUp } from '@/api/auth.api';
+import {
+  initiateFacebookOAuth,
+  initiateGoogleOAuth,
+  loginWithPassword,
+  refreshToken,
+  signUp,
+} from '@/api/auth.api';
 import { errorToastProps, successToastProps } from '@/libs/toast/toast-props';
 import { parseAxiosError } from '@/utils/AxiosError';
 import { Env } from '@/libs/Env';
+import { fetchProfile } from '@/api/user.api';
 
 interface AuthContextType {
   accessToken: string | null;
@@ -26,6 +33,9 @@ interface AuthContextType {
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
   signup: (params: SignUpParams) => Promise<void>;
+  loginWithGoogle: () => void;
+  loginWithFacebook: () => void;
+  getMe: () => Promise<any> | undefined;
 }
 
 interface SignUpParams {
@@ -41,6 +51,9 @@ const AuthContext = createContext<AuthContextType>({
   isLoading: true,
   login: async () => {},
   signup: async () => {},
+  loginWithGoogle: () => {},
+  loginWithFacebook: () => {},
+  getMe: async () => undefined,
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
@@ -85,7 +98,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       setIsLoading(true);
 
-      if (initialEmail) {
+      if (initialEmail && password) {
         const response = await loginWithPassword(initialEmail, password);
 
         toast.success('Welcome back !', {
@@ -161,9 +174,79 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const loginWithGoogle = () => {
+    if (isLoading) {
+      return; // Prevent multiple submissions
+    }
+
+    try {
+      setIsLoading(true);
+      initiateGoogleOAuth(); // Redirect browser to Google
+    } catch (err: any) {
+      const { message } = parseAxiosError(err);
+
+      if (Env.NODE_ENV === 'development') {
+        console.warn('Development Environment Message - Error login:', message);
+      }
+
+      toast.error(message || 'Login failed. Please try again.', {
+        ...errorToastProps,
+      });
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  //FIXME: Facebook login function
+  const loginWithFacebook = () => {
+    if (isLoading) {
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      initiateFacebookOAuth();
+    } catch (err: any) {
+      const { message } = parseAxiosError(err);
+      toast.error(message || 'Facebook login failed. Please try again.');
+      setIsLoading(false);
+    }
+  };
+
+  const getMe = async () => {
+    if (!accessToken) {
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      
+      const userData = await fetchProfile();
+      console.log('User data fetched:', userData);
+      return userData;
+    } catch (err: any) {
+      const { message } = parseAxiosError(err);
+      toast.error(message || 'Failed to fetch user data.', {
+        ...errorToastProps,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <AuthContext.Provider
-      value={{ accessToken, setAccessToken, isLoading, login, signup }}
+      value={{
+        accessToken,
+        setAccessToken,
+        isLoading,
+        login,
+        signup,
+        loginWithGoogle,
+        loginWithFacebook,
+        getMe,
+      }}
     >
       {children}
     </AuthContext.Provider>

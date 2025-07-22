@@ -10,7 +10,7 @@ export function useRouterRedirect() {
   };
 
   const redirectToLogin = () => {
-    router.push(`/${locale}/login`);
+    router.push(`/${locale}/email`);
   };
 
   return { redirectToHome, redirectToLogin };

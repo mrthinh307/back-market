@@ -6,7 +6,8 @@ import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { usePasswordValidation } from '@/hooks/useAuthValidation';
 import { Button } from '../ui/button';
-import Input from './Input';
+import FormInput from './FormInput';
+import { Checkbox } from '../ui/checkbox';
 
 function SignUpCredentials({ email: initialEmail }: { email?: string }) {
   const {
@@ -19,7 +20,6 @@ function SignUpCredentials({ email: initialEmail }: { email?: string }) {
   const { isLoading, signup } = useAuth();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [acceptMarketing, setAcceptMarketing] = useState(false);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ function SignUpCredentials({ email: initialEmail }: { email?: string }) {
 
   return (
     <>
-      <Input
+      <FormInput
         label={t('password_label')}
         type="password"
         value={password}
@@ -46,13 +46,13 @@ function SignUpCredentials({ email: initialEmail }: { email?: string }) {
         isShowDescription={true}
       />
       <div className="mb-3">
-        <Input
+        <FormInput
           label={t('first_name_label')}
           type="text"
           value={firstName || ''}
           onChange={(e) => setFirstName(e.target.value)}
         />
-        <Input
+        <FormInput
           label={t('last_name_label')}
           type="text"
           value={lastName}
@@ -60,12 +60,7 @@ function SignUpCredentials({ email: initialEmail }: { email?: string }) {
         />
       </div>
       <div className="flex items-center gap-3 mb-3">
-        <input
-          type="checkbox"
-          checked={acceptMarketing}
-          onChange={(e) => setAcceptMarketing(e.target.checked)}
-          id="marketing-checkbox"
-        />
+        <Checkbox className='size-5'/>
         <label htmlFor="marketing-checkbox" className="cursor-pointer">
           {t('checkbox_description')}
         </label>
@@ -73,7 +68,9 @@ function SignUpCredentials({ email: initialEmail }: { email?: string }) {
       <div className="mb-6">
         <p className="text-sm text-muted">
           {t('terms_of_use_description')}{' '}
-          <strong className="text-content underline">{t('terms_of_use')}</strong>
+          <strong className="text-primary underline">
+            {t('terms_of_use')}
+          </strong>
         </p>
       </div>
       <Button
@@ -107,7 +104,9 @@ function SignUpCredentials({ email: initialEmail }: { email?: string }) {
       <div className="mt-6 text-sm text-muted">
         <p>
           {t('privacy_policy_description')}{' '}
-          <strong className="text-content underline">{t('privacy_policy')}</strong>
+          <strong className="text-primary underline">
+            {t('privacy_policy')}
+          </strong>
         </p>
       </div>
     </>

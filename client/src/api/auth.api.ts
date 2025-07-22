@@ -1,3 +1,4 @@
+import { Env } from '@/libs/Env';
 import httpRequest from '@/libs/HttpRequest';
 
 export const emailVerification = async (email: string) => {
@@ -8,6 +9,16 @@ export const emailVerification = async (email: string) => {
 export const loginWithPassword = async (email: string, password: string) => {
   const response = await httpRequest.post('/auth/login', { email, password });
   return response.data;
+};
+
+export const initiateGoogleOAuth = () => {
+  const backendUrl = Env.NEXT_PUBLIC_NEXT_BASE_URL || 'http://localhost:8888';
+  window.location.href = `${backendUrl}/auth/google`;
+};
+
+export const initiateFacebookOAuth = () => {
+  const backendUrl = Env.NEXT_PUBLIC_NEXT_BASE_URL || 'http://localhost:8888';
+  window.location.href = `${backendUrl}/auth/facebook`;
 };
 
 export const signUp = async (
@@ -28,9 +39,9 @@ export const signUp = async (
 export const refreshToken = async () => {
   const response = await httpRequest.post('/auth/refresh');
   return response.data;
-}
+};
 
 export const logout = async () => {
   const response = await httpRequest.post('/auth/logout');
   return response.data;
-}
+};

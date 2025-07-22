@@ -5,34 +5,32 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  Get,
   Req,
   Res,
+  UseGuards,
 } from '@nestjs/common';
-import { Request, Response, CookieOptions } from 'express';
+import { ConfigService } from '@nestjs/config/dist/config.service';
+import { Request, Response } from 'express';
 
 import { AuthService } from './auth.service';
 import { LoginDto, SignupDto } from './dto';
-import { RequestWithCookies } from './types';
-
-function getCookieOptions(): CookieOptions {
-  return {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    path: '/',
-  };
-}
-
-function setAuthCookies(
-  res: Response,
-  tokens: { access_token: string; refresh_token: string },
-) {
-  res.cookie('refresh_token', tokens.refresh_token, getCookieOptions());
-}
+import { OAuthUserInfo, RequestWithCookies } from './auth.types';
+import { GoogleOAuthGuard, FacebookOAuthGuard } from './guard';
+import { setAuthCookies } from '../common/utils/cookie';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private configService: ConfigService,
+    private authService: AuthService,
+  ) {}
+
+  private redirectToFrontend(res: Response) {
+    const frontendUrl =
+      this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3000';
+    res.redirect(frontendUrl);
+  }
 
   @Post('signup')
   async signup(
@@ -67,6 +65,50 @@ export class AuthController {
     return result;
   }
 
+  @Get('google')
+  @UseGuards(GoogleOAuthGuard)
+  async googleAuth() {
+    // Guard redirects to Google
+  }
+
+  @Get('google/callback')
+  @UseGuards(GoogleOAuthGuard)
+  async googleAuthCallback(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const tokens = await this.authService.googleLogin(
+      req.user as OAuthUserInfo,
+    );
+
+    setAuthCookies(res, tokens);
+
+    // Redirect to frontend with success
+    this.redirectToFrontend(res);
+  }
+
+  @Get('facebook')
+  @UseGuards(FacebookOAuthGuard)
+  async facebookAuth() {
+    // Guard redirects to Facebook
+  }
+
+  @Get('facebook/callback')
+  @UseGuards(FacebookOAuthGuard)
+  async facebookAuthCallback(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const tokens = await this.authService.facebookLogin(
+      req.user as OAuthUserInfo,
+    );
+
+    setAuthCookies(res, tokens);
+
+    // Redirect to frontend with success
+    this.redirectToFrontend(res);
+  }
+
   @HttpCode(HttpStatus.OK)
   @Post('refresh')
   async refresh(
@@ -80,7 +122,7 @@ export class AuthController {
 
     const newTokens = await this.authService.refreshTokens(refreshToken);
 
-    res.cookie('refresh_token', newTokens.refresh_token, getCookieOptions());
+    setAuthCookies(res, newTokens);
 
     return { access_token: newTokens.access_token };
   }
@@ -89,7 +131,7 @@ export class AuthController {
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
     res.clearCookie('refresh_token');
-    return res.status(HttpStatus.OK).json({
+    return res.json({
       message: 'Logged out successfully',
     });
   }

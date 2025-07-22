@@ -17,3 +17,13 @@ export interface RequestWithCookies extends Request {
     refresh_token?: string;
   };
 }
+
+export interface OAuthUserInfo {
+  provider: string;
+  providerId: string;
+  email: string;
+  emailVerified?: boolean;
+  firstName: string;
+  lastName: string;
+  avatarUrl?: string;
+}
