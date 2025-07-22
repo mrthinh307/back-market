@@ -7,9 +7,28 @@ import { Profile, Strategy } from 'passport-facebook';
 export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
   constructor(configService: ConfigService) {
     super({
-      clientID: configService.get('FACEBOOK_CLIENT_ID')!,
-      clientSecret: configService.get('FACEBOOK_CLIENT_SECRET')!,
-      callbackURL: configService.get('FACEBOOK_CALLBACK_URL')!,
+      clientID:
+        configService.get('FACEBOOK_CLIENT_ID') ||
+        (() => {
+          throw new Error(
+            'FACEBOOK_CLIENT_ID is not set in the environment variables',
+          );
+        })(),
+      clientSecret:
+        configService.get('FACEBOOK_CLIENT_SECRET') ||
+        (() => {
+          throw new Error(
+            'FACEBOOK_CLIENT_SECRET is not set in the environment variables',
+          );
+        })(),
+      callbackURL:
+        configService.get('FACEBOOK_CALLBACK_URL') ||
+        (() => {
+          throw new Error(
+            'FACEBOOK_CALLBACK_URL is not set in the environment variables',
+          );
+        })(),
+
       profileFields: ['id', 'displayName', 'photos', 'email'],
     });
   }

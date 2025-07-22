@@ -7,9 +7,27 @@ import { Strategy, VerifyCallback, Profile } from 'passport-google-oauth20';
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(configService: ConfigService) {
     super({
-      clientID: configService.get<string>('GOOGLE_CLIENT_ID')!,
-      clientSecret: configService.get<string>('GOOGLE_CLIENT_SECRET')!,
-      callbackURL: configService.get<string>('GOOGLE_CALLBACK_URL')!,
+      clientID:
+        configService.get<string>('GOOGLE_CLIENT_ID') ||
+        (() => {
+          throw new Error(
+            'GOOGLE_CLIENT_ID is not set in the environment variables',
+          );
+        })(),
+      clientSecret:
+        configService.get<string>('GOOGLE_CLIENT_SECRET') ||
+        (() => {
+          throw new Error(
+            'GOOGLE_CLIENT_SECRET is not set in the environment variables',
+          );
+        })(),
+      callbackURL:
+        configService.get<string>('GOOGLE_CALLBACK_URL') ||
+        (() => {
+          throw new Error(
+            'GOOGLE_CALLBACK_URL is not set in the environment variables',
+          );
+        })(),
       scope: ['email', 'profile'],
     });
   }

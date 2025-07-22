@@ -17,7 +17,7 @@ function EmailCredentials() {
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations('EmailCredentials');
-  const [isLoginloading, setIsLoginLoading] = useState(false);
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [isFacebookLoading, setIsFacebookLoading] = useState(false);
   const { loginWithGoogle, loginWithFacebook } = useAuth();
@@ -26,7 +26,7 @@ function EmailCredentials() {
   const handleNext = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (isLoginloading || isGoogleLoading || isFacebookLoading) {
+    if (isLoginLoading || isGoogleLoading || isFacebookLoading) {
       return; // Prevent multiple submissions
     }
 
@@ -55,7 +55,7 @@ function EmailCredentials() {
   const handleLoginWithGoogle = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (isLoginloading || isGoogleLoading || isFacebookLoading) {
+    if (isLoginLoading || isGoogleLoading || isFacebookLoading) {
       return; // Prevent multiple submissions
     }
 
@@ -66,7 +66,7 @@ function EmailCredentials() {
   const handleLoginWithFacebook = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (isFacebookLoading || isLoginloading || isGoogleLoading) {
+    if (isFacebookLoading || isLoginLoading || isGoogleLoading) {
       return; // Prevent multiple submissions
     }
 
@@ -89,10 +89,10 @@ function EmailCredentials() {
       <Button
         type="submit"
         disabled={!isValid}
-        className={`${isLoginloading ? 'cursor-not-allowed' : ''}`}
+        className={`${isLoginLoading ? 'cursor-not-allowed' : ''}`}
         onClick={handleNext}
       >
-        {isLoginloading ? (
+        {isLoginLoading ? (
           <svg
             aria-hidden="false"
             aria-label="Loading"
