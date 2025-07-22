@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { logout } from '@/api/auth.api';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLocale } from 'next-intl';
+import Header from '@/components/layouts/Header';
+import Footer from '@/components/layouts/Footer';
 
 export default function Home() {
   const locale = useLocale();
@@ -16,13 +18,14 @@ export default function Home() {
     } catch (error) {
       console.error('Logout failed:', error);
     } finally {
-      setAccessToken(null); 
+      setAccessToken(null);
       window.location.href = `/${locale}/email`;
     }
-  }
+  };
 
   return (
-    <div className="container mx-auto p-8">
+    <div className="mx-auto">
+      <Header />
       <h1 className="text-blue-600 text-4xl font-bold mb-4 font-heading">
         Welcome to the Home Page
       </h1>
@@ -41,13 +44,11 @@ export default function Home() {
         Access Token: <span className="text-content">{accessToken}</span>
       </p>
       {accessToken && (
-        <button
-          className="cursor-pointer"
-          onClick={handleLogout}
-        >
+        <button className="cursor-pointer" onClick={handleLogout}>
           Log out
         </button>
       )}
+      <Footer />
     </div>
   );
 }

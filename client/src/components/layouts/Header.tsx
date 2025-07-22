@@ -5,7 +5,6 @@ import {
   ShoppingCart,
   Menu,
   X,
-  Globe,
   RefreshCw,
 } from 'lucide-react';
 
@@ -93,12 +92,6 @@ const Header: React.FC = () => {
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-4">
-            {/* Trade-in Button */}
-            <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-              <RefreshCw size={16} />
-              <span className="text-sm font-medium">Trade-in</span>
-            </button>
-
             {/* Need help */}
             <button className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
               Need help?
