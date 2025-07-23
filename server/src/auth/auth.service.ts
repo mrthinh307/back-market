@@ -1,30 +1,64 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { User } from '@prisma/client';
 import * as argon from 'argon2';
 
 import { PrismaService } from '../prisma/prisma.service';
 import { LoginDto, SignupDto } from './dto';
-import { JwtPayload, TokenPair, LoginPhaseResponse } from './types';
+import {
+  JwtPayload,
+  TokenPair,
+  LoginPhaseResponse,
+  OAuthUserInfo,
+} from './auth.types';
 
 @Injectable()
 export class AuthService {
+  private readonly ACCESS_TOKEN_EXPIRY = '15m';
+  private readonly REFRESH_TOKEN_EXPIRY = '7d';
+
+  private readonly ERROR_MESSAGES = {
+    CREDENTIAL_TAKEN: 'Email already exists',
+    USER_NOT_FOUND: 'Invalid email or password',
+    INVALID_PASSWORD: 'Invalid email or password',
+    USER_NO_LONGER_EXISTS: 'User account no longer exists',
+    INVALID_REFRESH_TOKEN: 'Invalid or expired refresh token',
+    MISSING_EMAIL: 'Email is required',
+  } as const;
+
   constructor(
-    private prisma: PrismaService,
-    private jwt: JwtService,
+    private readonly prisma: PrismaService,
+    private readonly jwt: JwtService,
   ) {}
 
+  /**
+   * Hash password using Argon2
+   */
   private async hashPassword(password: string): Promise<string> {
-    return await argon.hash(password);
+    return argon.hash(password);
   }
 
-  private async signToken(userId: string, email: string): Promise<TokenPair> {
-    const payload = { sub: userId, email };
+  /**
+   * Verify password against hash
+   */
+  private async verifyPassword(
+    hash: string,
+    password: string,
+  ): Promise<boolean> {
+    return argon.verify(hash, password);
+  }
 
-    const accessToken = await this.jwt.signAsync(payload);
-    const refreshToken = await this.jwt.signAsync(payload, {
-      expiresIn: '7d', // 👈 override default value
-    });
+  /**
+   * Generate JWT access and refresh tokens
+   */
+  private async signToken(userId: string, email: string): Promise<TokenPair> {
+    const payload: JwtPayload = { sub: userId, email };
+
+    const [accessToken, refreshToken] = await Promise.all([
+      this.jwt.signAsync(payload, { expiresIn: this.ACCESS_TOKEN_EXPIRY }),
+      this.jwt.signAsync(payload, { expiresIn: this.REFRESH_TOKEN_EXPIRY }),
+    ]);
 
     return {
       access_token: accessToken,
@@ -32,15 +66,90 @@ export class AuthService {
     };
   }
 
-  // SIGN UP
+  /**
+   * Validate user password
+   */
+  private async validateUserPassword(
+    user: User,
+    password: string,
+  ): Promise<void> {
+    if (!user.hash) {
+      throw new ForbiddenException(this.ERROR_MESSAGES.INVALID_PASSWORD);
+    }
+
+    const isPasswordValid = await this.verifyPassword(user.hash, password);
+    if (!isPasswordValid) {
+      throw new ForbiddenException(this.ERROR_MESSAGES.INVALID_PASSWORD);
+    }
+  }
+
+  /**
+   * Find or create OAuth user with profile data
+   */
+  private async findOrCreateOAuthUser(params: OAuthUserInfo): Promise<User> {
+    const {
+      email,
+      providerId,
+      provider,
+      emailVerified,
+      avatarUrl,
+      firstName,
+      lastName,
+    } = params;
+
+    if (!email) {
+      throw new ForbiddenException(this.ERROR_MESSAGES.MISSING_EMAIL);
+    }
+
+    let user = await this.prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      // Create new OAuth user
+      user = await this.prisma.user.create({
+        data: {
+          email,
+          providerId,
+          provider,
+          emailVerified: emailVerified ?? false,
+          avatarUrl,
+          firstName: firstName || '',
+          lastName: lastName || '',
+        },
+      });
+    } else {
+      // Update existing user with OAuth data if missing
+      const updateData: Partial<User> = {};
+
+      if (!user.providerId && providerId) updateData.providerId = providerId;
+      if (!user.provider && provider) updateData.provider = provider;
+      if (!user.emailVerified && emailVerified)
+        updateData.emailVerified = emailVerified;
+      if (!user.avatarUrl && avatarUrl) updateData.avatarUrl = avatarUrl;
+
+      if (Object.keys(updateData).length > 0) {
+        user = await this.prisma.user.update({
+          where: { email },
+          data: updateData,
+        });
+      }
+    }
+
+    return user;
+  }
+
+  // PUBLIC METHODS
+
+  /**
+   * Register a new user with email and password
+   */
   async signup(dto: SignupDto): Promise<TokenPair> {
-    const hash = await this.hashPassword(dto.password);
+    const hashedPassword = await this.hashPassword(dto.password);
 
     try {
       const user = await this.prisma.user.create({
         data: {
           email: dto.email,
-          hash,
+          hash: hashedPassword,
           firstName: dto.firstName,
           lastName: dto.lastName,
         },
@@ -52,19 +161,21 @@ export class AuthService {
         error instanceof PrismaClientKnownRequestError &&
         error.code === 'P2002'
       ) {
-        throw new ForbiddenException('Credential taken');
+        throw new ForbiddenException(this.ERROR_MESSAGES.CREDENTIAL_TAKEN);
       }
       throw error;
     }
   }
 
-  // LOGIN
+  /**
+   * Login user with email/password or email verification
+   */
   async login(dto: LoginDto): Promise<TokenPair | LoginPhaseResponse> {
     const user = await this.prisma.user.findUnique({
       where: { email: dto.email },
     });
 
-    // Phase 1: Only email is provided
+    // Phase 1: Email verification only
     if (!dto.password) {
       return {
         action: user ? 'login' : 'signup',
@@ -74,22 +185,34 @@ export class AuthService {
       };
     }
 
-    // Phase 2: Email + password provided
+    // Phase 2: Full authentication
     if (!user) {
-      throw new ForbiddenException(
-        'User not found. Please verify your credentials.',
-      );
+      throw new ForbiddenException(this.ERROR_MESSAGES.USER_NOT_FOUND);
     }
 
-    const isPasswordValid = await argon.verify(user.hash, dto.password);
-    if (!isPasswordValid) {
-      throw new ForbiddenException('Password incorrect. Please try again.');
-    }
-
+    await this.validateUserPassword(user, dto.password);
     return this.signToken(user.id, user.email);
   }
 
-  // REFRESH TOKENS
+  /**
+   * Authenticate user via Google OAuth
+   */
+  async googleLogin(googleUser: OAuthUserInfo): Promise<TokenPair> {
+    const user = await this.findOrCreateOAuthUser(googleUser);
+    return this.signToken(user.id, user.email);
+  }
+
+  /**
+   * Authenticate user via Facebook OAuth
+   */
+  async facebookLogin(facebookUser: OAuthUserInfo): Promise<TokenPair> {
+    const user = await this.findOrCreateOAuthUser(facebookUser);
+    return this.signToken(user.id, user.email);
+  }
+
+  /**
+   * Generate new access and refresh tokens
+   */
   async refreshTokens(refreshToken: string): Promise<TokenPair> {
     try {
       const payload = await this.jwt.verifyAsync<JwtPayload>(refreshToken);
@@ -99,15 +222,15 @@ export class AuthService {
       });
 
       if (!user) {
-        throw new ForbiddenException('User no longer exists');
+        throw new ForbiddenException(this.ERROR_MESSAGES.USER_NO_LONGER_EXISTS);
       }
 
-      // (Optional) Có thể kiểm tra refresh token có bị revoke hay không
-
-      return await this.signToken(user.id, user.email);
+      return this.signToken(user.id, user.email);
     } catch (error) {
-      console.error('Refresh token verification failed:', error);
-      throw new ForbiddenException('Invalid refresh token');
+      if (error instanceof ForbiddenException) {
+        throw error;
+      }
+      throw new ForbiddenException(this.ERROR_MESSAGES.INVALID_REFRESH_TOKEN);
     }
   }
 }

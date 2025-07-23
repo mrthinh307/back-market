@@ -8,6 +8,7 @@ import { routing } from '@/libs/i18n/I18nRouting';
 import '@/styles/global.css';
 import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider } from '@/contexts/AuthContext';
+import { ThemeProvider } from '@/components/providers/theme-provider';
 
 export const metadata: Metadata = {
   title: 'Back Market',
@@ -45,18 +46,24 @@ export default async function RootLayout(props: {
 }) {
   const { locale } = await props.params;
 
-  
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-  
+
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} suppressHydrationWarning className={locale}>
-      <body>
+    <html lang={locale} suppressHydrationWarning className={`${locale}`}>
+      <body className="antialiased">
         <NextIntlClientProvider>
-          <AuthProvider>{props.children}</AuthProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <AuthProvider>{props.children}</AuthProvider>
+          </ThemeProvider>
         </NextIntlClientProvider>
         <Toaster position="top-right" />
       </body>

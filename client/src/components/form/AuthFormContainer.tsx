@@ -23,13 +23,13 @@ export default function AuthFormContainer({
     <div className="container">
       <div className="mx-auto w-full max-w-[34rem]">
         <div className="mb-4">
-          <h1 className="text-[18px] leading-6 md:text-[20px] md:leading-7 text-content-secondary font-duplet-bold">
+          <h1 className="text-[18px] leading-6 md:text-[20px] md:leading-7 text-secondary font-duplet-bold">
             {formTitle}
           </h1>
-          <p className="text-[14px] text-muted">{formSubtitle}</p>
+          <p className="text-sm text-muted">{formSubtitle}</p>
         </div>
         <div>
-          <form className="w-full max-w-[36rem] flex flex-col bg-white rounded-lg shadow-sm p-6">
+          <form className="w-full max-w-[36rem] flex flex-col bg-white dark:bg-[#292524] rounded-lg shadow-sm p-6">
             <div className={initialEmail ? 'mb-6' : ''}>
               <p className="font-duplet-bold font-500 mb-1">{initialEmail}</p>
               {initialEmail && (
@@ -50,7 +50,7 @@ export default function AuthFormContainer({
             <div className="mt-4">
               <a
                 href="https://www.backmarket.co.uk/en-gb/legal/data-protection"
-                className="text-content-secondary text-base font-duplet-bold underline"
+                className="text-secondary text-base font-duplet-bold underline"
               >
                 {t('privacy_policy')}
               </a>

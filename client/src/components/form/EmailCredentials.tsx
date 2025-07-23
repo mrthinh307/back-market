@@ -2,37 +2,39 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { emailVerification } from '@/api/auth.api';
 import { Button } from '@/components/ui/button';
 import { useEmailValidation } from '@/hooks/useAuthValidation';
-import { appleIcon, googleIcon, mailBoxIcon } from '@/public/assets/images';
+import { facebookIcon, googleIcon, mailBoxIcon } from '@/public/assets/images';
 import { parseAxiosError } from '@/utils/AxiosError';
-import Input from './Input';
+import { useAuth } from '@/contexts/AuthContext';
+import Input from './FormInput';
 
 function EmailCredentials() {
   const router = useRouter();
   const locale = useLocale();
-  const { email, error, isValid, handleEmailChange } = useEmailValidation();
-  const [isLoading, setIsLoading] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
   const t = useTranslations('EmailCredentials');
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [isFacebookLoading, setIsFacebookLoading] = useState(false);
+  const { loginWithGoogle, loginWithFacebook } = useAuth();
+  const { email, error, isValid, handleEmailChange } = useEmailValidation();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleNext = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (isLoading || isDisabled) {
+    if (isLoginLoading || isGoogleLoading || isFacebookLoading) {
       return; // Prevent multiple submissions
     }
 
     if (isValid) {
       try {
-        setIsLoading(true);
+        setIsLoginLoading(true);
         const response = await emailVerification(email);
 
-        setIsDisabled(true);
         document.cookie = `email=${email}; path=/`;
         sessionStorage.setItem('email', email);
 
@@ -43,10 +45,35 @@ function EmailCredentials() {
         const { message } = parseAxiosError(err);
         console.error('Error sending email verification:', message);
       } finally {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoginLoading(false);
+        }, 5000); // Reset loading state after 5 seconds
       }
     }
   };
+
+  const handleLoginWithGoogle = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (isLoginLoading || isGoogleLoading || isFacebookLoading) {
+      return; // Prevent multiple submissions
+    }
+
+    setIsGoogleLoading(true);
+    loginWithGoogle();
+  };
+
+  const handleLoginWithFacebook = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (isFacebookLoading || isLoginLoading || isGoogleLoading) {
+      return; // Prevent multiple submissions
+    }
+
+    setIsFacebookLoading(true);
+    loginWithFacebook();
+  };
+
   return (
     <>
       <Input
@@ -62,10 +89,10 @@ function EmailCredentials() {
       <Button
         type="submit"
         disabled={!isValid}
-        className={`${isLoading ? 'cursor-not-allowed' : ''}`}
-        onClick={handleSubmit}
+        className={`${isLoginLoading ? 'cursor-not-allowed' : ''}`}
+        onClick={handleNext}
       >
-        {isLoading || isDisabled ? (
+        {isLoginLoading ? (
           <svg
             aria-hidden="false"
             aria-label="Loading"
@@ -90,18 +117,23 @@ function EmailCredentials() {
       <div>
         <div className="my-6">
           <div className="content-center">
-            <hr className="border-[#dfe1e7] border-t grow" />
+            <hr className="border-muted border-t grow" />
             <span className="text-muted mx-4 mb-0.5">or</span>
-            <hr className="border-[#dfe1e7] border-t grow" />
+            <hr className="border-muted border-t grow" />
           </div>
         </div>
         <div className="flex flex-col gap-3">
-          <Button variant="outline" type="button">
+          <Button
+            variant="outline"
+            type="button"
+            onClick={handleLoginWithGoogle}
+            className={`${isGoogleLoading ? 'cursor-not-allowed' : ''}`}
+          >
             <Image src={googleIcon} alt="Google icon" className="size-5" />
             {t('continue_with_google')}
           </Button>
-          <Button variant="outline" type="button">
-            <Image src={appleIcon} alt="Apple icon" className="size-5" />
+          <Button variant="outline" type="button" onClick={handleLoginWithFacebook}>
+            <Image src={facebookIcon} alt="Facebook icon" className="size-5.5 dark:invert" />
             {t('continue_with_apple')}
           </Button>
         </div>
