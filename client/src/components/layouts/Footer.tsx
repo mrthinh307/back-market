@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
-import { ChevronDown, Mail, Linkedin, Facebook, Instagram } from 'lucide-react';
+import {
+  ChevronDown,
+  Mail,
+  Linkedin,
+  Facebook,
+  Instagram,
+  XCircle,
+} from 'lucide-react';
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
   const [showLearnMore, setShowLearnMore] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [touched, setTouched] = useState(false);
+
+  // Kiểm tra lỗi email đơn giản
+  const isEmailError = touched && email && !email.includes('@');
 
   const footerSections = [
     {
@@ -81,47 +93,85 @@ const Footer: React.FC = () => {
     <footer className="bg-gray-50 border-t border-gray-200">
       {/* Newsletter Section */}
       <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ">
-          <div className="max-w-2xl">
+        <div className="flex flex-col md:flex-row justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 gap-x-8">
+          <div className="mb-4 md:mb-0">
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
               Get £15 off your first order.
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-600">
               On orders of £250 or more, when you sign up for emails.
             </p>
-
-            <form onSubmit={handleEmailSubmit} className="flex gap-2 mb-4">
-              <div className="flex-1 relative">
+          </div>
+          <div className="px-30 flex-shrink-0">
+            <form
+              onSubmit={handleEmailSubmit}
+              className="flex gap-2 w-80 md:w-auto"
+            >
+              <div className="relative">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => {
+                    setIsFocused(false);
+                    setTouched(true);
+                  }}
+                  id="footer-email"
+                  className={`
+                    w-80 md:w-96 px-4 pt-5 pb-2 border-3 rounded-lg  hover:bg-gray-200
+                    placeholder-transparent peer
+                    ${isEmailError ? ' border-red-400' : 'border-gray-900'}
+                  `}
                   placeholder="Email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                   required
                 />
-                <Mail className="absolute right-3 top-3.5 h-5 w-5 text-gray-400" />
+                <label
+                  htmlFor="footer-email"
+                  className={`
+                    absolute left-3 px-1 -translate-y-1/5 transition-all duration-200
+                    pointer-events-none
+                    max-w-[calc(100%-2.5rem)] overflow-hidden whitespace-nowrap
+                    text-base text-black
+                    ${email || isFocused ? 'top-2 text-xs text-gray-700' : 'top-5'}
+                  `}
+                >
+                  Email
+                </label>
+                {email ? (
+                  <button
+                    type="button"
+                    onClick={() => setEmail('')}
+                    className="absolute right-3 top-4.5 h-5 w-5 flex items-center justify-center text-gray-800 transition-colors
+                              border-2 hover:border-gray-600 rounded-full cursor-pointer"
+                    tabIndex={-1}
+                    aria-label="Xóa email"
+                  >
+                    <XCircle className="h-5 w-5" />
+                  </button>
+                ) : (
+                  <Mail className="absolute right-3 top-4.5 h-5 w-5 text-gray-800" />
+                )}
               </div>
               <button
                 type="submit"
-                className="px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-medium"
+                className="px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors font-bold cursor-pointer"
               >
                 Sign up
               </button>
             </form>
-
+            {/* Nút Learn more và phần ghi chú đặt ngay dưới form */}
             <button
               onClick={() => setShowLearnMore(!showLearnMore)}
-              className="flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              className="flex items-center text-sm font-bold underline text-gray-900 cursor-pointer transition-colors mt-2"
             >
               <ChevronDown
                 className={`h-4 w-4 mr-1 transition-transform ${showLearnMore ? 'rotate-180' : ''}`}
               />
               Learn more
             </button>
-
             {showLearnMore && (
-              <div className="mt-4 p-4 bg-gray-50 rounded-lg text-sm text-gray-600">
+              <div className="mt-2 p-4 bg-gray-50 rounded-lg text-sm text-gray-600 w-124">
                 <p>
                   Terms and conditions apply. Discount valid for new subscribers
                   only. Minimum order value £250. Cannot be combined with other
