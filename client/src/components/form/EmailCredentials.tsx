@@ -12,6 +12,7 @@ import { facebookIcon, googleIcon, mailBoxIcon } from '@/public/assets/images';
 import { parseAxiosError } from '@/utils/AxiosError';
 import { useAuth } from '@/contexts/AuthContext';
 import Input from './FormInput';
+import LoadingSpinner from '../ui/LoadingSpinner';
 
 function EmailCredentials() {
   const router = useRouter();
@@ -93,23 +94,7 @@ function EmailCredentials() {
         onClick={handleNext}
       >
         {isLoginLoading ? (
-          <svg
-            aria-hidden="false"
-            aria-label="Loading"
-            fill="currentColor"
-            height="24"
-            role="img"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-            className="animate-spin text-inherit"
-          >
-            <path
-              fillRule="evenodd"
-              d="M12 3.75A8.25 8.25 0 1 0 20.25 12a.75.75 0 0 1 1.5 0c0 5.385-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12 6.615 2.25 12 2.25a.75.75 0 0 1 0 1.5"
-              clipRule="evenodd"
-            ></path>
-          </svg>
+          <LoadingSpinner />
         ) : (
           t('next_button')
         )}
@@ -132,8 +117,16 @@ function EmailCredentials() {
             <Image src={googleIcon} alt="Google icon" className="size-5" />
             {t('continue_with_google')}
           </Button>
-          <Button variant="outline" type="button" onClick={handleLoginWithFacebook}>
-            <Image src={facebookIcon} alt="Facebook icon" className="size-5.5 dark:invert" />
+          <Button
+            variant="outline"
+            type="button"
+            onClick={handleLoginWithFacebook}
+          >
+            <Image
+              src={facebookIcon}
+              alt="Facebook icon"
+              className="size-5.5 dark:invert"
+            />
             {t('continue_with_apple')}
           </Button>
         </div>
