@@ -3,9 +3,9 @@ export const errorToastProps = {
   richColors: true,
   style: {
     fontSize: '16px',
-    fontFamily: 'var(--font-duplet-regular)',
-    color: 'var(--color-content)',
-    backgroundColor: 'var(--color-destructive)',
+    fontFamily: 'var(--font-duplet)',
+    color: 'var(--color-primary)',
+    backgroundColor: 'var(--color-destructive-secondary)',
     boxShadow: 'var(--shadow-lg)',
     border: 'none',
     borderRadius: 'var(--radius-sm)',

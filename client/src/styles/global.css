@@ -4,29 +4,33 @@
 @custom-variant dark (&:is(.dark *));
 
 @font-face {
-  font-family: 'DupletOpen-Regular';
+  font-family: 'DupletOpen';
   src: url('/fonts/DupletOpen-Regular.otf') format('opentype');
   font-style: normal;
+  font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'DupletOpen-Bold';
+  font-family: 'DupletOpen';
   src: url('/fonts/DupletOpen-Semibold.otf') format('opentype');
   font-style: normal;
+  font-weight: 600;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'DupletOpen-Light';
+  font-family: 'DupletOpen';
   src: url('/fonts/DupletOpen-Light.otf') format('opentype');
   font-style: normal;
+  font-weight: 300;
   font-display: swap;
 }
 
 /* Shadcn UI Theme Variables (using in shadcnUi's components) */
 :root {
   --radius: 0.625rem;
+  --sub-background: #f2f3f7;
   --background: #f8f9fc;
   --background-secondary: #fff;
   --foreground: #0c0a09;
@@ -44,6 +48,7 @@
   --accent: #f5f5f4;
   --accent-foreground: oklch(0.208 0.042 265.755);
   --destructive: oklch(0.577 0.245 27.325);
+  --destructive-secondary: #F6B4B2;
   --border: #e7e5e4;
   --border-dark: #0e1016;
   --input: oklch(0.929 0.013 255.508);
@@ -67,13 +72,14 @@
 
 .dark {
   --background: #1a1a1a;
+  --sub-background: #262626;
   --background-secondary: #000000;
   --foreground: #fff;
   --card: #1c1917;
   --card-foreground: #fff;
   --popover: #1c1917;
   --popover-foreground: #fff;
-  --primary: #f9f9f9;
+  --primary: #e5e5e5;
   --primary-foreground: #0e1016;
   --secondary: #fafafa;
   --secondary-foreground: #fafafa;
@@ -83,6 +89,7 @@
   --accent: #292524;
   --accent-foreground: oklch(0.984 0.003 200.858);
   --destructive: oklch(0.704 0.191 22.216);
+  --destructive-secondary: oklch(0.704 0.191 22.216);
   --border: rgba(255, 255, 255, 0.1);
   --border-dark: rgba(255, 255, 255, 0.1);
   --input: oklch(1 0 0 / 15%);
@@ -111,6 +118,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 
   --color-background: var(--background);
+  --color-sub-background: var(--sub-background);
   --color-background-secondary: var(--background-secondary);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -127,6 +135,7 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-destructive-secondary: var(--destructive-secondary);
   --color-input: var(--input);
   --color-input-hover: var(--input-hover);
   --color-border: var(--border);
@@ -149,8 +158,7 @@
   --color-button-hover-foreground: var(--button-hover-foreground);
 
   --font-heading: 'Cormorand Garamond', serif;
-  --font-duplet-light: 'DupletOpen-Light', sans-serif;
-  --font-duplet-regular: 'DupletOpen-Regular', sans-serif;
+  --font-duplet: 'DupletOpen', sans-serif;
   --font-duplet-bold: 'DupletOpen-Bold', sans-serif;
 
   --shadow-sm: 0 2px 4px #0000000d;
@@ -161,6 +169,8 @@
   --breakpoint-xl: 1200px;
   --breakpoint-lg: 992px;
   --breakpoint-md: 768px;
+  --breakpoint-sm: 576px;
+  --breakpoint-xs: 480px;
 }
 
 @layer base {
@@ -169,16 +179,11 @@
   }
 
   body {
-    @apply bg-background text-primary font-duplet-regular;
-  }
+    @apply bg-background text-primary font-duplet font-normal;
+  } 
 
   html.jp {
-    @apply font-[500];
-  }
-
-  h1,
-  h2 {
-    @apply font-heading;
+    @apply font-semibold;
   }
 
   section,
@@ -189,7 +194,7 @@
 
 @layer utilities {
   .container {
-    @apply max-w-full grow px-6 xl:max-w-[1184px] xl:basis-full xl:px-8;
+    @apply max-w-full grow px-6 xl:max-w-[1184px] xl:basis-full xl:px-8 mx-auto;
   }
 
   .content-center {
@@ -198,6 +203,16 @@
 
   .input-icon {
     @apply rounded-full flex items-center justify-center shrink-0 cursor-pointer appearance-none border-0 no-underline motion-safe:transition motion-safe:duration-200 motion-safe:ease-in size-10 bg-transparent hover:bg-input-hover;
+  }
+
+  /* Hide scrollbar for all browsers */
+  .scrollbar-none {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
   }
 
   @keyframes spin-360 {
@@ -210,6 +225,20 @@
   }
 
   .animate-spin {
-    animation: spin-360 2.5s linear infinite;
+    animation: spin-360 2.8s linear infinite;
+  }
+
+  /* Mobile menu slide in animation */
+  @keyframes slide-in-left {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .animate-slide-in-left {
+    animation: slide-in-left 0.2s ease-out;
   }
 }
