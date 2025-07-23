@@ -52,7 +52,7 @@ function LoadingPage() {
             </defs>
           </svg>
         </div>
-        <h3 className="text-xl font-duplet-bold">Loading your goodies !</h3>
+        <h3 className="text-xl font-semibold">Loading your goodies !</h3>
       </div>
     </div>
   );
