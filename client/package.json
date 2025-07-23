@@ -21,7 +21,8 @@
     "commit": "commit",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "test:lighthouse": "run-p start lighthouse --race"
+    "test:lighthouse": "run-p start lighthouse --race",
+    "type": "module"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",

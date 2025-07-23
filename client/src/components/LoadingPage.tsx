@@ -3,12 +3,13 @@ import logo from '@/public/assets/images/header-logo-1.svg';
 
 function LoadingPage() {
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className="flex flex-col min-h-screen">
       <header className="bg-white min-h-16 flex justify-start items-center px-8 py-4">
         <div className="h-[14px] shrink-0 text-content">
           <Image src={logo} alt="logo" className="h-full w-auto" />
         </div>
       </header>
+
       <div className="flex-1 flex flex-col justify-center items-center p-4">
         <div className="flex items-center justify-center mb-4 relative">
           <div className="relative flex items-center justify-center w-24 h-24">
@@ -52,7 +53,7 @@ function LoadingPage() {
             </defs>
           </svg>
         </div>
-        <h3 className='text-xl font-duplet-bold'>Loading your goodies !</h3>
+        <h3 className="text-xl font-duplet-bold">Loading your goodies !</h3>
       </div>
     </div>
   );
