@@ -125,7 +125,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         {/* Footer Section */}
         <div className="px-6 py-4">
           <div className="flex items-center">
-            <Image src="/assets/UK.png" alt="GB flag" height={20} width={30} />
+            <Image src="/assets/images/UK.png" alt="GB flag" height={20} width={30} />
             <span className="ml-2 text-sm font-semibold">GB</span>
           </div>
         </div>
