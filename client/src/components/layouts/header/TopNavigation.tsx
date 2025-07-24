@@ -1,6 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 
 interface TopNavigationProps {
   topNavItems: Array<{
@@ -28,20 +29,7 @@ const TopNavigation: React.FC<TopNavigationProps> = ({ topNavItems }: TopNavigat
             ))}
           </div>
           <div className="flex items-center">
-            <Link href="/">
-              <Image
-                src="/assets/UK.png"
-                alt="GB flag"
-                height={16}
-                width={24}
-              />
-            </Link>
-            <Link
-              href="/"
-              className="px-2 py-1 hover:text-muted font-semibold"
-            >
-              GB
-            </Link>
+            <LanguageSwitcher />
           </div>
         </div>
       </div>

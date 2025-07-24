@@ -182,7 +182,7 @@
     @apply bg-background text-primary font-duplet font-normal;
   } 
 
-  html.jp {
+  html.ja {
     @apply font-semibold;
   }
 

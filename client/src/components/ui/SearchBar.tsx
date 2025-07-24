@@ -1,7 +1,9 @@
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 function SearchBar({ label }: { label?: string }) {
   const [query, setQuery] = useState('');
+  const t = useTranslations('Header');
 
   return (
     <div className="flex gap-4 w-full">
@@ -17,7 +19,7 @@ function SearchBar({ label }: { label?: string }) {
         </button>
         <input
           className="appearance-none bg-transparent outline-none h-10 w-full text-ellipsis placeholder:text-muted"
-          placeholder={label || 'What are you looking for?'}
+          placeholder={label || t('search_bar_placeholder')}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />

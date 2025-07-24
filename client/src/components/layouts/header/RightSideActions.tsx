@@ -1,10 +1,12 @@
-import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import React from 'react';
 
 import { ModeToggle } from '../../ui/mode-toggle';
 
 const RightSideActions = () => {
+  const t = useTranslations('Header');
   return (
     <div className="flex items-center gap-0.5">
       {/* Need help */}
@@ -12,7 +14,7 @@ const RightSideActions = () => {
         className="hidden md:flex text-base font-semibold hover:text-secondary-foreground transition-colors hover:underline px-3 py-2"
         href="/en/email"
       >
-        Need help?
+        {t('need_help')}
       </Link>
 
       {/* User Account */}
@@ -31,7 +33,7 @@ const RightSideActions = () => {
 
       {/* Shopping Cart */}
       <Link
-        className="p-2 rounded-full hover:bg-sub-background transition-colors relative duration-300"
+        className="p-1 rounded-full hover:bg-sub-background transition-colors relative duration-300"
         href="/"
       >
         <Image
@@ -47,7 +49,11 @@ const RightSideActions = () => {
       </Link>
 
       {/* Module Toggle Theme */}
-      <ModeToggle className="hidden md:flex rounded-full hover:bg-sub-background" />
+      <ModeToggle
+        className="hidden md:flex rounded-full hover:bg-sub-background"
+        menuClassName="rounded-sm border-0 dark:border shadow-lg p-0 mt-1"
+        menuItemClassName="hover:rounded-none leading-6"
+      />
     </div>
   );
 };

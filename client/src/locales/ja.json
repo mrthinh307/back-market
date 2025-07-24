@@ -7,6 +7,23 @@
     "sign_in_link": "Log in",
     "sign_up_link": "Sign up"
   },
+  "Header": {
+    "verified_refurbished": "認定整備済製品",
+    "repair_care": "修理と保証",
+    "end_fast_tech": "使い捨て技術に終止符を",
+    "tech_journal": "テックジャーナル",
+    "search_bar_placeholder": "お探しの商品は？",
+    "need_help": "サポートが必要ですか？",
+    "good_deals": "お買い得",
+    "smartphones": "スマートフォン",
+    "laptops": "ノートパソコン",
+    "tablets": "タブレット",
+    "game_consoles": "ゲーム機",
+    "smartwatches": "スマートウォッチ",
+    "audio": "オーディオ",
+    "home_appliances": "家電",
+    "more": "もっと見る"
+  },
   "AuthFormContainer": {
     "go_back": "メールアドレスが違いますか？戻る",
     "privacy_policy": "プライバシーポリシー"

@@ -39,13 +39,13 @@ export default function Home() {
           <p className="text-muted">
             Testing custom colors and styles from tailwind.config.ts
           </p>
-          <Link href="/en/email" className="text-secondary underline">
+          <Link href={`/${locale}/email`} className="text-secondary underline">
             Go to Sign In Page
           </Link>
         </div>
         <p className="mt-2">Access Token: {accessToken}</p>
         <div>
-          <Link href="/en/admin" className="text-secondary underline">
+          <Link href={`/${locale}/admin`} className="text-secondary underline">
             <strong className="text-destructive">Go to Admin page</strong>
           </Link>
         </div>

@@ -2,6 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
+
 interface MobileMenuProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (value: boolean) => void;
@@ -28,7 +30,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   return (
     <div className="fixed inset-0 z-50 md:hidden bg-background flex flex-col animate-slide-in-left">
       {/* Mobile Menu Header - Fixed at top */}
-      <div className="flex items-center justify-between bg-white dark:bg-background p-4 border-b border-gray-200 dark:border-gray-600/30 relative">
+      <div className="flex items-center justify-between bg-white dark:bg-background p-4 border-b border-gray-200 dark:border-gray-600/30 relative px-4 py-2">
         {/* Empty space for balance */}
         <div className="w-10"></div>
 
@@ -38,8 +40,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             <Image
               src="assets/images/header-logo-1.svg"
               alt="Logo"
-              height={16}
-              width={140}
+              height={14}
+              width={120}
               className="dark:invert"
             />
           </Link>
@@ -124,10 +126,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
 
         {/* Footer Section */}
         <div className="px-6 py-4">
-          <div className="flex items-center">
-            <Image src="/assets/images/UK.png" alt="GB flag" height={20} width={30} />
-            <span className="ml-2 text-sm font-semibold">GB</span>
-          </div>
+          <LanguageSwitcher />
         </div>
       </div>
     </div>

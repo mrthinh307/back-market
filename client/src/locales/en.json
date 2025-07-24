@@ -7,6 +7,23 @@
     "sign_in_link": "Log in",
     "sign_up_link": "Sign up"
   },
+"Header": {
+    "verified_refurbished": "Verified Refurbished",
+    "repair_care": "Repair & Care",
+    "end_fast_tech": "End fast tech",
+    "tech_journal": "Tech Journal",
+    "search_bar_placeholder": "What are you looking for?",
+    "need_help": "Need help?",
+    "good_deals": "Good Deals",
+    "smartphones": "Smartphones",
+    "laptops": "Laptops",
+    "tablets": "Tablets",
+    "game_consoles": "Game Consoles",
+    "smartwatches": "Smartwatches",
+    "audio": "Audio",
+    "home_appliances": "Home Appliances",
+    "more": "More"
+  },
   "AuthFormContainer": {
     "go_back": "Not your email? Go Back",
     "privacy_policy": "Privacy Policy"
