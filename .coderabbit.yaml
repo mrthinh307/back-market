@@ -6,10 +6,7 @@ early_access: true
 reviews:
   profile: chill
   high_level_summary: true
-  approve_if_no_issues: false
-  comment_mode: inline
   request_changes_workflow: true
-  review_status: true
   branches:
     include:
       - "*"
