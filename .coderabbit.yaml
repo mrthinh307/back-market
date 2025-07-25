@@ -9,6 +9,9 @@ reviews:
   approve_if_no_issues: false
   comment_mode: inline
   request_changes_workflow: true
+  branches:
+    include:
+      - "*"
 
   rules:
     # Shared Typescript rules
