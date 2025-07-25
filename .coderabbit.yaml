@@ -43,10 +43,10 @@ reviews:
 settings:
   auto_review: true
 
-exclude:
-  paths:
-    - "**/*.spec.ts"
-    - "**/*.test.ts"
-    - "**/node_modules/**"
-    - "**/dist/**"
-    - "**/.next/**"
+reviews:
+  path_filters:
+    - "!**/*.spec.ts"
+    - "!**/*.test.ts"
+    - "!**/node_modules/**"
+    - "!**/dist/**"
+    - "!**/.next/**"
