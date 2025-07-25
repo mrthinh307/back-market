@@ -1,4 +1,5 @@
 # === DEPENDENCIES ===
+/node_modules
 */node_modules
 .pnp.*
 .yarn/*
