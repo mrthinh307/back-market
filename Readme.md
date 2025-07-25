@@ -55,6 +55,7 @@ Client will run at: `http://localhost:3000`
 ## 📚 Documentation
 
 - **🖥️ Backend Documentation**: [server/README.md](./server/README.md)
+
   - NestJS setup and configuration
   - Database management with Prisma and Neon
   - API development and testing
@@ -69,6 +70,7 @@ Client will run at: `http://localhost:3000`
 ## 🛠️ Tech Stack
 
 ### Backend (Server)
+
 - **Framework**: NestJS
 - **Database**: PostgreSQL (Neon Cloud)
 - **ORM**: Prisma
@@ -76,6 +78,7 @@ Client will run at: `http://localhost:3000`
 - **Language**: TypeScript
 
 ### Frontend (Client)
+
 - **Framework**: Next.js 15
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS 4
@@ -84,12 +87,14 @@ Client will run at: `http://localhost:3000`
 - **Build Tool**: Turbopack
 
 ### Overview about project
+
 - **Server**: See [server/README.md#environment-variables](./server/README.md#🔧-environment-variables)
 - **Client**: See [client/README.md#environment-variables](./client/README.md#🔍-environment-variables)
 
 ## 🚀 Production Deployment
 
 ### Backend Production
+
 ```bash
 cd server
 yarn build
@@ -97,6 +102,7 @@ yarn start:prod
 ```
 
 ### Frontend Production
+
 ```bash
 cd client
 yarn build
@@ -114,9 +120,12 @@ yarn start
 ## 🔍 Troubleshooting
 
 For specific troubleshooting guides:
+
 - **Backend Issues**: See [server/README.md#troubleshooting](./server/README.md#🔍-troubleshooting)
 - **Frontend Issues**: See [client/README.md#troubleshooting](./client/README.md#🔍-troubleshooting)
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/mrthinh307/back-market?utm_source=oss&utm_medium=github&utm_campaign=mrthinh307%2Fback-market&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)

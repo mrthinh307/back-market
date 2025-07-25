@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+
+language: en-US
+early_access: true
+
+reviews:
+  profile: chill
+  high_level_summary: true
+  request_changes_workflow: true
+  auto_review:
+    enabled: true
+  path_filters:
+    - "!**/*.spec.ts"
+    - "!**/*.test.ts"
+    - "!**/node_modules/**"
+    - "!**/dist/**"
+    - "!**/.next/**"
+  rules:
+    # Shared Typescript rules
+    - language: Typescript
+      paths:
+        - client/**
+        - server/**
+      config:
+        enable_best_practices: true
+        enable_performance_improvements: true
+        enable_security_checks: true
+        enable_style_checks: true
+        enable_code_quality_checks: true
+        max_function_length: 80
+        max_file_length: 500
+
+    # Next.js frontend specific
+    - language: Typescript
+      paths:
+        - client/**
+      config:
+        framework: Next.js
+        enable_accessibility_checks: true
+        enable_react_hooks_checks: true
+
+    # NestJS backend specific
+    - language: Typescript
+      paths:
+        - server/**
+      config:
+        framework: NestJS
+        enable_http_routing_checks: true
+        enable_security_checks: true
