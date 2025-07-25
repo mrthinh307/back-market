@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "commit": "commit",
     "commitlint": "commitlint"
   },
   "devDependencies": {
