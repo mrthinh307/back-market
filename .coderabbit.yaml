@@ -7,6 +7,14 @@ reviews:
   profile: chill
   high_level_summary: true
   request_changes_workflow: true
+  auto_review:
+    enabled: true
+  path_filters:
+    - "!**/*.spec.ts"
+    - "!**/*.test.ts"
+    - "!**/node_modules/**"
+    - "!**/dist/**"
+    - "!**/.next/**"
   rules:
     # Shared Typescript rules
     - language: Typescript
@@ -39,14 +47,3 @@ reviews:
         framework: NestJS
         enable_http_routing_checks: true
         enable_security_checks: true
-
-settings:
-  auto_review: true
-
-reviews:
-  path_filters:
-    - "!**/*.spec.ts"
-    - "!**/*.test.ts"
-    - "!**/node_modules/**"
-    - "!**/dist/**"
-    - "!**/.next/**"
