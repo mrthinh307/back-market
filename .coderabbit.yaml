@@ -7,10 +7,6 @@ reviews:
   profile: chill
   high_level_summary: true
   request_changes_workflow: true
-  branches:
-    include:
-      - "*"
-
   rules:
     # Shared Typescript rules
     - language: Typescript
