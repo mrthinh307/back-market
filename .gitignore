@@ -1,0 +1,78 @@
+# === DEPENDENCIES ===
+*/node_modules
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# === BUILD / OUTPUT ===
+*/build
+*/dist
+*/out
+*/.next
+*/generated/prisma
+
+# === TESTING ===
+*/coverage
+*/vitest-test-results
+*/.nyc_output
+*/test-results/
+*/playwright-report/
+*/playwright/.cache/
+
+# === LOGS ===
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# === ENVIRONMENT FILES ===
+.env
+.env*
+.env*.local
+.env.production
+.env.test
+.env.development.local
+.env.production.local
+
+# === MISC ===
+.DS_Store
+*.pem
+*.tsbuildinfo
+next-env.d.ts
+
+# === LOCAL / TEMP FILES ===
+local
+.temp
+.tmp
+
+# === RUNTIME DATA ===
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# === DIAGNOSTIC REPORTS ===
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# === IDEs & EDITORS ===
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+/.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# === DEPLOYMENT / HOSTING ===
+.vercel
