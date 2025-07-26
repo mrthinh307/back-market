@@ -1,6 +1,7 @@
 {
   "name": "next-js-boilerplate",
   "author": "Ixartz (https://github.com/ixartz)",
+  "license": "MIT",
   "engines": {
     "node": ">=20"
   },

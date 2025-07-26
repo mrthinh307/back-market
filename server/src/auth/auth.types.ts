@@ -27,3 +27,38 @@ export interface OAuthUserInfo {
   lastName: string;
   avatarUrl?: string;
 }
+
+export interface UserAuth {
+  id: string;
+  email: string;
+  emailVerified: boolean;
+  provider?: string;
+  providerId?: string;
+  role?: string;
+}
+
+export interface UserProfile {
+  id: string;
+  authId: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  avatarUrl?: string;
+}
+
+export interface User {
+  id: string;
+  email: string;
+  emailVerified: boolean;
+  provider?: string | null;
+  providerId?: string | null;
+  role: string;
+  profile: {
+    id: string;
+    authId: string;
+    firstName?: string | null;
+    lastName?: string | null;
+    phone?: string | null;
+    avatarUrl?: string | null;
+  };
+}

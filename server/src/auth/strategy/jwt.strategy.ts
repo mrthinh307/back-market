@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
@@ -25,12 +24,17 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(payload: JwtPayload) {
-    const user = await this.prisma.user.findUnique({
+    const user = await this.prisma.userAuth.findUnique({
       where: { id: payload.sub },
+      include: { profile: true },
     });
 
-    const { hash, ...userWithoutHash } = user || {};
-
-    return userWithoutHash;
+    if (!user) {
+      throw new Error('User not found');
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { hash, ...userWithoutPassword } = user;
+      return userWithoutPassword;
+    }
   }
 }
