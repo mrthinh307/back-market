@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "product_variants" ALTER COLUMN "created_at" SET DATA TYPE TIMESTAMPTZ(6),
+ALTER COLUMN "updated_at" SET DATA TYPE TIMESTAMPTZ(6);
+
+-- AlterTable
+ALTER TABLE "reviews" ALTER COLUMN "created_at" SET DATA TYPE TIMESTAMPTZ(6),
+ALTER COLUMN "updated_at" SET DATA TYPE TIMESTAMPTZ(6);
