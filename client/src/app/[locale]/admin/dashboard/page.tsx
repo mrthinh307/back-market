@@ -13,6 +13,7 @@ import { ChartAreaInteractive } from '@/components/admin/chart-area-interactive'
 import { DataTable } from '@/components/admin/data-table';
 
 import data from "./data.json"
+import { Env } from '@/libs/Env';
 
 export default function AdminDashboard() {
   const { accessToken, isLoading, getMe } = useAuth();
@@ -33,7 +34,7 @@ export default function AdminDashboard() {
 
       const userData = await getMe();
 
-      if (!userData || userData.role !== 'ADMIN') {
+      if (!userData || userData.role.toLowerCase() !== Env.NEXT_PUBLIC_AUTHORITATIVE_ROLE.toLowerCase()) {
         if (!hasRedirected) {
           setHasRedirected(true);
           redirectToHome();

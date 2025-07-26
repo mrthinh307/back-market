@@ -4,7 +4,7 @@ import { Role } from '../auth/decorator';
 import { JwtGuard, RoleGuard } from '../auth/guard';
 
 @UseGuards(JwtGuard, RoleGuard)
-@Role('ADMIN')
+@Role('admin')
 @Controller('admin')
 export class AdminController {
   @Get('admin-stuff')
