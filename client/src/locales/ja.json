@@ -1,11 +1,7 @@
 {
   "RootLayout": {
-    "home_link": "Home",
-    "about_link": "About",
-    "counter_link": "Counter",
-    "portfolio_link": "Portfolio",
-    "sign_in_link": "Log in",
-    "sign_up_link": "Sign up"
+    "meta_title": "地球に優しい再生テクノロジー | Back Market",
+    "meta_description": "Back Marketでは、再生済みのスマートフォン、ノートパソコン、タブレットなど幅広い製品を取り揃えています。手頃な価格で高品質なテクノロジーを手に入れ、持続可能な未来に貢献しましょう。"
   },
   "Header": {
     "verified_refurbished": "認定整備済製品",
