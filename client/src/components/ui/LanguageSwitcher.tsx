@@ -45,7 +45,7 @@ export function LanguageSwitcher() {
             key={lang.locale}
             onClick={() => switchLanguage(lang.locale)}
             disabled={lang.locale === locale}
-            className="hover:rounded-none px-6 py-2 cursor-pointer gap-0 flex items-center justify-between text-left"
+            className="rounded-none px-6 py-2 cursor-pointer gap-0 flex items-center justify-between text-left border-b last:border-0"
           >
             <div className="flex grow flex-1 items-center justify-start">
               <RectangleFlag countryCode={lang.countryCode} className="mr-2" />

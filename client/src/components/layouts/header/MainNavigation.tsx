@@ -22,7 +22,7 @@ const MainNavigation: React.FC<MainNavigationProps> = ({
               key={index}
               href={item.href}
               className={`
-                flex items-center space-x-1 whitespace-nowrap text-[15px] font-regular transition-colors relative
+                flex items-center space-x-1 whitespace-nowrap text-sm font-regular transition-colors relative
                 ${
                   item.highlight
                     ? 'text-[#9D3963] dark:text-[#E26B91]'

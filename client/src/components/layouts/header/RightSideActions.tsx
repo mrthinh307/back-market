@@ -19,7 +19,7 @@ const RightSideActions = () => {
 
       {/* User Account */}
       <Link
-        className="p-2 rounded-full hover:bg-sub-background transition-colors duration-300"
+        className="p-2 rounded-full hover:bg-icon-button-hover transition-colors duration-300"
         href="/"
       >
         <Image
@@ -33,7 +33,7 @@ const RightSideActions = () => {
 
       {/* Shopping Cart */}
       <Link
-        className="p-1 rounded-full hover:bg-sub-background transition-colors relative duration-300"
+        className="p-2 rounded-full hover:bg-icon-button-hover transition-colors relative duration-300"
         href="/"
       >
         <Image
@@ -50,9 +50,9 @@ const RightSideActions = () => {
 
       {/* Module Toggle Theme */}
       <ModeToggle
-        className="hidden md:flex rounded-full hover:bg-sub-background"
+        className="hidden md:flex rounded-full hover:bg-icon-button-hover"
         menuClassName="rounded-sm border-0 dark:border shadow-lg p-0 mt-1"
-        menuItemClassName="hover:rounded-none leading-6"
+        menuItemClassName="rounded-none leading-6 border-b last:border-0"
       />
     </div>
   );
