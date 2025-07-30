@@ -7,6 +7,7 @@ import {
   Instagram,
   XCircle,
 } from 'lucide-react';
+import Image from 'next/image';
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -184,124 +185,160 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+      <div className="lg:w-[1120px] mx-auto py-12">
+        <div className="flex flex-row gap-18 justify-center list-none md:flex-row">
           {footerSections.map((section, index) => (
             <div key={index} className={index === 4 ? 'lg:col-span-2' : ''}>
-              <h4 className="text-sm font-semibold text-gray-900 mb-4">
+              <h4 className="text-xl font-semibold text-gray-900 mb-4">
                 {section.title}
               </h4>
-              <ul className="space-y-3">
+              <ul className="flex list-none flex-col gap-2">
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
                     <a
                       href={link.href}
-                      className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                      className="text-sm text-gray-900 hover:text-gray-700 hover:underline transition-colors"
                     >
                       {link.label}
                     </a>
                   </li>
                 ))}
               </ul>
+              {/* Thêm icon mạng xã hội vào cột About Us */}
+              {index === 0 && (
+                <div className="flex flex-wrap items-center pt-4 flex-col gap-4">
+                  <a
+                    href="#"
+                    className="p-2 bg-gray-400 rounded-full hover:bg-gray-700 transition-colors"
+                  >
+                    <Linkedin className="h-4 w-4 text-white" />
+                  </a>
+                  <a
+                    href="#"
+                    className="p-2 bg-gray-400 rounded-full hover:bg-gray-700 transition-colors"
+                  >
+                    <Facebook className="h-4 w-4 text-white" />
+                  </a>
+                  <a
+                    href="#"
+                    className="p-2 bg-gray-400 rounded-full hover:bg-gray-700 transition-colors"
+                  >
+                    <Instagram className="h-4 w-4 text-white" />
+                  </a>
+                </div>
+              )}
+
+              {/* Payment Method Icons */}
+              {index === 2 && (
+                <div className="mt-4">
+                  <div className="flex flex-wrap items-center gap-1">
+                    <div className="w-8 h-6 bg-white rounded flex items-center justify-center border-2">
+                      <Image
+                        src="/assets/images/Visa.png"
+                        alt="Payment Logo"
+                        height={24}
+                        width={30}
+                      />
+                    </div>
+                    <div className="w-8 h-6 bg-white rounded flex items-center justify-center border-2">
+                      <Image
+                        src="/assets/images/Mastercard.png"
+                        alt="Payment Logo"
+                        height={24}
+                        width={30}
+                      />
+                    </div>
+                    <div className="w-8 h-6 bg-green-100 rounded flex items-center justify-center border-2">
+                      <Image
+                        src="/assets/images/GooglePay.png"
+                        alt="Payment Logo"
+                        height={24}
+                        width={30}
+                      />
+                    </div>
+                    <div className="w-8 h-6 bg-white rounded flex items-center justify-center border-2">
+                      <Image
+                        src="/assets/images/Klarna.png"
+                        alt="Payment Logo"
+                        height={30}
+                        width={36}
+                      />
+                    </div>
+                    <div className="w-8 h-6 bg-white rounded flex items-center justify-center border-2">
+                      <Image
+                        src="/assets/images/clearPay.png"
+                        alt="Payment Logo"
+                        height={30}
+                        width={36}
+                      />
+                    </div>
+                    <div className="w-8 h-6 bg-white rounded flex items-center justify-center border-2">
+                      <Image
+                        src="/assets/images/ApplePay.png"
+                        alt="Payment Logo"
+                        height={24}
+                        width={30}
+                      />
+                    </div>
+                    <div className="w-8 h-6 bg-white rounded flex items-center justify-center border-2">
+                      <Image
+                        src="/assets/images/JCB.png"
+                        alt="Payment Logo"
+                        height={24}
+                        width={30}
+                      />
+                    </div>
+                    <div className="w-8 h-6 rounded flex items-center justify-center border-2">
+                      <Image
+                        src="/assets/images/Paypal.jpg"
+                        alt="Payment Logo"
+                        height={24}
+                        width={30}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
 
           {/* B-Corp Certification */}
-          <div className="flex justify-center lg:justify-end">
-            <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-12 h-12 border-2 border-gray-400 rounded-full flex items-center justify-center mb-1">
-                  <span className="text-lg font-bold text-gray-600">B</span>
-                </div>
-                <p className="text-xs text-gray-500">Certified</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Social Media Links */}
-        <div className="mt-8 pt-8 border-t border-gray-200">
-          <div className="flex items-center justify-between">
-            <div className="flex space-x-4">
-              <a
-                href="#"
-                className="p-2 bg-gray-600 rounded-full hover:bg-gray-700 transition-colors"
-              >
-                <Linkedin className="h-4 w-4 text-white" />
-              </a>
-              <a
-                href="#"
-                className="p-2 bg-gray-600 rounded-full hover:bg-gray-700 transition-colors"
-              >
-                <Facebook className="h-4 w-4 text-white" />
-              </a>
-              <a
-                href="#"
-                className="p-2 bg-gray-600 rounded-full hover:bg-gray-700 transition-colors"
-              >
-                <Instagram className="h-4 w-4 text-white" />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Payment Methods */}
-        <div className="mt-8">
-          <div className="flex flex-wrap gap-3">
-            {/* Payment Method Icons */}
-            <div className="flex items-center gap-2">
-              <div className="w-12 h-8 bg-blue-600 rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">VISA</span>
-              </div>
-              <div className="w-12 h-8 bg-red-500 rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">MC</span>
-              </div>
-              <div className="w-12 h-8 bg-blue-500 rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">AMEX</span>
-              </div>
-              <div className="w-12 h-8 bg-blue-400 rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">PP</span>
-              </div>
-              <div className="w-12 h-8 bg-red-600 rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">M</span>
-              </div>
-              <div className="w-12 h-8 bg-black rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">PAY</span>
-              </div>
-              <div className="w-12 h-8 bg-gray-600 rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">GP</span>
-              </div>
-              <div className="w-12 h-8 bg-pink-500 rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">K</span>
-              </div>
+          <div className="">
+            <div className="flex flex-wrap justify-start gap-16">
+              <Image
+                src="/assets/images/B-Logo.svg"
+                alt="B-Corp-Logo"
+                height={200}
+                width={200}
+              />
             </div>
           </div>
         </div>
 
         {/* Bottom Section */}
         <div className="mt-12 pt-8 border-t border-gray-200">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-sm text-gray-600 mb-4 md:mb-0">
+          <div className="">
+            <div className="flex justify-center text-sl text-gray-900 mb-4 md:mb-4 font-semibold">
               © 2025 Back Market
             </div>
 
             {/* App Download Links */}
-            <div className="flex space-x-4">
+            <div className="flex justify-center space-x-4">
               <a href="#" className="inline-block">
-                <div className="bg-black text-white px-4 py-2 rounded-lg flex items-center space-x-2">
-                  <div className="text-xs">
-                    <div className="text-white">GET IT ON</div>
-                    <div className="font-bold">Google Play</div>
-                  </div>
-                </div>
+                <Image
+                  src="/assets/images/GooglePlay.svg"
+                  alt="Payment Logo"
+                  height={160}
+                  width={220}
+                />
               </a>
-              <a href="#" className="inline-block">
-                <div className="bg-black text-white px-4 py-2 rounded-lg flex items-center space-x-2">
-                  <div className="text-xs">
-                    <div className="text-white">Download on the</div>
-                    <div className="font-bold">App Store</div>
-                  </div>
-                </div>
+              <a href="#" className="inline-block ">
+                <Image
+                  src="/assets/images/apple-store.svg"
+                  alt="Payment Logo"
+                  height={160}
+                  width={200}
+                />
               </a>
             </div>
           </div>

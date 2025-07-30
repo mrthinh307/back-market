@@ -41,7 +41,12 @@ const Header: React.FC = () => {
       <MainNavigation mainNavItems={mainNavItems} />
 
       {/* Mobile Menu */}
-      <MobileMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} mainNavItems={mainNavItems} topNavItems={topNavItems} />
+      <MobileMenu
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        mainNavItems={mainNavItems}
+        topNavItems={topNavItems}
+      />
     </header>
   );
 };
