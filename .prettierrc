@@ -14,6 +14,6 @@
   "vueIndentScriptAndStyle": false,
   "useTabs": false,
   "singleQuote": true,
-  "jsxSingleQuote": false,
+  "jsxSingleQuote": true,
   "semi": true
 }
