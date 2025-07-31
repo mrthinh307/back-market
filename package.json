@@ -1,4 +1,10 @@
 {
+  "name": "backmarket",
+  "private": true,
+  "workspaces": [
+    "client/*",
+    "server/*"
+  ],
   "scripts": {
     "commit": "commit",
     "commitlint": "commitlint"
