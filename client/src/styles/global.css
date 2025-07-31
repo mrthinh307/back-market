@@ -48,11 +48,12 @@
   --accent: #f5f5f4;
   --accent-foreground: oklch(0.208 0.042 265.755);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-secondary: #F6B4B2;
+  --destructive-secondary: #f6b4b2;
   --border: #e7e5e4;
   --border-dark: #0e1016;
   --input: oklch(0.929 0.013 255.508);
   --input-hover: #edeff3;
+  --icon-button-hover: rgba(14, 16, 22, 0.06);
   --ring: oklch(0.704 0.04 256.788);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -68,6 +69,9 @@
   --sidebar-border: #e7e5e4;
   --sidebar-ring: #a6a09b;
   --button-hover: #323339;
+  --shadow-sm: 0 2px 4px #0000000d;
+  --shadow-md: 0 4px 8px #00000014;
+  --shadow-lg: 0 8px 16px #0000001f;
 }
 
 .dark {
@@ -94,6 +98,7 @@
   --border-dark: rgba(255, 255, 255, 0.1);
   --input: oklch(1 0 0 / 15%);
   --input-hover: #292524;
+  --icon-button-hover: #262626;
   --ring: oklch(0.551 0.027 264.364);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
@@ -109,6 +114,9 @@
   --sidebar-border: rgba(255, 255, 255, 0.1);
   --sidebar-ring: #79716b;
   --button-hover: #f1f1f1;
+  --shadow-sm: 0 2px 4px rgba(100, 255, 255, 0.1);
+  --shadow-md: 0 4px 8px rgba(100, 255, 255, 0.15);
+  --shadow-lg: 0 8px 16px rgba(100, 255, 255, 0.2);
 }
 
 @theme inline {
@@ -138,8 +146,11 @@
   --color-destructive-secondary: var(--destructive-secondary);
   --color-input: var(--input);
   --color-input-hover: var(--input-hover);
+  --color-icon-button-hover: var(--icon-button-hover);
   --color-border: var(--border);
-  --color-dark: var(--border-dark); /* Dark border color used in most components in Back Market */
+  --color-dark: var(
+    --border-dark
+  ); /* Dark border color used in most components in Back Market */
   --color-ring: var(--ring);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -161,9 +172,9 @@
   --font-duplet: 'DupletOpen', sans-serif;
   --font-duplet-bold: 'DupletOpen-Bold', sans-serif;
 
-  --shadow-sm: 0 2px 4px #0000000d;
-  --shadow-md: 0 4px 8px #00000014;
-  --shadow-lg: 0 8px 16px #0000001f;
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
 
   --breakpoint-2xl: 1440px;
   --breakpoint-xl: 1200px;
@@ -180,21 +191,24 @@
 
   body {
     @apply bg-background text-primary font-duplet font-normal;
-  } 
+  }
 
   html.ja {
     @apply font-semibold;
   }
 
-  section,
-  main {
-    @apply flex justify-center;
+  section {
+    @apply mb-14;
   }
 }
 
 @layer utilities {
   .container {
-    @apply max-w-full grow px-6 xl:max-w-[1184px] xl:basis-full xl:px-8 mx-auto;
+    @apply max-w-full grow xl:max-w-[1184px] xl:basis-full px-6 xl:px-8 mx-auto;
+  }
+
+  .slide-carousel-container {
+    @apply w-full max-w-full grow xl:max-w-[1184px] xl:basis-full pl-6 pr-0 xl:px-8;
   }
 
   .content-center {
@@ -210,9 +224,19 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
-  
+
   .scrollbar-none::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
+  }
+
+  .gradient-mask-r-90 {
+    -webkit-mask-image: linear-gradient(90deg, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, #000 90%, transparent);
+  }
+
+  .gradient-mask-l-90 {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 90%);
+    mask-image: linear-gradient(90deg, transparent, #000 90%);
   }
 
   @keyframes spin-360 {
