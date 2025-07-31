@@ -6,3 +6,4 @@ export { default as mailBoxIcon } from './mail-box.svg';
 export { default as showPasswordIcon } from './show-password.svg';
 export { default as hidePasswordIcon } from './hide-password.svg';
 export { default as facebookIcon } from './facebook.svg';
+export { default as playVideoIcon } from './play-video-icon.svg';
