@@ -131,8 +131,8 @@ export class AuthController {
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
     res.clearCookie('refresh_token');
-    return res.json({
+    return {
       message: 'Logged out successfully',
-    });
+    };
   }
 }
