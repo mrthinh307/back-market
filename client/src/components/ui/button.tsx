@@ -6,12 +6,12 @@ import * as React from 'react';
 import { cn } from '@/libs/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-sm text-base font-semibold transition-all disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg:not([class*=\'size-\'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer overflow-hidden',
+  "inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-sm text-base font-semibold transition-all disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive cursor-pointer overflow-hidden",
   {
     variants: {
       variant: {
         default:
-          'bg-primary text-primary-foreground shadow-xs hover:bg-button-hover disabled:bg-[#f3f3f3] dark:disabled:bg-[#3a3a3a] disabled:text-muted/70',
+          'bg-primary text-primary-foreground shadow-xs hover:bg-button-hover disabled:bg-[#0e10160d] dark:disabled:bg-[#3a3a3a] disabled:text-[#8e9095]',
         destructive:
           'bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 disabled:opacity-50',
         outline:
@@ -26,7 +26,7 @@ const buttonVariants = cva(
         default: 'h-12 px-4 py-2 has-[>svg]:px-3',
         sm: 'h-8 rounded-sm gap-1.5 px-3 has-[>svg]:px-2.5',
         lg: 'h-10 rounded-sm px-6 has-[>svg]:px-4',
-        icon: 'size-9',
+        icon: 'size-10 rounded-full p-2 shadow-none',
       },
     },
     defaultVariants: {
@@ -42,8 +42,8 @@ function Button({
   size,
   asChild = false,
   ...props
-}: React.ComponentProps<'button'>
-  & VariantProps<typeof buttonVariants> & {
+}: React.ComponentProps<'button'> &
+  VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
   }) {
   const Comp = asChild ? Slot : 'button';
