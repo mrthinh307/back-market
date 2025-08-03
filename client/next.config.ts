@@ -10,7 +10,12 @@ const baseConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   images: {
-    domains: ['www.backmarket.co.uk', 'wwww.backmarket.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.backmarket.*', 
+      },
+    ],
   },
   async redirects() {
     return [
