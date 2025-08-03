@@ -10,7 +10,7 @@ export function useEmailValidation(savedEmail?: string) {
 
   const validateEmail = (value: string) => {
     setEmail(value);
-    
+
     if (!value.trim()) {
       setError(null);
       setIsValid(false);
@@ -22,7 +22,8 @@ export function useEmailValidation(savedEmail?: string) {
       setError(null);
       setIsValid(true);
     } catch (validationError: any) {
-      const errorMessage = validationError.errors?.[0]?.message || 'Invalid email';
+      const errorMessage =
+        validationError.errors?.[0]?.message || 'Invalid email';
       setError(errorMessage);
       setIsValid(false);
     }
@@ -61,7 +62,7 @@ export function usePasswordValidation() {
 
   const validatePassword = (value: string) => {
     setPassword(value);
-    
+
     if (!value.trim()) {
       setError(null);
       setIsValid(false);
@@ -74,7 +75,8 @@ export function usePasswordValidation() {
       setError(null);
       setIsValid(true);
     } catch (validationError: any) {
-      const errorMessage = validationError.errors?.[0]?.message || 'Invalid password';
+      const errorMessage =
+        validationError.errors?.[0]?.message || 'Invalid password';
       console.warn('Password validation error:', errorMessage);
       setError(errorMessage);
       setIsValid(false);

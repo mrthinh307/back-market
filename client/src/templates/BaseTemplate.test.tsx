@@ -9,15 +9,15 @@ describe('Base template', () => {
   describe('Render method', () => {
     it('should have 3 menu items', () => {
       render(
-        <NextIntlClientProvider locale="en" messages={messages}>
+        <NextIntlClientProvider locale='en' messages={messages}>
           <BaseTemplate
-            leftNav={(
+            leftNav={
               <>
                 <li>link 1</li>
                 <li>link 2</li>
                 <li>link 3</li>
               </>
-            )}
+            }
           >
             {null}
           </BaseTemplate>
@@ -31,7 +31,7 @@ describe('Base template', () => {
 
     it('should have a link to support creativedesignsguru.com', () => {
       render(
-        <NextIntlClientProvider locale="en" messages={messages}>
+        <NextIntlClientProvider locale='en' messages={messages}>
           <BaseTemplate leftNav={<li>1</li>}>{null}</BaseTemplate>
         </NextIntlClientProvider>,
       );

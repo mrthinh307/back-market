@@ -13,5 +13,5 @@ export const parseAxiosError = (
       message: axiosErr.response?.data?.message || 'Unknown error occurred',
     };
   }
-  return { message: 'Unknown error occurred', };
+  return { message: 'Unknown error occurred' };
 };

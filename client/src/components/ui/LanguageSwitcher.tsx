@@ -27,31 +27,31 @@ export function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex items-center cursor-pointer">
+        <div className='flex items-center cursor-pointer'>
           <RectangleFlag
             countryCode={currentLanguage?.countryCode.toLowerCase()!}
           />
-          <span className="px-2 py-1 font-semibold">
+          <span className='px-2 py-1 font-semibold'>
             {currentLanguage?.countryCode.toUpperCase()}
           </span>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        align="end"
-        className="w-auto min-w-[320px] rounded-sm shadow-lg px-0 py-2 bg-card border-0 dark:border"
+        align='end'
+        className='w-auto min-w-[320px] rounded-sm shadow-lg px-0 py-2 bg-card border-0 dark:border'
       >
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.locale}
             onClick={() => switchLanguage(lang.locale)}
             disabled={lang.locale === locale}
-            className="rounded-none px-6 py-2 cursor-pointer gap-0 flex items-center justify-between text-left border-b last:border-0"
+            className='rounded-none px-6 py-2 cursor-pointer gap-0 flex items-center justify-between text-left border-b last:border-0'
           >
-            <div className="flex grow flex-1 items-center justify-start">
-              <RectangleFlag countryCode={lang.countryCode} className="mr-2" />
-              <span className="text-base text-primary">{lang.label}</span>
+            <div className='flex grow flex-1 items-center justify-start'>
+              <RectangleFlag countryCode={lang.countryCode} className='mr-2' />
+              <span className='text-base text-primary'>{lang.label}</span>
             </div>
-            <span className="text-sm text-muted ml-6">{lang.description}</span>
+            <span className='text-sm text-muted ml-6'>{lang.description}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

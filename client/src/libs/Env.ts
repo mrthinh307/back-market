@@ -5,7 +5,8 @@ export const Env = createEnv({
   client: {
     NEXT_PUBLIC_NEXT_BASE_URL: z.string().url(),
     NEXT_PUBLIC_DEV_FACEBOOK_URL: z.string().url(),
-    NEXT_PUBLIC_AUTHORITATIVE_ROLE: z.string().default('admin'),  },
+    NEXT_PUBLIC_AUTHORITATIVE_ROLE: z.string().default('admin'),
+  },
   shared: {
     NODE_ENV: z.enum(['test', 'development', 'production']).optional(),
   },

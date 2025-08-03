@@ -12,7 +12,7 @@ import { SectionCards } from '@/components/admin/section-cards';
 import { ChartAreaInteractive } from '@/components/admin/chart-area-interactive';
 import { DataTable } from '@/components/admin/data-table';
 
-import data from "./data.json"
+import data from './data.json';
 import { Env } from '@/libs/Env';
 
 export default function AdminDashboard() {
@@ -34,7 +34,11 @@ export default function AdminDashboard() {
 
       const userData = await getMe();
 
-      if (!userData || userData.role.toLowerCase() !== Env.NEXT_PUBLIC_AUTHORITATIVE_ROLE.toLowerCase()) {
+      if (
+        !userData ||
+        userData.role.toLowerCase() !==
+          Env.NEXT_PUBLIC_AUTHORITATIVE_ROLE.toLowerCase()
+      ) {
         if (!hasRedirected) {
           setHasRedirected(true);
           redirectToHome();
@@ -63,14 +67,14 @@ export default function AdminDashboard() {
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" />
+      <AppSidebar variant='inset' />
       <SidebarInset>
         <SiteHeader />
-        <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+        <div className='flex flex-1 flex-col'>
+          <div className='@container/main flex flex-1 flex-col gap-2'>
+            <div className='flex flex-col gap-4 py-4 md:gap-6 md:py-6'>
               <SectionCards />
-              <div className="px-4 lg:px-6">
+              <div className='px-4 lg:px-6'>
                 <ChartAreaInteractive />
               </div>
               <DataTable data={data} />

@@ -9,7 +9,9 @@ import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 
-export async function generateMetadata(props: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await props.params;
   const t = await getTranslations({
     locale,
@@ -40,18 +42,18 @@ export default async function RootLayout(props: {
 
   return (
     <html lang={locale} suppressHydrationWarning className={`${locale}`}>
-      <body className="antialiased">
+      <body className='antialiased'>
         <NextIntlClientProvider>
           <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
+            attribute='class'
+            defaultTheme='system'
             enableSystem
             disableTransitionOnChange
           >
             <AuthProvider>{props.children}</AuthProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
-        <Toaster position="top-right" />
+        <Toaster position='top-right' />
       </body>
     </html>
   );

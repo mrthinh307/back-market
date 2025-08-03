@@ -28,63 +28,63 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   if (!isMenuOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 md:hidden bg-background flex flex-col animate-slide-in-left">
+    <div className='fixed inset-0 z-50 md:hidden bg-background flex flex-col animate-slide-in-left'>
       {/* Mobile Menu Header - Fixed at top */}
-      <div className="flex items-center justify-between bg-white dark:bg-background p-4 border-b border-gray-200 dark:border-gray-600/30 relative px-4 py-2">
+      <div className='flex items-center justify-between bg-white dark:bg-background p-4 border-b border-gray-200 dark:border-gray-600/30 relative px-4 py-2'>
         {/* Empty space for balance */}
-        <div className="w-10"></div>
+        <div className='w-10'></div>
 
         {/* Logo - Centered */}
-        <div className="absolute left-1/2 transform -translate-x-1/2">
-          <Link href="/" onClick={() => setIsMenuOpen(false)}>
+        <div className='absolute left-1/2 transform -translate-x-1/2'>
+          <Link href='/' onClick={() => setIsMenuOpen(false)}>
             <Image
-              src="assets/images/header-logo-1.svg"
-              alt="Logo"
+              src='assets/images/header-logo-1.svg'
+              alt='Logo'
               height={14}
               width={120}
-              className="dark:invert"
+              className='dark:invert'
             />
           </Link>
         </div>
 
         {/* Close Button */}
         <button
-          className="p-2 rounded-full hover:bg-sub-background cursor-pointer transition-colors"
+          className='p-2 rounded-full hover:bg-sub-background cursor-pointer transition-colors'
           onClick={() => setIsMenuOpen(false)}
         >
           <Image
-            src="/assets/images/x-icon.svg"
-            alt="Close"
+            src='/assets/images/x-icon.svg'
+            alt='Close'
             width={24}
             height={24}
-            className="dark:invert"
+            className='dark:invert'
           />
         </button>
       </div>
 
       {/* Mobile Menu Content - Scrollable middle section */}
-      <div className="flex-1 overflow-y-auto scrollbar-none bg-white dark:bg-background">
+      <div className='flex-1 overflow-y-auto scrollbar-none bg-white dark:bg-background'>
         {/* Shop Section */}
-        <div className="p-6">
-          <h2 className="text-secondary mb-4">Shop</h2>
+        <div className='p-6'>
+          <h2 className='text-secondary mb-4'>Shop</h2>
 
           {/* All main nav items */}
-          <div className="flex flex-col">
+          <div className='flex flex-col'>
             {mainNavItems.map((item, index) => (
               <Link
                 key={index}
                 href={item.href}
-                className="flex items-center justify-between py-5 last:pb-0"
+                className='flex items-center justify-between py-5 last:pb-0'
                 onClick={() => setIsMenuOpen(false)}
               >
-                <div className="flex items-center">
+                <div className='flex items-center'>
                   {item.highlight && (
                     <Image
-                      src="/assets/images/good-deal.svg"
-                      alt="Highlight Icon"
+                      src='/assets/images/good-deal.svg'
+                      alt='Highlight Icon'
                       width={24}
                       height={24}
-                      className="mr-2 dark:invert"
+                      className='mr-2 dark:invert'
                     />
                   )}
                   <span
@@ -96,11 +96,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                   </span>
                 </div>
                 <Image
-                  src="/assets/images/chevron-right.svg"
-                  alt="Arrow"
+                  src='/assets/images/chevron-right.svg'
+                  alt='Arrow'
                   width={24}
                   height={24}
-                  className="dark:invert"
+                  className='dark:invert'
                 />
               </Link>
             ))}
@@ -109,14 +109,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       </div>
 
       {/* Mobile Menu Footer - Fixed at bottom */}
-      <div className="bg-white dark:bg-background">
+      <div className='bg-white dark:bg-background'>
         {/* Additional Links Section */}
-        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-600/30">
+        <div className='px-6 py-4 border-b border-gray-200 dark:border-gray-600/30'>
           {topNavItems.map((item, index) => (
             <Link
               key={index}
               href={item.href || '#'}
-              className="block py-2 text-sm font-semibold"
+              className='block py-2 text-sm font-semibold'
               onClick={() => setIsMenuOpen(false)}
             >
               {item.label}
@@ -125,7 +125,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         </div>
 
         {/* Footer Section */}
-        <div className="px-6 py-4">
+        <div className='px-6 py-4'>
           <LanguageSwitcher />
         </div>
       </div>

@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { CategoryCardProps } from '@/types/cards.type';
@@ -14,9 +13,7 @@ function CategoryCard({ category }: { category: CategoryCardProps }) {
             width={0}
             height={0}
             sizes='100vw'
-            layout="responsive"
-            objectFit="cover"
-            className="w-full h-auto"
+            className='w-full h-auto object-cover'
           />
         </div>
         <h3 className='font-semibold text-lg md:text-xl'>{category.name}</h3>

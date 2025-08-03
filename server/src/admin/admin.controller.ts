@@ -9,6 +9,6 @@ import { JwtGuard, RoleGuard } from '../auth/guard';
 export class AdminController {
   @Get('admin-stuff')
   getAdminStuff() {
-    return { "secure": true };
+    return { secure: true };
   }
 }

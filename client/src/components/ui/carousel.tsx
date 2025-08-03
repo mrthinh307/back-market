@@ -93,10 +93,10 @@ const useDotButton = (
     // Initial setup
     onInit(emblaApi);
     onSelect(emblaApi);
-    
+
     // Add event listeners
     emblaApi.on('reInit', onInit);
-    emblaApi.on('reInit', onSelect); 
+    emblaApi.on('reInit', onSelect);
     emblaApi.on('select', onSelect);
 
     // ✅ PROPER CLEANUP - Remove ALL event listeners
@@ -154,7 +154,7 @@ const useAutoplay = (
 
     // Initial state
     setAutoplayIsPlaying(autoplay.isPlaying());
-    
+
     // Add event listeners
     emblaApi
       .on('autoplay:play', handleAutoplayPlay)
@@ -339,14 +339,14 @@ const useCarouselLogic = (
   // ✅ PROPER EVENT HANDLING - No memory leaks, no duplicates
   React.useEffect(() => {
     if (!api) return;
-    
+
     // Event handlers
     const handleReInit = () => onSelect(api);
     const handleSelect = () => onSelect(api);
 
     // Initial setup
     onSelect(api);
-    
+
     // Add event listeners
     api.on('reInit', handleReInit);
     api.on('select', handleSelect);
@@ -398,9 +398,9 @@ function Carousel({
       <div
         onKeyDownCapture={carouselLogic.handleKeyDown}
         className={cn('relative', className)}
-        role="region"
-        aria-roledescription="carousel"
-        data-slot="carousel"
+        role='region'
+        aria-roledescription='carousel'
+        data-slot='carousel'
         {...props}
       >
         {children}
@@ -437,9 +437,9 @@ function CarouselWithAutoplay({
       <div
         onKeyDownCapture={carouselLogic.handleKeyDown}
         className={cn('relative', className)}
-        role="region"
-        aria-roledescription="carousel"
-        data-slot="carousel"
+        role='region'
+        aria-roledescription='carousel'
+        data-slot='carousel'
         {...props}
       >
         {children}
@@ -456,8 +456,8 @@ function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       ref={carouselRef}
-      className="overflow-hidden"
-      data-slot="carousel-content"
+      className='overflow-hidden'
+      data-slot='carousel-content'
     >
       <div
         className={cn(
@@ -477,9 +477,9 @@ function CarouselItem({ className, ...props }: React.ComponentProps<'div'>) {
 
   return (
     <div
-      role="group"
-      aria-roledescription="slide"
-      data-slot="carousel-item"
+      role='group'
+      aria-roledescription='slide'
+      data-slot='carousel-item'
       className={cn(
         'min-w-0 shrink-0 grow-0 basis-full',
         orientation === 'horizontal' ? 'pl-4' : 'pt-4',
@@ -501,7 +501,7 @@ function CarouselPrevious({
 
   return (
     <Button
-      data-slot="carousel-previous"
+      data-slot='carousel-previous'
       variant={variant}
       size={size}
       disabled={!canScrollPrev}
@@ -510,7 +510,7 @@ function CarouselPrevious({
       {...props}
     >
       <ArrowLeft />
-      <span className="sr-only">Previous slide</span>
+      <span className='sr-only'>Previous slide</span>
     </Button>
   );
 }
@@ -525,7 +525,7 @@ function CarouselNext({
 
   return (
     <Button
-      data-slot="carousel-next"
+      data-slot='carousel-next'
       variant={variant}
       size={size}
       disabled={!canScrollNext}
@@ -534,7 +534,7 @@ function CarouselNext({
       {...props}
     >
       <ArrowRight />
-      <span className="sr-only">Next slide</span>
+      <span className='sr-only'>Next slide</span>
     </Button>
   );
 }
@@ -545,7 +545,7 @@ function CarouselNavigation({ className }: React.ComponentProps<'div'>) {
       className={`hidden md:flex container mt-4 items-center justify-between ${className}`}
     >
       <CarouselDots />
-      <div className="flex items-center gap-3">
+      <div className='flex items-center gap-3'>
         <CarouselPrevious />
         <CarouselNext />
       </div>
@@ -558,7 +558,7 @@ const DotButton: React.FC<React.ComponentPropsWithRef<'button'>> = (props) => {
   const { children, ...restProps } = props;
 
   return (
-    <button type="button" {...restProps}>
+    <button type='button' {...restProps}>
       {children}
     </button>
   );
@@ -612,17 +612,17 @@ function CarouselDotsWithProgress({
       {...props}
     >
       {scrollSnaps.map((_, index) => (
-        <div key={index} className="relative flex items-center">
+        <div key={index} className='relative flex items-center'>
           {/* Show progress bar only for selected dot */}
           {index === selectedIndex ? (
             <DotButton
               onClick={() => onDotButtonClick(index)}
-              className="w-8 h-2 rounded-full transition-all duration-200 !border !border-primary relative overflow-hidden"
+              className='w-8 h-2 rounded-full transition-all duration-200 !border !border-primary relative overflow-hidden'
             >
               {/* Progress bar - shows only for selected dot */}
               {showAutoplayProgress && (
                 <div
-                  className="absolute left-0 top-0 h-full bg-primary rounded-full transition-all duration-100 ease-linear"
+                  className='absolute left-0 top-0 h-full bg-primary rounded-full transition-all duration-100 ease-linear'
                   style={{
                     width: `${progressPercentage}%`,
                   }}
@@ -633,7 +633,7 @@ function CarouselDotsWithProgress({
             /* Regular dots for non-selected items */
             <DotButton
               onClick={() => onDotButtonClick(index)}
-              className="w-2 h-2 rounded-full transition-all duration-200 !border !border-primary bg-transparent hover:bg-gray-200 dark:hover:bg-gray-500"
+              className='w-2 h-2 rounded-full transition-all duration-200 !border !border-primary bg-transparent hover:bg-gray-200 dark:hover:bg-gray-500'
             />
           )}
         </div>

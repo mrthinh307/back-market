@@ -33,7 +33,7 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white dark:bg-background border-b border-[#dfe1e7] dark:border-gray-600/30">
+    <header className='bg-white dark:bg-background border-b border-[#dfe1e7] dark:border-gray-600/30'>
       {/* Top Navigation */}
       <TopNavigation topNavItems={topNavItems} />
 
@@ -44,7 +44,12 @@ const Header: React.FC = () => {
       <MainNavigation mainNavItems={mainNavItems} />
 
       {/* Mobile Menu */}
-      <MobileMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} mainNavItems={mainNavItems} topNavItems={topNavItems} />
+      <MobileMenu
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        mainNavItems={mainNavItems}
+        topNavItems={topNavItems}
+      />
     </header>
   );
 };
