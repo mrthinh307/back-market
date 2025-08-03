@@ -550,6 +550,266 @@ const ProductPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+
+      {/* Often bought together Section */}
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">Often bought together</h2>
+          <div className="bg-white border border-gray-200 rounded-lg p-6">
+            <div className="flex flex-col lg:flex-row items-center justify-between">
+              <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8 mb-6 lg:mb-0">
+                {/* First Product */}
+                <div className="flex items-center space-x-4">
+                  <div className="w-48 h-48 rounded-lg flex items-center justify-center">
+                    <Image
+                      src="/assets/images/Iphone13.avif"
+                      alt="iPhone 15 Plus"
+                      width={216}
+                      height={216}
+                      className="rounded-lg object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-gray-900">iPhone 15 Plus</h3>
+                    <p className="text-sm text-gray-600">128 GB - Pink - Unlocked</p>
+                    <div className="flex items-center space-x-2 mt-1">
+                      <span className="text-lg font-bold text-gray-900">£431.00</span>
+                      <span className="text-sm text-gray-500 line-through">£799.00 new</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-2xl font-bold text-gray-400">+</div>
+
+                <div className="flex items-center space-x-4">
+                  <div className="w-48 h-48 rounded-lg flex items-center justify-center">
+                    <Image
+                      src="/assets/images/Iphone13.avif"
+                      alt="Case iPhone 15 Plus"
+                      width={216}
+                      height={216}
+                      className="rounded-lg object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-gray-900">Case iPhone 15 Plus and 2 protective screens - TPU -...</h3>
+                    <div className="flex items-center space-x-2 mt-1">
+                      <span className="text-lg font-bold text-gray-900">£23.99</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center lg:text-right">
+                <div className="text-lg font-bold text-gray-900 mb-2">Total price: £454.99</div>
+                <button className="bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors">
+                  Add both to cart
+                </button>
+                <div className="flex items-center justify-center lg:justify-end space-x-1 mt-2 text-sm text-gray-500">
+                  <Truck size={14} />
+                  <span>These items might be sold and delivered by different sellers</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* You may also like Section */}
+      <div className="bg-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">You may also like</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* iPhone 14 */}
+            <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
+              <div className="w-full h-48 bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+                <Image
+                  src="/assets/images/Iphone13.avif"
+                  alt="iPhone 14"
+                  width={192}
+                  height={192}
+                  className="rounded-lg object-cover"
+                />
+              </div>
+              <h3 className="font-medium text-gray-900 mb-1">iPhone 14</h3>
+              <p className="text-sm text-gray-600 mb-2">Midnight · 128 GB · Physical SIM + eSIM</p>
+              <div className="flex items-center space-x-1 mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    size={14}
+                    className={`${
+                      i < 5 ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                    }`}
+                  />
+                ))}
+                <span className="text-sm text-gray-600 ml-1">4.5/5 (16490)</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-lg font-bold text-gray-900">£263.00</span>
+                <span className="text-sm text-gray-500 line-through">£599.00 new</span>
+              </div>
+            </div>
+            
+            <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
+              <div className="w-full h-48 bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+                <Image
+                  src="/assets/images/Iphone13.avif"
+                  alt="iPhone 14"
+                  width={192}
+                  height={192}
+                  className="rounded-lg object-cover"
+                />
+              </div>
+              <h3 className="font-medium text-gray-900 mb-1">iPhone 14</h3>
+              <p className="text-sm text-gray-600 mb-2">Midnight · 128 GB · Physical SIM + eSIM</p>
+              <div className="flex items-center space-x-1 mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    size={14}
+                    className={`${
+                      i < 5 ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                    }`}
+                  />
+                ))}
+                <span className="text-sm text-gray-600 ml-1">4.5/5 (16490)</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-lg font-bold text-gray-900">£263.00</span>
+                <span className="text-sm text-gray-500 line-through">£599.00 new</span>
+              </div>
+            </div>
+
+            <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
+              <div className="w-full h-48 bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+                <Image
+                  src="/assets/images/Iphone13.avif"
+                  alt="iPhone 14"
+                  width={192}
+                  height={192}
+                  className="rounded-lg object-cover"
+                />
+              </div>
+              <h3 className="font-medium text-gray-900 mb-1">iPhone 14</h3>
+              <p className="text-sm text-gray-600 mb-2">Midnight · 128 GB · Physical SIM + eSIM</p>
+              <div className="flex items-center space-x-1 mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    size={14}
+                    className={`${
+                      i < 5 ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                    }`}
+                  />
+                ))}
+                <span className="text-sm text-gray-600 ml-1">4.5/5 (16490)</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-lg font-bold text-gray-900">£263.00</span>
+                <span className="text-sm text-gray-500 line-through">£599.00 new</span>
+              </div>
+            </div>
+
+            <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
+              <div className="w-full h-48 bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+                <Image
+                  src="/assets/images/Iphone13.avif"
+                  alt="iPhone 14"
+                  width={192}
+                  height={192}
+                  className="rounded-lg object-cover"
+                />
+              </div>
+              <h3 className="font-medium text-gray-900 mb-1">iPhone 14</h3>
+              <p className="text-sm text-gray-600 mb-2">Midnight · 128 GB · Physical SIM + eSIM</p>
+              <div className="flex items-center space-x-1 mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    size={14}
+                    className={`${
+                      i < 5 ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                    }`}
+                  />
+                ))}
+                <span className="text-sm text-gray-600 ml-1">4.5/5 (16490)</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-lg font-bold text-gray-900">£263.00</span>
+                <span className="text-sm text-gray-500 line-through">£599.00 new</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Product bla bla bla bla Tabs */}
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">Pairs well with</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* iPhone 14 */}
+            <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
+              <div className="w-full h-48 bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+                <Image
+                  src="/assets/images/Iphone13.avif"
+                  alt="iPhone 14"
+                  width={192}
+                  height={192}
+                  className="rounded-lg object-cover"
+                />
+              </div>
+              <h3 className="font-medium text-gray-900 mb-1">iPhone 14</h3>
+              <p className="text-sm text-gray-600 mb-2">Midnight · 128 GB · Physical SIM + eSIM</p>
+              <div className="flex items-center space-x-1 mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    size={14}
+                    className={`${
+                      i < 5 ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                    }`}
+                  />
+                ))}
+                <span className="text-sm text-gray-600 ml-1">4.5/5 (12099)</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-lg font-bold text-gray-900">£391.00</span>
+                <span className="text-sm text-gray-500 line-through">£1,099.00 new</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Reviews */}
+      <div className="bg-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">iPhone 13 - Unlocked: customer reviews</h2>
+          <div className="flex items-center">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      size={24}
+                      className={`${
+                        i < 4 ? 'text-black fill-current mr-1' : 'text-gray-300'
+                      }`}
+                    />
+                  ))}
+                  <span className="ml-2 text-2xl text-black font-medium">
+                    4.6/5 (38 verified reviews in the last 24 months.)
+                  </span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 };
