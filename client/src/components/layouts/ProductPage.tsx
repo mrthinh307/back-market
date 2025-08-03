@@ -1670,15 +1670,15 @@ const ProductPage: React.FC = () => {
         </div>
 
         {/* You may also like Section */}
-        <div className="bg-white py-12">
+        <div className="">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-8">You may also like</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
-                <div className="w-full h-48 bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+                <div className="flex flex-col items-center justify-center gap-1">
                   <Image
                     fetchPriority="high"
-                    className="rounded-lg block w-auto md:!h-auto md:w-full lg:w-[29.125rem] h-auto max-h-full max-w-full leading-none"
+                    className="h-auto max-h-full max-w-full leading-none"
                     alt="iPhone 13 128GB - Pink - Unlocked"
                     decoding="async"
                     height="132"
@@ -1701,10 +1701,10 @@ const ProductPage: React.FC = () => {
               </div>
               
               <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
-                <div className="w-full h-48 bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+                <div className="flex flex-col items-center justify-center gap-1">
                   <Image
                     fetchPriority="high"
-                    className="rounded-lg block w-auto md:!h-auto md:w-full lg:w-[29.125rem] h-auto max-h-full max-w-full leading-none"
+                    className="h-auto max-h-full max-w-full leading-none"
                     alt="iPhone 13 128GB - Pink - Unlocked"
                     decoding="async"
                     height="132"
@@ -1726,10 +1726,10 @@ const ProductPage: React.FC = () => {
                 </div>
               </div>
               <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
-                <div className="w-full h-48 bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+                <div className="flex flex-col items-center justify-center gap-1">
                   <Image
                     fetchPriority="high"
-                    className="rounded-lg block w-auto md:!h-auto md:w-full lg:w-[29.125rem] h-auto max-h-full max-w-full leading-none"
+                    className="h-auto max-h-full max-w-full leading-none"
                     alt="iPhone 13 128GB - Pink - Unlocked"
                     decoding="async"
                     height="132"
@@ -1751,10 +1751,10 @@ const ProductPage: React.FC = () => {
                 </div>
               </div>
               <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
-                <div className="w-full h-48 bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+                <div className="flex flex-col items-center justify-center gap-1">
                   <Image
                     fetchPriority="high"
-                    className="rounded-lg block w-auto md:!h-auto md:w-full lg:w-[29.125rem] h-auto max-h-full max-w-full leading-none"
+                    className="h-auto max-h-full max-w-full leading-none"
                     alt="iPhone 13 128GB - Pink - Unlocked"
                     decoding="async"
                     height="132"
@@ -1779,16 +1779,16 @@ const ProductPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Product bla bla bla bla Tabs */}
-        <div className="bg-white">
+        {/* Pairs well with section */}
+        <div className="py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-8">Pairs well with</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
-                <div className="w-full h-48 bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+                <div className="flex flex-col items-center justify-center gap-1">
                   <Image
                     fetchPriority="high"
-                    className="rounded-lg block w-auto md:!h-auto md:w-full lg:w-[29.125rem] h-auto max-h-full max-w-full leading-none"
+                    className="h-auto max-h-full max-w-full leading-none"
                     alt="iPhone 13 128GB - Pink - Unlocked"
                     decoding="async"
                     height="132"
@@ -1814,20 +1814,39 @@ const ProductPage: React.FC = () => {
         </div>
 
         {/* Reviews */}
-        <div className="bg-white py-12">
+        <div className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-8">iPhone 13 - Unlocked: customer reviews</h2>
             <div className="flex items-center">
-                    <RatingStars rating={4.6} size={24} filledColor="text-black" emptyColor="text-gray-300" />
-                    <span className="ml-2 text-2xl text-black font-medium">
-                      4.6/5 (38 verified reviews in the last 24 months.)
-                    </span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center space-x-2">
-
+              <RatingStars rating={4.6} size={24} filledColor="text-black" emptyColor="text-gray-300" />
+              <span className="ml-2 text-2xl text-black font-medium">
+                4.6/5
+              </span>
+              <div className="">
+                <svg
+                  aria-hidden="true"
+                  fill="currentColor"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="ml-2 "
+                >
+                  <path
+                    d="M17.53 8.54a.75.75 0 0 0-1.06-1.061L11 12.949l-2.47-2.47a.75.75 0 0 0-1.06 1.06l2.646 2.647a1.25 1.25 0 0 0 1.768 0l5.646-5.647"
+                  ></path>
+                  <path
+                    fillRule="evenodd"
+                    d="M4.5 2.759a1.25 1.25 0 0 0-1.25 1.25V8.73c0 9.392 7.29 12.1 8.395 12.455a1.147 1.147 0 0 0 .71 0C13.46 20.83 20.75 18.122 20.75 8.73V4.01a1.25 1.25 0 0 0-1.25-1.25h-15m.25 5.97V4.26h14.5v4.47c0 8.106-6.024 10.573-7.25 10.992-1.226-.419-7.25-2.886-7.25-10.992"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
               </div>
+              <span className="ml-2 text-sm text-black font-medium">
+                (38 verified reviews in the last 24 months.)
+              </span>
             </div>
+            <hr className="border-t border-gray-300 mt-8" />
           </div>
         </div>
 
