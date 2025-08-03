@@ -18,6 +18,9 @@ const baseConfig: NextConfig = {
       },
     ];
   },
+  images: {
+    domains: ['d2e6ccujb3mkqf.cloudfront.net'],
+  },
 };
 
 // Initialize the Next-Intl plugin
