@@ -7,12 +7,15 @@
   ],
   "scripts": {
     "commit": "commit",
-    "commitlint": "commitlint"
+    "commitlint": "commitlint",
+    "format": "prettier --write \"client/src/**/*.{ts,tsx,js,jsx,json,md}\" \"server/src/**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"client/src/**/*.{ts,tsx,js,jsx,json,md}\" \"server/src/**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@commitlint/prompt-cli": "^19.8.1",
-    "lefthook": "^1.12.2"
+    "lefthook": "^1.12.2",
+    "prettier": "^3.6.2"
   }
 }
