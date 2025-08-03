@@ -60,493 +60,822 @@ const ProductPage: React.FC = () => {
     },
   ];
 
-  const storageOptions = ['64GB', '128GB', '256GB', '512GB'];
-
-  const specifications = [
-    { label: 'Screen size', value: '6.1 inches' },
-    { label: 'Display', value: 'Super Retina XDR OLED' },
-    { label: 'Processor', value: 'A15 Bionic chip' },
-    { label: 'Camera', value: '12MP dual camera system' },
-    { label: 'Battery life', value: 'Up to 17 hours video playback' },
-    { label: 'Water resistance', value: 'IP68' },
-    { label: 'Operating system', value: 'iOS 15' },
-  ];
-
-  const features = [
-    'Face ID for secure authentication',
-    'Dual camera system with Portrait mode',
-    'A15 Bionic chip for lightning-fast performance',
-    'All-day battery life',
-    'Durable design with Ceramic Shield front',
-    '5G capable for super-fast downloads',
-  ];
-
-  const selectedConditionData = conditionOptions.find(
-    (opt) => opt.id === selectedCondition,
-  );
-
   return (
-    <div className="bg-white">
-      <div className="flex justify-center bg-surface-default-low pb-18 md:pb-48">
-        <div className="max-w-full grow px-24 lg:max-w-[1184px] lg:basis-full lg:px-32">
-          {/* Breadcrumb */}
-          <nav
-            aria-label="Breadcrumb"
-            className="bg-surface-default-low hidden md:block"
+    <div className="flex justify-center pb-5 md:pb-8">
+      <div
+        className="max-w-full grow px-3 lg:max-w-[1184px] lg:basis-full lg:px-3"
+        data-test="container-wrapper"
+      >
+        <nav
+          aria-label="Breadcrumb"
+          className="bg-surface-default-low hidden md:block"
+        >
+          <ol
+            className="m-0 flex md:py-8"
+            itemType="http://schema.org/BreadcrumbList"
           >
-            <ol className="m-0 flex list-none items-center py-12 md:py-20">
-              <li
-                className="text-action-default-hi md:flex md:shrink-0 hidden"
-                itemProp="itemListElement"
-                itemScope
-                itemType=""
+            <li
+              className="text-action-default-hi md:flex md:shrink-0 hidden"
+              itemProp="itemListElement"
+              itemType="http://schema.org/ListItem"
+            >
+              <a
+                href="https://www.backmarket.com/en-us"
+                rel="noreferrer noopener"
+                className="flex items-center whitespace-nowrap text-action-default-hi focus-visible-outline-default-hi rounded-sm font-weight-body-1-link cursor-pointer [text-align:inherit] hover:text-action-default-hi-hover no-underline hover:underline"
+                itemProp="item"
               >
-                <a
-                  href="/"
-                  className="flex items-center whitespace-nowrap text-action-default-hi focus-visible-outline-default-hi rounded-sm font-weight-body-1-link cursor-pointer [text-align:inherit] hover:text-action-default-hi-hover no-underline hover:underline"
-                >
-                  <span className="body-2-bold truncate" itemProp="name">
-                    Home
-                  </span>
-                </a>
-                <svg
-                  aria-hidden="true"
-                  className="hidden md:mx-8 md:block"
-                  fill="currentColor"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  width="24"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <meta content="1" itemProp="position"></meta>
-              </li>
-
-              <li
-                className="text-action-default-hi md:flex md:shrink-0 hidden"
-                itemProp="itemListElement"
-                itemScope
-                itemType=""
-              >
-                <a
-                  href="/"
-                  className="flex items-center whitespace-nowrap text-action-default-hi focus-visible-outline-default-hi rounded-sm font-weight-body-1-link cursor-pointer [text-align:inherit] hover:text-action-default-hi-hover no-underline hover:underline"
-                >
-                  <span className="body-2-bold truncate" itemProp="name">
-                    Smartphones
-                  </span>
-                </a>
-                <svg
-                  aria-hidden="true"
-                  className="hidden md:mx-8 md:block"
-                  fill="currentColor"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  width="24"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <meta content="1" itemProp="position"></meta>
-              </li>
-
-              <li
-                className="text-action-default-hi md:flex md:shrink-0 hidden"
-                itemProp="itemListElement"
-                itemScope
-                itemType=""
-              >
-                <a
-                  href="/"
-                  className="flex items-center whitespace-nowrap text-action-default-hi focus-visible-outline-default-hi rounded-sm font-weight-body-1-link cursor-pointer [text-align:inherit] hover:text-action-default-hi-hover no-underline hover:underline"
-                >
-                  <span className="body-2-bold truncate" itemProp="name">
-                    Iphone
-                  </span>
-                </a>
-                <svg
-                  aria-hidden="true"
-                  className="hidden md:mx-8 md:block"
-                  fill="currentColor"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  width="24"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <meta content="1" itemProp="position"></meta>
-              </li>
-
-              <li
-                className="text-action-default-hi md:flex min-w-[6ch] hidden"
-                itemScope
-                itemProp="itemListElement"
-                itemType=""
-              >
-                <div
-                  aria-current="page"
-                  className="body-2 truncate"
+                <span
+                  className="body-2-bold truncate font-bold"
                   itemProp="name"
                 >
-                  iPhone 13 128GB - Pink - Unlocked
-                </div>
-                <meta content="4" itemProp="name"></meta>
-              </li>
-            </ol>
-          </nav>
-
-          {/* Product Images */}
-          <div className="flex flex-col flex-wrap items-center md:flex-row md:flex-nowrap">
-            {/* Main Image */}
-            <div className="relative w-full max-w-full grow-0 md:w-1/3 lg:w-1/2">
-              <div className="top-[7rem] md:sticky md:right-1/2 md:mr-56">
-                <div>
-                  <div className="flex justify-center" data-test="carousel">
-                    <div className="relative -mb-4 flex min-h-72 flex-col flex-wrap overflow-hidden mt-12 md:mt-32 md:grow">
-                      <div className="relative flex w-full grow justify-center">
-                        <ul className="w-full list-none">
-                          <li
-                            aria-hidden="false"
-                            className="flex w-full list-none justify-center motion-safe:animate-fade-in block"
-                            id="gallery-carousel"
-                          >
-                            <button
-                              className="relative focus-visible-outline-inset-hi rounded-sm cursor-pointer"
-                              type="button"
-                            >
-                              <Image
-                                fetchPriority="high"
-                                className="rounded-lg block !h-[66.7vw] max-h-full w-auto md:!h-auto md:w-full lg:w-[29.125rem] h-auto max-h-full max-w-full leading-none"
-                                alt="iPhone 13 128GB - Pink - Unlocked"
-                                height="976"
-                                width={976}
-                                decoding="async"
-                                sizes="(max-width: 768px) 100vw, 466px"
-                                src="/assets/images/Iphone13.avif"
-                              ></Image>
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Product Info */}
-          <div>
-            {/* Product Title & Rating */}
-            <div className="mb-6">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                iPhone 13 - Unlocked
-              </h1>
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={16}
-                      className={`${
-                        i < 4 ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                      }`}
-                    />
-                  ))}
-                  <span className="ml-2 text-sm text-gray-600">
-                    4.2 (1,247 reviews)
-                  </span>
-                </div>
-                <button className="flex items-center space-x-1 text-gray-600 hover:text-gray-900">
-                  <Share2 size={16} />
-                  <span className="text-sm">Share</span>
-                </button>
-              </div>
-
-              {/* Trust Signals */}
-              <div className="flex flex-wrap gap-4 mb-6">
-                <div className="flex items-center space-x-2 text-sm text-green-600">
-                  <Shield size={16} />
-                  <span>12-month warranty</span>
-                </div>
-                <div className="flex items-center space-x-2 text-sm text-green-600">
-                  <Truck size={16} />
-                  <span>Free delivery</span>
-                </div>
-                <div className="flex items-center space-x-2 text-sm text-green-600">
-                  <RotateCcw size={16} />
-                  <span>30-day returns</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Storage Selection */}
-            <div className="mb-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-3">
-                Storage
-              </h3>
-              <div className="grid grid-cols-4 gap-2">
-                {storageOptions.map((storage) => (
-                  <button
-                    key={storage}
-                    onClick={() => setSelectedStorage(storage)}
-                    className={`py-3 px-4 rounded-lg border text-sm font-medium transition-colors ${
-                      selectedStorage === storage
-                        ? 'border-green-500 bg-green-50 text-green-700'
-                        : 'border-gray-300 hover:border-gray-400'
-                    }`}
-                  >
-                    {storage}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Condition Selection */}
-            <div className="mb-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-3">
-                Condition
-              </h3>
-              <div className="space-y-3">
-                {conditionOptions.map((condition) => (
-                  <div
-                    key={condition.id}
-                    className={`p-4 rounded-lg border cursor-pointer transition-colors ${
-                      selectedCondition === condition.id
-                        ? 'border-green-500 bg-green-50'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
-                    onClick={() => setSelectedCondition(condition.id)}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-3">
-                          <div
-                            className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                              selectedCondition === condition.id
-                                ? 'border-green-500 bg-green-500'
-                                : 'border-gray-300'
-                            }`}
-                          >
-                            {selectedCondition === condition.id && (
-                              <Check size={10} className="text-white" />
-                            )}
-                          </div>
-                          <div>
-                            <p className="font-medium text-gray-900">
-                              {condition.name}
-                            </p>
-                            <p className="text-sm text-gray-600">
-                              {condition.description}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-xl font-bold text-gray-900">
-                          £{condition.price}
-                        </p>
-                        <div className="flex items-center space-x-2">
-                          <span className="text-sm text-gray-500 line-through">
-                            £{condition.originalPrice}
-                          </span>
-                          <span className="text-sm text-green-600 font-medium">
-                            Save £{condition.savings}
-                          </span>
-                        </div>
-                        <p className="text-xs text-gray-500 mt-1">
-                          {condition.available} available
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Add to Cart */}
-            <div className="mb-8">
-              <button className="w-full bg-green-600 text-white py-4 px-6 rounded-lg font-medium text-lg hover:bg-green-700 transition-colors mb-4">
-                Add to cart - £{selectedConditionData?.price}
-              </button>
-              <p className="text-center text-sm text-gray-600">
-                Free delivery • Ready to ship in 1-2 days
-              </p>
-            </div>
-
-            {/* Product Highlights */}
-            <div className="border-t border-gray-200 pt-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">
-                Why choose this iPhone?
-              </h3>
-              <ul className="space-y-2">
-                {features.slice(0, 3).map((feature, index) => (
-                  <li key={index} className="flex items-start space-x-3">
-                    <Check
-                      size={16}
-                      className="text-green-500 mt-0.5 flex-shrink-0"
-                    />
-                    <span className="text-sm text-gray-600">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Product Details Tabs */}
-        <div className="mt-16 border-t border-gray-200 pt-8">
-          <div className="border-b border-gray-200">
-            <nav className="flex space-x-8">
-              {['overview', 'specs', 'condition', 'reviews'].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`py-4 px-1 border-b-2 font-medium text-sm capitalize transition-colors ${
-                    activeTab === tab
-                      ? 'border-green-500 text-green-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
+                  Home
+                </span>
+              </a>
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+                className="hidden md:mx-3 md:block"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              <meta content="1" itemProp="position" />
+            </li>
+            <li
+              className="text-action-default-hi md:flex md:shrink-0 hidden"
+              itemProp="itemListElement"
+              itemType="http://schema.org/ListItem"
+            >
+              <a
+                href="https://www.backmarket.com/en-us/l/smartphones/0744fd27-8605-465d-8691-3b6dffda5969"
+                rel="noreferrer noopener"
+                className="flex items-center whitespace-nowrap text-action-default-hi focus-visible-outline-default-hi rounded-sm font-weight-body-1-link cursor-pointer [text-align:inherit] hover:text-action-default-hi-hover no-underline hover:underline"
+                itemProp="item"
+              >
+                <svg
+                  aria-hidden="true"
+                  fill="currentColor"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mr-8 shrink-0 md:hidden"
                 >
-                  {tab}
-                </button>
-              ))}
-            </nav>
-          </div>
-
-          <div className="py-8">
-            {activeTab === 'overview' && (
-              <div className="max-w-4xl">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                  Product Overview
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  The iPhone 13 features a beautiful 6.1-inch Super Retina XDR
-                  display, the powerful A15 Bionic chip, and an advanced
-                  dual-camera system for incredible photos and videos. With its
-                  durable design and all-day battery life, it's the perfect
-                  smartphone for everyday use.
-                </p>
-
-                <h4 className="text-lg font-medium text-gray-900 mb-3">
-                  Key Features
-                </h4>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {features.map((feature, index) => (
-                    <div key={index} className="flex items-start space-x-3">
-                      <Check
-                        size={16}
-                        className="text-green-500 mt-0.5 flex-shrink-0"
-                      />
-                      <span className="text-sm text-gray-600">{feature}</span>
-                    </div>
-                  ))}
-                </div>
+                  <path d="M8.427 7.53a.75.75 0 0 0-1.06-1.06L2.72 11.116a1.25 1.25 0 0 0 0 1.768l4.646 4.646a.75.75 0 0 0 1.06-1.06l-3.719-3.72h16.19a.75.75 0 1 0 0-1.5H4.706l3.72-3.72"></path>
+                </svg>
+                <span
+                  className="body-2-bold truncate font-bold"
+                  itemProp="name"
+                >
+                  Smartphones
+                </span>
+              </a>
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+                className="hidden md:mx-3 md:block"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              <meta content="2" itemProp="position" />
+            </li>
+            <li
+              className="text-action-default-hi md:flex md:shrink-0 min-w-0"
+              itemProp="itemListElement"
+              itemType="http://schema.org/ListItem"
+            >
+              <a
+                href="https://www.backmarket.com/en-us/l/iphone/e8724fea-197e-4815-85ce-21b8068020cc"
+                rel="noreferrer noopener"
+                className="flex items-center whitespace-nowrap text-action-default-hi focus-visible-outline-default-hi rounded-sm font-weight-body-1-link cursor-pointer [text-align:inherit] hover:text-action-default-hi-hover no-underline hover:underline"
+                itemProp="item"
+              >
+                <svg
+                  aria-hidden="true"
+                  fill="currentColor"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mr-8 shrink-0 md:hidden"
+                >
+                  <path d="M8.427 7.53a.75.75 0 0 0-1.06-1.06L2.72 11.116a1.25 1.25 0 0 0 0 1.768l4.646 4.646a.75.75 0 0 0 1.06-1.06l-3.719-3.72h16.19a.75.75 0 1 0 0-1.5H4.706l3.72-3.72"></path>
+                </svg>
+                <span
+                  className="body-2-bold truncate font-bold"
+                  itemProp="name"
+                >
+                  iPhone
+                </span>
+              </a>
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+                className="hidden md:mx-3 md:block"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              <meta content="3" itemProp="position" />
+            </li>
+            <li
+              className="text-action-default-hi md:flex min-w-[6ch] hidden"
+              itemProp="itemListElement"
+              itemType="http://schema.org/ListItem"
+            >
+              <div
+                aria-current="page"
+                className="body-2 truncate"
+                itemProp="name"
+              >
+                iPhone 13 128GB - Pink - Unlocked
               </div>
-            )}
-
-            {activeTab === 'specs' && (
-              <div className="max-w-4xl">
-                <h3 className="text-xl font-semibold text-gray-900 mb-6">
-                  Technical Specifications
-                </h3>
-                <div className="grid md:grid-cols-2 gap-6">
-                  {specifications.map((spec, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between py-3 border-b border-gray-200"
-                    >
-                      <span className="font-medium text-gray-900">
-                        {spec.label}
-                      </span>
-                      <span className="text-gray-600">{spec.value}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'condition' && (
-              <div className="max-w-4xl">
-                <h3 className="text-xl font-semibold text-gray-900 mb-6">
-                  Understanding Our Conditions
-                </h3>
-                <div className="space-y-6">
-                  {conditionOptions.map((condition) => (
-                    <div
-                      key={condition.id}
-                      className="border border-gray-200 rounded-lg p-6"
-                    >
-                      <h4 className="text-lg font-medium text-gray-900 mb-2">
-                        {condition.name}
-                      </h4>
-                      <p className="text-gray-600 mb-4">
-                        {condition.description}
-                      </p>
-                      <div className="text-sm text-gray-500">
-                        <p>• All devices are fully functional</p>
-                        <p>• Comes with 12-month warranty</p>
-                        <p>• 30-day return policy</p>
-                        <p>• Professional quality check performed</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'reviews' && (
-              <div className="max-w-4xl">
-                <h3 className="text-xl font-semibold text-gray-900 mb-6">
-                  Customer Reviews
-                </h3>
-                <div className="space-y-6">
-                  {[1, 2, 3].map((review) => (
-                    <div key={review} className="border-b border-gray-200 pb-6">
-                      <div className="flex items-center space-x-4 mb-3">
-                        <div className="flex">
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              size={16}
-                              className={`${
-                                i < 4
-                                  ? 'text-yellow-400 fill-current'
-                                  : 'text-gray-300'
-                              }`}
+              <meta content="4" itemProp="position" />
+            </li>
+          </ol>
+        </nav>
+        <nav
+          aria-label="Breadcrumb"
+          className="bg-surface-default-low md:hidden"
+        >
+          <ol
+            className="m-0 flex list-none items-center py-8 md:py-12"
+            itemType="http://schema.org/BreadcrumbList"
+          >
+            <li
+              className="text-action-default-low caption-bold flex py-8 md:body-2-bold"
+              itemProp="itemListElement"
+              itemType="http://schema.org/ListItem"
+            >
+              <a
+                href="https://www.backmarket.com/en-us/l/smartphones/0744fd27-8605-465d-8691-3b6dffda5969"
+                rel="noreferrer noopener"
+                className="text-action-default-low flex items-center whitespace-nowrap text-action-default-hi focus-visible-outline-default-hi rounded-sm font-weight-body-1-link cursor-pointer [text-align:inherit] hover:text-action-default-hi-hover no-underline hover:underline"
+                itemProp="item"
+              >
+                <span className="truncate" itemProp="name">
+                  Smartphones
+                </span>
+              </a>
+              <span aria-hidden="true" className="mx-4">
+                •
+              </span>
+              <meta content="1" itemProp="position" />
+            </li>
+            <li
+              className="text-action-default-low caption-bold flex py-8 md:body-2-bold"
+              itemProp="itemListElement"
+              itemType="http://schema.org/ListItem"
+            >
+              <a
+                href="https://www.backmarket.com/en-us/l/iphone/e8724fea-197e-4815-85ce-21b8068020cc"
+                rel="noreferrer noopener"
+                className="text-action-default-low flex items-center whitespace-nowrap text-action-default-hi focus-visible-outline-default-hi rounded-sm font-weight-body-1-link cursor-pointer [text-align:inherit] hover:text-action-default-hi-hover no-underline hover:underline"
+                itemProp="item"
+              >
+                <span className="truncate" itemProp="name">
+                  iPhone
+                </span>
+              </a>
+              <meta content="2" itemProp="position" />
+            </li>
+          </ol>
+        </nav>
+        <div className="flex flex-col flex-wrap items-center md:flex-row md:flex-nowrap">
+          <div className="relative w-full max-w-full grow-0 md:w-1/3 lg:w-1/2">
+            <div className="top-[7rem] md:sticky md:right-1/2 md:mr-14">
+              <div>
+                <div className="flex justify-center" data-test="carousel">
+                  <div className="relative -mb-4 flex min-h-72 flex-col flex-wrap overflow-hidden mt-3 md:mt-8 md:grow">
+                    <div className="relative flex w-full grow justify-center">
+                      <ul className="w-full list-none">
+                        <li
+                          id="gallery-carousel"
+                          aria-hidden="false"
+                          className="flex w-full list-none justify-center motion-safe:animate-fade-in"
+                        >
+                          <button
+                            className="relative focus-visible-outline-inset-hi rounded-sm cursor-pointer"
+                            type="button"
+                          >
+                            <Image
+                              fetchPriority="high"
+                              className="rounded-lg block w-auto md:!h-auto md:w-full lg:w-[29.125rem] h-auto max-h-full max-w-full leading-none"
+                              alt="iPhone 13 128GB - Pink - Unlocked"
+                              decoding="async"
+                              height="976"
+                              loading="eager"
+                              sizes="(max-width: 768px) 100vw, 466px"
+                              src="https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg"
+                              width="976"
                             />
-                          ))}
-                        </div>
-                        <span className="font-medium text-gray-900">
-                          John D.
-                        </span>
-                        <span className="text-sm text-gray-500">
-                          Excellent condition
-                        </span>
+                          </button>
+                        </li>
+                      </ul>
+                      <div className="sr-only" role="status">
+                        "1 / 6. "{' '}
+                        <span aria-labelledby="gallery-carousel"></span>
                       </div>
-                      <p className="text-gray-600">
-                        Great phone in excellent condition. Exactly as described
-                        and arrived quickly. Very happy with my purchase from
-                        Back Market.
-                      </p>
                     </div>
-                  ))}
+                    <div className="relative isolate mx-auto flex w-full justify-center h-60">
+                      <div className="flex items-center px-8 py-4 absolute left-0 z-10 mt-4">
+                        <button
+                          className=" bg-black rounded-full flex cursor-pointer items-center justify-center size-8 hover:bg-gray-700 duration-300"
+                          type="button"
+                        >
+                          <svg
+                            className="text-white"
+                            aria-hidden="false"
+                            aria-label="Previous"
+                            fill="currentColor"
+                            height="24"
+                            role="img"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="m10.957 12 3.47-3.47a.75.75 0 1 0-1.06-1.06L9.72 11.116a1.25 1.25 0 0 0 0 1.768l3.646 3.646a.75.75 0 0 0 1.06-1.06L10.958 12"
+                              clipRule="evenodd"
+                            ></path>
+                          </svg>
+                        </button>
+                      </div>
+                      <div>
+                        <div className="gradient-mask-lr-60 absolute inset-x-0">
+                          <ul
+                            className="flex list-none flex-row gap-8 overflow-hidden py-4 justify-normal"
+                            style={{ paddingLeft: 56, paddingRight: 56 }}
+                          ></ul>
+                        </div>
+                      </div>
+                      <div className="flex items-center px-8 py-4 absolute right-0 z-10 mt-4">
+                        <button
+                          className=" bg-black rounded-full flex cursor-pointer items-center justify-center size-8 hover:bg-gray-700 duration-300"
+                          type="button"
+                        >
+                          <svg
+                            className="text-white"
+                            aria-hidden="false"
+                            aria-label="Next"
+                            fill="currentColor"
+                            height="24"
+                            role="img"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                              clipRule="evenodd"
+                            ></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            )}
+            </div>
+          </div>
+          <div className="w-full max-w-full grow-0 md:w-2/3 md:basis-2/3 lg:w-1/2 lg:basis-1/2">
+            <div className="flex flex-col items-start md:flex-col-reverse">
+              <div className="w-full">
+                <div className="mb-64 hidden md:block">
+                  <a
+                    className=" bg-green-200 rounded-sm body-2-bold inline-flex items-center self-center p-2 pr-4 isolate mb-4"
+                    href="#ecoBlocks"
+                  >
+                    <Image
+                      alt=""
+                      className="stroke-success"
+                      height="24"
+                      src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/product/eco-block/butterfly.svg"
+                      width="24"
+                    />
+                    <span className="ml-1 underline">
+                      More sustainable than new
+                    </span>
+                  </a>
+                  <h1 className="text-3xl">
+                    iPhone 13 128GB - Pink - Unlocked
+                  </h1>
+                  <button
+                    className="flex bg-transparent items-center"
+                    data-test="product-page-reviews-count"
+                    type="button"
+                  >
+                    <div className="text-action-default-hi flex items-center">
+                      <div
+                        aria-label="Rating of 4.4 out of 5 stars"
+                        className="text-action-default-hi flex items-center"
+                        role="img"
+                      >
+                        <div className="flex cursor-pointer">
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            width="16"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M13.154 3.65c-.427-1.026-1.881-1.026-2.308 0L8.838 8.478l-5.21.418C2.519 8.984 2.07 10.367 2.914 11.09l3.97 3.4-1.213 5.085c-.258 1.082.919 1.937 1.868 1.357l4.46-2.724 4.462 2.724c.949.58 2.125-.275 1.867-1.357l-1.212-5.084 3.97-3.4c.844-.724.394-2.107-.714-2.196l-5.21-.418-2.008-4.826"></path>
+                          </svg>
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            width="16"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M13.154 3.65c-.427-1.026-1.881-1.026-2.308 0L8.838 8.478l-5.21.418C2.519 8.984 2.07 10.367 2.914 11.09l3.97 3.4-1.213 5.085c-.258 1.082.919 1.937 1.868 1.357l4.46-2.724 4.462 2.724c.949.58 2.125-.275 1.867-1.357l-1.212-5.084 3.97-3.4c.844-.724.394-2.107-.714-2.196l-5.21-.418-2.008-4.826"></path>
+                          </svg>
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            width="16"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M13.154 3.65c-.427-1.026-1.881-1.026-2.308 0L8.838 8.478l-5.21.418C2.519 8.984 2.07 10.367 2.914 11.09l3.97 3.4-1.213 5.085c-.258 1.082.919 1.937 1.868 1.357l4.46-2.724 4.462 2.724c.949.58 2.125-.275 1.867-1.357l-1.212-5.084 3.97-3.4c.844-.724.394-2.107-.714-2.196l-5.21-.418-2.008-4.826"></path>
+                          </svg>
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            width="16"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M13.154 3.65c-.427-1.026-1.881-1.026-2.308 0L8.838 8.478l-5.21.418C2.519 8.984 2.07 10.367 2.914 11.09l3.97 3.4-1.213 5.085c-.258 1.082.919 1.937 1.868 1.357l4.46-2.724 4.462 2.724c.949.58 2.125-.275 1.867-1.357l-1.212-5.084 3.97-3.4c.844-.724.394-2.107-.714-2.196l-5.21-.418-2.008-4.826"></path>
+                          </svg>
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            width="16"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M13.154 3.65c-.427-1.026-1.881-1.026-2.308 0L8.838 8.478l-5.21.418C2.519 8.984 2.07 10.367 2.914 11.09l3.97 3.4-1.213 5.085a1.231 1.231 0 0 0 .464 1.289l-.013.055.048-.03a1.231 1.231 0 0 0 1.369.043l4.46-2.724 4.462 2.724c.949.58 2.125-.275 1.867-1.357l-1.212-5.084 3.97-3.4c.844-.724.394-2.107-.714-2.196l-5.21-.418-2.008-4.826M12 16.666a1.248 1.248 0 0 1 .652.183l4.078 2.49-1.109-4.648a1.25 1.25 0 0 1 .403-1.24l3.63-3.108-4.765-.382a1.25 1.25 0 0 1-1.054-.766L12 4.782v11.883"
+                              clipRule="evenodd"
+                            ></path>
+                          </svg>
+                        </div>
+                        <span
+                          aria-hidden="true"
+                          className="ml-2 mt-1 pb-2 md:mt-2 body-2-bold cursor-pointer"
+                        >
+                          4.4/5
+                        </span>
+                      </div>
+                    </div>
+                    <div className="body-2-link underline-offset-2 ml-3 underline cursor-pointer">
+                      (3,743 reviews)
+                    </div>
+                  </button>
+                  <div className="mt-6 flex items-center">
+                    <div className="grow">
+                      <div>
+                        <div className="flex flex-wrap items-baseline gap-x-4">
+                          <span
+                            className="text-2xl font-bold"
+                            data-qa="productpage-product-price"
+                            data-test="productpage-product-price"
+                          >
+                            $288.99
+                          </span>
+                          <div className="flex flex-wrap gap-x-4">
+                            <span className="body-2-bold whitespace-nowrap">
+                              before trade-in
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex flex-wrap items-center gap-x-2">
+                          <span className="caption z-[1]">
+                            <span id="trigger-v-0-5-0-0">
+                              <button className="text-static-default-low cursor-pointer whitespace-nowrap">
+                                <span className="text-gray-700 line-through">
+                                  <span className="">$629.00</span> new
+                                </span>
+                              </button>
+                            </span>
+                          </span>
+                          <div className="bg-green-300">
+                            <span
+                              className="rounded-xs inline-block max-w-full truncate px-1 py-0 font-bold text-sl"
+                              title="Save $340.01"
+                            >
+                              Save $340.01
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      aria-disabled="false"
+                      className="bg-black text-white rounded-sm relative select-none no-underline motion-safe:ease-in inline-block w-auto px-4 py-3 hover:no-underline motion-safe:transition-colors motion-safe:duration-200 cursor-pointer border-none min-w-[164px] max-w-[256px] grow hover:bg-gray-800"
+                      data-id="product-page-buy-button-desktop"
+                      data-qa="product-page-buy-button-desktop"
+                      type="button"
+                    >
+                      <span
+                        aria-hidden="false"
+                        className="pointer-events-none flex items-center justify-center"
+                      >
+                        <span className="body-1-bold truncate">
+                          Add to cart
+                        </span>
+                      </span>
+                    </button>
+
+                    <button
+                      aria-disabled="false"
+                      aria-label="Add to Favorites"
+                      className="hover:bg-gray-200 rounded-sm relative max-w-full select-none no-underline motion-safe:ease-in inline-flex h-12 items-center justify-center px-3 motion-safe:transition motion-safe:duration-300 cursor-pointer border-solid mx-3 border-2 border-black "
+                      data-qa="my-favorites-toggle"
+                      type="button"
+                    >
+                      <span className="pointer-events-none flex items-center">
+                        <span className="pointer-events-none flex items-center space-x-8">
+                          <span className="body-2-bold pointer-events-none truncate">
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              width="24"
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="my-8"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M7.5 4.87a3.75 3.75 0 0 0-3.75 3.75c0 1.14.596 2.126 1.462 2.977l.014.014L12 19.01l6.774-7.4.014-.013c.866-.85 1.462-1.838 1.462-2.977a3.75 3.75 0 0 0-3.75-3.75c-.982 0-1.813.493-2.515 1.077a13.434 13.434 0 0 0-.7.634l-.209.197a4.47 4.47 0 0 1-.4.342C12.578 7.19 12.326 7.37 12 7.37c-.325 0-.578-.18-.676-.25a4.47 4.47 0 0 1-.4-.342L10.716 6.58c-.211-.2-.436-.414-.701-.634C9.313 5.363 8.482 4.87 7.5 4.87M2.25 8.62c0-2.9 2.35-5.25 5.25-5.25 1.503 0 2.672.757 3.474 1.423a15.976 15.976 0 0 1 .8.724A27.034 27.034 0 0 0 12 5.73a9.016 9.016 0 0 0 .226-.213 15.976 15.976 0 0 1 .8-.724c.802-.666 1.97-1.423 3.474-1.423 2.9 0 5.25 2.35 5.25 5.25 0 1.694-.888 3.038-1.896 4.033l-6.932 7.57a1.25 1.25 0 0 1-1.844 0l-6.932-7.57C3.138 11.658 2.25 10.313 2.25 8.62m9.51-2.692s.006-.005.017-.01a.077.077 0 0 1-.017.01m.463-.01a.087.087 0 0 1 .017.01l-.017-.01"
+                                clipRule="evenodd"
+                              ></path>
+                            </svg>
+                          </span>
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-x-4 body-2 text-primary pt-6">
+                    <div className="flex flex-wrap items-center gap-4 self-start w-[40px] flex-shrink-0 mr-1 ">
+                      <Image
+                        alt="Affirm"
+                        className="h-auto max-h-full max-w-full leading-none"
+                        decoding="async"
+                        height="20"
+                        loading="lazy"
+                        sizes="100vw"
+                        src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/payment/methods-v5/affirm.svg"
+                        width="36"
+                      />
+                    </div>
+
+                    <div className="grow">
+                      Buy now, pay later.
+                      <div data-test="affirm-modal" className="inline">
+                        <a
+                          className="px-1"
+                          data-affirm-color="black"
+                          data-amount="28899"
+                          data-learnmore-show="false"
+                          data-page-type="product"
+                          data-test="affirm-link"
+                        ></a>
+                        <button
+                          aria-label="'Learn more about Affirm payment options"
+                          className="rounded-sm font-weight-body-1-link cursor-pointer [text-align:inherit] underline"
+                          type="button"
+                        >
+                          Learn more
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-4 md:relative">
+                    <div className="gap-4 flex flex-col md:flex-row md:flex-nowrap md:items-center md:overflow-hidden">
+                      <button
+                        className="bg-gray-200 hover:bg-gray-300 cursor-pointer rounded-full body-2 flex h-9 w-fit max-w-full shrink-0 items-center px-2"
+                        type="button"
+                      >
+                        <div className="mr-8 shrink-0">
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className=""
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M7 3.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5M4.75 7a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0"
+                              clip-rule="evenodd"
+                            ></path>
+                            <path d="M13 6.25a.75.75 0 0 0 0 1.5h5.19l-1.72 1.72a.75.75 0 1 0 1.06 1.06l2.647-2.646a1.25 1.25 0 0 0 0-1.768L17.53 3.47a.75.75 0 1 0-1.06 1.06l1.72 1.72H13m-7.19 10H11a.75.75 0 0 1 0 1.5H5.81l1.72 1.72a.75.75 0 1 1-1.06 1.06l-2.647-2.646a1.25 1.25 0 0 1 0-1.768L6.47 13.47a.75.75 0 1 1 1.06 1.06l-1.72 1.72"></path>
+                            <path
+                              fill-rule="evenodd"
+                              d="M14.5 13.25a1.25 1.25 0 0 0-1.25 1.25v5a1.25 1.25 0 0 0 1.25 1.25h5a1.25 1.25 0 0 0 1.25-1.25v-5a1.25 1.25 0 0 0-1.25-1.25h-5m.25 6v-4.5h4.5v4.5h-4.5"
+                              clip-rule="evenodd"
+                            ></path>
+                          </svg>
+                        </div>
+                        <p className="line-clamp-1 overflow-hidden text-ellipsis text-left md:overflow-auto md:text-clip">
+                          Get this for even less with Trade-in
+                        </p>
+                        <svg
+                          aria-hidden="true"
+                          fill="currentColor"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          width="24"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="shrink-0"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </button>
+                      <button
+                        className=" bg-gray-200 hover:bg-gray-300 cursor-pointer rounded-full body-2 flex h-9 w-fit max-w-full shrink-0 items-center px-3"
+                        type="button"
+                      >
+                        <div className="mr-8 shrink-0">
+                          <Image
+                            alt="Visible by verizon tiny logo"
+                            className="h-auto max-h-full max-w-full leading-none"
+                            decoding="async"
+                            height="20"
+                            loading="lazy"
+                            sizes="100vw"
+                            src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/visible-by-verizon/visible-by-verizon-logo-tiny.svg"
+                            width="20"
+                          />
+                        </div>
+                        <p className="line-clamp-1 overflow-hidden text-ellipsis text-left md:overflow-auto md:text-clip">
+                          Save big: $20/month unlimited data
+                        </p>
+                        <svg
+                          aria-hidden="true"
+                          fill="currentColor"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          width="24"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="shrink-0"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+                    <div className="absolute right-0 top-[-2px] z-[1] hidden w-[104px] items-center justify-end md:flex">
+                      <button
+                        className=" bg-gray-300 rounded-full flex shrink-0 cursor-pointer appearance-none items-center justify-center border-0 no-underline disabled:cursor-not-allowed motion-safe:transition motion-safe:duration-300 motion-safe:ease-in size-10"
+                        type="button"
+                      >
+                        <svg
+                          aria-hidden="false"
+                          aria-label="View more"
+                          fill="currentColor"
+                          height="24"
+                          role="img"
+                          viewBox="0 0 24 24"
+                          width="24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div className=" mb-7 md:mb-8 mt-6">
+                    <div className="flex flex-col gap-2">
+                      <div className="bg-blue-100 rounded-lg flex flex-row items-center p-2">
+                        <div className="mr-2 flex h-10 w-10 shrink-0 items-center justify-center md:h-12 md:w-12">
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 md:h-8 md:w-8"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M2.25 5.5A.75.75 0 0 1 3 4.75h10.5a1.25 1.25 0 0 1 1.225 1h2.966a1.25 1.25 0 0 1 1.118.691l1.655 3.31H20.5A1.25 1.25 0 0 1 21.75 11v5a1.25 1.25 0 0 1-1.25 1.25h-.854a2.751 2.751 0 0 1-5.292 0h-3.207a2.751 2.751 0 0 1-5.293 0H5A1.25 1.25 0 0 1 3.75 16v-5.5a.75.75 0 0 1 1.5 0v5.25h.604a2.751 2.751 0 0 1 5.292 0h2.104v-9.5H3A.75.75 0 0 1 2.25 5.5m18 10.25h-.604a2.751 2.751 0 0 0-4.896-.832V11.25h5.5v4.5m-5.5-6v-2.5h2.787l1.25 2.5H14.75m-7.5 6.75a1.25 1.25 0 1 1 2.5 0 1.25 1.25 0 0 1-2.5 0M17 15.25a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5"
+                              clipRule="evenodd"
+                            ></path>
+                            <path d="M3.5 7.25a.75.75 0 0 0 0 1.5H7a.75.75 0 0 0 0-1.5H3.5"></path>
+                          </svg>
+                        </div>
+                        <div className="flex w-full items-center justify-between text-left">
+                          <div className="flex flex-col">
+                            <div className="text-xl font-bold">
+                              <div>
+                                <div>
+                                  <span>Free delivery by Aug 6 - Aug 7</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <button className=" bg-blue-100 hover:bg-blue-200 cursor-pointer rounded-lg flex flex-row items-center p-2 motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in w-full">
+                        <div className="mr-2 flex h-10 w-10 shrink-0 items-center justify-center md:h-12 md:w-12">
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 md:h-8 md:w-8"
+                          >
+                            <path d="M10.25 12.75A.75.75 0 0 1 11 13.5v3a.75.75 0 0 1-1.5 0v-3a.75.75 0 0 1 .75-.75"></path>
+                            <path
+                              fillRule="evenodd"
+                              d="M14.5 6.7c0-1.291 1.166-2.45 2.75-2.45S20 5.409 20 6.7v1.8a.75.75 0 0 0 1.5 0V6.7c0-2.243-1.968-3.95-4.25-3.95C14.967 2.75 13 4.457 13 6.7v2.05H5.75A3.25 3.25 0 0 0 2.5 12v6a3.25 3.25 0 0 0 3.25 3.25h9A3.25 3.25 0 0 0 18 18v-6a3.25 3.25 0 0 0-3.25-3.25H14.5V6.7m-8.75 3.55A1.75 1.75 0 0 0 4 12v6a1.75 1.75 0 0 0 1.75 1.75h9A1.75 1.75 0 0 0 16.5 18v-6a1.75 1.75 0 0 0-1.75-1.75h-9"
+                              clipRule="evenodd"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div className="flex w-full items-center justify-between text-left">
+                          <div className="flex flex-col">
+                            <div className="font-bold text-xl">
+                              <div className="w-full">
+                                Works with all carriers
+                              </div>
+                            </div>
+                            <div className="caption">
+                              <div className="w-full">
+                                This phone is unlocked
+                              </div>
+                            </div>
+                          </div>
+                          <div className="ml-2 flex h-10 w-10 items-center">
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              width="24"
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-24 w-full"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                                clipRule="evenodd"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </button>
+
+                      <button className="bg-blue-100 hover:bg-blue-200 cursor-pointer rounded-lg flex flex-row items-center p-2 motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in">
+                        <div className="mr-2 flex h-10 w-10 shrink-0 items-center justify-center md:h-12 md:w-12">
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 md:h-6 md:w-6"
+                          >
+                            <path d="M17.53 8.54a.75.75 0 0 0-1.06-1.061L11 12.949l-2.47-2.47a.75.75 0 0 0-1.06 1.06l2.646 2.647a1.25 1.25 0 0 0 1.768 0l5.646-5.647"></path>
+                            <path
+                              fillRule="evenodd"
+                              d="M4.5 2.759a1.25 1.25 0 0 0-1.25 1.25V8.73c0 9.392 7.29 12.1 8.395 12.455a1.147 1.147 0 0 0 .71 0C13.46 20.83 20.75 18.122 20.75 8.73V4.01a1.25 1.25 0 0 0-1.25-1.25h-15m.25 5.97V4.26h14.5v4.47c0 8.106-6.024 10.573-7.25 10.992-1.226-.419-7.25-2.886-7.25-10.992"
+                              clipRule="evenodd"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div className="flex w-full items-center justify-between text-left">
+                          <div className="flex flex-col">
+                            <div className="font-bold text-xl">
+                              <div>Free 30-day returns</div>
+                              <div>1-year warranty</div>
+                            </div>
+                            <div className="caption"></div>
+                          </div>
+                          <div className="ml-2 flex h-10 w-10 items-center">
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              width="24"
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-24 w-full"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                                clipRule="evenodd"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </button>
+
+                      <button className="bg-blue-100 cursor-pointer hover:bg-blue-200 rounded-lg flex flex-row items-center p-2 motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in">
+                        <div className="mr-2 flex h-10 w-10 shrink-0 items-center justify-center md:h-12 md:w-12">
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 md:h-8 md:w-8"
+                          >
+                            <path d="M16.548 9.512a.75.75 0 1 0-1.096-1.024L10.4 13.901l-1.852-1.984a.75.75 0 0 0-1.096 1.023l2.034 2.18a1.25 1.25 0 0 0 1.828 0l5.234-5.608"></path>
+                            <path
+                              fillRule="evenodd"
+                              d="M13.764 3.401c-.993-1.535-3.24-1.535-4.233 0A1.021 1.021 0 0 1 8.306 3.8C6.6 3.141 4.782 4.462 4.88 6.288A1.021 1.021 0 0 1 4.124 7.33C2.357 7.8 1.662 9.937 2.816 11.356a1.021 1.021 0 0 1 0 1.288c-1.154 1.42-.46 3.556 1.308 4.026a1.021 1.021 0 0 1 .757 1.042C4.782 19.538 6.6 20.86 8.306 20.201a1.021 1.021 0 0 1 1.225.398c.993 1.535 3.24 1.535 4.233 0A1.021 1.021 0 0 1 14.99 20.2c1.706.658 3.523-.663 3.425-2.489a1.021 1.021 0 0 1 .757-1.042c1.767-.47 2.461-2.607 1.308-4.026a1.021 1.021 0 0 1 0-1.288c1.153-1.42.46-3.556-1.308-4.026a1.021 1.021 0 0 1-.757-1.042c.098-1.826-1.719-3.147-3.425-2.489A1.021 1.021 0 0 1 13.765 3.4M10.79 4.216a1.021 1.021 0 0 1 1.715 0A2.521 2.521 0 0 0 15.529 5.2a1.021 1.021 0 0 1 1.387 1.008 2.521 2.521 0 0 0 1.869 2.572 1.021 1.021 0 0 1 .53 1.631 2.521 2.521 0 0 0 0 3.18 1.021 1.021 0 0 1-.53 1.63 2.521 2.521 0 0 0-1.869 2.573 1.021 1.021 0 0 1-1.387 1.008 2.521 2.521 0 0 0-3.024.983 1.021 1.021 0 0 1-1.715 0A2.521 2.521 0 0 0 7.766 18.8a1.021 1.021 0 0 1-1.387-1.008 2.521 2.521 0 0 0-1.87-2.572 1.021 1.021 0 0 1-.53-1.631 2.521 2.521 0 0 0 0-3.18 1.021 1.021 0 0 1 .53-1.63 2.521 2.521 0 0 0 1.87-2.573 1.021 1.021 0 0 1 1.387-1.008 2.521 2.521 0 0 0 3.024-.983"
+                              clipRule="evenodd"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div className="flex w-full items-center justify-between text-left">
+                          <div className="flex flex-col">
+                            <div className="font-bold text-xl">
+                              Verified Refurbished
+                            </div>
+                            <div className="caption"></div>
+                          </div>
+                          <div className="ml-2 flex h-10 w-10 items-center">
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              width="24"
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-24 w-full"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                                clipRule="evenodd"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
