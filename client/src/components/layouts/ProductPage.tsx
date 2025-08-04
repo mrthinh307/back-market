@@ -773,7 +773,7 @@ const ProductPage: React.FC = () => {
                         </div>
                         <div className="flex w-full items-center justify-between text-left">
                           <div className="flex flex-col">
-                            <div className="text-xl font-bold">
+                            <div className="text-base font-bold">
                               <div>
                                 <div>
                                   <span>Free delivery by Aug 6 - Aug 7</span>
@@ -805,7 +805,7 @@ const ProductPage: React.FC = () => {
                         </div>
                         <div className="flex w-full items-center justify-between text-left">
                           <div className="flex flex-col">
-                            <div className="font-bold text-xl">
+                            <div className="font-bold text-base">
                               <div className="w-full">
                                 Works with all carriers
                               </div>
@@ -857,7 +857,7 @@ const ProductPage: React.FC = () => {
                         </div>
                         <div className="flex w-full items-center justify-between text-left">
                           <div className="flex flex-col">
-                            <div className="font-bold text-xl">
+                            <div className="font-bold text-base">
                               <div>Free 30-day returns</div>
                               <div>1-year warranty</div>
                             </div>
@@ -904,7 +904,7 @@ const ProductPage: React.FC = () => {
                         </div>
                         <div className="flex w-full items-center justify-between text-left">
                           <div className="flex flex-col">
-                            <div className="font-bold text-xl">
+                            <div className="font-bold text-base">
                               Verified Refurbished
                             </div>
                             <div className="caption"></div>
@@ -1036,16 +1036,16 @@ const ProductPage: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="w-full max-w-full grow-0 md:w-2/3 md:basis-2/3 lg:w-1/2 lg:basis-1/2">
-            <div className="flex flex-col items-start md:flex-col-reverse">
+          <div className="w-1/2 max-w-full grow-0 md:w-2/3 md:basis-2/3 lg:w-1/2 lg:basis-1/2 px-8">
+            <div className="flex flex-col mr-3 items-start md:flex-col-reverse">
               <div className="w-full">
                 <div className="mb-64 hidden md:block">
                   <div className='w-full max-w-full rounded-sm border border-black py-2 px-5'>
                     <div className='mt-8'>
-                      <h1 className="text-3xl ">
+                      <h1 className="text-xl font-bold">
                         iPhone 13 128GB - Pink - Unlocked
                       </h1>
-                      <div className="mt-4 flex flex-warp gap-2">
+                      <div className="mt-2 text-sm flex flex-warp gap-2">
                         <div className="rounded-none border border-black font-bold body-2 flex h-6 w-fit max-w-full shrink-0 items-center px-2">
                           Fair
                         </div>
@@ -1124,7 +1124,7 @@ const ProductPage: React.FC = () => {
                     <div className='flex items-center'>
                       <button
                         aria-disabled="false"
-                        className="bg-black text-white rounded-sm relative select-none no-underline motion-safe:ease-in inline-block max-w-full px-4 py-4 hover:no-underline motion-safe:transition-colors motion-safe:duration-200 cursor-pointer border-none min-w-[164px] max-w-[256px] grow hover:bg-gray-800"
+                        className="bg-black text-white rounded-sm relative select-none no-underline motion-safe:ease-in inline-block max-w-full px-2 py-3 hover:no-underline motion-safe:transition-colors motion-safe:duration-200 cursor-pointer border-none min-w-[164px] max-w-[256px] grow hover:bg-gray-800"
                         data-id="product-page-buy-button-desktop"
                         data-qa="product-page-buy-button-desktop"
                         type="button"
@@ -1133,13 +1133,13 @@ const ProductPage: React.FC = () => {
                           aria-hidden="false"
                           className="pointer-events-none flex items-center justify-center"
                         >
-                          <span className="body-2-bold truncate text-xl">
+                          <span className="body-2-bold truncate text-base font-bold">
                             Add to cart
                           </span>
                         </span>
                       </button>
                     </div>
-                    <div className="mt-2">
+                    <div className="mt-2 text-sm">
                       <span className='text-gray-600'>
                         Proudly refurbished by
                       </span>
@@ -1164,7 +1164,7 @@ const ProductPage: React.FC = () => {
                         (United Kingdom)
                       </span>
                     </div>
-                    <div className="flex flex-row items-center gap-2 self-start w-[40px] flex-shrink-0 mr-1 mt-2">
+                    <div className="flex flex-row items-center gap-2 self-start w-[40px] flex-shrink-0 mr-1 mt-4">
                       <Image
                         alt="Visa"
                         className="h-auto max-h-full max-w-full leading-none"
@@ -1273,7 +1273,7 @@ const ProductPage: React.FC = () => {
                         </div>
                         <div className="flex w-full items-center justify-between text-left">
                           <div className="flex flex-col">
-                            <div className="text-xl font-bold">
+                            <div className="text-base font-bold">
                               <div>
                                 <div>
                                   <span>Free delivery by Aug 6 - Aug 7</span>
@@ -1305,7 +1305,7 @@ const ProductPage: React.FC = () => {
                         </div>
                         <div className="flex w-full items-center justify-between text-left">
                           <div className="flex flex-col">
-                            <div className="font-bold text-xl">
+                            <div className="font-bold text-base">
                               <div>Free 30-day returns</div>
                               <div>1-year warranty</div>
                             </div>
@@ -1334,7 +1334,7 @@ const ProductPage: React.FC = () => {
 
                     <div className='mt-16'>
                       <div>
-                        <h3 className='body-1 text-xl mt-4'>Comes with</h3>
+                        <h3 className='body-1 text-base mt-4'>Comes with</h3>
                         <div className="mt-3 flex items-center w-fit max-w-full gap-4 body-2 text-primary pt-1 py-1 px-3 pl-1 bg-gray-300 rounded-3xl">
                           <div className="ml-2 flex w-8 h-8 items-center">
                               <svg
@@ -1356,11 +1356,11 @@ const ProductPage: React.FC = () => {
                                 ></path>
                               </svg>
                             </div>
-                            <div className="font-medium text-lg">
+                            <div className="font-medium text-sm">
                               Compatible charging cable
                             </div>
                         </div>
-                        <div className="mt-2">
+                        <div className="mt-3">
                           <div data-test="affirm-modal" className="inline">
                               <a
                                 className="px-1"
@@ -1372,7 +1372,7 @@ const ProductPage: React.FC = () => {
                               ></a>
                               <button
                                 aria-label="'Learn more about BEST4TECH"
-                                className="inline rounded-sm text-xl font-bold cursor-pointer [text-align:inherit] underline"
+                                className="inline rounded-sm text-base font-bold cursor-pointer [text-align:inherit] underline"
                                 type="button"
                               >
                               See accessories we don't include
@@ -1382,10 +1382,10 @@ const ProductPage: React.FC = () => {
                       </div>
 
                       <div className=" mb-7 md:mb-8 mt-9 flex flex-col">
-                        <button className="hover:bg-gray-200 cursor-pointer rounded-none p-6 flex flex-row items-center motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in">
+                        <button className="hover:bg-gray-200 cursor-pointer rounded-none p-3 flex flex-row items-center motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in">
                           <div className="flex w-full items-center justify-between text-left">
                             <div className="flex flex-col">
-                              <div className="font-bold text-xl ml-3">
+                              <div className="font-bold text-base ml-3">
                                 <div>Technical Specifications</div>
                               </div>
                               <div className="caption"></div>
@@ -1410,10 +1410,10 @@ const ProductPage: React.FC = () => {
                           </div>
                         </button>
                         <hr className="border-t border-gray-300" />
-                        <button className="hover:bg-gray-200 cursor-pointer rounded-none p-6 flex flex-row items-center motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in">
+                        <button className="hover:bg-gray-200 cursor-pointer rounded-none p-3 flex flex-row items-center motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in">
                           <div className="flex w-full items-center justify-between text-left">
                             <div className="flex flex-col">
-                              <div className="font-bold text-xl ml-3">
+                              <div className="font-bold text-base ml-3">
                                 <div>Perks & benefits included</div>
                               </div>
                               <div className="caption"></div>
@@ -1438,10 +1438,10 @@ const ProductPage: React.FC = () => {
                           </div>
                         </button>
                         <hr className="border-t border-gray-300" />
-                        <button className="hover:bg-gray-200 cursor-pointer rounded-none p-6 flex flex-row items-center motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in">
+                        <button className="hover:bg-gray-200 cursor-pointer rounded-none p-3 flex flex-row items-center motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in">
                           <div className="flex w-full items-center justify-between text-left">
                             <div className="flex flex-col">
-                              <div className="font-bold text-xl ml-3">
+                              <div className="font-bold text-base ml-3">
                                 <div>Frequently asked questions</div>
                               </div>
                               <div className="caption"></div>
@@ -1477,7 +1477,7 @@ const ProductPage: React.FC = () => {
         {/* often bougth section */}
         <div className="">
           <div className="max-w-7xl mx-auto p-4 sm:p-8 sm:px-6 lg:px-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">Often bought together</h2>
+            <h2 className="text-2xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">Often bought together</h2>
             <div className="bg-white border border-gray-200 rounded-lg p-4 sm:py-6">
               {/* Mobile layout */}
               <div className="block lg:hidden">
@@ -1849,8 +1849,6 @@ const ProductPage: React.FC = () => {
             <hr className="border-t border-gray-300 mt-8" />
           </div>
         </div>
-
-
       </div>
     </div>
   );

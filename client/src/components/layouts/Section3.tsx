@@ -51,7 +51,7 @@ const ProductCondition = () => {
   ];
 
   return (
-    <div className="py-2 md:py-6">
+    <div className="py-2 md:py-6 px-12">
       <div className="md:flex md:justify-center md:items-center">
         {/* Left side - Product image */}
         <div className="max-w-full md:relative md:mr-4 md:min-w-[337px] md:max-w-[498px] md:grow lg:mr-8 hidden md:block">
@@ -65,7 +65,7 @@ const ProductCondition = () => {
                       alt="iPhone 13 Body"
                       width={498}
                       height={498}
-                      className="rounded-lg h-auto w-full md:min-w-[337px] md:max-w-[498px] md:rounded-[32px]"
+                      className="rounded-lg h-auto w-full max-h-[498px] md:min-w-[337px] md:max-w-[498px] md:rounded-[32px]"
                     />
                     <div className="caption bg-gray-100 absolute right-3 top-3 px-4">
                       <span>Example image</span>
@@ -101,7 +101,7 @@ const ProductCondition = () => {
         </div>
 
         {/* Right side - Condition selection */}
-        <div className="md:shrink-0">
+        <div className="w-full md:w-1/2 md:shrink-0 p-8">
           <div className="opacity-100 transition-opacity duration-500 ease-out">
             <fieldset role="radiogroup">
               <legend className="mb-3 flex items-baseline justify-between">
@@ -124,10 +124,11 @@ const ProductCondition = () => {
                   className="h-8 w-8 m-1 ml-0"
                   fill="currentColor"
                   viewBox="0 0 24 24"
+                  width={32}
                 >
                   <path
                     fillRule="evenodd"
-                    d="M3.69 3h16.62a1.58 1.58 0 0 1 1.581 1.577v14.846A1.58 1.58 0 0 1 20.31 21H3.69a1.579 1.579 0 0 1-1.581-1.577V4.577A1.579 1.579 0 0 1 3.69 3"
+                    d="M3.69 3h16.62a1.58 1.58 0 0 1 1.581 1.577v14.846A1.58 1.58 0 0 1 20.31 21H3.69a1.579 1.579 0 0 1-1.581-1.577V4.577A1.579 1.579 0 0 1 3.69 3m5.933 14.453h3.262a.1.1 0 0 0 .07-.17l-5.167-5.167a.166.166 0 0 1 0-.233l5.167-5.168a.1.1 0 0 0-.07-.17H9.623a.39.39 0 0 0-.277.116l-5.222 5.222a.166.166 0 0 0 0 .233l5.222 5.222a.39.39 0 0 0 .277.115m10.173-.17-5.168-5.167a.166.166 0 0 1 0-.234l5.168-5.168a.1.1 0 0 0-.071-.17h-3.262a.39.39 0 0 0-.277.116l-5.222 5.222a.166.166 0 0 0 0 .233l5.222 5.223a.39.39 0 0 0 .277.115h3.262a.1.1 0 0 0 .07-.17"
                     clipRule="evenodd"
                   />
                 </svg>
@@ -141,7 +142,7 @@ const ProductCondition = () => {
               </button>
 
               {/* Condition options */}
-              <ul className="list-none grid grid-cols-2 gap-x-3 gap-y-3">
+              <ul className="list-none grid grid-cols-2 gap-x-3 gap-y-3 ">
                 {conditions.map((condition) => (
                   <li key={condition.id}>
                     <button
@@ -149,8 +150,8 @@ const ProductCondition = () => {
                       aria-disabled="false"
                       className={`focus:outline-none rounded-sm relative flex size-full flex-col border py-3 no-underline ${
                         selectedCondition === condition.id
-                          ? 'bg-blue-50 border-blue-300 hover:bg-blue-50'
-                          : 'bg-white border-gray-300 hover:bg-gray-50'
+                          ? 'bg-pink-50 border-black hover:bg-pink-100'
+                          : 'bg-white border-black hover:bg-gray-200'
                       }`}
                       role="radio"
                       type="button"
@@ -162,14 +163,12 @@ const ProductCondition = () => {
                             <div
                               className={`rounded-full border ${
                                 selectedCondition === condition.id
-                                  ? 'bg-blue-600 border-blue-600'
-                                  : 'bg-transparent border-blue-600'
+                                  ? 'bg-black border-black'
+                                  : 'bg-transparent border-black'
                               }`}
                               style={{
-                                width:
-                                  condition.id === 'premium' ? '16px' : '12px',
-                                height:
-                                  condition.id === 'premium' ? '16px' : '12px',
+                                width: condition.id === 'premium' ? '16px' : '12px',
+                                height: condition.id === 'premium' ? '16px' : '12px',
                               }}
                             />
                           </div>
@@ -179,7 +178,7 @@ const ProductCondition = () => {
                             <span
                               className={`mr-2 min-w-[100px] grow ${
                                 selectedCondition === condition.id
-                                  ? 'text-blue-600 font-bold'
+                                  ? 'text-black font-bold'
                                   : 'text-gray-900'
                               }`}
                             >
@@ -229,7 +228,7 @@ const StorageSelection = () => {
   ];
 
   return (
-    <div className="py-2 md:py-6">
+    <div className="py-2 md:py-6 px-12">
       <div className="md:flex md:justify-center md:items-center">
         {/* Left side - Storage image */}
         <div className="max-w-full md:relative md:mr-8 md:min-w-[337px] md:max-w-[498px] md:grow lg:mr-16 hidden md:block">
@@ -240,14 +239,14 @@ const StorageSelection = () => {
                 alt="Storage selection"
                 width={498}
                 height={498}
-                className="rounded-lg block max-w-[498px] md:min-w-[337px] md:rounded-[32px]"
+                className="rounded-lg block max-w-[498px] max-h-[498px] md:min-w-[337px] md:rounded-[32px]"
               />
             </div>
           </div>
         </div>
 
         {/* Right side - Storage selection */}
-        <div className="md:shrink-0">
+        <div className="md:shrink-0 w-full md:w-1/2 p-8">
           <div className="opacity-100 transition-opacity duration-500 ease-out">
             <fieldset role="radiogroup">
               <legend className="mb-3 flex items-baseline justify-between">
@@ -262,10 +261,10 @@ const StorageSelection = () => {
                     <button
                       aria-checked={selectedStorage === storage.id}
                       aria-disabled="false"
-                      className={`focus:outline-none rounded-sm relative flex size-full flex-col border py-3 no-underline ${
+                      className={`focus:outline-none rounded-sm relative flex size-full flex-col border py-2 no-underline ${
                         selectedStorage === storage.id
-                          ? 'bg-blue-50 border-blue-300 hover:bg-blue-50'
-                          : 'bg-white border-gray-300 hover:bg-gray-50'
+                          ? 'bg-pink-50 border-black hover:bg-pink-100'
+                          : 'bg-white border-black hover:bg-gray-200'
                       }`}
                       role="radio"
                       type="button"
@@ -277,8 +276,8 @@ const StorageSelection = () => {
                             <div
                               className={`rounded-full border ${
                                 selectedStorage === storage.id
-                                  ? 'bg-blue-600 border-blue-600'
-                                  : 'bg-transparent border-blue-600'
+                                  ? 'bg-black border-black'
+                                  : 'bg-transparent border-black'
                               }`}
                               style={{ width: '12px', height: '12px' }}
                             />
@@ -289,7 +288,7 @@ const StorageSelection = () => {
                             <span
                               className={`mr-2 min-w-[100px] grow ${
                                 selectedStorage === storage.id
-                                  ? 'text-blue-600 font-bold'
+                                  ? 'text-black font-bold'
                                   : 'text-gray-900'
                               }`}
                             >
@@ -349,7 +348,7 @@ const ColorSelection = () => {
   ];
 
   return (
-    <div className="py-8 md:py-9">
+    <div className="py-8 md:py-9 px-12">
       <div className="md:flex md:justify-center md:items-center">
         {/* Left side - Product gallery */}
         <div className="max-w-full md:relative md:mr-8 md:min-w-[337px] md:max-w-[498px] md:grow lg:mr-16 hidden md:block">
@@ -444,7 +443,7 @@ const ColorSelection = () => {
         </div>
 
         {/* Right side - Color selection */}
-        <div className="md:shrink-0">
+        <div className="md:shrink-0 w-1/2 p-8">
           <div className="opacity-100 transition-opacity duration-500 ease-out">
             <fieldset role="radiogroup">
               <legend className="mb-3 flex items-baseline justify-between">
@@ -461,8 +460,8 @@ const ColorSelection = () => {
                       aria-disabled="false"
                       className={`focus:outline-none rounded-sm relative flex size-full flex-col border py-3 no-underline ${
                         selectedColor === color.id
-                          ? 'bg-blue-50 border-blue-300 hover:bg-blue-50'
-                          : 'bg-white border-gray-300 hover:bg-gray-50'
+                          ? 'bg-pink-50 border-black hover:bg-pink-100'
+                          : 'bg-white border-black hover:bg-gray-200'
                       }`}
                       role="radio"
                       type="button"
@@ -480,7 +479,7 @@ const ColorSelection = () => {
                             <span
                               className={`mr-2 min-w-[100px] grow ${
                                 selectedColor === color.id
-                                  ? 'text-blue-600 font-bold'
+                                  ? 'text-black font-bold'
                                   : 'text-gray-900'
                               }`}
                             >
@@ -507,7 +506,7 @@ const ColorSelection = () => {
 // Trade-in component
 const TradeInSection = () => {
   return (
-    <div className="py-8 md:py-9">
+    <div className="py-8 md:py-9 px-12">
       <div className="md:flex md:justify-center md:items-center">
         {/* Left side - Trade-in image */}
         <div className="max-w-full md:relative md:mr-8 md:min-w-[337px] md:max-w-[498px] md:grow lg:mr-16 hidden md:block">
@@ -517,13 +516,13 @@ const TradeInSection = () => {
               alt="Trade-in"
               width={498}
               height={498}
-              className="rounded-lg block min-w-[337px] max-w-[498px] md:rounded-[32px]"
+              className="rounded-lg block min-w-[337px] max-w-[498px] max-h-[498px] md:rounded-[32px]"
             />
           </div>
         </div>
 
         {/* Right side - Trade-in content */}
-        <div className="md:shrink-0">
+        <div className="md:shrink-0 w-1/2 p-8">
           <div className="opacity-100 transition-opacity duration-500 ease-out">
             <div className="flex flex-col">
               <h2 className="text-2xl font-bold mb-4">
@@ -536,12 +535,17 @@ const TradeInSection = () => {
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M7 3.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5M4.75 7a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0"
-                    clipRule="evenodd"
-                  />
-                  <path d="M13 6.25a.75.75 0 0 0 0 1.5h5.19l-1.72 1.72a.75.75 0 1 0 1.06 1.06l2.647-2.646a1.25 1.25 0 0 0 0-1.768L17.53 3.47a.75.75 0 1 0-1.06 1.06l1.72 1.72H13" />
+                  <path 
+                    fill-rule="evenodd" 
+                    d="M7 3.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5M4.75 7a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0" 
+                    clip-rule="evenodd"
+                  ></path>
+                  <path d="M13 6.25a.75.75 0 0 0 0 1.5h5.19l-1.72 1.72a.75.75 0 1 0 1.06 1.06l2.647-2.646a1.25 1.25 0 0 0 0-1.768L17.53 3.47a.75.75 0 1 0-1.06 1.06l1.72 1.72H13m-7.19 10H11a.75.75 0 0 1 0 1.5H5.81l1.72 1.72a.75.75 0 1 1-1.06 1.06l-2.647-2.646a1.25 1.25 0 0 1 0-1.768L6.47 13.47a.75.75 0 1 1 1.06 1.06l-1.72 1.72" />
+                  <path 
+                    fill-rule="evenodd" 
+                    d="M14.5 13.25a1.25 1.25 0 0 0-1.25 1.25v5a1.25 1.25 0 0 0 1.25 1.25h5a1.25 1.25 0 0 0 1.25-1.25v-5a1.25 1.25 0 0 0-1.25-1.25h-5m.25 6v-4.5h4.5v4.5h-4.5" 
+                    clip-rule="evenodd"
+                  ></path>
                 </svg>
                 <div className="text-sm flex-1 text-left">
                   <p className="mb-0">See how Trade-in works</p>
