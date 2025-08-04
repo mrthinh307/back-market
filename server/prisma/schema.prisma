@@ -9,11 +9,6 @@ datasource db {
   // directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
-generator erd {
-  provider = "prisma-erd-generator"
-  output   = "./erd.svg"
-}
-
 // USERS & AUTHENTICATION
 enum UserRole {
   user
