@@ -14,6 +14,63 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 
+const RatingStars: React.FC<{ 
+  rating: number; 
+  maxRating?: number; 
+  size?: number;
+  filledColor?: string;
+  emptyColor?: string;
+}> = ({ 
+  rating, 
+  maxRating = 5, 
+  size = 14,
+  filledColor = "text-black-400",
+  emptyColor = "text-gray-300"
+}) => {
+  const stars = [];
+  
+  for (let i = 1; i <= maxRating; i++) {
+    if (i <= Math.floor(rating)) {
+      stars.push(
+        <Star
+          key={i}
+          size={size}
+          className={`${filledColor} fill-current`}
+        />
+      );
+    } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
+      const fillPercentage = (rating % 1) * 100;
+      stars.push(
+        <div key={i} className="relative">
+          <Star
+            size={size}
+            className={emptyColor}
+          />
+          <div 
+            className="absolute inset-0 overflow-hidden"
+            style={{ width: `${fillPercentage}%` }}
+          >
+            <Star
+              size={size}
+              className={`${filledColor} fill-current`}
+            />
+          </div>
+        </div>
+      );
+    } else {
+      stars.push(
+        <Star
+          key={i}
+          size={size}
+          className={emptyColor}
+        />
+      );
+    }
+  }
+  
+  return <div className="flex items-center space-x-1">{stars}</div>;
+};
+
 const ProductPage: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedCondition, setSelectedCondition] = useState('excellent');
@@ -878,6 +935,922 @@ const ProductPage: React.FC = () => {
             </div>
           </div>
         </div>
+        
+        {/*add to cart section 2*/}
+        <div className="flex flex-col flex-wrap items-center md:flex-row md:flex-nowrap">
+          <div className="relative w-full max-w-full grow-0 md:w-1/3 lg:w-1/2">
+            <div className="top-[7rem] md:sticky md:right-1/2 md:mr-14">
+              <div>
+                <div className="flex justify-center" data-test="carousel">
+                  <div className="relative -mb-4 flex min-h-72 flex-col flex-wrap overflow-hidden mt-3 md:mt-8 md:grow">
+                    <div className="relative flex w-full grow justify-center">
+                      <ul className="w-full list-none">
+                        <li
+                          id="gallery-carousel"
+                          aria-hidden="false"
+                          className="flex w-full list-none justify-center motion-safe:animate-fade-in"
+                        >
+                          <button
+                            className="relative focus-visible-outline-inset-hi rounded-sm cursor-pointer"
+                            type="button"
+                          >
+                            <Image
+                              fetchPriority="high"
+                              className="rounded-lg block w-auto md:!h-auto md:w-full lg:w-[29.125rem] h-auto max-h-full max-w-full leading-none"
+                              alt="iPhone 13 128GB - Pink - Unlocked"
+                              decoding="async"
+                              height="976"
+                              loading="eager"
+                              sizes="(max-width: 768px) 100vw, 466px"
+                              src="https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg"
+                              width="976"
+                            />
+                          </button>
+                        </li>
+                      </ul>
+                      <div className="sr-only" role="status">
+                        "1 / 6. "{' '}
+                        <span aria-labelledby="gallery-carousel"></span>
+                      </div>
+                    </div>
+                    <div className="relative isolate mx-auto flex w-full justify-center h-60">
+                      <div className="flex items-center px-8 py-4 absolute left-0 z-10 mt-4">
+                        <button
+                          className=" bg-black rounded-full flex cursor-pointer items-center justify-center size-8 hover:bg-gray-700 duration-300"
+                          type="button"
+                        >
+                          <svg
+                            className="text-white"
+                            aria-hidden="false"
+                            aria-label="Previous"
+                            fill="currentColor"
+                            height="24"
+                            role="img"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="m10.957 12 3.47-3.47a.75.75 0 1 0-1.06-1.06L9.72 11.116a1.25 1.25 0 0 0 0 1.768l3.646 3.646a.75.75 0 0 0 1.06-1.06L10.958 12"
+                              clipRule="evenodd"
+                            ></path>
+                          </svg>
+                        </button>
+                      </div>
+                      <div>
+                        <div className="gradient-mask-lr-60 absolute inset-x-0">
+                          <ul
+                            className="flex list-none flex-row gap-8 overflow-hidden py-4 justify-normal"
+                            style={{ paddingLeft: 56, paddingRight: 56 }}
+                          ></ul>
+                        </div>
+                      </div>
+                      <div className="flex items-center px-8 py-4 absolute right-0 z-10 mt-4">
+                        <button
+                          className=" bg-black rounded-full flex cursor-pointer items-center justify-center size-8 hover:bg-gray-700 duration-300"
+                          type="button"
+                        >
+                          <svg
+                            className="text-white"
+                            aria-hidden="false"
+                            aria-label="Next"
+                            fill="currentColor"
+                            height="24"
+                            role="img"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                              clipRule="evenodd"
+                            ></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-full max-w-full grow-0 md:w-2/3 md:basis-2/3 lg:w-1/2 lg:basis-1/2">
+            <div className="flex flex-col items-start md:flex-col-reverse">
+              <div className="w-full">
+                <div className="mb-64 hidden md:block">
+                  <div className='w-full max-w-full rounded-sm border border-black py-2 px-5'>
+                    <div className='mt-8'>
+                      <h1 className="text-3xl ">
+                        iPhone 13 128GB - Pink - Unlocked
+                      </h1>
+                      <div className="mt-4 flex flex-warp gap-2">
+                        <div className="rounded-none border border-black font-bold body-2 flex h-6 w-fit max-w-full shrink-0 items-center px-2">
+                          Fair
+                        </div>
+                        <div className="ml-1 rounded-none border border-black font-bold body-2 flex h-6 w-fit max-w-full shrink-0 items-center px-2">
+                          Standard battery
+                        </div>
+                        <div className="ml-1 rounded-none border border-black font-bold body-2 flex h-6 w-fit max-w-full shrink-0 items-center px-2">
+                          128GB
+                        </div>
+                        <div className="ml-1 rounded-none border border-black font-bold body-2 flex h-6 w-fit max-w-full shrink-0 items-center px-2">
+                          Pink
+                        </div>
+                      </div>
+                      <div className="mt-4 grow">
+                        <div>
+                          <div className="flex flex-wrap items-baseline gap-x-4">
+                            <span
+                              className="text-2xl font-bold"
+                              data-qa="productpage-product-price"
+                              data-test="productpage-product-price"
+                            >
+                              $288.99
+                            </span>
+                            <div className="flex flex-wrap gap-x-4">
+                              <span className="body-2-bold whitespace-nowrap">
+                                before trade-in
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-x-2">
+                            <span className="caption z-[1]">
+                              <span id="trigger-v-0-5-0-0">
+                                <button className="text-static-default-low cursor-pointer whitespace-nowrap">
+                                  <span className="text-gray-700 line-through">
+                                    <span className="">$629.00</span> new
+                                  </span>
+                                </button>
+                              </span>
+                            </span>
+                            <div className="bg-green-300">
+                              <span
+                                className="rounded-xs inline-block max-w-full truncate px-1 py-0 font-bold text-sl"
+                                title="Save $340.01"
+                              >
+                                Save $340.01
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="grow">
+                        <div dta-test="affirm-modal" className="inline">
+                            <a
+                              className=""
+                              data-affirm-color="black"
+                              data-amount="28899"
+                              data-learnmore-show="false"
+                              data-page-type="product"
+                              data-test="affirm-link"
+                            ></a>
+                            <button
+                              aria-label="'Learn more about Affirm payment options"
+                              className="rounded-sm font-weight-body-1-link cursor-pointer [text-align:inherit] underline"
+                              type="button"
+                            >
+                            Quality Assurance Fee
+                          </button>
+                        </div>
+                        <span className='ml-1 text-sm'>
+                          applies (starting at £0.99)
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <div className='flex items-center'>
+                      <button
+                        aria-disabled="false"
+                        className="bg-black text-white rounded-sm relative select-none no-underline motion-safe:ease-in inline-block max-w-full px-4 py-4 hover:no-underline motion-safe:transition-colors motion-safe:duration-200 cursor-pointer border-none min-w-[164px] max-w-[256px] grow hover:bg-gray-800"
+                        data-id="product-page-buy-button-desktop"
+                        data-qa="product-page-buy-button-desktop"
+                        type="button"
+                      >
+                        <span
+                          aria-hidden="false"
+                          className="pointer-events-none flex items-center justify-center"
+                        >
+                          <span className="body-2-bold truncate text-xl">
+                            Add to cart
+                          </span>
+                        </span>
+                      </button>
+                    </div>
+                    <div className="mt-2">
+                      <span className='text-gray-600'>
+                        Proudly refurbished by
+                      </span>
+                      <div data-test="affirm-modal" className="inline">
+                          <a
+                            className="px-1"
+                            data-affirm-color="black"
+                            data-amount="28899"
+                            data-learnmore-show="false"
+                            data-page-type="product"
+                            data-test="affirm-link"
+                          ></a>
+                          <button
+                            aria-label="'Learn more about BEST4TECH"
+                            className="inline rounded-sm font-weight-body-1-link cursor-pointer [text-align:inherit] underline"
+                            type="button"
+                          >
+                          BEST4TECH
+                        </button>
+                      </div>
+                      <span className='px-1 text-gray-600'>
+                        (United Kingdom)
+                      </span>
+                    </div>
+                    <div className="flex flex-row items-center gap-2 self-start w-[40px] flex-shrink-0 mr-1 mt-2">
+                      <Image
+                        alt="Visa"
+                        className="h-auto max-h-full max-w-full leading-none"
+                        decoding="async"
+                        height="20"
+                        loading="lazy"
+                        sizes="100vw"
+                        src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/payment/networks-v5/visa.svg"
+                        width="36"
+                      />
+                      <Image
+                        alt="Mastercard"
+                        className="h-auto max-h-full max-w-full leading-none"
+                        decoding="async"
+                        height="20"
+                        loading="lazy"
+                        sizes="100vw"
+                        src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/payment/networks-v5/mastercard.svg"
+                        width="36"
+                      />
+                      <Image
+                        alt="American Expess"
+                        className="h-auto max-h-full max-w-full leading-none"
+                        decoding="async"
+                        height="20"
+                        loading="lazy"
+                        sizes="100vw"
+                        src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/payment/networks-v5/amex.svg"
+                        width="36"
+                      />
+                      <Image
+                        alt="Paypal"
+                        className="h-auto max-h-full max-w-full leading-none"
+                        decoding="async"
+                        height="20"
+                        loading="lazy"
+                        sizes="100vw"
+                        src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/payment/networks-v5/paypal.svg"
+                        width="36"
+                      />
+                      <Image
+                        alt="ClearPay"
+                        className="h-auto max-h-full max-w-full leading-none"
+                        decoding="async"
+                        height="20"
+                        loading="lazy"
+                        sizes="100vw"
+                        src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/payment/networks-v5/clearpay.svg"
+                        width="36"
+                      />
+                      <Image
+                        alt="Apple Pay"
+                        className="h-auto max-h-full max-w-full leading-none"
+                        decoding="async"
+                        height="20"
+                        loading="lazy"
+                        sizes="100vw"
+                        src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/payment/networks-v5/apple_pay.svg"
+                        width="36"
+                      />
+                      <Image
+                        alt="Google Pay"
+                        className="h-auto max-h-full max-w-full leading-none"
+                        decoding="async"
+                        height="20"
+                        loading="lazy"
+                        sizes="100vw"
+                        src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/payment/methods-v5/google_pay.svg"
+                        width="36"
+                      />
+                      <Image
+                        alt="Klarna"
+                        className="h-auto max-h-full max-w-full leading-none"
+                        decoding="async"
+                        height="20"
+                        loading="lazy"
+                        sizes="100vw"
+                        src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/payment/networks-v5/klarna.svg"
+                        width="36"
+                      />
+                    </div>
+                  </div>
+                  <div>
+
+                  </div>
+                  <div className=" mb-7 md:mb-8 mt-6">
+                    <div className="flex flex-col gap-2">
+                      <div className="bg-blue-100 rounded-lg flex flex-row items-center p-2">
+                        <div className="mr-2 flex h-10 w-10 shrink-0 items-center justify-center md:h-12 md:w-12">
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 md:h-8 md:w-8"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M2.25 5.5A.75.75 0 0 1 3 4.75h10.5a1.25 1.25 0 0 1 1.225 1h2.966a1.25 1.25 0 0 1 1.118.691l1.655 3.31H20.5A1.25 1.25 0 0 1 21.75 11v5a1.25 1.25 0 0 1-1.25 1.25h-.854a2.751 2.751 0 0 1-5.292 0h-3.207a2.751 2.751 0 0 1-5.293 0H5A1.25 1.25 0 0 1 3.75 16v-5.5a.75.75 0 0 1 1.5 0v5.25h.604a2.751 2.751 0 0 1 5.292 0h2.104v-9.5H3A.75.75 0 0 1 2.25 5.5m18 10.25h-.604a2.751 2.751 0 0 0-4.896-.832V11.25h5.5v4.5m-5.5-6v-2.5h2.787l1.25 2.5H14.75m-7.5 6.75a1.25 1.25 0 1 1 2.5 0 1.25 1.25 0 0 1-2.5 0M17 15.25a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5"
+                              clipRule="evenodd"
+                            ></path>
+                            <path d="M3.5 7.25a.75.75 0 0 0 0 1.5H7a.75.75 0 0 0 0-1.5H3.5"></path>
+                          </svg>
+                        </div>
+                        <div className="flex w-full items-center justify-between text-left">
+                          <div className="flex flex-col">
+                            <div className="text-xl font-bold">
+                              <div>
+                                <div>
+                                  <span>Free delivery by Aug 6 - Aug 7</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <button className="bg-blue-100 hover:bg-blue-200 cursor-pointer rounded-lg flex flex-row items-center p-2 motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in">
+                        <div className="mr-2 flex h-10 w-10 shrink-0 items-center justify-center md:h-12 md:w-12">
+                          <svg
+                            aria-hidden="true"
+                            fill="currentColor"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 md:h-6 md:w-6"
+                          >
+                            <path d="M17.53 8.54a.75.75 0 0 0-1.06-1.061L11 12.949l-2.47-2.47a.75.75 0 0 0-1.06 1.06l2.646 2.647a1.25 1.25 0 0 0 1.768 0l5.646-5.647"></path>
+                            <path
+                              fillRule="evenodd"
+                              d="M4.5 2.759a1.25 1.25 0 0 0-1.25 1.25V8.73c0 9.392 7.29 12.1 8.395 12.455a1.147 1.147 0 0 0 .71 0C13.46 20.83 20.75 18.122 20.75 8.73V4.01a1.25 1.25 0 0 0-1.25-1.25h-15m.25 5.97V4.26h14.5v4.47c0 8.106-6.024 10.573-7.25 10.992-1.226-.419-7.25-2.886-7.25-10.992"
+                              clipRule="evenodd"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div className="flex w-full items-center justify-between text-left">
+                          <div className="flex flex-col">
+                            <div className="font-bold text-xl">
+                              <div>Free 30-day returns</div>
+                              <div>1-year warranty</div>
+                            </div>
+                            <div className="caption"></div>
+                          </div>
+                          <div className="ml-2 flex h-10 w-10 items-center">
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              width="24"
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-24 w-full"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                                clipRule="evenodd"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+
+                    <div className='mt-16'>
+                      <div>
+                        <h3 className='body-1 text-xl mt-4'>Comes with</h3>
+                        <div className="mt-3 flex items-center w-fit max-w-full gap-4 body-2 text-primary pt-1 py-1 px-3 pl-1 bg-gray-300 rounded-3xl">
+                          <div className="ml-2 flex w-8 h-8 items-center">
+                              <svg
+                                aria-hidden="true"
+                                fill="currentColor"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                width="24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-24 w-full"
+                              >
+                                <path
+                                  d="m18.008 14.06-2.019 3.172A.5.5 0 0 0 16.411 18H18l-.583 2.622c-.074.334.38.512.552.216l2.092-3.586A.5.5 0 0 0 19.63 16.5H18l.552-2.206c.082-.33-.362-.521-.544-.234"
+                                ></path>
+                                <path
+                                  fillRule="evenodd"
+                                  d="M9 2.75A.75.75 0 0 1 9.75 3.5v1.75h4.5V3.5a.75.75 0 0 1 1.5 0v1.764a2.25 2.25 0 0 1 2 2.236v3a2.25 2.25 0 0 1-2.25 2.25h-2.75v7.75a.75.75 0 0 1-1.5 0v-7.75H8.5a2.25 2.25 0 0 1-2.25-2.25v-3a2.25 2.25 0 0 1 2-2.236V3.5A.75.75 0 0 1 9 2.75m6.5 4a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-.75.75h-7a.75.75 0 0 1-.75-.75v-3A.75.75 0 0 1 8.5 6.75h7"
+                                  clipRule="evenodd"
+                                ></path>
+                              </svg>
+                            </div>
+                            <div className="font-medium text-lg">
+                              Compatible charging cable
+                            </div>
+                        </div>
+                        <div className="mt-2">
+                          <div data-test="affirm-modal" className="inline">
+                              <a
+                                className="px-1"
+                                data-affirm-color="black"
+                                data-amount="28899"
+                                data-learnmore-show="false"
+                                data-page-type="product"
+                                data-test="affirm-link"
+                              ></a>
+                              <button
+                                aria-label="'Learn more about BEST4TECH"
+                                className="inline rounded-sm text-xl font-bold cursor-pointer [text-align:inherit] underline"
+                                type="button"
+                              >
+                              See accessories we don't include
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className=" mb-7 md:mb-8 mt-9 flex flex-col">
+                        <button className="hover:bg-gray-200 cursor-pointer rounded-none p-6 flex flex-row items-center motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in">
+                          <div className="flex w-full items-center justify-between text-left">
+                            <div className="flex flex-col">
+                              <div className="font-bold text-xl ml-3">
+                                <div>Technical Specifications</div>
+                              </div>
+                              <div className="caption"></div>
+                            </div>
+                            <div className="ml-2 flex h-10 w-10 items-center">
+                              <svg
+                                aria-hidden="true"
+                                fill="currentColor"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                width="24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-24 w-full"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                                  clipRule="evenodd"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </button>
+                        <hr className="border-t border-gray-300" />
+                        <button className="hover:bg-gray-200 cursor-pointer rounded-none p-6 flex flex-row items-center motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in">
+                          <div className="flex w-full items-center justify-between text-left">
+                            <div className="flex flex-col">
+                              <div className="font-bold text-xl ml-3">
+                                <div>Perks & benefits included</div>
+                              </div>
+                              <div className="caption"></div>
+                            </div>
+                            <div className="ml-2 flex h-10 w-10 items-center">
+                              <svg
+                                aria-hidden="true"
+                                fill="currentColor"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                width="24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-24 w-full"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                                  clipRule="evenodd"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </button>
+                        <hr className="border-t border-gray-300" />
+                        <button className="hover:bg-gray-200 cursor-pointer rounded-none p-6 flex flex-row items-center motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in">
+                          <div className="flex w-full items-center justify-between text-left">
+                            <div className="flex flex-col">
+                              <div className="font-bold text-xl ml-3">
+                                <div>Frequently asked questions</div>
+                              </div>
+                              <div className="caption"></div>
+                            </div>
+                            <div className="ml-2 flex h-10 w-10 items-center">
+                              <svg
+                                aria-hidden="true"
+                                fill="currentColor"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                width="24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-24 w-full"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
+                                  clipRule="evenodd"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* often bougth section */}
+        <div className="">
+          <div className="max-w-7xl mx-auto p-4 sm:p-8 sm:px-6 lg:px-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">Often bought together</h2>
+            <div className="bg-white border border-gray-200 rounded-lg p-4 sm:py-6">
+              {/* Mobile layout */}
+              <div className="block lg:hidden">
+                <div className="flex flex-col space-y-4">
+                  <div className="flex items-center space-x-4">
+                    <div className="shrink-0">
+                      <Image
+                        fetchPriority="high"
+                        className="rounded-lg w-20 h-20 sm:w-24 sm:h-24 object-cover"
+                        alt="iPhone 13 128GB - Pink - Unlocked"
+                        decoding="async"
+                        height="96"
+                        loading="eager"
+                        sizes="96px"
+                        src="https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg"
+                        width="96"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-medium text-gray-900 text-sm sm:text-base">iPhone 13</h3>
+                      <p className="text-xs sm:text-sm text-gray-600">128 GB - Pink - Unlocked</p>
+                      <div className="flex items-center space-x-2 mt-1">
+                        <span className="text-base sm:text-lg font-bold text-gray-900">£431.00</span>
+                        <span className="text-xs sm:text-sm text-gray-500 line-through">£799.00 new</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-center">
+                    <svg
+                      aria-hidden="true"
+                      fill="currentColor"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-8 w-8 sm:h-12 sm:w-12"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M12.75 6a.75.75 0 0 0-1.5 0v5.25H6a.75.75 0 0 0 0 1.5h5.25V18a.75.75 0 0 0 1.5 0v-5.25H18a.75.75 0 0 0 0-1.5h-5.25V6"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <div className="shrink-0">
+                      <Image
+                        fetchPriority="high"
+                        className="rounded-lg w-20 h-20 sm:w-24 sm:h-24 object-cover"
+                        alt="iPhone 13 128GB - Pink - Unlocked"
+                        decoding="async"
+                        height="96"
+                        loading="eager"
+                        sizes="96px"
+                        src="https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg"
+                        width="96"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-medium text-gray-900 text-sm sm:text-base">Case iPhone 15 Plus and 2 protective screens - TPU -...</h3>
+                      <div className="flex items-center space-x-2 mt-1">
+                        <span className="text-base sm:text-lg font-bold text-gray-900">£23.99</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="text-center pt-4 border-t border-gray-200">
+                    <div className="text-lg font-bold text-xl text-gray-900 mb-4">Total price: £454.99</div>
+                    <button
+                      aria-disabled="false"
+                      className="bg-black text-white rounded-sm relative select-none no-underline motion-safe:ease-in inline-block w-full sm:w-auto px-4 py-3 hover:no-underline motion-safe:transition-colors motion-safe:duration-200 cursor-pointer border-none min-w-[164px] max-w-[256px] hover:bg-gray-800"
+                      data-id="product-page-buy-button-desktop"
+                      data-qa="product-page-buy-button-desktop"
+                      type="button"
+                    >
+                      <span
+                        aria-hidden="false"
+                        className="pointer-events-none flex items-center justify-center"
+                      >
+                        <span className="body-1-bold text-xl truncate">
+                          Add both to cart
+                        </span>
+                      </span>
+                    </button>
+                    <div className="mt-4 text-static-info-hi text-gray-500 text-xs sm:text-sm">
+                      <span>These items might be sold and delivered by different sellers 🚛</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Desktop layout */}
+              <div className="hidden lg:flex flex-row items-center">
+                <div className="flex flex-col w-2/3 grow md:gap-8 lg:flex-row items-stretch justify-center">
+                  <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8 mb-6 lg:mb-0">
+                    <div className='flex w-[200px] flex-col items-center lg:w-[254px]'>
+                      <div className="flex h-full items-center gap-4 md:flex-col md:gap-8 md:px-8 md:py-10">
+                        <div className="shrink-0">
+                          <Image
+                            fetchPriority="high"
+                            className="rounded-lg block w-auto md:!h-auto md:w-full lg:w-[29.125rem] h-auto max-h-full max-w-full leading-none"
+                            alt="iPhone 13 128GB - Pink - Unlocked"
+                            decoding="async"
+                            height="132"
+                            loading="eager"
+                            sizes="(max-width: 768px) 100vw, 466px"
+                            src="https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg"
+                            width="132"
+                          />
+                        </div>
+                        <div>
+                          <h3 className="font-medium text-gray-900">iPhone 13</h3>
+                          <p className="text-sm text-gray-600">128 GB - Pink - Unlocked</p>
+                          <div className="flex items-center space-x-2 mt-1">
+                            <span className="text-lg font-bold text-gray-900">£431.00</span>
+                            <span className="text-sm text-gray-500 line-through">£799.00 new</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mb-16">
+                      <svg
+                        aria-hidden="true"
+                        fill="currentColor"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-24 w-24"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M12.75 6a.75.75 0 0 0-1.5 0v5.25H6a.75.75 0 0 0 0 1.5h5.25V18a.75.75 0 0 0 1.5 0v-5.25H18a.75.75 0 0 0 0-1.5h-5.25V6"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                    </div>
+
+                    <div className='flex w-[200px] flex-col items-center lg:w-[254px]'>
+                      <div className="flex h-full items-center gap-4 md:flex-col md:gap-8 md:px-8 md:py-10">
+                        <div className="shrink-0">
+                          <Image
+                            fetchPriority="high"
+                            className="rounded-lg block w-auto md:!h-auto md:w-full lg:w-[29.125rem] h-auto max-h-full max-w-full leading-none"
+                            alt="iPhone 13 128GB - Pink - Unlocked"
+                            decoding="async"
+                            height="132"
+                            loading="eager"
+                            sizes="(max-width: 768px) 100vw, 466px"
+                            src="https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg"
+                            width="132"
+                          />
+                        </div>
+                        <div>
+                          <h3 className="font-medium text-gray-900">Case iPhone 15 Plus and 2 protective screens - TPU -...</h3>
+                          <div className="flex items-center space-x-2 mt-1">
+                            <span className="text-lg font-bold text-gray-900">£23.99</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-center lg:text-right flex flex-col w-1/3 grow p-6 place-items-center justify-center">
+                    <div className="text-lg font-bold text-xl text-gray-900 mb-4">Total price: £454.99</div>
+                    <button
+                      aria-disabled="false"
+                      className="bg-black text-white rounded-sm relative select-none no-underline motion-safe:ease-in inline-block w-auto px-4 py-3 hover:no-underline motion-safe:transition-colors motion-safe:duration-200 cursor-pointer border-none min-w-[164px] max-w-[256px] grow hover:bg-gray-800"
+                      data-id="product-page-buy-button-desktop"
+                      data-qa="product-page-buy-button-desktop"
+                      type="button"
+                    >
+                      <span
+                        aria-hidden="false"
+                        className="pointer-events-none flex items-center justify-center"
+                      >
+                        <span className="body-1-bold text-xl truncate">
+                          Add both to cart
+                        </span>
+                      </span>
+                    </button>
+                    <div className="mt-4 text-static-info-hi text-gray-500 flex items-center md:max-w-[190px]">
+                      <span>These items might be sold and delivered by different sellers 🚛</span>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* You may also like Section */}
+        <div className="">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8">You may also like</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
+                <div className="flex flex-col items-center justify-center gap-1">
+                  <Image
+                    fetchPriority="high"
+                    className="h-auto max-h-full max-w-full leading-none"
+                    alt="iPhone 13 128GB - Pink - Unlocked"
+                    decoding="async"
+                    height="132"
+                    loading="eager"
+                    sizes="(max-width: 768px) 100vw, 466px"
+                    src="https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg"
+                    width="132"
+                  />
+                </div>
+                <h3 className="font-medium text-gray-900 mb-1">iPhone 14</h3>
+                <p className="text-sm text-gray-600 mb-2">Midnight · 128 GB · Physical SIM + eSIM</p>
+                <div className="flex items-center space-x-1 mb-2">
+                  <RatingStars rating={4.5} />
+                  <span className="text-sm text-gray-600 ml-1">4.5/5 (16490)</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-lg font-bold text-gray-900">£263.00</span>
+                  <span className="text-sm text-gray-500 line-through">£599.00 new</span>
+                </div>
+              </div>
+              
+              <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
+                <div className="flex flex-col items-center justify-center gap-1">
+                  <Image
+                    fetchPriority="high"
+                    className="h-auto max-h-full max-w-full leading-none"
+                    alt="iPhone 13 128GB - Pink - Unlocked"
+                    decoding="async"
+                    height="132"
+                    loading="eager"
+                    sizes="(max-width: 768px) 100vw, 466px"
+                    src="https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg"
+                    width="132"
+                  />
+                </div>
+                <h3 className="font-medium text-gray-900 mb-1">iPhone 14</h3>
+                <p className="text-sm text-gray-600 mb-2">Midnight · 128 GB · Physical SIM + eSIM</p>
+                <div className="flex items-center space-x-1 mb-2">
+                  <RatingStars rating={4.5} />
+                  <span className="text-sm text-gray-600 ml-1">4.5/5 (16490)</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-lg font-bold text-gray-900">£263.00</span>
+                  <span className="text-sm text-gray-500 line-through">£599.00 new</span>
+                </div>
+              </div>
+              <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
+                <div className="flex flex-col items-center justify-center gap-1">
+                  <Image
+                    fetchPriority="high"
+                    className="h-auto max-h-full max-w-full leading-none"
+                    alt="iPhone 13 128GB - Pink - Unlocked"
+                    decoding="async"
+                    height="132"
+                    loading="eager"
+                    sizes="(max-width: 768px) 100vw, 466px"
+                    src="https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg"
+                    width="132"
+                  />
+                </div>
+                <h3 className="font-medium text-gray-900 mb-1">iPhone 14</h3>
+                <p className="text-sm text-gray-600 mb-2">Midnight · 128 GB · Physical SIM + eSIM</p>
+                <div className="flex items-center space-x-1 mb-2">
+                  <RatingStars rating={4.5} />
+                  <span className="text-sm text-gray-600 ml-1">4.5/5 (16490)</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-lg font-bold text-gray-900">£263.00</span>
+                  <span className="text-sm text-gray-500 line-through">£599.00 new</span>
+                </div>
+              </div>
+              <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
+                <div className="flex flex-col items-center justify-center gap-1">
+                  <Image
+                    fetchPriority="high"
+                    className="h-auto max-h-full max-w-full leading-none"
+                    alt="iPhone 13 128GB - Pink - Unlocked"
+                    decoding="async"
+                    height="132"
+                    loading="eager"
+                    sizes="(max-width: 768px) 100vw, 466px"
+                    src="https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg"
+                    width="132"
+                  />
+                </div>
+                <h3 className="font-medium text-gray-900 mb-1">iPhone 14</h3>
+                <p className="text-sm text-gray-600 mb-2">Midnight · 128 GB · Physical SIM + eSIM</p>
+                <div className="flex items-center space-x-1 mb-2">
+                  <RatingStars rating={4.5} />
+                  <span className="text-sm text-gray-600 ml-1">4.5/5 (16490)</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-lg font-bold text-gray-900">£263.00</span>
+                  <span className="text-sm text-gray-500 line-through">£599.00 new</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Pairs well with section */}
+        <div className="py-6">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8">Pairs well with</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer">
+                <div className="flex flex-col items-center justify-center gap-1">
+                  <Image
+                    fetchPriority="high"
+                    className="h-auto max-h-full max-w-full leading-none"
+                    alt="iPhone 13 128GB - Pink - Unlocked"
+                    decoding="async"
+                    height="132"
+                    loading="eager"
+                    sizes="(max-width: 768px) 100vw, 466px"
+                    src="https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg"
+                    width="132"
+                  />
+                </div>
+                <h3 className="font-medium text-gray-900 mb-1">iPhone 14</h3>
+                <p className="text-sm text-gray-600 mb-2">Midnight · 128 GB · Physical SIM + eSIM</p>
+                <div className="flex items-center space-x-1 mb-2">
+                  <RatingStars rating={3.5} />
+                  <span className="text-sm text-gray-600 ml-1">3.5 (12099)</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-lg font-bold text-gray-900">£391.00</span>
+                  <span className="text-sm text-gray-500 line-through">£1,099.00 new</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Reviews */}
+        <div className="py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">iPhone 13 - Unlocked: customer reviews</h2>
+            <div className="flex items-center">
+              <RatingStars rating={4.6} size={24} filledColor="text-black" emptyColor="text-gray-300" />
+              <span className="ml-2 text-2xl text-black font-medium">
+                4.6/5
+              </span>
+              <div className="">
+                <svg
+                  aria-hidden="true"
+                  fill="currentColor"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="ml-2 "
+                >
+                  <path
+                    d="M17.53 8.54a.75.75 0 0 0-1.06-1.061L11 12.949l-2.47-2.47a.75.75 0 0 0-1.06 1.06l2.646 2.647a1.25 1.25 0 0 0 1.768 0l5.646-5.647"
+                  ></path>
+                  <path
+                    fillRule="evenodd"
+                    d="M4.5 2.759a1.25 1.25 0 0 0-1.25 1.25V8.73c0 9.392 7.29 12.1 8.395 12.455a1.147 1.147 0 0 0 .71 0C13.46 20.83 20.75 18.122 20.75 8.73V4.01a1.25 1.25 0 0 0-1.25-1.25h-15m.25 5.97V4.26h14.5v4.47c0 8.106-6.024 10.573-7.25 10.992-1.226-.419-7.25-2.886-7.25-10.992"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <span className="ml-2 text-sm text-black font-medium">
+                (38 verified reviews in the last 24 months.)
+              </span>
+            </div>
+            <hr className="border-t border-gray-300 mt-8" />
+          </div>
+        </div>
+
+
       </div>
     </div>
   );
