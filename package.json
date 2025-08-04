@@ -2,10 +2,13 @@
   "name": "backmarket",
   "private": true,
   "workspaces": [
-    "client/*",
-    "server/*"
+    "client",
+    "server"
   ],
   "scripts": {
+    "dev": "concurrently \"yarn --cwd server start:dev\" \"yarn --cwd client dev\"",
+    "dev:server": "yarn --cwd server start:dev",
+    "dev:client": "yarn --cwd client dev",
     "commit": "commit",
     "commitlint": "commitlint",
     "format": "prettier --write \"client/src/**/*.{ts,tsx,js,jsx,json,md}\" \"server/src/**/*.{ts,tsx,js,jsx,json,md}\"",
@@ -15,6 +18,7 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@commitlint/prompt-cli": "^19.8.1",
+    "concurrently": "^9.2.0",
     "lefthook": "^1.12.2",
     "prettier": "^3.6.2"
   }

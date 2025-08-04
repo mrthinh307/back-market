@@ -2,7 +2,6 @@ import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 import './src/libs/Env';
 
-// Define the base Next.js configuration
 const baseConfig: NextConfig = {
   eslint: {
     dirs: ['.'],
@@ -13,7 +12,28 @@ const baseConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'www.backmarket.*', 
+        hostname: '**.backmarket.co.uk',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.backmarket.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'd2e6ccujb3mkqf.cloudfront.net',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'front-office.statics.backmarket.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'product-page.statics.backmarket.com',
+        pathname: '/**',
       },
     ],
   },
@@ -26,33 +46,8 @@ const baseConfig: NextConfig = {
       },
     ];
   },
-  images: {
-    domains: [
-      'd2e6ccujb3mkqf.cloudfront.net',
-      'product-page.statics.backmarket.com',
-      'front-office.statics.backmarket.com',
-    ],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'front-office.statics.backmarket.com',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'product-page.statics.backmarket.com',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'd2e6ccujb3mkqf.cloudfront.net',
-        pathname: '/**',
-      },
-    ],
-  },
 };
 
-// Initialize the Next-Intl plugin
 const configWithPlugins = createNextIntlPlugin('./src/libs/i18n/I18n.ts')(
   baseConfig,
 );
