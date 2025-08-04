@@ -19,7 +19,28 @@ const baseConfig: NextConfig = {
     ];
   },
   images: {
-    domains: ['d2e6ccujb3mkqf.cloudfront.net'],
+    domains: [
+      'd2e6ccujb3mkqf.cloudfront.net',
+      'product-page.statics.backmarket.com',
+      'front-office.statics.backmarket.com',
+    ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'front-office.statics.backmarket.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'product-page.statics.backmarket.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'd2e6ccujb3mkqf.cloudfront.net',
+        pathname: '/**',
+      },
+    ],
   },
 };
 

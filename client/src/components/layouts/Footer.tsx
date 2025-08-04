@@ -308,15 +308,15 @@ const Footer: React.FC = () => {
               <Image
                 src="/assets/images/B-Logo.svg"
                 alt="B-Corp-Logo"
-                height={200}
-                width={200}
+                height={100}
+                width={100}
               />
             </div>
           </div>
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-12 pt-8 border-t border-gray-200">
+        <div className="mt-3 pt-2 border-t border-gray-200">
           <div className="">
             <div className="flex justify-center text-sl text-gray-900 mb-4 md:mb-4 font-semibold">
               © 2025 Back Market
@@ -328,16 +328,16 @@ const Footer: React.FC = () => {
                 <Image
                   src="/assets/images/GooglePlay.svg"
                   alt="Payment Logo"
-                  height={160}
-                  width={220}
+                  height={120}
+                  width={180}
                 />
               </a>
               <a href="#" className="inline-block ">
                 <Image
                   src="/assets/images/apple-store.svg"
                   alt="Payment Logo"
-                  height={160}
-                  width={200}
+                  height={120}
+                  width={160}
                 />
               </a>
             </div>

@@ -61,7 +61,7 @@ const ProductPage: React.FC = () => {
   ];
 
   return (
-    <div className="flex justify-center pb-5 md:pb-8">
+    <div className="flex justify-center pb-2 md:pb-2">
       <div
         className="max-w-full grow px-3 lg:max-w-[1184px] lg:basis-full lg:px-3"
         data-test="container-wrapper"
@@ -366,7 +366,7 @@ const ProductPage: React.FC = () => {
           <div className="w-full max-w-full grow-0 md:w-2/3 md:basis-2/3 lg:w-1/2 lg:basis-1/2">
             <div className="flex flex-col items-start md:flex-col-reverse">
               <div className="w-full">
-                <div className="mb-64 hidden md:block">
+                <div className="mb-16 hidden md:block">
                   <a
                     className=" bg-green-200 rounded-sm body-2-bold inline-flex items-center self-center p-2 pr-4 isolate mb-4"
                     href="#ecoBlocks"
