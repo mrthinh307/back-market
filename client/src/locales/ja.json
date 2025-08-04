@@ -1,0 +1,60 @@
+{
+  "RootLayout": {
+    "meta_title": "地球に優しい再生テクノロジー | Back Market",
+    "meta_description": "Back Marketでは、再生済みのスマートフォン、ノートパソコン、タブレットなど幅広い製品を取り揃えています。手頃な価格で高品質なテクノロジーを手に入れ、持続可能な未来に貢献しましょう。"
+  },
+  "Header": {
+    "verified_refurbished": "認定整備済製品",
+    "repair_care": "修理と保証",
+    "end_fast_tech": "使い捨て技術に終止符を",
+    "tech_journal": "テックジャーナル",
+    "search_bar_placeholder": "お探しの商品は？",
+    "need_help": "サポートが必要ですか？",
+    "good_deals": "お買い得",
+    "smartphones": "スマートフォン",
+    "laptops": "ノートパソコン",
+    "tablets": "タブレット",
+    "game_consoles": "ゲーム機",
+    "smartwatches": "スマートウォッチ",
+    "audio": "オーディオ",
+    "home_appliances": "家電",
+    "more": "もっと見る"
+  },
+  "AuthFormContainer": {
+    "go_back": "メールアドレスが違いますか？戻る",
+    "privacy_policy": "プライバシーポリシー"
+  },
+  "EmailCredentials": {
+    "meta_title": "ログイン",
+    "meta_description": "使いやすいログインプロセスで、スムーズにアカウントにサインインできます。",
+    "email_form_title": "どなたですか？",
+    "next_button": "次へ",
+    "continue_with_google": "Googleで続行",
+    "continue_with_apple": "Facebookで続行",
+    "or": "または",
+    "email_label": "メールアドレス"
+  },
+  "LoginCredentials": {
+    "glad_to_see_you": "おかえりなさい！また会えて嬉しいです！",
+    "enter_your_password": "情報を取得するにはパスワードを入力してください。",
+    "where_is_your_email": "あなたのメールアドレスはどこですか？=))",
+    "password_label": "パスワード",
+    "forgot_password": "パスワードをお忘れですか？",
+    "sign_in_button": "サインイン"
+  },
+  "SignUpCredentials": {
+    "meta_title": "アカウントを作成",
+    "signup_title": "開けゴマ。アカウントを作成します。",
+    "signup_subtitle": "注文を追跡し、最高のテクノロジーにアクセスしましょう。",
+    "password_label": "パスワード",
+    "password_description": "8文字以上で、英大文字・小文字・数字（0〜9）をそれぞれ1文字以上含めてください。",
+    "first_name_label": "名（ファーストネーム）",
+    "last_name_label": "姓（ラストネーム）",
+    "checkbox_description": "笑えるマーケティングメールを送ってください。笑わなければ、配信停止します。",
+    "terms_of_use_description": "アカウントを作成することで、Back Marketの",
+    "terms_of_use": "利用規約",
+    "create_account": "アカウントを作成する",
+    "privacy_policy_description": "この情報は、アカウントの作成、注文や下取りの管理など、当マーケットプレイスのサービス提供に必要です。あなたの情報は、Back Market（JUNG SAS）によって、サービスの提供、注文と下取りの管理、法的要件の遵守、詐欺防止のために処理されます。あなたには、個人データへのアクセス、訂正、制限、削除、そして該当する場合には商業的勧誘への異議申し立ての権利があります。詳しくは当社の",
+    "privacy_policy": "プライバシーポリシーをご覧ください。"
+  }
+}

@@ -27,12 +27,12 @@ export default function AuthLayout(props: {
     <LoadingPage />
   ) : (
     <>
-      <header className="bg-background border-b border-[#dfe1e7] dark:border-gray-600/30 min-h-16 flex justify-start items-center px-8 py-4">
-        <Link href={`/${locale}`} className="h-[14px] shrink-0">
-          <Image src={logo} alt="logo" className="h-full w-auto dark:invert" />
+      <header className='bg-background border-b border-[#dfe1e7] dark:border-gray-600/30 min-h-16 flex justify-start items-center px-8 py-4'>
+        <Link href={`/${locale}`} className='h-[14px] shrink-0'>
+          <Image src={logo} alt='logo' className='h-full w-auto dark:invert' />
         </Link>
       </header>
-      <main className="my-10">{props.children}</main>
+      <main className='my-10'>{props.children}</main>
     </>
   );
 }

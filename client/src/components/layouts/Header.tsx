@@ -1,36 +1,39 @@
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
+import { VerifiedIcon } from 'lucide-react';
+
 import {
   TopNavigation,
   MainHeader,
   MainNavigation,
   MobileMenu,
 } from './header/index';
-import { VerifiedIcon } from 'lucide-react';
 
 const Header: React.FC = () => {
+  const t = useTranslations('Header');
   const topNavItems = [
-    { label: 'Verified Refurbished', icon: VerifiedIcon },
-    { label: 'Repair & Care', href: '/repair' },
-    { label: 'End fast tech', href: '/sustainability' },
-    { label: 'Tech Journal', href: '/journal' },
+    { label: t('verified_refurbished'), icon: VerifiedIcon },
+    { label: t('repair_care'), href: '/repair' },
+    { label: t('end_fast_tech'), href: '/sustainability' },
+    { label: t('tech_journal'), href: '/journal' },
   ];
 
   const mainNavItems = [
-    { label: 'Good deals', href: '/deals', highlight: true },
-    { label: 'Smartphones', href: '/smartphones' },
-    { label: 'Laptops', href: '/laptops' },
-    { label: 'Tablets', href: '/tablets' },
-    { label: 'Game consoles', href: '/gaming' },
-    { label: 'Smartwatches', href: '/smartwatches' },
-    { label: 'Audio', href: '/audio' },
-    { label: 'Home appliances', href: '/appliances' },
-    { label: 'More', href: '/more' },
+    { label: t('good_deals'), href: '/deals', highlight: true },
+    { label: t('smartphones'), href: '/smartphones' },
+    { label: t('laptops'), href: '/laptops' },
+    { label: t('tablets'), href: '/tablets' },
+    { label: t('game_consoles'), href: '/gaming' },
+    { label: t('smartwatches'), href: '/smartwatches' },
+    { label: t('audio'), href: '/audio' },
+    { label: t('home_appliances'), href: '/appliances' },
+    { label: t('more'), href: '/more' },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white dark:bg-background border-b border-[#dfe1e7] dark:border-gray-600/30">
+    <header className='bg-white dark:bg-background border-b border-[#dfe1e7] dark:border-gray-600/30'>
       {/* Top Navigation */}
       <TopNavigation topNavItems={topNavItems} />
 

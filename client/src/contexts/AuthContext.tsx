@@ -221,7 +221,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     try {
       setIsLoading(true);
-      
+
       const userData = await fetchProfile();
       console.log('User data fetched:', userData);
       return userData;
@@ -233,7 +233,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   return (
     <AuthContext.Provider

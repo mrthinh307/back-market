@@ -39,57 +39,53 @@ function SignUpCredentials({ email: initialEmail }: { email?: string }) {
     <>
       <FormInput
         label={t('password_label')}
-        type="password"
+        type='password'
         value={password}
         onChange={handlePasswordChange}
         error={!!error}
         description={t('password_description')}
         isShowDescription={true}
       />
-      <div className="mb-3">
+      <div className='mb-3'>
         <FormInput
           label={t('first_name_label')}
-          type="text"
+          type='text'
           value={firstName || ''}
           onChange={(e) => setFirstName(e.target.value)}
         />
         <FormInput
           label={t('last_name_label')}
-          type="text"
+          type='text'
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
         />
       </div>
-      <div className="flex items-center gap-3 mb-3">
-        <Checkbox className='size-5'/>
-        <label htmlFor="marketing-checkbox" className="cursor-pointer">
+      <div className='flex items-center gap-3 mb-3'>
+        <Checkbox className='size-5' />
+        <label htmlFor='marketing-checkbox' className='cursor-pointer'>
           {t('checkbox_description')}
         </label>
       </div>
-      <div className="mb-6">
-        <p className="text-sm text-muted">
+      <div className='mb-6'>
+        <p className='text-sm text-muted'>
           {t('terms_of_use_description')}{' '}
-          <strong className="text-primary underline">
+          <strong className='text-primary underline'>
             {t('terms_of_use')}
           </strong>
         </p>
       </div>
       <Button
-        type="submit"
+        type='submit'
         disabled={!validPassword || !initialEmail || !firstName || !lastName}
         className={`${isLoading ? 'cursor-not-allowed' : ''}`}
         onClick={handleSignup}
       >
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          t('create_account')
-        )}
+        {isLoading ? <LoadingSpinner /> : t('create_account')}
       </Button>
-      <div className="mt-6 text-sm text-muted">
+      <div className='mt-6 text-sm text-muted'>
         <p>
           {t('privacy_policy_description')}{' '}
-          <strong className="text-primary underline">
+          <strong className='text-primary underline'>
             {t('privacy_policy')}
           </strong>
         </p>

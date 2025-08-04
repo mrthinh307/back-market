@@ -25,7 +25,7 @@ function LoginCredentials({ email: initialEmail }: { email?: string }) {
     <>
       <FormInput
         label={t('password_label')}
-        type="password"
+        type='password'
         value={password}
         onChange={(handlePasswordChange) =>
           setPassword(handlePasswordChange.target.value)
@@ -33,22 +33,18 @@ function LoginCredentials({ email: initialEmail }: { email?: string }) {
       />
       <Link
         href={Env.NEXT_PUBLIC_DEV_FACEBOOK_URL}
-        target="_blank"
-        className="text-muted font-semibold font-500 underline mb-8"
+        target='_blank'
+        className='text-muted font-semibold font-500 underline mb-8'
       >
         {t('forgot_password')}
       </Link>
       <Button
-        type="submit"
+        type='submit'
         disabled={!password || !initialEmail}
         className={`${isLoading ? 'cursor-not-allowed' : ''}`}
         onClick={handleSubmit}
       >
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          t('sign_in_button')
-        )}
+        {isLoading ? <LoadingSpinner /> : t('sign_in_button')}
       </Button>
     </>
   );

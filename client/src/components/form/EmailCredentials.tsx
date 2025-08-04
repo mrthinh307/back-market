@@ -85,47 +85,43 @@ function EmailCredentials() {
         error={!!error}
         description={error || ''}
         isShowDescription={true}
-        className="mb-6"
+        className='mb-6'
       />
       <Button
-        type="submit"
+        type='submit'
         disabled={!isValid}
         className={`${isLoginLoading ? 'cursor-not-allowed' : ''}`}
         onClick={handleNext}
       >
-        {isLoginLoading ? (
-          <LoadingSpinner />
-        ) : (
-          t('next_button')
-        )}
+        {isLoginLoading ? <LoadingSpinner /> : t('next_button')}
       </Button>
       <div>
-        <div className="my-6">
-          <div className="content-center">
-            <hr className="border-muted border-t grow" />
-            <span className="text-muted mx-4 mb-0.5">or</span>
-            <hr className="border-muted border-t grow" />
+        <div className='my-6'>
+          <div className='content-center'>
+            <hr className='border-muted border-t grow' />
+            <span className='text-muted mx-4 mb-0.5'>or</span>
+            <hr className='border-muted border-t grow' />
           </div>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className='flex flex-col gap-3'>
           <Button
-            variant="outline"
-            type="button"
+            variant='outline'
+            type='button'
             onClick={handleLoginWithGoogle}
             className={`${isGoogleLoading ? 'cursor-not-allowed' : ''}`}
           >
-            <Image src={googleIcon} alt="Google icon" className="size-5" />
+            <Image src={googleIcon} alt='Google icon' className='size-5' />
             {t('continue_with_google')}
           </Button>
           <Button
-            variant="outline"
-            type="button"
+            variant='outline'
+            type='button'
             onClick={handleLoginWithFacebook}
           >
             <Image
               src={facebookIcon}
-              alt="Facebook icon"
-              className="size-5.5 dark:invert"
+              alt='Facebook icon'
+              className='size-5.5 dark:invert'
             />
             {t('continue_with_apple')}
           </Button>

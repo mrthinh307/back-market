@@ -17,6 +17,8 @@ type InputProps = {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
+  inputClassName?: string;
+  labelClassName?: string;
 };
 
 const FormInput = ({
@@ -29,6 +31,8 @@ const FormInput = ({
   value: controlledValue,
   onChange,
   className,
+  inputClassName,
+  labelClassName,
 }: InputProps) => {
   const [internalValue, setInternalValue] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -60,7 +64,7 @@ const FormInput = ({
   };
 
   return (
-    <div className={`relative mb-3 ${className}`}>
+    <div className={`relative mb-3 rounded-sm ${className}`}>
       <Input
         ref={inputRef}
         type={
@@ -68,60 +72,66 @@ const FormInput = ({
         }
         value={value}
         onChange={handleChange}
-        autoComplete="off"
-        placeholder=" "
-        className={`peer rounded-sm border text-primary w-full h-[48px] min-w-0 relative duration-200 transition-all hover:bg-input-hover dark:hover:bg-[#292524] focus:outline-none focus:ring-2 px-3 pt-6 pb-3 !text-base ${
+        autoComplete='off'
+        placeholder=' '
+        className={`peer rounded-sm border text-primary w-full h-[48px] min-w-0 relative duration-200 transition-all hover:bg-input-hover dark:hover:bg-input/60 focus:outline-none focus:ring-2 px-3 pt-6 pb-3 !text-base ${
           error
             ? 'border-destructive focus:border-destructive focus:ring-red-200'
             : 'border-dark'
-        }`}
+        } ${inputClassName}`}
       />
       <label
-        className="absolute left-3 top-3 text-base transition-all duration-200 ease-in-out
+        className={`absolute left-3 top-3 text-base transition-all duration-200 ease-in-out
                    peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-primary
                    peer-focus:top-1 peer-focus:text-xs peer-focus:text-muted
-                   peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-muted pointer-events-none"
+                   peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-muted pointer-events-none ${labelClassName}`}
       >
         {label}
       </label>
-      <div className="rounded-sm absolute right-1 top-1 z-[1] size-10 motion-safe:transition-colors motion-safe:duration-200">
+      <div className='rounded-sm absolute right-1 top-1 z-[10 ] size-10 motion-safe:transition-colors motion-safe:duration-200'>
         {type !== 'password' && value && (
           <button
-            type="button"
-            aria-label="Clear input"
-            title="Clear"
+            type='button'
+            aria-label='Clear input'
+            title='Clear'
             onClick={handleClear}
-            className="input-icon"
+            className='input-icon'
           >
-            <Image src={clearIcon} alt="Clear input" className='text-primary dark:invert' />
+            <Image
+              src={clearIcon}
+              alt='Clear input'
+              className='text-primary dark:invert'
+            />
           </button>
         )}
         {type === 'password' && (
           <button
-            className="input-icon"
+            className='input-icon'
             onClick={handlePasswordToggle}
-            type="button"
+            type='button'
           >
             <Image
               src={showPasswordIcon}
-              alt="Show password"
-              className={`absolute dark:invert ${showPassword ? 'opacity-0' : 'opacity-100'}`} 
+              alt='Show password'
+              className={`absolute dark:invert ${showPassword ? 'opacity-0' : 'opacity-100'}`}
             />
             <Image
               src={hidePasswordIcon}
-              alt="Hide password"
+              alt='Hide password'
               className={`absolute dark:invert ${showPassword ? 'opacity-100' : 'opacity-0'}`}
             />
           </button>
         )}
         {!value && icon && (
-          <div className="input-icon pointer-events-none">
-            <Image src={icon} alt="Input icon" className='dark:invert' />
+          <div className='input-icon pointer-events-none'>
+            <Image src={icon} alt='Input icon' className='dark:invert' />
           </div>
         )}
       </div>
       {isShowDescription && (
-        <p className={`text-sm mt-2 ${error ? 'text-destructive' : 'text-muted'}`}>
+        <p
+          className={`text-sm mt-2 ${error ? 'text-destructive' : 'text-muted'}`}
+        >
           {description}
         </p>
       )}

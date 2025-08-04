@@ -152,23 +152,23 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
+    <Sidebar collapsible='offcanvas' {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
+              className='data-[slot=sidebar-menu-button]:!p-1.5'
             >
-              <a href="#">
+              <a href='#'>
                 <Image
-                  src="/assets/images/dark-logo.png"
+                  src='/assets/images/dark-logo.png'
                   width={22}
                   height={22}
                   className='rounded-full'
-                  alt="backmarket-admin-logo"
+                  alt='backmarket-admin-logo'
                 />
-                <span className="text-base font-semibold">
+                <span className='text-base font-semibold'>
                   Admin's Workspace
                 </span>
               </a>
@@ -179,7 +179,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavSecondary items={data.navSecondary} className='mt-auto' />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />

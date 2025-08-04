@@ -154,7 +154,7 @@ client/
 │   │   └── toast/              # Toast notifications
 │   ├── locales/                 # Translation files
 │   │   ├── en.json
-│   │   └── jp.json
+│   │   └── ja.json
 │   ├── styles/
 │   │   └── global.css          # Global styles
 │   ├── templates/              # Page templates
@@ -197,11 +197,11 @@ Custom fonts located in `public/fonts/`:
 
 ### Supported Languages
 - English (`en`)
-- Japanese (`jp`)
+- Japanese (`ja`)
 
 ### Translation Files
 - `src/locales/en.json`
-- `src/locales/jp.json`
+- `src/locales/ja.json`
 
 ### Usage
 ```typescript

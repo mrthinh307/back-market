@@ -1,11 +1,24 @@
 {
   "RootLayout": {
-    "home_link": "Home",
-    "about_link": "About",
-    "counter_link": "Counter",
-    "portfolio_link": "Portfolio",
-    "sign_in_link": "Log in",
-    "sign_up_link": "Sign up"
+    "meta_title": "Refurbished tech that's better for the planet | Back Market",
+    "meta_description": "Discover a wide range of refurbished smartphones, laptops, tablets, and more at Back Market. Enjoy quality tech at affordable prices while contributing to a sustainable future."
+  },
+  "Header": {
+    "verified_refurbished": "Verified Refurbished",
+    "repair_care": "Repair & Care",
+    "end_fast_tech": "End fast tech",
+    "tech_journal": "Tech Journal",
+    "search_bar_placeholder": "What are you looking for?",
+    "need_help": "Need help?",
+    "good_deals": "Good Deals",
+    "smartphones": "Smartphones",
+    "laptops": "Laptops",
+    "tablets": "Tablets",
+    "game_consoles": "Game Consoles",
+    "smartwatches": "Smartwatches",
+    "audio": "Audio",
+    "home_appliances": "Home Appliances",
+    "more": "More"
   },
   "AuthFormContainer": {
     "go_back": "Not your email? Go Back",
@@ -39,7 +52,7 @@
     "last_name_label": "Last Name",
     "checkbox_description": "Send me hilarious marketing emails. If I don't giggle, I'll unsubscribe.",
     "terms_of_use_description": "By creating an account, you agree to Back Market's",
-    "terms_of_use": "Terms of Use.",  
+    "terms_of_use": "Terms of Use.",
     "create_account": "Create Account",
     "privacy_policy_description": "We need this info to create your account and manage your orders and trade-ins on our marketplace. Your info is processed by Back Market (JUNG SAS) to offer you our services, manage and track your orders and trade-ins, meet legal requirements, and fight and prevent fraud. You have the right to access, rectify, limit, delete your personal data and — where applicable — object to commercial prospecting. Find more info in our",
     "privacy_policy": "Privacy Policy."

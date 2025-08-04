@@ -3,7 +3,6 @@ import nextPlugin from '@next/eslint-plugin-next';
 import jestDom from 'eslint-plugin-jest-dom';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import playwright from 'eslint-plugin-playwright';
-import storybook from 'eslint-plugin-storybook';
 
 export default antfu(
   {
@@ -49,8 +48,6 @@ export default antfu(
     files: ['**/*.spec.ts', '**/*.e2e.ts'],
     ...playwright.configs['flat/recommended'],
   },
-  // --- Storybook Rules ---
-  ...storybook.configs['flat/recommended'],
   // --- Custom Rule Overrides ---
   {
     rules: {
