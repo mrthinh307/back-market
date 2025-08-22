@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AdminModule } from './admin/admin.module';
 import { ProductVariantModule } from './product-variant/product-variant.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ProductVariantModule } from './product-variant/product-variant.module';
     AdminModule,
     UserModule,
     PrismaModule,
+    ProductModule,
     ProductVariantModule
   ],
 })
