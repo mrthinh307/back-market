@@ -4,6 +4,7 @@ import {
   AttributeDto,
   ProductVariantDetailDto,
 } from './dto/product-variant-detail.dto';
+import { generateSku } from 'src/common/utils/string';
 
 @Injectable()
 export class ProductVariantService {
@@ -52,7 +53,7 @@ export class ProductVariantService {
 
     return {
       id: variant.id,
-      sku: variant.sku,
+      sku: generateSku(variant.sku || ''),
       title: variant.title,
       subtitleRaw, // 👈 Array ["512 GB", "Black", "Unlocked"]
       subtitleText, // 👈 String "512 GB - Black - Unlocked"

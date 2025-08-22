@@ -1,8 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
-
 import { ProductVariantService } from './product-variant.service';
 
-@Controller('products')
+@Controller('variants')
 export class ProductVariantController {
   constructor(private productVariantService: ProductVariantService) {}
 

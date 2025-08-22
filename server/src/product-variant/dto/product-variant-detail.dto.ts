@@ -19,17 +19,17 @@ export class ProductVariantDetailDto {
   stock: number;
   price: number;
 
-  product: {
+  product?: {
     id: string;
     name: string;
-    brand: {
-      id: string;
-      name: string;
-    } | null;
     category: {
       id: number;
       name: string;
     };
+    brand: {
+      id: string;
+      name: string;
+    } | null;
   };
 
   attributes: AttributeDto[];
