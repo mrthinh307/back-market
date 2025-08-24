@@ -6,7 +6,6 @@ import {
   IsOptional,
 } from 'class-validator';
 
-// DTO cho việc login - password là optional để support 2 phases
 export class LoginDto {
   @IsEmail()
   @IsNotEmpty()
@@ -17,9 +16,8 @@ export class LoginDto {
   password?: string;
 }
 
-// DTO cho việc signup (đầy đủ thông tin)
 export class SignupDto {
-  @IsEmail()
+  @IsEmail()  
   @IsNotEmpty()
   email: string;
 

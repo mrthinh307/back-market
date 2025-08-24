@@ -5,4 +5,4 @@ import { SetMetadata } from '@nestjs/common';
  * @param role - The roles that are required to access the route.
  * @returns A metadata key with the specified roles.
  */
-export const Role = (role: string) => SetMetadata('role', role);
+export const Roles = (roles: string[]) => SetMetadata('roles', roles);
