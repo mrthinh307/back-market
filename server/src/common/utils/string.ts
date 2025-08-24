@@ -1,4 +1,4 @@
-export function generateSku(name: string): string {
+export function generateSlug(name: string): string {
   return name
     .toLowerCase()               // Converts to lowercase
     .trim()                      // Removes whitespace from both ends
