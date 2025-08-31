@@ -11,20 +11,23 @@ export class AttributeDto {
   grade?: AttributeValueDto;
 }
 
+export class SubtitleDto {
+  raw?: string[]; // 👈 Array ["512 GB", "Black", "Unlocked"]
+  text?: string; // 👈 String "512 GB - Black - Unlocked"
+}
+
 export class ProductVariantDetailDto {
   id: string;
   slug: string;
   title: string | null;
 
-  subtitleRaw?: string[]; // 👈 Array ["512 GB", "Black", "Unlocked"]
-  subtitleText?: string; // 👈 String "512 GB - Black - Unlocked"
+  subtitle: SubtitleDto;
 
   available: boolean;
   selected?: boolean;
-  price: {
-    amount: number;
-    currency: 'USD';  
-  };
+
+  price: number;
+  priceWithCurrency: `$${number}`;
 
   product?: {
     id: string;
@@ -47,16 +50,14 @@ export class VariantItemDto {
   slug: string;
   available: boolean;
   selected: boolean;
-  price: {
-    amount: number;
-    currency: 'USD';
-  };
+  price: number;
+  priceWithCurrency: string;
   grade: AttributeValueDto;
-};
+}
 
 export class ProductDto {
   relevantVariants: {
-    attribute:AttributeDto;
+    attribute: AttributeDto;
     items: VariantItemDto[];
   }[];
 }

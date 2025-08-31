@@ -1,13 +1,11 @@
-import { IsNotEmpty, IsString } from 'class-validator';
-import { Transform } from 'class-transformer';
+import { IsNotEmpty, IsUUID } from 'class-validator';
 
 export class GetRelevantVariantsQueryDto {
-  @IsString()
   @IsNotEmpty()
-  @Transform(({ value }) => typeof value === 'string' ? value.trim() : value)
+  @IsUUID()
   productId: string;
 
-  @IsString()
-  @Transform(({ value }) => typeof value === 'string' ? value.trim() : value)
-  defaultVariantId?: string;
+  @IsNotEmpty()
+  @IsUUID()
+  defaultVariantId: string;
 }

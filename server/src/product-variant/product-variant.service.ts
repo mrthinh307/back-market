@@ -1,13 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Prisma } from '@prisma/client';
+
 import {
   AttributeDto,
   ProductVariantDetailDto,
   ProductDto,
   VariantItemDto,
 } from './dto/product-variant.dto';
-import { generateSlug } from 'src/common/utils/string';
-import { Prisma } from '@prisma/client';
+import { generateSlug, getSubtitle } from 'src/common/utils/string';
 
 // Type for Prisma raw query result (before transformation to DTO)
 type PrismaProductVariant = {
@@ -80,20 +81,17 @@ export class ProductVariantService {
       },
     }));
 
-    const subtitleRaw = attributes.map((a) => a.grade?.name || '');
-    const subtitleText = subtitleRaw.join(' - ');
-
     return {
       id: variant.id,
       slug: generateSlug(variant.sku!),
       title: variant.title,
-      subtitleRaw,
-      subtitleText,
-      available: variant.stock > 0,
-      price: {
-        amount: variant.price ? variant.price.toNumber() : 0,
-        currency: 'USD',
+      subtitle: {
+        raw: getSubtitle(attributes).raw,
+        text: getSubtitle(attributes).text,
       },
+      available: variant.stock > 0,
+      price: variant.price.toNumber(),
+      priceWithCurrency: `$${variant.price.toNumber()}`,
       product: {
         id: variant.product.id,
         name: variant.product.name,
@@ -310,10 +308,8 @@ export class ProductVariantService {
               slug: generateSlug(variant.sku),
               available: variant.stock > 0,
               selected: defaultCombination[attributeId] === variantAttr!.valueId,
-              price: {
-                amount: variant.price ? variant.price.toNumber() : 0,
-                currency: 'USD' as const,
-              },
+              price: variant.price.toNumber(),
+              priceWithCurrency: `$${variant.price.toNumber()}`,
               grade: {
                 id: variantAttr!.value.id,
                 name: variantAttr!.value.value,
