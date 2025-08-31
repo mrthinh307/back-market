@@ -193,12 +193,6 @@ model Product {
   @@map("products")
 }
 
-// enum ProductCondition {
-//   REFURBISHED
-//   NEW
-//   USED
-// }
-
 model ProductVariant {
   id        String   @id @default(uuid()) @db.Uuid
   productId String   @map("product_id") @db.Uuid
