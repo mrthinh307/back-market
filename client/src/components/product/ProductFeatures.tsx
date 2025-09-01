@@ -2,9 +2,9 @@ import React from 'react';
 
 const ProductFeatures: React.FC = () => {
   return (
-    <div className='mb-7 md:mb-8 mt-6'>
-      <div className='flex flex-col gap-2'>
-        <div className='bg-blue-100 rounded-lg flex flex-row items-center p-2'>
+    <div className='mb-7 md:mb-8 mt-6 w-full'>
+      <div className='flex flex-col gap-2 w-full'>
+        <div className='bg-blue-100 w-full rounded-lg flex flex-row items-center p-2'>
           <div className='mr-2 flex h-10 w-10 shrink-0 items-center justify-center md:h-12 md:w-12'>
             <svg
               aria-hidden='true'

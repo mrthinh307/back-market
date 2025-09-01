@@ -14,7 +14,7 @@ interface BreadcrumbProps {
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, isMobile = false }) => {
   if (isMobile) {
     return (
-      <nav aria-label='Breadcrumb' className='bg-surface-default-low md:hidden'>
+      <nav aria-label='Breadcrumb' className='bg-muted-secondary md:hidden'>
         <ol
           className='m-0 flex list-none items-center py-8 md:py-12'
           itemType='http://schema.org/BreadcrumbList'
@@ -22,15 +22,15 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, isMobile = false }) => {
           {items.map((item, index) => (
             <li
               key={index}
-              className='text-action-default-low caption-bold flex py-8 md:body-2-bold'
+              className='text-muted-foreground font-duplet font-semibold text-sm flex py-8 md:text-base'
               itemProp='itemListElement'
-              itemType='http://schema.org/ListItem'
+              itemType='http://schema.org/BreadcrumbList'
             >
               {item.href ? (
                 <a
                   href={item.href}
                   rel='noreferrer noopener'
-                  className='text-action-default-low flex items-center whitespace-nowrap text-action-default-hi focus-visible-outline-default-hi rounded-sm font-weight-body-1-link cursor-pointer [text-align:inherit] hover:text-action-default-hi-hover no-underline hover:underline'
+                  className='text-muted-foreground flex items-center whitespace-nowrap focus-visible:outline-ring rounded-sm font-duplet font-semibold text-sm cursor-pointer [text-align:inherit] hover:text-foreground no-underline hover:underline'
                   itemProp='item'
                 >
                   <span className='truncate' itemProp='name'>
@@ -58,7 +58,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, isMobile = false }) => {
   return (
     <nav
       aria-label='Breadcrumb'
-      className='bg-surface-default-low hidden md:block'
+      className='bg-muted-secondary hidden md:block'
     >
       <ol
         className='m-0 flex md:py-8'
@@ -67,26 +67,26 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, isMobile = false }) => {
         {items.map((item, index) => (
           <li
             key={index}
-            className='text-action-default-hi md:flex md:shrink-0 hidden'
+            className='text-foreground md:flex md:shrink-0 hidden'
             itemProp='itemListElement'
-            itemType='http://schema.org/ListItem'
+            itemType='http://schema.org/BreadcrumbList'
           >
             {item.href ? (
               <a
                 href={item.href}
                 rel='noreferrer noopener'
-                className='flex items-center whitespace-nowrap text-action-default-hi focus-visible-outline-default-hi rounded-sm font-weight-body-1-link cursor-pointer [text-align:inherit] hover:text-action-default-hi-hover no-underline hover:underline'
+                className='flex items-center whitespace-nowrap text-foreground focus-visible:outline-ring rounded-sm font-duplet font-semibold text-sm cursor-pointer [text-align:inherit] hover:text-muted-foreground no-underline hover:underline'
                 itemProp='item'
               >
                 <span
-                  className='body-2-bold truncate font-bold'
+                  className='font-duplet font-bold text-sm truncate'
                   itemProp='name'
                 >
                   {item.name}
                 </span>
               </a>
             ) : (
-              <div aria-current='page' className='font-heading' itemProp='name'>
+              <div aria-current='page' className='font-duplet text-foreground' itemProp='name'>
                 {item.name}
               </div>
             )}
