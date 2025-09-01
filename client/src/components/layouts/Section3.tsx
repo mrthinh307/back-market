@@ -68,26 +68,26 @@ const ProductCondition = () => {
                       className="rounded-lg h-auto w-full max-h-[498px] md:min-w-[337px] md:max-w-[498px] md:rounded-[32px]"
                     />
                     <div className="caption bg-gray-100 absolute right-3 top-3 px-4">
-                      <span>Example image</span>
+                      <span className="font-duplet text-sm">Example image</span>
                     </div>
                     <div className="rounded-b-lg absolute inset-x-0 bottom-0 flex flex-col p-4 md:flex-row md:flex-wrap md:items-center md:rounded-b-[32px] md:pb-6 md:pl-8 md:pt-12 bg-gradient-to-t from-black/80 to-transparent">
-                      <p className="text-white text-xl mr-2 mt-2">
+                      <p className="text-white text-xl mr-2 mt-2 font-duplet">
                         <span>Body</span>
                       </p>
                       <div className="flex grow flex-row flex-wrap">
                         <div className="bg-white rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center">
                           <CheckIcon />
-                          <span className="ml-1 text-left">
+                          <span className="ml-1 text-left font-duplet">
                             Light signs of use
                           </span>
                         </div>
                         <div className="bg-white rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center">
                           <CheckIcon />
-                          <span className="ml-1 text-left">Verified parts</span>
+                          <span className="ml-1 text-left font-duplet">Verified parts</span>
                         </div>
                         <div className="bg-white rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center">
                           <StarIcon />
-                          <span className="ml-1 text-left">
+                          <span className="ml-1 text-left font-duplet">
                             Battery for daily use
                           </span>
                         </div>
@@ -105,15 +105,15 @@ const ProductCondition = () => {
           <div className="opacity-100 transition-opacity duration-500 ease-out">
             <fieldset role="radiogroup">
               <legend className="mb-3 flex items-baseline justify-between">
-                <h2 className="text-2xl font-bold">
+                <h2 className="text-2xl font-duplet font-semibold">
                   <span>Select the condition</span>
                 </h2>
-                <button className="text-blue-600 relative bottom-2 block pl-3 md:hidden text-sm font-medium cursor-pointer hover:text-blue-700 underline">
+                <button className="text-blue-600 relative bottom-2 block pl-3 md:hidden text-sm font-duplet font-medium cursor-pointer hover:text-blue-700 underline">
                   Compare
                 </button>
               </legend>
               <div>
-                <p className="text-sm mb-4 block md:hidden -mt-4">
+                <p className="text-sm mb-4 block md:hidden -mt-4 font-duplet">
                   All guaranteed 100% functional
                 </p>
               </div>
@@ -132,7 +132,7 @@ const ProductCondition = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <div className="text-sm flex-1 text-left">
+                <div className="text-sm flex-1 text-left font-duplet">
                   <p className="mb-0">
                     Refurbishers have restored devices to high quality based on
                     a 25-point inspection. Compare conditions
@@ -176,16 +176,16 @@ const ProductCondition = () => {
                         <div className="ml-4 flex grow flex-col">
                           <div className="flex grow flex-nowrap items-start text-left flex-col">
                             <span
-                              className={`mr-2 min-w-[100px] grow ${
+                              className={`mr-2 min-w-[100px] grow font-duplet ${
                                 selectedCondition === condition.id
-                                  ? 'text-black font-bold'
-                                  : 'text-gray-900'
+                                  ? 'text-black font-semibold'
+                                  : 'text-gray-900 font-normal'
                               }`}
                             >
                               {condition.name}
                             </span>
                             <span
-                              className={`text-sm flex shrink-0 items-center gap-1 ${
+                              className={`text-sm flex shrink-0 items-center gap-1 font-duplet ${
                                 condition.isGoodDeal
                                   ? 'text-green-600'
                                   : 'text-gray-600'
@@ -250,7 +250,7 @@ const StorageSelection = () => {
           <div className="opacity-100 transition-opacity duration-500 ease-out">
             <fieldset role="radiogroup">
               <legend className="mb-3 flex items-baseline justify-between">
-                <h2 className="text-2xl font-bold">
+                <h2 className="text-2xl font-duplet font-semibold">
                   <span>Select storage</span>
                 </h2>
               </legend>
@@ -286,15 +286,15 @@ const StorageSelection = () => {
                         <div className="ml-4 flex grow flex-col">
                           <div className="flex grow flex-nowrap items-start text-left flex-row">
                             <span
-                              className={`mr-2 min-w-[100px] grow ${
+                              className={`mr-2 min-w-[100px] grow font-duplet ${
                                 selectedStorage === storage.id
-                                  ? 'text-black font-bold'
-                                  : 'text-gray-900'
+                                  ? 'text-black font-semibold'
+                                  : 'text-gray-900 font-normal'
                               }`}
                             >
                               {storage.name}
                             </span>
-                            <span className="text-sm flex shrink-0 items-center gap-1 text-gray-600 pt-3">
+                            <span className="text-sm flex shrink-0 items-center gap-1 text-gray-600 pt-3 font-duplet">
                               {storage.price}
                             </span>
                           </div>
@@ -447,7 +447,7 @@ const ColorSelection = () => {
           <div className="opacity-100 transition-opacity duration-500 ease-out">
             <fieldset role="radiogroup">
               <legend className="mb-3 flex items-baseline justify-between">
-                <h2 className="text-2xl font-bold">
+                <h2 className="text-2xl font-duplet font-semibold">
                   <span>Select the color</span>
                 </h2>
               </legend>
@@ -477,15 +477,15 @@ const ColorSelection = () => {
                         <div className="ml-4 flex grow flex-col">
                           <div className="flex grow flex-nowrap items-start text-left flex-col">
                             <span
-                              className={`mr-2 min-w-[100px] grow ${
+                              className={`mr-2 min-w-[100px] grow font-duplet ${
                                 selectedColor === color.id
-                                  ? 'text-black font-bold'
-                                  : 'text-gray-900'
+                                  ? 'text-black font-semibold'
+                                  : 'text-gray-900 font-normal'
                               }`}
                             >
                               {color.name}
                             </span>
-                            <span className="text-sm flex shrink-0 items-center gap-1 text-gray-600">
+                            <span className="text-sm flex shrink-0 items-center gap-1 text-gray-600 font-duplet">
                               {color.price}
                             </span>
                           </div>
@@ -525,7 +525,7 @@ const TradeInSection = () => {
         <div className="md:shrink-0 w-1/2 p-8">
           <div className="opacity-100 transition-opacity duration-500 ease-out">
             <div className="flex flex-col">
-              <h2 className="text-2xl font-bold mb-4">
+              <h2 className="text-2xl font-duplet font-semibold mb-4">
                 Get this for even less with Trade-in
               </h2>
 
@@ -536,18 +536,18 @@ const TradeInSection = () => {
                   viewBox="0 0 24 24"
                 >
                   <path 
-                    fill-rule="evenodd" 
+                    fillRule="evenodd" 
                     d="M7 3.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5M4.75 7a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0" 
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                   <path d="M13 6.25a.75.75 0 0 0 0 1.5h5.19l-1.72 1.72a.75.75 0 1 0 1.06 1.06l2.647-2.646a1.25 1.25 0 0 0 0-1.768L17.53 3.47a.75.75 0 1 0-1.06 1.06l1.72 1.72H13m-7.19 10H11a.75.75 0 0 1 0 1.5H5.81l1.72 1.72a.75.75 0 1 1-1.06 1.06l-2.647-2.646a1.25 1.25 0 0 1 0-1.768L6.47 13.47a.75.75 0 1 1 1.06 1.06l-1.72 1.72" />
                   <path 
-                    fill-rule="evenodd" 
+                    fillRule="evenodd" 
                     d="M14.5 13.25a1.25 1.25 0 0 0-1.25 1.25v5a1.25 1.25 0 0 0 1.25 1.25h5a1.25 1.25 0 0 0 1.25-1.25v-5a1.25 1.25 0 0 0-1.25-1.25h-5m.25 6v-4.5h4.5v4.5h-4.5" 
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
-                <div className="text-sm flex-1 text-left">
+                <div className="text-sm flex-1 text-left font-duplet">
                   <p className="mb-0">See how Trade-in works</p>
                 </div>
                 <ArrowRightIcon />
@@ -562,7 +562,7 @@ const TradeInSection = () => {
                           <input
                             type="text"
                             aria-label="Search your device"
-                            className="peer rounded-sm relative w-full min-w-0 pl-3 transition-colors duration-200 bg-gray-100 hover:bg-gray-200 text-gray-900 h-12 border border-solid border-gray-300 focus:border-blue-500 focus:outline-none pr-12"
+                            className="peer rounded-sm relative w-full min-w-0 pl-3 transition-colors duration-200 bg-gray-100 hover:bg-gray-200 text-gray-900 h-12 border border-solid border-gray-300 focus:border-blue-500 focus:outline-none pr-12 font-duplet"
                             placeholder="Search your device"
                           />
                         </div>
@@ -579,7 +579,7 @@ const TradeInSection = () => {
                         </svg>
                       </div>
                     </div>
-                    <span className="text-gray-600 text-sm">
+                    <span className="text-gray-600 text-sm font-duplet">
                       e.g. iPhone 11, MacBook Air, Galaxy S21...
                     </span>
                   </div>
@@ -589,10 +589,10 @@ const TradeInSection = () => {
                     <div className="m-auto flex w-full flex-row items-center pl-2 pr-4">
                       <div className="ml-4 flex grow flex-col">
                         <div className="flex grow flex-nowrap items-start text-left flex-row">
-                          <span className="mr-2 min-w-[100px] grow text-gray-900">
+                          <span className="mr-2 min-w-[100px] grow text-gray-900 font-duplet">
                             No trade-in
                           </span>
-                          <span className="text-sm flex shrink-0 items-center gap-1 text-gray-600 pt-3"></span>
+                          <span className="text-sm flex shrink-0 items-center gap-1 text-gray-600 pt-3 font-duplet"></span>
                         </div>
                       </div>
                     </div>
@@ -610,74 +610,76 @@ const TradeInSection = () => {
 // Verizon offer component
 const VerizonOffer = () => {
   return (
-    <div className="md:flex md:justify-center md:items-center pb-12 pt-14 md:py-0">
-      <div className="max-w-full md:relative md:mr-8 md:min-w-[337px] md:max-w-[498px] md:grow lg:mr-16 hidden md:block">
-        <div className="flex w-full flex-col justify-center opacity-100 transition-opacity duration-500 ease-out">
-          <div className="text-gray-900 text-2xl font-bold flex grow flex-col items-end">
-            <span>Go unlimited for 20% less.</span>
+    <div className="py-8 md:py-9 px-12">
+      <div className="flex flex-col md:flex md:justify-center md:items-center">
+        <div className="max-w-full md:relative md:mr-8 md:min-w-[337px] md:max-w-[498px] md:grow lg:mr-16 hidden md:block">
+          <div className="flex w-full flex-col justify-center opacity-100 transition-opacity duration-500 ease-out">
+            <div className="text-gray-900 text-2xl font-duplet font-semibold flex grow flex-col items-end">
+              <span>Go unlimited for 20% less.</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="md:shrink-0">
-        <div className="opacity-100 transition-opacity duration-500 ease-out">
-          <div className="flex">
-            <div className="shadow-lg rounded-lg flex flex-col gap-4 bg-[#1800FF] px-6 pt-4 md:px-8 md:pt-8">
-              <h2 className="text-white text-2xl font-bold md:hidden">
-                Go unlimited for 20% less.
-              </h2>
-              <div className="text-white">
-                <span className="font-bold">
-                  This phone comes with an offer for unlimited premium 5G data
-                  on Verizon's network for $20/month for 2 years. That's a total
-                  savings of $120 with no strings attached.
-                </span>
-                <p className="text-xs">Terms apply</p>
-              </div>
-              <div>
-                <button className="rounded-sm relative max-w-full select-none no-underline inline-flex h-8 items-center justify-center px-3 transition duration-300 cursor-pointer bg-white text-black border-none hover:bg-gray-100">
-                  <span className="flex items-center">
-                    <span className="flex items-center space-x-2">
-                      <span className="text-sm font-bold truncate">
-                        See plan details
+        <div className="md:shrink-0 w-full md:w-auto">
+          <div className="opacity-100 transition-opacity duration-500 ease-out">
+            <div className="flex justify-center md:justify-start">
+              <div className="shadow-lg rounded-lg flex flex-col gap-4 bg-[#1800FF] px-6 pt-4 md:px-8 md:pt-8 w-full max-w-md md:max-w-none">
+                <h2 className="text-white text-2xl font-duplet font-semibold md:hidden">
+                  Go unlimited for 20% less.
+                </h2>
+                <div className="text-white font-duplet">
+                  <span className="font-semibold text-sm md:text-base leading-relaxed">
+                    This phone comes with an offer for unlimited premium 5G data
+                    on Verizon's network for $20/month for 2 years. That's a total
+                    savings of $120 with no strings attached.
+                  </span>
+                  <p className="text-xs font-normal mt-2">Terms apply</p>
+                </div>
+                <div>
+                  <button className="rounded-sm relative w-full md:w-auto select-none no-underline inline-flex h-10 md:h-8 items-center justify-center px-4 md:px-3 transition duration-300 cursor-pointer bg-white text-black border-none hover:bg-gray-100 font-duplet font-medium">
+                    <span className="flex items-center">
+                      <span className="flex items-center space-x-2">
+                        <span className="text-sm font-semibold truncate">
+                          See plan details
+                        </span>
                       </span>
                     </span>
-                  </span>
-                </button>
+                  </button>
+                </div>
+                <footer>
+                  <div className="flex items-center justify-end gap-5 md:hidden">
+                    <Image
+                      src="/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/visible-by-verizon/character-cropped.png"
+                      alt=""
+                      width={100}
+                      height={95}
+                      className="h-auto max-h-full max-w-full"
+                    />
+                    <Image
+                      src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/visible-by-verizon/logo-two-lines.svg"
+                      alt="Visible partnered with Back Market"
+                      width={129}
+                      height={58}
+                      className="md:hidden h-auto max-h-full max-w-full"
+                    />
+                  </div>
+                  <div className="hidden items-center justify-between md:flex">
+                    <Image
+                      src="/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/visible-by-verizon/character.png"
+                      alt=""
+                      width={98}
+                      height={94}
+                      className="h-auto max-h-full max-w-full"
+                    />
+                    <Image
+                      src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/visible-by-verizon/logo-with-backmarket.svg"
+                      alt="Visible partnered with Back Market"
+                      width={200}
+                      height={42}
+                      className="h-auto max-h-full max-w-full"
+                    />
+                  </div>
+                </footer>
               </div>
-              <footer>
-                <div className="flex items-center justify-end gap-5 md:hidden">
-                  <Image
-                    src="/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/visible-by-verizon/character-cropped.png"
-                    alt=""
-                    width={100}
-                    height={95}
-                    className="h-auto max-h-full max-w-full"
-                  />
-                  <Image
-                    src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/visible-by-verizon/logo-two-lines.svg"
-                    alt="Visible partnered with Back Market"
-                    width={129}
-                    height={58}
-                    className="md:hidden h-auto max-h-full max-w-full"
-                  />
-                </div>
-                <div className="hidden items-center justify-between md:flex">
-                  <Image
-                    src="/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/visible-by-verizon/character.png"
-                    alt=""
-                    width={98}
-                    height={94}
-                    className="h-auto max-h-full max-w-full"
-                  />
-                  <Image
-                    src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/visible-by-verizon/logo-with-backmarket.svg"
-                    alt="Visible partnered with Back Market"
-                    width={200}
-                    height={42}
-                    className="h-auto max-h-full max-w-full"
-                  />
-                </div>
-              </footer>
             </div>
           </div>
         </div>
