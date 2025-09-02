@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import ProductSelection from '@/components/product/ProductSelection';
+import ColorSelection from '@/components/product/ColorSelection';
+import { SelectionOption } from '@/types/product-selection.type';
 
 // Icons components
 const CheckIcon = () => (
@@ -29,191 +32,88 @@ const ArrowRightIcon = () => (
   </svg>
 );
 
-const ArrowLeftIcon = () => (
-  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-    <path
-      fillRule="evenodd"
-      d="m10.957 12 3.47-3.47a.75.75 0 1 0-1.06-1.06L9.72 11.116a1.25 1.25 0 0 0 0 1.768l3.646 3.646a.75.75 0 0 0 1.06-1.06L10.958 12"
-      clipRule="evenodd"
-    />
-  </svg>
-);
-
 // Product condition component
 const ProductCondition = () => {
   const [selectedCondition, setSelectedCondition] = useState('good');
 
-  const conditions = [
+  const conditions: SelectionOption[] = [
     { id: 'fair', name: 'Fair', price: '$349.00' },
     { id: 'good', name: 'Good', price: '$308.99', isGoodDeal: true },
     { id: 'excellent', name: 'Excellent', price: '$341.00' },
     { id: 'premium', name: 'Premium', price: '$439.56' },
   ];
 
-  return (
-    <div className="py-2 md:py-6 px-12">
-      <div className="md:flex md:justify-center md:items-center">
-        {/* Left side - Product image */}
-        <div className="max-w-full md:relative md:mr-4 md:min-w-[337px] md:max-w-[498px] md:grow lg:mr-8 hidden md:block">
-          <div className="flex w-full flex-col justify-center opacity-100 transition-opacity duration-500 ease-out">
-            <div className="relative mx-auto mb-4 max-w-[498px] md:mb-0 md:block md:w-full md:min-w-[337px]">
-              <div className="relative -mb-4 flex min-h-72 flex-col flex-wrap overflow-hidden w-full pb-4">
-                <div className="relative flex w-full grow justify-center">
-                  <div className="rounded-lg relative flex w-full md:rounded-[32px]">
-                    <Image
-                      src="https://product-page.statics.backmarket.com/images/pickers/models/iphone_13_grade_11_body.png"
-                      alt="iPhone 13 Body"
-                      width={498}
-                      height={498}
-                      className="rounded-lg h-auto w-full max-h-[498px] md:min-w-[337px] md:max-w-[498px] md:rounded-[32px]"
-                    />
-                    <div className="caption bg-gray-100 absolute right-3 top-3 px-4">
-                      <span className="font-duplet text-sm">Example image</span>
-                    </div>
-                    <div className="rounded-b-lg absolute inset-x-0 bottom-0 flex flex-col p-4 md:flex-row md:flex-wrap md:items-center md:rounded-b-[32px] md:pb-6 md:pl-8 md:pt-12 bg-gradient-to-t from-black/80 to-transparent">
-                      <p className="text-white text-xl mr-2 mt-2 font-duplet">
-                        <span>Body</span>
-                      </p>
-                      <div className="flex grow flex-row flex-wrap">
-                        <div className="bg-white rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center">
-                          <CheckIcon />
-                          <span className="ml-1 text-left font-duplet">
-                            Light signs of use
-                          </span>
-                        </div>
-                        <div className="bg-white rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center">
-                          <CheckIcon />
-                          <span className="ml-1 text-left font-duplet">Verified parts</span>
-                        </div>
-                        <div className="bg-white rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center">
-                          <StarIcon />
-                          <span className="ml-1 text-left font-duplet">
-                            Battery for daily use
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+  const infoButtonIcon = (
+    <svg
+      className="h-8 w-8 m-1 ml-0"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      width={32}
+    >
+      <path
+        fillRule="evenodd"
+        d="M3.69 3h16.62a1.58 1.58 0 0 1 1.581 1.577v14.846A1.58 1.58 0 0 1 20.31 21H3.69a1.579 1.579 0 0 1-1.581-1.577V4.577A1.579 1.579 0 0 1 3.69 3m5.933 14.453h3.262a.1.1 0 0 0 .07-.17l-5.167-5.167a.166.166 0 0 1 0-.233l5.167-5.168a.1.1 0 0 0-.07-.17H9.623a.39.39 0 0 0-.277.116l-5.222 5.222a.166.166 0 0 0 0 .233l5.222 5.222a.39.39 0 0 0 .277.115m10.173-.17-5.168-5.167a.166.166 0 0 1 0-.234l5.168-5.168a.1.1 0 0 0-.071-.17h-3.262a.39.39 0 0 0-.277.116l-5.222 5.222a.166.166 0 0 0 0 .233l5.222 5.223a.39.39 0 0 0 .277.115h3.262a.1.1 0 0 0 .07-.17"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+
+  const leftContent = (
+    <div className="relative mx-auto mb-4 max-w-[498px] md:mb-0 md:block md:w-full md:min-w-[337px]">
+      <div className="relative -mb-4 flex min-h-72 flex-col flex-wrap overflow-hidden w-full pb-4">
+        <div className="relative flex w-full grow justify-center">
+          <div className="rounded-lg relative flex w-full md:rounded-[32px]">
+            <Image
+              src="https://product-page.statics.backmarket.com/images/pickers/models/iphone_13_grade_11_body.png"
+              alt="iPhone 13 Body"
+              width={498}
+              height={498}
+              className="rounded-lg h-auto w-full max-h-[498px] md:min-w-[337px] md:max-w-[498px] md:rounded-[32px]"
+            />
+            <div className="caption bg-gray-100 absolute right-3 top-3 px-4">
+              <span className="font-duplet text-sm">Example image</span>
+            </div>
+            <div className="rounded-b-lg absolute inset-x-0 bottom-0 flex flex-col p-4 md:flex-row md:flex-wrap md:items-center md:rounded-b-[32px] md:pb-6 md:pl-8 md:pt-12 bg-gradient-to-t from-black/80 to-transparent">
+              <p className="text-white text-xl mr-2 mt-2 font-duplet">
+                <span>Body</span>
+              </p>
+              <div className="flex grow flex-row flex-wrap">
+                <div className="bg-white rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center">
+                  <CheckIcon />
+                  <span className="ml-1 text-left font-duplet">
+                    Light signs of use
+                  </span>
+                </div>
+                <div className="bg-white rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center">
+                  <CheckIcon />
+                  <span className="ml-1 text-left font-duplet">Verified parts</span>
+                </div>
+                <div className="bg-white rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center">
+                  <StarIcon />
+                  <span className="ml-1 text-left font-duplet">
+                    Battery for daily use
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Right side - Condition selection */}
-        <div className="w-full md:w-1/2 md:shrink-0 p-8">
-          <div className="opacity-100 transition-opacity duration-500 ease-out">
-            <fieldset role="radiogroup">
-              <legend className="mb-3 flex items-baseline justify-between">
-                <h2 className="text-2xl font-duplet font-semibold">
-                  <span>Select the condition</span>
-                </h2>
-                <button className="text-blue-600 relative bottom-2 block pl-3 md:hidden text-sm font-duplet font-medium cursor-pointer hover:text-blue-700 underline">
-                  Compare
-                </button>
-              </legend>
-              <div>
-                <p className="text-sm mb-4 block md:hidden -mt-4 font-duplet">
-                  All guaranteed 100% functional
-                </p>
-              </div>
-
-              {/* Info button */}
-              <button className="shadow-md rounded-lg relative no-underline transition duration-200 ease-in bg-blue-50 focus:outline-none cursor-pointer hover:bg-blue-100 hover:shadow-lg mb-6 flex min-h-[72px] w-full flex-row items-center gap-3 px-4 py-3 md:flex">
-                <svg
-                  className="h-8 w-8 m-1 ml-0"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  width={32}
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M3.69 3h16.62a1.58 1.58 0 0 1 1.581 1.577v14.846A1.58 1.58 0 0 1 20.31 21H3.69a1.579 1.579 0 0 1-1.581-1.577V4.577A1.579 1.579 0 0 1 3.69 3m5.933 14.453h3.262a.1.1 0 0 0 .07-.17l-5.167-5.167a.166.166 0 0 1 0-.233l5.167-5.168a.1.1 0 0 0-.07-.17H9.623a.39.39 0 0 0-.277.116l-5.222 5.222a.166.166 0 0 0 0 .233l5.222 5.222a.39.39 0 0 0 .277.115m10.173-.17-5.168-5.167a.166.166 0 0 1 0-.234l5.168-5.168a.1.1 0 0 0-.071-.17h-3.262a.39.39 0 0 0-.277.116l-5.222 5.222a.166.166 0 0 0 0 .233l5.222 5.223a.39.39 0 0 0 .277.115h3.262a.1.1 0 0 0 .07-.17"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <div className="text-sm flex-1 text-left font-duplet">
-                  <p className="mb-0">
-                    Refurbishers have restored devices to high quality based on
-                    a 25-point inspection. Compare conditions
-                  </p>
-                </div>
-                <ArrowRightIcon />
-              </button>
-
-              {/* Condition options */}
-              <ul className="list-none grid grid-cols-2 gap-x-3 gap-y-3 ">
-                {conditions.map((condition) => (
-                  <li key={condition.id}>
-                    <button
-                      aria-checked={selectedCondition === condition.id}
-                      aria-disabled="false"
-                      className={`focus:outline-none rounded-sm relative flex size-full flex-col border py-3 no-underline ${
-                        selectedCondition === condition.id
-                          ? 'bg-pink-50 border-black hover:bg-pink-100'
-                          : 'bg-white border-black hover:bg-gray-200'
-                      }`}
-                      role="radio"
-                      type="button"
-                      onClick={() => setSelectedCondition(condition.id)}
-                    >
-                      <div className="m-auto flex w-full flex-row items-center pl-2 pr-4">
-                        <div className="shrink-0">
-                          <div className="flex size-6 items-center justify-center">
-                            <div
-                              className={`rounded-full border ${
-                                selectedCondition === condition.id
-                                  ? 'bg-black border-black'
-                                  : 'bg-transparent border-black'
-                              }`}
-                              style={{
-                                width: condition.id === 'premium' ? '16px' : '12px',
-                                height: condition.id === 'premium' ? '16px' : '12px',
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="ml-4 flex grow flex-col">
-                          <div className="flex grow flex-nowrap items-start text-left flex-col">
-                            <span
-                              className={`mr-2 min-w-[100px] grow font-duplet ${
-                                selectedCondition === condition.id
-                                  ? 'text-black font-semibold'
-                                  : 'text-gray-900 font-normal'
-                              }`}
-                            >
-                              {condition.name}
-                            </span>
-                            <span
-                              className={`text-sm flex shrink-0 items-center gap-1 font-duplet ${
-                                condition.isGoodDeal
-                                  ? 'text-green-600'
-                                  : 'text-gray-600'
-                              }`}
-                            >
-                              {condition.isGoodDeal && (
-                                <svg
-                                  className="h-6 w-6"
-                                  fill="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path d="M6.166 5.106a.75.75 0 1 0-1.06 1.06l11.447 11.448h-5.26a.75.75 0 1 0 0 1.5h6.57a1.25 1.25 0 0 0 1.25-1.25v-6.571a.75.75 0 0 0-1.5 0v5.26L6.167 5.106" />
-                                </svg>
-                              )}
-                              {condition.price}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </fieldset>
-          </div>
-        </div>
       </div>
     </div>
+  );
+
+  return (
+    <ProductSelection
+      title="Select the condition"
+      options={conditions}
+      selectedOption={selectedCondition}
+      onSelectionChange={setSelectedCondition}
+      leftContent={leftContent}
+      showInfoButton={true}
+      infoButtonText="Refurbishers have restored devices to high quality based on a 25-point inspection. Compare conditions"
+      infoButtonIcon={infoButtonIcon}
+      gridColumns={2}
+    />
   );
 };
 
@@ -221,103 +121,34 @@ const ProductCondition = () => {
 const StorageSelection = () => {
   const [selectedStorage, setSelectedStorage] = useState('128');
 
-  const storageOptions = [
+  const storageOptions: SelectionOption[] = [
     { id: '128', name: '128 GB', price: '$308.99' },
     { id: '256', name: '256 GB', price: '$378.99' },
     { id: '512', name: '512 GB', price: '$430.92' },
   ];
 
   return (
-    <div className="py-2 md:py-6 px-12">
-      <div className="md:flex md:justify-center md:items-center">
-        {/* Left side - Storage image */}
-        <div className="max-w-full md:relative md:mr-8 md:min-w-[337px] md:max-w-[498px] md:grow lg:mr-16 hidden md:block">
-          <div className="flex w-full flex-col justify-center opacity-100 transition-opacity duration-500 ease-out">
-            <div className="rounded-lg relative md:rounded-[32px]">
-              <Image
-                src="https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/product/funnel/desktop/smartphone/step-storage.jpg"
-                alt="Storage selection"
-                width={498}
-                height={498}
-                className="rounded-lg block max-w-[498px] max-h-[498px] md:min-w-[337px] md:rounded-[32px]"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Right side - Storage selection */}
-        <div className="md:shrink-0 w-full md:w-1/2 p-8">
-          <div className="opacity-100 transition-opacity duration-500 ease-out">
-            <fieldset role="radiogroup">
-              <legend className="mb-3 flex items-baseline justify-between">
-                <h2 className="text-2xl font-duplet font-semibold">
-                  <span>Select storage</span>
-                </h2>
-              </legend>
-
-              <ul className="list-none grid gap-y-3">
-                {storageOptions.map((storage) => (
-                  <li key={storage.id}>
-                    <button
-                      aria-checked={selectedStorage === storage.id}
-                      aria-disabled="false"
-                      className={`focus:outline-none rounded-sm relative flex size-full flex-col border py-2 no-underline ${
-                        selectedStorage === storage.id
-                          ? 'bg-pink-50 border-black hover:bg-pink-100'
-                          : 'bg-white border-black hover:bg-gray-200'
-                      }`}
-                      role="radio"
-                      type="button"
-                      onClick={() => setSelectedStorage(storage.id)}
-                    >
-                      <div className="m-auto flex w-full flex-row items-center pl-2 pr-4">
-                        <div className="shrink-0">
-                          <div className="flex size-6 items-center justify-center">
-                            <div
-                              className={`rounded-full border ${
-                                selectedStorage === storage.id
-                                  ? 'bg-black border-black'
-                                  : 'bg-transparent border-black'
-                              }`}
-                              style={{ width: '12px', height: '12px' }}
-                            />
-                          </div>
-                        </div>
-                        <div className="ml-4 flex grow flex-col">
-                          <div className="flex grow flex-nowrap items-start text-left flex-row">
-                            <span
-                              className={`mr-2 min-w-[100px] grow font-duplet ${
-                                selectedStorage === storage.id
-                                  ? 'text-black font-semibold'
-                                  : 'text-gray-900 font-normal'
-                              }`}
-                            >
-                              {storage.name}
-                            </span>
-                            <span className="text-sm flex shrink-0 items-center gap-1 text-gray-600 pt-3 font-duplet">
-                              {storage.price}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </fieldset>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ProductSelection
+      title="Select storage"
+      options={storageOptions}
+      selectedOption={selectedStorage}
+      onSelectionChange={setSelectedStorage}
+      leftImage={{
+        src: "https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/product/funnel/desktop/smartphone/step-storage.jpg",
+        alt: "Storage selection",
+        width: 498,
+        height: 498
+      }}
+      gridColumns={1}
+    />
   );
 };
 
 // Color selection component
-const ColorSelection = () => {
+const ColorSelectionComponent = () => {
   const [selectedColor, setSelectedColor] = useState('pink');
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const colors = [
+  const colors: SelectionOption[] = [
     {
       id: 'midnight',
       name: 'Midnight',
@@ -348,158 +179,13 @@ const ColorSelection = () => {
   ];
 
   return (
-    <div className="py-8 md:py-9 px-12">
-      <div className="md:flex md:justify-center md:items-center">
-        {/* Left side - Product gallery */}
-        <div className="max-w-full md:relative md:mr-8 md:min-w-[337px] md:max-w-[498px] md:grow lg:mr-16 hidden md:block">
-          <div className="flex w-full flex-col justify-center opacity-100 transition-opacity duration-500 ease-out">
-            <div className="mb-4 w-full">
-              <div className="flex justify-center">
-                <div className="relative -mb-4 flex min-h-72 flex-col flex-wrap overflow-hidden mt-3 md:mt-8 md:grow">
-                  <div className="relative flex w-full grow justify-center">
-                    <div className="relative">
-                      <Image
-                        src="https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg"
-                        alt="iPhone 13 128GB - Pink - Unlocked"
-                        width={976}
-                        height={976}
-                        className="rounded-lg block !h-[66.7vw] max-h-full w-auto md:!h-auto md:w-full lg:w-[29.125rem]"
-                        priority={currentImageIndex === 0}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Image navigation */}
-                  <div className="relative isolate mx-auto flex w-full justify-center pt-3 h-15">
-                    <div className="flex items-center px-2 py-1">
-                      <button
-                        className="rounded-full flex shrink-0 cursor-pointer appearance-none items-center justify-center border-0 no-underline disabled:cursor-not-allowed transition duration-300 ease-in size-8 bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-400"
-                        type="button"
-                        onClick={() =>
-                          setCurrentImageIndex(
-                            Math.max(0, currentImageIndex - 1),
-                          )
-                        }
-                        disabled={currentImageIndex === 0}
-                      >
-                        <ArrowLeftIcon />
-                      </button>
-                    </div>
-                    <div>
-                      <ul className="flex list-none flex-row gap-2 overflow-hidden py-1 justify-center">
-                        {productImages.map((_, index) => (
-                          <li key={index} className="flex">
-                            <button
-                              aria-current={currentImageIndex === index}
-                              aria-label={`Controller ${index + 1}`}
-                              className="flex focus:outline-none rounded-sm size-10"
-                              type="button"
-                              onClick={() => setCurrentImageIndex(index)}
-                            >
-                              <div
-                                className={`appearance-none overflow-hidden no-underline transition-colors rounded-sm flex size-10 justify-center border border-solid ${
-                                  currentImageIndex === index
-                                    ? 'bg-blue-600 border-blue-600'
-                                    : 'bg-gray-200 border-gray-300'
-                                }`}
-                              >
-                                <Image
-                                  src="https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg"
-                                  alt={`Product image ${index + 1}`}
-                                  width={40}
-                                  height={40}
-                                  className="!h-10 object-cover"
-                                />
-                              </div>
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="flex items-center px-2 py-1">
-                      <button
-                        className="rounded-full flex shrink-0 cursor-pointer appearance-none items-center justify-center border-0 no-underline disabled:cursor-not-allowed transition duration-300 ease-in size-8 bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-400"
-                        type="button"
-                        onClick={() =>
-                          setCurrentImageIndex(
-                            Math.min(
-                              productImages.length - 1,
-                              currentImageIndex + 1,
-                            ),
-                          )
-                        }
-                        disabled={
-                          currentImageIndex === productImages.length - 1
-                        }
-                      >
-                        <ArrowRightIcon />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right side - Color selection */}
-        <div className="md:shrink-0 w-1/2 p-8">
-          <div className="opacity-100 transition-opacity duration-500 ease-out">
-            <fieldset role="radiogroup">
-              <legend className="mb-3 flex items-baseline justify-between">
-                <h2 className="text-2xl font-duplet font-semibold">
-                  <span>Select the color</span>
-                </h2>
-              </legend>
-
-              <ul className="list-none grid grid-cols-2 gap-x-3 gap-y-3">
-                {colors.map((color) => (
-                  <li key={color.id}>
-                    <button
-                      aria-checked={selectedColor === color.id}
-                      aria-disabled="false"
-                      className={`focus:outline-none rounded-sm relative flex size-full flex-col border py-3 no-underline ${
-                        selectedColor === color.id
-                          ? 'bg-pink-50 border-black hover:bg-pink-100'
-                          : 'bg-white border-black hover:bg-gray-200'
-                      }`}
-                      role="radio"
-                      type="button"
-                      onClick={() => setSelectedColor(color.id)}
-                    >
-                      <div className="m-auto flex w-full flex-row items-center pl-2 pr-4">
-                        <div className="shrink-0">
-                          <div
-                            className="border border-gray-300 rounded-md m-2 size-4"
-                            style={{ backgroundColor: color.color }}
-                          />
-                        </div>
-                        <div className="ml-4 flex grow flex-col">
-                          <div className="flex grow flex-nowrap items-start text-left flex-col">
-                            <span
-                              className={`mr-2 min-w-[100px] grow font-duplet ${
-                                selectedColor === color.id
-                                  ? 'text-black font-semibold'
-                                  : 'text-gray-900 font-normal'
-                              }`}
-                            >
-                              {color.name}
-                            </span>
-                            <span className="text-sm flex shrink-0 items-center gap-1 text-gray-600 font-duplet">
-                              {color.price}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </fieldset>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ColorSelection
+      title="Select the color"
+      options={colors}
+      selectedOption={selectedColor}
+      onSelectionChange={setSelectedColor}
+      productImages={productImages}
+    />
   );
 };
 
@@ -697,7 +383,7 @@ const Section3: React.FC = () => {
           {/* Main content sections */}
           <ProductCondition />
           <StorageSelection />
-          <ColorSelection />
+          <ColorSelectionComponent />
           <TradeInSection />
           <VerizonOffer />
         </div>
