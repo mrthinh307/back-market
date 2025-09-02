@@ -1,21 +1,27 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Breadcrumb from '../product/Breadcrumb';
-import ProductGallery from '../product/ProductGallery';
 import ProductInfo from '../product/ProductInfo';
 import ProductFeatures from '../product/ProductFeatures';
 import ProductCard from '../product/ProductCard';
 
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+} from '@/components/ui/breadcrumb';
+import GalleryCarousel from '../product/GalleryCarousel';
+
 const ProductPage: React.FC = () => {
-  const [selectedImage, setSelectedImage] = useState(0);
   const [isWishlisted, setIsWishlisted] = useState(false);
 
   const productImages = [
-    '/api/placeholder/400/400',
-    '/api/placeholder/400/400',
-    '/api/placeholder/400/400',
-    '/api/placeholder/400/400',
-    '/api/placeholder/400/400',
+    '/assets/images/Iphone13.avif',
+    '/assets/images/Iphone13.avif',
+    '/assets/images/Iphone13.avif',
+    '/assets/images/Iphone13.avif',
+    '/assets/images/Iphone13.avif',
   ];
 
   const breadcrumbItems = [
@@ -28,7 +34,7 @@ const ProductPage: React.FC = () => {
       name: 'iPhone',
       href: 'https://www.backmarket.com/en-us/l/iphone/e8724fea-197e-4815-85ce-21b8068020cc',
     },
-    { name: 'iPhone 13 128GB - Pink - Unlocked', current: true },
+    { name: 'iPhone 13 128GB - Pink - Unlocked' },
   ];
 
   const relatedProducts = [
@@ -97,24 +103,33 @@ const ProductPage: React.FC = () => {
   };
 
   return (
-    <div className='flex justify-center pb-2 md:pb-2'>
-      <div
-        className='max-w-full grow px-3 lg:max-w-[1184px] lg:basis-full lg:px-3'
-        data-test='container-wrapper'
-      >
-        {/* Breadcrumb Navigation */}
-        <Breadcrumb items={breadcrumbItems} />
-        <Breadcrumb items={breadcrumbItems.slice(1)} isMobile />
+    <div className='flex justify-center pb-[18px] md:pb-12'>
+      <div className='container'>
+        <Breadcrumb className='py-5'>
+          <BreadcrumbList>
+            {breadcrumbItems.map((item, index) => (
+              <BreadcrumbItem key={index}>
+                {item.href ? (
+                  <BreadcrumbLink href={item.href}>{item.name}</BreadcrumbLink>
+                ) : (
+                  <BreadcrumbPage>{item.name}</BreadcrumbPage>
+                )}
+              </BreadcrumbItem>
+            ))}
+          </BreadcrumbList>
+        </Breadcrumb>
 
         {/* Main Product Section */}
-        <div className='flex flex-col flex-wrap items-center md:flex-row md:flex-nowrap'>
-          <ProductGallery
-            images={productImages}
-            selectedImage={selectedImage}
-            onImageSelect={setSelectedImage}
-          />
+        <div className='mt-3 md:mt-8 flex flex-col flex-wrap md:flex-row md:flex-nowrap'>
+          <div className='relative w-full max-w-full grow md:w-1/3 lg:w-1/2'>
+            <GalleryCarousel
+              galleryImages={productImages}
+              className='mt-4 md:mr-14'
+              carouselItemClassName='flex justify-center'
+            />
+          </div>
 
-          <div className='w-full max-w-full grow-0 md:w-2/3 md:basis-2/3 lg:w-1/2 lg:basis-1/2'>
+          <div className='w-full max-w-full grow md:w-2/3 md:basis-2/3 lg:w-1/2 lg:basis-1/2'>
             <div className='flex flex-col items-start md:flex-col-reverse'>
               <ProductInfo
                 title='iPhone 13 128GB - Pink - Unlocked'
@@ -217,7 +232,7 @@ const ProductPage: React.FC = () => {
                   </div>
 
                   <div className='text-center pt-4 border-t border-gray-200'>
-                    <div className='text-lg font-bold text-xl text-gray-900 mb-4'>
+                    <div className='font-bold text-xl text-gray-900 mb-4'>
                       Total price: £454.99
                     </div>
                     <button
@@ -333,7 +348,7 @@ const ProductPage: React.FC = () => {
                   </div>
                 </div>
                 <div className='text-center lg:text-right flex flex-col w-1/3 grow p-6 place-items-center justify-center'>
-                  <div className='text-lg font-bold text-xl text-gray-900 mb-4'>
+                  <div className='font-bold text-xl text-gray-900 mb-4'>
                     Total price: £454.99
                   </div>
                   <button

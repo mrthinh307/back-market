@@ -529,22 +529,22 @@ const TradeInSection = () => {
                 Get this for even less with Trade-in
               </h2>
 
-              <button className="shadow-md rounded-lg relative block no-underline transition duration-200 ease-in bg-blue-50 focus:outline-none cursor-pointer hover:bg-blue-100 hover:shadow-lg mb-6 flex min-h-[72px] w-full flex-row items-center gap-3 px-4 py-3">
+              <button className="shadow-md rounded-lg relative no-underline transition duration-200 ease-in bg-blue-50 focus:outline-none cursor-pointer hover:bg-blue-100 hover:shadow-lg mb-6 flex min-h-[72px] w-full flex-row items-center gap-3 px-4 py-3">
                 <svg
                   className="h-8 w-8 m-1"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path 
-                    fill-rule="evenodd" 
+                    fillRule="evenodd" 
                     d="M7 3.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5M4.75 7a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0" 
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                   <path d="M13 6.25a.75.75 0 0 0 0 1.5h5.19l-1.72 1.72a.75.75 0 1 0 1.06 1.06l2.647-2.646a1.25 1.25 0 0 0 0-1.768L17.53 3.47a.75.75 0 1 0-1.06 1.06l1.72 1.72H13m-7.19 10H11a.75.75 0 0 1 0 1.5H5.81l1.72 1.72a.75.75 0 1 1-1.06 1.06l-2.647-2.646a1.25 1.25 0 0 1 0-1.768L6.47 13.47a.75.75 0 1 1 1.06 1.06l-1.72 1.72" />
                   <path 
-                    fill-rule="evenodd" 
+                    fillRule="evenodd" 
                     d="M14.5 13.25a1.25 1.25 0 0 0-1.25 1.25v5a1.25 1.25 0 0 0 1.25 1.25h5a1.25 1.25 0 0 0 1.25-1.25v-5a1.25 1.25 0 0 0-1.25-1.25h-5m.25 6v-4.5h4.5v4.5h-4.5" 
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
                 <div className="text-sm flex-1 text-left">
