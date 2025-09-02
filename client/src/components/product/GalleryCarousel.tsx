@@ -12,7 +12,6 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 import Fade from 'embla-carousel-fade';
-import { cn } from '@/libs/utils';
 
 function GalleryCarousel({
   galleryImages,
@@ -81,7 +80,7 @@ function GalleryCarousel({
       </CarouselContent>
 
       {/* Thumbnail Navigation */}
-      <div className={cn('flex items-center justify-center', className)}>
+      <div className='flex items-center justify-center pt-3'>
         <CarouselPrevious className='size-8 mx-2 my-1' />
         <CarouselThumbnails
           images={galleryImages}
