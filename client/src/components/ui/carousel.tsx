@@ -8,6 +8,7 @@ import Fade from 'embla-carousel-fade';
 import Autoplay from 'embla-carousel-autoplay';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { EmblaCarouselType } from 'embla-carousel';
+import Image from 'next/image';
 
 import { cn } from '@/libs/utils';
 import { Button } from '@/components/ui/button';
@@ -507,6 +508,7 @@ function CarouselPrevious({
       disabled={!canScrollPrev}
       hidden={!canScrollPrev && !canScrollNext}
       onClick={scrollPrev}
+      className={`${className}`}
       {...props}
     >
       <ArrowLeft />
@@ -531,6 +533,7 @@ function CarouselNext({
       disabled={!canScrollNext}
       hidden={!canScrollNext && !canScrollPrev}
       onClick={scrollNext}
+      className={`${className}`}
       {...props}
     >
       <ArrowRight />
@@ -564,7 +567,8 @@ const DotButton: React.FC<React.ComponentPropsWithRef<'button'>> = (props) => {
   );
 };
 
-function CarouselDots({ className }: React.ComponentProps<'div'>) {
+function 
+CarouselDots({ className }: React.ComponentProps<'div'>) {
   const { api } = useCarousel();
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(api);
 
@@ -642,6 +646,50 @@ function CarouselDotsWithProgress({
   );
 }
 
+// Thumbnail Navigation Component with integrated logic
+function CarouselThumbnails({
+  images,
+  selectedIndex,
+  onThumbnailClick,
+}: {
+  images: string[];
+  selectedIndex: number;
+  onThumbnailClick: (index: number) => void;
+  className?: string;
+}) {
+  return (
+
+      <ul className='flex list-none gap-2 overflow-hidden py-1 px-0.5 justify-center'>
+        {images.map((image: string, index: number) => (
+          <li key={index} className='flex'>
+            <button 
+              className='flex rounded-sm cursor-pointer'
+              onClick={() => onThumbnailClick(index)}
+            >
+              <div 
+                className={cn(
+                  'appearance-none overflow-hidden no-underline transition-colors -inset-y-1 left-0 rounded-sm flex size-10 justify-center border border-solid',
+                  selectedIndex === index 
+                    ? 'border-dark dark:border-chart-2' 
+                    : 'border-[#818388]'
+                )}
+              >
+                <Image
+                  src={image}
+                  alt={`Thumbnail ${index + 1}`}
+                  className='h-[40px] w-auto max-h-full max-w-full leading-none object-cover'
+                  width={0}
+                  height={0}
+                />
+              </div>
+            </button>
+          </li>
+        ))}
+      </ul>
+
+  );
+}
+
 export {
   type CarouselApi,
   Carousel,
@@ -653,6 +701,7 @@ export {
   CarouselNavigation,
   CarouselDots,
   CarouselDotsWithProgress,
+  CarouselThumbnails,
   DotButton,
   useDotButton,
   useAutoplay,
