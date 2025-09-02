@@ -2,7 +2,16 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import ProductSelection from '@/components/product/ProductSelection';
 import ColorSelection from '@/components/product/ColorSelection';
-import { SelectionOption } from '@/types/product-selection.type';
+import ProductFeatures from '@/components/product/ProductFeatures';
+import FeatureIcon from '@/components/product/FeatureIcon';
+import { SelectionOption, FeatureItem } from '@/types/product-selection.type';
+import { 
+  getTradeInFeatures, 
+  getProductConditionOptions, 
+  getStorageOptions, 
+  getColorOptions, 
+  getProductImages 
+} from '../product/temp-data-product';
 
 // Icons components
 const CheckIcon = () => (
@@ -22,26 +31,13 @@ const StarIcon = () => (
   </svg>
 );
 
-const ArrowRightIcon = () => (
-  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-    <path
-      fillRule="evenodd"
-      d="m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12"
-      clipRule="evenodd"
-    />
-  </svg>
-);
+
 
 // Product condition component
 const ProductCondition = () => {
   const [selectedCondition, setSelectedCondition] = useState('good');
 
-  const conditions: SelectionOption[] = [
-    { id: 'fair', name: 'Fair', price: '$349.00' },
-    { id: 'good', name: 'Good', price: '$308.99', isGoodDeal: true },
-    { id: 'excellent', name: 'Excellent', price: '$341.00' },
-    { id: 'premium', name: 'Premium', price: '$439.56' },
-  ];
+  const conditions: SelectionOption[] = getProductConditionOptions();
 
   const infoButtonIcon = (
     <svg
@@ -121,11 +117,7 @@ const ProductCondition = () => {
 const StorageSelection = () => {
   const [selectedStorage, setSelectedStorage] = useState('128');
 
-  const storageOptions: SelectionOption[] = [
-    { id: '128', name: '128 GB', price: '$308.99' },
-    { id: '256', name: '256 GB', price: '$378.99' },
-    { id: '512', name: '512 GB', price: '$430.92' },
-  ];
+  const storageOptions: SelectionOption[] = getStorageOptions();
 
   return (
     <ProductSelection
@@ -148,35 +140,8 @@ const StorageSelection = () => {
 const ColorSelectionComponent = () => {
   const [selectedColor, setSelectedColor] = useState('pink');
 
-  const colors: SelectionOption[] = [
-    {
-      id: 'midnight',
-      name: 'Midnight',
-      price: '$316.00',
-      color: 'rgb(24, 32, 40)',
-    },
-    { id: 'red', name: 'Red', price: '$342.00', color: 'rgb(255, 0, 0)' },
-    { id: 'blue', name: 'Blue', price: '$308.99', color: 'rgb(156, 176, 196)' },
-    {
-      id: 'green',
-      name: 'Green',
-      price: '$342.00',
-      color: 'rgb(217, 239, 213)',
-    },
-    {
-      id: 'starlight',
-      name: 'Starlight',
-      price: '$308.99',
-      color: 'rgb(238, 233, 229)',
-    },
-    { id: 'pink', name: 'Pink', price: '$308.99', color: 'rgb(252, 231, 231)' },
-  ];
-
-  const productImages = [
-    'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
-    'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-2_4afc23ba-0d58-4702-a96b-285ff6754398.jpg',
-    'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-3_ee749f47-ef5e-498c-bce1-fe3d67463bb7.jpg',
-  ];
+  const colors: SelectionOption[] = getColorOptions();
+  const productImages = getProductImages();
 
   return (
     <ColorSelection
@@ -191,6 +156,17 @@ const ColorSelectionComponent = () => {
 
 // Trade-in component
 const TradeInSection = () => {
+  const tradeInFeaturesData = getTradeInFeatures();
+  
+  // Transform data to FeatureItem format
+  const tradeInFeatures: FeatureItem[] = tradeInFeaturesData.map(feature => ({
+    id: feature.id,
+    title: feature.title,
+    description: feature.description,
+    icon: <FeatureIcon iconType={feature.iconType} />,
+    onClick: feature.onClick,
+  }));
+
   return (
     <div className="py-8 md:py-9 px-12">
       <div className="md:flex md:justify-center md:items-center">
@@ -215,29 +191,10 @@ const TradeInSection = () => {
                 Get this for even less with Trade-in
               </h2>
 
-              <button className="shadow-md rounded-lg relative block no-underline transition duration-200 ease-in bg-blue-50 focus:outline-none cursor-pointer hover:bg-blue-100 hover:shadow-lg mb-6 flex min-h-[72px] w-full flex-row items-center gap-3 px-4 py-3">
-                <svg
-                  className="h-8 w-8 m-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path 
-                    fillRule="evenodd" 
-                    d="M7 3.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5M4.75 7a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0" 
-                    clipRule="evenodd"
-                  ></path>
-                  <path d="M13 6.25a.75.75 0 0 0 0 1.5h5.19l-1.72 1.72a.75.75 0 1 0 1.06 1.06l2.647-2.646a1.25 1.25 0 0 0 0-1.768L17.53 3.47a.75.75 0 1 0-1.06 1.06l1.72 1.72H13m-7.19 10H11a.75.75 0 0 1 0 1.5H5.81l1.72 1.72a.75.75 0 1 1-1.06 1.06l-2.647-2.646a1.25 1.25 0 0 1 0-1.768L6.47 13.47a.75.75 0 1 1 1.06 1.06l-1.72 1.72" />
-                  <path 
-                    fillRule="evenodd" 
-                    d="M14.5 13.25a1.25 1.25 0 0 0-1.25 1.25v5a1.25 1.25 0 0 0 1.25 1.25h5a1.25 1.25 0 0 0 1.25-1.25v-5a1.25 1.25 0 0 0-1.25-1.25h-5m.25 6v-4.5h4.5v4.5h-4.5" 
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <div className="text-sm flex-1 text-left font-duplet">
-                  <p className="mb-0">See how Trade-in works</p>
-                </div>
-                <ArrowRightIcon />
-              </button>
+              {/* Trade-in features */}
+              <div className="mb-6">
+                <ProductFeatures features={tradeInFeatures} className="mb-0 mt-0" />
+              </div>
 
               <ul className="list-none">
                 <li className="mb-3">

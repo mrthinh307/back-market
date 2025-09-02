@@ -3,6 +3,9 @@ import Breadcrumb from '../product/Breadcrumb';
 import ProductGallery from '../product/ProductGallery';
 import ProductInfo from '../product/ProductInfo';
 import ProductFeatures from '../product/ProductFeatures';
+import FeatureIcon from '../product/FeatureIcon';
+import { getProductFeatures } from '../product/temp-data-product';
+import { FeatureItem } from '@/types/product-selection.type';
 import ProductBundle from '../product/ProductBundle';
 import ProductRecommendations from '../product/ProductRecommendations';
 import Section2 from './Section_2';
@@ -11,6 +14,18 @@ import Section3 from './Section3';
 const ProductPage: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [isWishlisted, setIsWishlisted] = useState(false);
+
+  // Get features for iPhone 13 (you can make this dynamic based on product ID)
+  const productFeaturesData = getProductFeatures('iphone-13');
+  
+  // Transform data to FeatureItem format
+  const features: FeatureItem[] = productFeaturesData.map(feature => ({
+    id: feature.id,
+    title: feature.title,
+    description: feature.description,
+    icon: <FeatureIcon iconType={feature.iconType} />,
+    onClick: feature.onClick,
+  }));
 
   const productImages = [
     '/api/placeholder/400/400',
@@ -130,7 +145,7 @@ const ProductPage: React.FC = () => {
               />
             </div>
 
-            <ProductFeatures />
+            <ProductFeatures features={features} />
 
           </div>
         </div>
