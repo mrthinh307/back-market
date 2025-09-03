@@ -43,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         />
       </div>
       <h3 className='font-medium text-gray-900 mb-1'>{name}</h3>
-      <p className='text-sm text-gray-600 mb-2'>{description}</p>
+      <p className='font-heading text-sm text-gray-600 mb-2'>{description}</p>
       <div className='flex items-center space-x-1 mb-2'>
         <RatingStars rating={rating} />
         <span className='text-sm text-gray-600 ml-1'>

@@ -86,7 +86,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, isMobile = false }) => {
                 </span>
               </a>
             ) : (
-              <div aria-current='page' className='font-heading' itemProp='name'>
+              <div aria-current='page' className='' itemProp='name'>
                 {item.name}
               </div>
             )}
