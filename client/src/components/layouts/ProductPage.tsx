@@ -1,26 +1,49 @@
 import React, { useState } from 'react';
-import Breadcrumb from '../product/Breadcrumb';
-import ProductGallery from '../product/ProductGallery';
 import ProductInfo from '../product/ProductInfo';
 import ProductFeatures from '../product/ProductFeatures';
-import OftenBoughtTogether from '../product/OftenBoughtTogether';
-import YouMayAlsoLike from '../product/YouMayAlsoLike';
-import PairsWellWith from '../product/PairsWellWith';
+import FeatureIcon from '../product/FeatureIcon';
+import { getProductFeatures } from '../product/temp-data-product';
+import { FeatureItem } from '@/types/product-selection.type';
+import ProductBundle from '../product/ProductBundle';
+import ProductRecommendations from '../product/ProductRecommendations';
+import Section2 from './Section_2';
+import Section3 from './Section3';
+
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import GalleryCarousel from '../product/GalleryCarousel';
 
 const ProductPage: React.FC = () => {
-  const [selectedImage, setSelectedImage] = useState(0);
   const [isWishlisted, setIsWishlisted] = useState(false);
 
+  // Get features for iPhone 13 (you can make this dynamic based on product ID)
+  const productFeaturesData = getProductFeatures('iphone-13');
+
+  // Transform data to FeatureItem format
+  const features: FeatureItem[] = productFeaturesData.map((feature) => ({
+    id: feature.id,
+    title: feature.title,
+    description: feature.description,
+    icon: <FeatureIcon iconType={feature.iconType} />,
+    onClick: feature.onClick,
+  }));
+
   const productImages = [
-    'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
-    'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-2_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
-    'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-3_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
-    'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-4_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
-    'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-5_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
+    '/assets/images/Iphone13.avif',
+    '/assets/images/Iphone13.avif',
+    '/assets/images/Iphone13.avif',
+    '/assets/images/Iphone13.avif',
+    '/assets/images/Iphone13.avif',
   ];
 
   const breadcrumbItems = [
-    { name: 'Home', href: 'https://www.backmarket.com/en-us' },
+    { name: 'Homepage', href: 'https://www.backmarket.com/en-us' },
     {
       name: 'Smartphones',
       href: 'https://www.backmarket.com/en-us/l/smartphones/0744fd27-8605-465d-8691-3b6dffda5969',
@@ -29,7 +52,7 @@ const ProductPage: React.FC = () => {
       name: 'iPhone',
       href: 'https://www.backmarket.com/en-us/l/iphone/e8724fea-197e-4815-85ce-21b8068020cc',
     },
-    { name: 'iPhone 13 128GB - Pink - Unlocked', current: true },
+    { name: 'iPhone 13 128GB - Pink - Unlocked' },
   ];
 
   const relatedProducts = [
@@ -123,25 +146,39 @@ const ProductPage: React.FC = () => {
   };
 
   return (
-    <div className='flex justify-center pb-4 md:pb-8'>
-      <div
-        className='max-w-full grow px-4 lg:max-w-[1184px] lg:basis-full lg:px-6'
-        data-test='container-wrapper'
-      >
-        {/* Breadcrumb Navigation */}
-        <Breadcrumb items={breadcrumbItems} />
-        <Breadcrumb items={breadcrumbItems.slice(1)} isMobile />
+    <div className='flex justify-center pb-[18px] md:pb-12'>
+      <div className='container'>
+        <Breadcrumb className='py-5'>
+          <BreadcrumbList>
+            {breadcrumbItems.map((item, index) => (
+              <React.Fragment key={index}>
+                <BreadcrumbItem>
+                  {item.href ? (
+                    <BreadcrumbLink href={item.href}>
+                      {item.name}
+                    </BreadcrumbLink>
+                  ) : (
+                    <BreadcrumbPage>{item.name}</BreadcrumbPage>
+                  )}
+                </BreadcrumbItem>
+                {index < breadcrumbItems.length - 1 && <BreadcrumbSeparator />}
+              </React.Fragment>
+            ))}
+          </BreadcrumbList>
+        </Breadcrumb>
 
         {/* Main Product Section */}
-        <div className='flex flex-col flex-wrap items-center md:flex-row md:flex-nowrap mb-8 md:mb-12'>
-          <ProductGallery
-            images={productImages}
-            selectedImage={selectedImage}
-            onImageSelect={setSelectedImage}
-          />
+        <div className='mt-3 md:mt-8 flex flex-col flex-wrap md:flex-row md:flex-nowrap'>
+          <div className='relative w-full max-w-full grow md:w-1/3 lg:w-1/2'>
+            <GalleryCarousel
+              galleryImages={productImages}
+              className='mt-4 md:mr-14'
+              carouselItemClassName='flex justify-center'
+            />
+          </div>
 
           <div className='w-full max-w-full grow-0 md:w-2/3 md:basis-2/3 lg:w-1/2 lg:basis-1/2'>
-            <div className='flex flex-col items-start'>
+            <div className='flex flex-col items-start md:flex-col'>
               <ProductInfo
                 title='iPhone 13 128GB - Pink - Unlocked'
                 rating={4.4}
@@ -155,49 +192,29 @@ const ProductPage: React.FC = () => {
                 onTradeInClick={handleTradeInClick}
                 onUnlimitedDataClick={handleUnlimitedDataClick}
               />
-
-              <ProductFeatures />
             </div>
+
+            <ProductFeatures features={features} />
           </div>
         </div>
 
+        <Section2 />
+
+        <Section3 />
+
         {/* Often Bought Together Section */}
-        <div className='mb-8 md:mb-12'>
-          <OftenBoughtTogether
-            mainProduct={{
-              name: 'iPhone 13',
-              description: '128 GB - Pink - Unlocked',
-              image:
-                'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
-              price: 431.0,
-              originalPrice: 799.0,
-            }}
-            accessoryProduct={{
-              name: 'Case iPhone 15 Plus and 2 protective screens - TPU -...',
-              image:
-                'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
-              price: 23.99,
-            }}
-            totalPrice={454.99}
-            onAddToCart={handleAddToCart}
-          />
-        </div>
+        <ProductBundle />
 
-        {/* You may also like Section */}
-        <div className='mb-8 md:mb-12'>
-          <YouMayAlsoLike
-            products={relatedProducts}
-            onProductClick={handleProductClick}
-          />
-        </div>
+        {/* Product Recommendations Sections */}
+        <ProductRecommendations
+          title='You may also like'
+          products={relatedProducts}
+        />
 
-        {/* Pairs well with section */}
-        <div className='mb-8 md:mb-12'>
-          <PairsWellWith
-            products={pairsWellProducts}
-            onProductClick={handleProductClick}
-          />
-        </div>
+        <ProductRecommendations
+          title='Pairs well with'
+          products={pairsWellProducts}
+        />
       </div>
     </div>
   );

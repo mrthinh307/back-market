@@ -1,6 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 import RatingStars from './RatingStars';
+import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
+import PriceBlock from './ProductInfo/PriceBlock';
+import WishlistButton from './ProductInfo/WishlistButton';
 
 interface ProductInfoProps {
   title: string;
@@ -29,11 +32,18 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   onTradeInClick,
   onUnlimitedDataClick,
 }) => {
+  const {
+    scrollContainerRef,
+    handleScroll,
+    handleScrollLeft,
+    isAtStart,
+    isAtEnd,
+  } = useHorizontalScroll();
   return (
     <div className='w-full'>
-      <div className='mb-16 hidden md:block'>
+      <div className='mb-4 hidden md:block'>
         <a
-          className='bg-green-200 rounded-sm body-2-bold inline-flex items-center self-center p-2 pr-4 isolate mb-4'
+          className='bg-green-200 rounded-sm inline-flex items-center self-center p-2 pr-4 isolate mb-4 font-duplet font-semibold text-sm'
           href='#ecoBlocks'
         >
           <Image
@@ -45,181 +55,313 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
           />
           <span className='ml-1 underline'>More sustainable than new</span>
         </a>
-        <h1 className='font-heading text-3xl font-bold'>{title}</h1>
+        <h1 className='text-3xl font-heading font-semibold text-foreground'>
+          {title}
+        </h1>
         <button
           className='flex bg-transparent items-center'
           data-test='product-page-reviews-count'
           type='button'
         >
-          <div className='text-action-default-hi flex items-center'>
+          <div className='mt-3 text-foreground flex items-center'>
             <div
               aria-label={`Rating of ${rating} out of 5 stars`}
-              className='text-action-default-hi flex items-center'
+              className='text-foreground flex items'
               role='img'
             >
               <RatingStars rating={rating} size={16} />
               <span
                 aria-hidden='true'
-                className='ml-2 mt-1 pb-2 md:mt-2 body-2-bold cursor-pointer'
+                className='ml-2 mt-1 pb-2 md:mt-2 font-duplet font-semibold text-sm cursor-pointer'
               >
                 {rating}/5
               </span>
             </div>
-          </div>
-          <div className='body-2-link underline-offset-2 ml-3 underline cursor-pointer'>
-            ({reviewCount.toLocaleString()} reviews)
+            <div className='font-duplet font-semibold text-sm underline-offset-2 ml-3 underline cursor-pointer text-foreground'>
+              ({reviewCount.toLocaleString()} reviews)
+            </div>
           </div>
         </button>
-        <div className='mt-6 flex items-center'>
+        <div className='mt-6 flex items-center mb-4'>
           <div className='grow'>
-            <div>
-              <div className='flex flex-wrap items-baseline gap-x-4'>
-                <span
-                  className='text-2xl font-bold'
-                  data-qa='productpage-product-price'
-                  data-test='productpage-product-price'
-                >
-                  ${price.toFixed(2)}
-                </span>
-                <div className='flex flex-wrap gap-x-4'>
-                  <span className='body-2-bold whitespace-nowrap'>
-                    before trade-in
-                  </span>
-                </div>
-              </div>
-              <div className='flex flex-wrap items-center gap-x-2'>
-                <span className='caption z-[1]'>
-                  <span id='trigger-v-0-5-0-0'>
-                    <button className='text-static-default-low cursor-pointer whitespace-nowrap'>
-                      <span className='text-gray-700 line-through'>
-                        <span className=''>${originalPrice.toFixed(2)}</span>{' '}
-                        new
-                      </span>
-                    </button>
-                  </span>
-                </span>
-                <div className='bg-green-300'>
-                  <span
-                    className='rounded-xs inline-block max-w-full truncate px-1 py-0 font-bold text-sl'
-                    title={`Save $${savings.toFixed(2)}`}
-                  >
-                    Save ${savings.toFixed(2)}
-                  </span>
-                </div>
-              </div>
-            </div>
+            <PriceBlock
+              price={price}
+              originalPrice={originalPrice}
+              savings={savings}
+            />
           </div>
 
-          {/* Additional offers section */}
-          <div className='mt-4 space-y-3'>
-            {/* Affirm Learn more */}
-            <div className='flex items-center'>
-              <div className='flex items-center text-sm text-gray-600'>
-                <span className='mr-2'>affirm</span>
-                <button
-                  className='text-blue-600 underline hover:text-blue-800'
-                  onClick={onAffirmClick}
-                >
-                  Buy now, pay later. Learn more
-                </button>
-              </div>
-            </div>
-
-            {/* Trade-in offer */}
-            <button
-              className='flex items-center text-sm text-gray-600 hover:text-gray-800 transition-colors'
-              onClick={onTradeInClick}
+          <button
+            aria-disabled='false'
+            className='bg-primary text-primary-foreground rounded-sm relative select-none no-underline motion-safe:ease-in inline-block w-auto px-4 py-3 hover:no-underline motion-safe:transition-colors motion-safe:duration-200 cursor-pointer border-none min-w-[164px] max-w-[256px] grow hover:bg-button-hover'
+            data-id='product-page-buy-button-desktop'
+            data-qa='product-page-buy-button-desktop'
+            type='button'
+          >
+            <span
+              aria-hidden='false'
+              className='pointer-events-none flex items-center justify-center'
             >
-              <svg
-                className='w-4 h-4 mr-2'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4'
-                />
-              </svg>
-              Get this for even less with Trade-in
-            </button>
+              <span className='font-duplet font-bold text-base truncate'>
+                Add to cart
+              </span>
+            </span>
+          </button>
 
-            {/* Unlimited data offer */}
-            <button
-              className='flex items-center text-sm text-gray-600 hover:text-gray-800 transition-colors'
-              onClick={onUnlimitedDataClick}
-            >
-              <svg
-                className='w-4 h-4 mr-2'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                />
-              </svg>
-              Save big: $20/month unlimited data
-            </button>
+          <WishlistButton
+            isWishlisted={isWishlisted}
+            onClick={onWishlistToggle}
+          />
+        </div>
+
+        <div
+          className='flex items-center gap-x-4 body-2 text-primary'
+          tabIndex={-1}
+        >
+          <div className='flex flex-wrap items-center gap-4 self-center w-[40px] flex-shrink-0 mr-2'>
+            <Image
+              alt='Afirm'
+              src='/assets/images/GooglePay.png'
+              width={40}
+              height={40}
+              className='bg-green-200'
+            />
           </div>
+          <div className='grow'>
+            Buy now, pay later. <br />
+            <a
+              className='affirm-product-modal font-bold underline'
+              data-qa='affirm-product-modal'
+              data-test='affirm-product-modal'
+              href='#'
+            >
+              Learn more
+            </a>
+          </div>
+        </div>
 
-          {/* Action buttons */}
-          <div className='mt-6 flex items-center'>
+        <div className='mt-6 md:relative'>
+          <div
+            ref={scrollContainerRef}
+            className='flex flex-col gap-3 md:flex-row md:flex-nowrap md:items-center md:overflow-x-auto md:scroll-smooth scrollbar-hide'
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {/* Trade-in Button */}
             <button
-              aria-disabled='false'
-              className='bg-black text-white rounded-sm relative select-none no-underline motion-safe:ease-in inline-block w-auto px-4 py-3 hover:no-underline motion-safe:transition-colors motion-safe:duration-200 cursor-pointer border-none min-w-[164px] max-w-[256px] grow hover:bg-gray-800'
-              data-id='product-page-buy-button-desktop'
-              data-qa='product-page-buy-button-desktop'
+              className='bg-gray-300 text-black rounded-full text-sm flex h-9 w-fit max-w-full shrink-0 items-center px-3 hover:bg-gray-400 transition-colors duration-200 min-w-max'
               type='button'
             >
-              <span
-                aria-hidden='false'
-                className='pointer-events-none flex items-center justify-center'
+              <div className='mr-2 shrink-0'>
+                <svg
+                  aria-hidden='true'
+                  fill='currentColor'
+                  height='24'
+                  viewBox='0 0 24 24'
+                  width='24'
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='text-purple-500'
+                >
+                  <path
+                    fillRule='evenodd'
+                    d='M7 3.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5M4.75 7a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0'
+                    clipRule='evenodd'
+                  />
+                  <path d='M13 6.25a.75.75 0 0 0 0 1.5h5.19l-1.72 1.72a.75.75 0 1 0 1.06 1.06l2.647-2.646a1.25 1.25 0 0 0 0-1.768L17.53 3.47a.75.75 0 1 0-1.06 1.06l1.72 1.72H13m-7.19 10H11a.75.75 0 0 1 0 1.5H5.81l1.72 1.72a.75.75 0 1 1-1.06 1.06l-2.647-2.646a1.25 1.25 0 0 1 0-1.768L6.47 13.47a.75.75 0 1 1 1.06 1.06l-1.72 1.72' />
+                  <path
+                    fillRule='evenodd'
+                    d='M14.5 13.25a1.25 1.25 0 0 0-1.25 1.25v5a1.25 1.25 0 0 0 1.25 1.25h5a1.25 1.25 0 0 0 1.25-1.25v-5a1.25 1.25 0 0 0-1.25-1.25h-5m.25 6v-4.5h4.5v4.5h-4.5'
+                    clipRule='evenodd'
+                  />
+                </svg>
+              </div>
+              <p className='line-clamp-1 overflow-hidden text-ellipsis text-left md:overflow-auto md:text-clip'>
+                Get this for even less with Trade-in
+              </p>
+              <svg
+                aria-hidden='true'
+                fill='currentColor'
+                height='24'
+                viewBox='0 0 24 24'
+                width='24'
+                xmlns='http://www.w3.org/2000/svg'
+                className='shrink-0 ml-2'
               >
-                <span className='body-1-bold truncate'>Add to cart</span>
-              </span>
+                <path
+                  fillRule='evenodd'
+                  d='m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12'
+                  clipRule='evenodd'
+                />
+              </svg>
+            </button>
+
+            {/* Verizon Button */}
+            <button
+              className='bg-gray-300 text-black rounded-full text-sm flex h-9 w-fit max-w-full shrink-0 items-center px-3 hover:bg-gray-400 transition-colors duration-200 min-w-max'
+              type='button'
+            >
+              <div className='mr-2 shrink-0'>
+                <img
+                  alt='Visible by verizon tiny logo'
+                  className='h-auto max-h-full max-w-full leading-none'
+                  height='20'
+                  width='20'
+                  src='https://front-office.statics.backmarket.com/f74eb5792e465b9340119f7163be88c6179486d9/img/visible-by-verizon/visible-by-verizon-logo-tiny.svg'
+                />
+              </div>
+              <p className='line-clamp-1 overflow-hidden text-ellipsis text-left md:overflow-auto md:text-clip'>
+                Save big: $20/month unlimited data
+              </p>
+              <svg
+                aria-hidden='true'
+                fill='currentColor'
+                height='24'
+                viewBox='0 0 24 24'
+                width='24'
+                xmlns='http://www.w3.org/2000/svg'
+                className='shrink-0 ml-2'
+              >
+                <path
+                  fillRule='evenodd'
+                  d='m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12'
+                  clipRule='evenodd'
+                />
+              </svg>
+            </button>
+
+            {/* Additional buttons for scrolling demo */}
+            <button
+              className='bg-gray-300 text-black rounded-full text-sm flex h-9 w-fit max-w-full shrink-0 items-center px-3 hover:bg-gray-400 transition-colors duration-200 min-w-max'
+              type='button'
+            >
+              <div className='mr-2 shrink-0'>
+                <svg
+                  aria-hidden='true'
+                  fill='currentColor'
+                  height='24'
+                  viewBox='0 0 24 24'
+                  width='24'
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='text-purple-500'
+                >
+                  <path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5' />
+                </svg>
+              </div>
+              <p className='line-clamp-1 overflow-hidden text-ellipsis text-left md:overflow-auto md:text-clip'>
+                Free shipping on orders over $50
+              </p>
+              <svg
+                aria-hidden='true'
+                fill='currentColor'
+                height='24'
+                viewBox='0 0 24 24'
+                width='24'
+                xmlns='http://www.w3.org/2000/svg'
+                className='shrink-0 ml-2'
+              >
+                <path
+                  fillRule='evenodd'
+                  d='m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12'
+                  clipRule='evenodd'
+                />
+              </svg>
             </button>
 
             <button
-              aria-disabled='false'
-              aria-label='Add to Favorites'
-              className={`hover:bg-gray-200 rounded-sm relative max-w-full select-none no-underline motion-safe:ease-in inline-flex h-12 items-center justify-center px-3 motion-safe:transition motion-safe:duration-300 cursor-pointer border-solid mx-3 border-2 ${
-                isWishlisted ? 'border-red-500 bg-red-50' : 'border-black'
-              }`}
-              data-qa='my-favorites-toggle'
+              className='bg-gray-300 text-black rounded-full text-sm flex h-9 w-fit max-w-full shrink-0 items-center px-3 hover:bg-gray-400 transition-colors duration-200 min-w-max'
               type='button'
-              onClick={onWishlistToggle}
             >
-              <span className='pointer-events-none flex items-center'>
-                <span className='pointer-events-none flex items-center space-x-8'>
-                  <span className='body-2-bold pointer-events-none truncate'>
-                    <svg
-                      aria-hidden='true'
-                      fill={isWishlisted ? 'currentColor' : 'none'}
-                      height='24'
-                      viewBox='0 0 24 24'
-                      width='24'
-                      xmlns='http://www.w3.org/2000/svg'
-                      className={`my-8 ${isWishlisted ? 'text-red-500' : ''}`}
-                    >
-                      <path
-                        fillRule='evenodd'
-                        d='M7.5 4.87a3.75 3.75 0 0 0-3.75 3.75c0 1.14.596 2.126 1.462 2.977l.014.014L12 19.01l6.774-7.4.014-.013c.866-.85 1.462-1.838 1.462-2.977a3.75 3.75 0 0 0-3.75-3.75c-.982 0-1.813.493-2.515 1.077a13.434 13.434 0 0 0-.7.634l-.209.197a4.47 4.47 0 0 1-.4.342C12.578 7.19 12.326 7.37 12 7.37c-.325 0-.578-.18-.676-.25a4.47 4.47 0 0 1-.4-.342L10.716 6.58c-.211-.2-.436-.414-.701-.634C9.313 5.363 8.482 4.87 7.5 4.87M2.25 8.62c0-2.9 2.35-5.25 5.25-5.25 1.503 0 2.672.757 3.474 1.423a15.976 15.976 0 0 1 .8.724A27.034 27.034 0 0 0 12 5.73a9.016 9.016 0 0 0 .226-.213 15.976 15.976 0 0 1 .8-.724c.802-.666 1.97-1.423 3.474-1.423 2.9 0 5.25 2.35 5.25 5.25 0 1.694-.888 3.038-1.896 4.033l-6.932 7.57a1.25 1.25 0 0 1-1.844 0l-6.932-7.57C3.138 11.658 2.25 10.313 2.25 8.62m9.51-2.692s.006-.005.017-.01a.077.077 0 0 1-.017.01m.463-.01a.087.087 0 0 1 .017.01l-.017-.01'
-                        clipRule='evenodd'
-                      ></path>
-                    </svg>
-                  </span>
-                </span>
-              </span>
+              <div className='mr-2 shrink-0'>
+                <svg
+                  aria-hidden='true'
+                  fill='currentColor'
+                  height='24'
+                  viewBox='0 0 24 24'
+                  width='24'
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='text-purple-500'
+                >
+                  <path d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' />
+                </svg>
+              </div>
+              <p className='line-clamp-1 overflow-hidden text-ellipsis text-left md:overflow-auto md:text-clip'>
+                Extended warranty available
+              </p>
+              <svg
+                aria-hidden='true'
+                fill='currentColor'
+                height='24'
+                viewBox='0 0 24 24'
+                width='24'
+                xmlns='http://www.w3.org/2000/svg'
+                className='shrink-0 ml-2'
+              >
+                <path
+                  fillRule='evenodd'
+                  d='m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12'
+                  clipRule='evenodd'
+                />
+              </svg>
             </button>
           </div>
+
+          {/* View More Button - Right Side (hidden at end) */}
+          {!isAtEnd && (
+            <div className='absolute right-0 top-[-2px] z-[1] hidden w-[104px] items-center justify-end md:flex bg-gradient-to-r from-transparent via-white/30 to-white'>
+              <button
+                aria-label='View more'
+                className='focus:outline-none focus:ring-2 focus:ring-foreground rounded-full flex shrink-0 cursor-pointer appearance-none items-center justify-center border-0 no-underline disabled:cursor-not-allowed transition-all duration-300 ease-in-out w-10 h-10 bg-gray-100 text-gray-600 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400'
+                type='button'
+                onClick={handleScroll}
+              >
+                <svg
+                  aria-hidden='true'
+                  aria-label='View more'
+                  fill='currentColor'
+                  height='24'
+                  role='img'
+                  viewBox='0 0 24 24'
+                  width='24'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    fillRule='evenodd'
+                    d='m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12'
+                    clipRule='evenodd'
+                  />
+                </svg>
+              </button>
+            </div>
+          )}
+
+          {/* View Back Button - Left Side (hidden at start) */}
+          {!isAtStart && (
+            <div className='absolute left-0 top-[-2px] z-[1] hidden w-[104px] items-center justify-start md:flex bg-gradient-to-l from-transparent via-white/30 to-white'>
+              <button
+                aria-label='View previous'
+                className='focus:outline-none focus:ring-2 focus:ring-foreground rounded-full flex shrink-0 cursor-pointer appearance-none items-center justify-center border-0 no-underline disabled:cursor-not-allowed transition-all duration-300 ease-in-out w-10 h-10 bg-gray-100 text-gray-600 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400'
+                type='button'
+                onClick={handleScrollLeft}
+              >
+                <svg
+                  aria-hidden='true'
+                  aria-label='View previous'
+                  fill='currentColor'
+                  height='24'
+                  role='img'
+                  viewBox='0 0 24 24'
+                  width='24'
+                  xmlns='http://www.w3.org/2000/svg'
+                  className='rotate-180'
+                >
+                  <path
+                    fillRule='evenodd'
+                    d='m13.043 12-3.47 3.47a.75.75 0 1 0 1.06 1.06l3.647-3.646a1.25 1.25 0 0 0 0-1.768L10.634 7.47a.75.75 0 0 0-1.06 1.06L13.042 12'
+                    clipRule='evenodd'
+                  />
+                </svg>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

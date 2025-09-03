@@ -10,7 +10,7 @@ export class ProductVariantController {
   constructor(private productVariantService: ProductVariantService) {}
 
   // Get relevant variants for product detail page
-  @Get('relevant')
+  @Get('relevants')
   getRelevantVariants(@Query() query: GetRelevantVariantsQueryDto) {
     return this.productVariantService.getRelevantVariants(query.productId, query.defaultVariantId);
   }
