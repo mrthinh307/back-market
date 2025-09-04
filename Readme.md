@@ -23,17 +23,17 @@
 
 ## 📋 Navigation
 
-- 📖 [A. Overview](#a-overview)
-- ✨ [B. Goals & Key Features](#b-goals--key-features)
-- 🏗️ [C. Project Structure](#c-project-structure)
-- 📋 [D. System Requirements](#d-system-requirements)
-- 🚀 [E. Quick Start](#e-quick-start)
-- 🛠️ [F. Tech Stack](#f-tech-stack)
-- 🚀 [G. Production Deployment](#g-production-deployment)
-- ⚙️ [H. Quality & CI/CD](#h-quality--cicd)
-- 👥 [I. Core Team](#i-core-team)
+- 📖 [1. Overview](#1-overview)
+- ✨ [2. Goals & Key Features](#2-goals--key-features)
+- 🏗️ [3. Project Structure](#3-project-structure)
+- 📋 [4. System Requirements](#4-system-requirements)
+- 🚀 [5. Quick Start](#5-quick-start)
+- 🛠️ [6. Tech Stack](#6-tech-stack)
+- 🚀 [7. Production Deployment](#7-production-deployment)
+- ⚙️ [8. Quality & CI/CD](#8-quality--cicd)
+- 👥 [9. Core Team](#9-core-team)
 
-## 📖 A. Overview
+## 📖 1. Overview
 
 <div align="center">
   <img src="https://i.vimeocdn.com/video/1908825700-e27a1c21c53ff3a34c378e093d8d738baafc042f7dfd390520ed51a8e2021bfc-d" alt="Project Banner" width="60%"/>
@@ -43,7 +43,7 @@
 
 🎯 **A modern e-commerce platform inspired by Back Market** - A comprehensive marketplace solution for refurbished electronics and pre-owned gadgets, designed to provide users with a reliable, affordable, and trustworthy platform for buying and selling certified second-hand devices.
 
-## ✨ B. Goals & Key Features
+## ✨ 2. Goals & Key Features
 
 <table>
   <tr>
@@ -81,7 +81,7 @@
 - **🔐 Secure Authentication**: JWT-based auth with OAuth2 integration (Facebook & Google)
 - **📊 Data Analytics**: Comprehensive analytics and reporting capabilities
 
-## 🏗️ C. Project Structure
+## 🏗️ 3. Project Structure
 
 ```
 back-market/
@@ -119,7 +119,7 @@ graph TD
 
 </div>
 
-## 📋 D. System Requirements
+## 📋 4. System Requirements
 
 | Component | Version | Notes |
 |-----------|---------|-------|
@@ -128,7 +128,7 @@ graph TD
 | **PostgreSQL** | Latest | Hosted on Neon Cloud |
 | **Docker** | Latest | For containerized development |
 
-## 🚀 E. Quick Start
+## 🚀 5. Quick Start
 
 ### ⚡ One-Command Setup
 
@@ -184,7 +184,7 @@ yarn dev
 ```
 📍 **Client**: `http://localhost:3000`
 
-## 🛠️ F. Tech Stack
+## 🛠️ 6. Tech Stack
 
 ### 🖥️ Backend (Server)
 
@@ -209,7 +209,7 @@ yarn dev
 | **Vitest** | Testing | Fast unit testing |
 | **Playwright** | E2E Testing | Cross-browser testing |
 
-## 🚀 G. Production Deployment
+## 🚀 7. Production Deployment
 
 ### Backend Deployment
 
@@ -234,7 +234,7 @@ yarn start
 docker-compose -f docker-compose.prod.yml up -d
 ```
 
-## ⚙️ H. Quality & CI/CD
+## ⚙️ 8. Quality & CI/CD
 
 ### 🛠️ Development Tools
 
@@ -268,13 +268,7 @@ flowchart LR
 
 </div>
 
-## 👥 I. Core Team
-
-<div align="center">
-  <h3>🌟 Meet Our Amazing Team</h3>
-  <p><em>Passionate developers building the future of e-commerce</em></p>
-</div>
-
+## 👥 9. Core Team
 <div align="center">
 
 <table>
@@ -290,7 +284,7 @@ flowchart LR
       <a href="https://github.com/Hiisam17">
         <img src="https://github.com/Hiisam17.png" width="100px" alt=""/><br />
         <b>Khanh Toan</b><br />
-        <em>Frontend Developer</em>
+        <em>Fullstack Developer</em>
       </a>
     </td>
     <td align="center">
@@ -306,7 +300,7 @@ flowchart LR
       <a href="https://github.com/mtuong1031">
         <img src="https://github.com/mtuong1031.png" width="100px" alt=""/><br />
         <b>Minh Tuong</b><br />
-        <em>Frontend Developer</em>
+        <em>Fullstack Developer</em>
       </a>
     </td>
     <td align="center">
