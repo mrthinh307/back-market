@@ -118,13 +118,13 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
           className='flex items-center gap-x-4 body-2 text-primary'
           tabIndex={-1}
         >
-          <div className='flex flex-wrap items-center gap-4 self-center w-[40px] flex-shrink-0 mr-2'>
+          <div className='flex flex-wrap items-center gap-4 self-center w-[50px] flex-shrink-0 mr-2'>
             <Image
               alt='Afirm'
               src='/assets/images/GooglePay.png'
-              width={40}
-              height={40}
-              className='bg-green-200'
+              width={80}
+              height={80}
+              className='bg-green-200 border-3 border-gray-200'
             />
           </div>
           <div className='grow'>
