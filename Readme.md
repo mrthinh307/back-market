@@ -1,7 +1,7 @@
 # 🛍️ BackMarket‑style E‑commerce
 
 <p>
-  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status"/>
+  <img src="https://img.shields.io/badge/Status-Developing-orange?style=for-the-badge" alt="Status"/>
   <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge" alt="Version"/>
   <img src="https://img.shields.io/github/stars/mrthinh307/back-market?style=for-the-badge" alt="Stars"/>
 </p>
@@ -21,29 +21,29 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"/></a>
 
 
-## 📋 Table of Contents
+## 📋 Navigation
 
-- [📖 Overview](#-overview)
-- [✨ Goals & Key Features](#-goals--key-features)
-- [🏗️ Project Structure](#️-project-structure)
-- [📋 System Requirements](#-system-requirements)
-- [🚀 Quick Start](#-quick-start)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [🚀 Production Deployment](#-production-deployment)
-- [⚙️ Quality & CI/CD](#️-quality--cicd)
-- [👥 Core Team](#-core-team)
+- 📖 [A. Overview](#a-overview)
+- ✨ [B. Goals & Key Features](#b-goals--key-features)
+- 🏗️ [C. Project Structure](#c-project-structure)
+- 📋 [D. System Requirements](#d-system-requirements)
+- 🚀 [E. Quick Start](#e-quick-start)
+- 🛠️ [F. Tech Stack](#f-tech-stack)
+- 🚀 [G. Production Deployment](#g-production-deployment)
+- ⚙️ [H. Quality & CI/CD](#h-quality--cicd)
+- 👥 [I. Core Team](#i-core-team)
 
-## 📖 Overview
+## 📖 A. Overview
 
 <div align="center">
-  <img src="https://1000logos.net/wp-content/uploads/2023/11/Back-Market-Logo.jpg" alt="Project Banner" width="60%"/>
+  <img src="https://i.vimeocdn.com/video/1908825700-e27a1c21c53ff3a34c378e093d8d738baafc042f7dfd390520ed51a8e2021bfc-d" alt="Project Banner" width="60%"/>
 </div>
 
 <br/>
 
 🎯 **A modern e-commerce platform inspired by Back Market** - A comprehensive marketplace solution for refurbished electronics and pre-owned gadgets, designed to provide users with a reliable, affordable, and trustworthy platform for buying and selling certified second-hand devices.
 
-## ✨ Goals & Key Features
+## ✨ B. Goals & Key Features
 
 <table>
   <tr>
@@ -81,7 +81,7 @@
 - **🔐 Secure Authentication**: JWT-based auth with OAuth2 integration (Facebook & Google)
 - **📊 Data Analytics**: Comprehensive analytics and reporting capabilities
 
-## 🏗️ Project Structure
+## 🏗️ C. Project Structure
 
 ```
 back-market/
@@ -106,18 +106,20 @@ back-market/
 
 ### 📊 Data Flow Architecture
 
+<div align="center">
+
 ```mermaid
 graph TD
-    A[🌐 Client<br/>Next.js 15] --> B[🚀 API Gateway<br/>NestJS]
-    B --> C[(📊 PostgreSQL<br/>Neon Cloud)]
-    B --> D[🔍 Elasticsearch<br/>Search Engine]
-    C --> E[⚡ Prisma ORM]
-    D --> F[🎯 Advanced Search]
+    A[Client<br/>Next.js 15] --> B[API Gateway<br/>NestJS]
+    B --> C[(Database<br/>PostgreSQL)]
+    B --> D[Search Engine<br/>Elasticsearch]
+    C --> E[ORM<br/>Prisma]
+    D --> F[Advanced Search]
 ```
 
----
+</div>
 
-## 📋 System Requirements
+## 📋 D. System Requirements
 
 | Component | Version | Notes |
 |-----------|---------|-------|
@@ -126,9 +128,7 @@ graph TD
 | **PostgreSQL** | Latest | Hosted on Neon Cloud |
 | **Docker** | Latest | For containerized development |
 
----
-
-## 🚀 Quick Start
+## 🚀 E. Quick Start
 
 ### ⚡ One-Command Setup
 
@@ -184,7 +184,7 @@ yarn dev
 ```
 📍 **Client**: `http://localhost:3000`
 
-## 🛠️ Tech Stack
+## 🛠️ F. Tech Stack
 
 ### 🖥️ Backend (Server)
 
@@ -209,7 +209,7 @@ yarn dev
 | **Vitest** | Testing | Fast unit testing |
 | **Playwright** | E2E Testing | Cross-browser testing |
 
-## 🚀 Production Deployment
+## 🚀 G. Production Deployment
 
 ### Backend Deployment
 
@@ -234,7 +234,7 @@ yarn start
 docker-compose -f docker-compose.prod.yml up -d
 ```
 
-## ⚙️ Quality & CI/CD
+## ⚙️ H. Quality & CI/CD
 
 ### 🛠️ Development Tools
 
@@ -246,29 +246,32 @@ docker-compose -f docker-compose.prod.yml up -d
 
 ### 🔄 CI/CD Pipeline
 
+<div align="center">
+
 ```mermaid
 flowchart LR
-    A[👨‍💻 Developer<br/>Commit] --> B[🔍 Lefthook<br/>Pre-commit]
-    B --> C[📝 Commitlint<br/>Message Check]
-    C --> D[📤 Push to<br/>GitHub]
+    A[Developer<br/>Commit] --> B[Lefthook<br/>Pre-commit]
+    B --> C[Commitlint<br/>Message Check]
+    C --> D[Push to<br/>GitHub]
     
-    D --> E[⚡ GitHub Actions<br/>CI Pipeline]
-    E --> F[🤖 CodeRabbit<br/>AI Review]
+    D --> E[GitHub Actions<br/>CI Pipeline]
+    E --> F[CodeRabbit<br/>AI Review]
     
-    F --> G[✅ PR Approved<br/>≥2 Reviewers]
-    G --> H[🔀 Squash & Merge<br/>to main]
-    H --> I[🚀 Auto Deploy<br/>Production]
+    F --> G[PR Approved<br/>≥2 Reviewers]
+    G --> H[Squash & Merge<br/>to main]
+    H --> I[Auto Deploy<br/>Production]
     
-    J[📊 Code Quality<br/>ESLint/Prettier] --> E
-    K[🧪 Testing<br/>Jest/Vitest] --> E
-    L[🔍 Security<br/>Dependabot] --> E
+    J[Code Quality<br/>ESLint/Prettier] --> E
+    K[Testing<br/>Jest/Vitest] --> E
+    L[Security<br/>Dependabot] --> E
 ```
 
-## 👥 Core Team
+</div>
+
+## 👥 I. Core Team
 
 <div align="center">
   <h3>🌟 Meet Our Amazing Team</h3>
-  <p><em>Passionate developers building the future of e-commerce</em></p>
 </div>
 
 <div align="center">
