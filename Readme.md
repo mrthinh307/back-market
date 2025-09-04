@@ -2,8 +2,8 @@
 
 <p>
   <img src="https://img.shields.io/badge/Status-Developing-orange?style=for-the-badge" alt="Status"/>
-  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge" alt="Version"/>
-  <img src="https://img.shields.io/github/stars/mrthinh307/back-market?style=for-the-badge" alt="Stars"/>
+  <img src="https://img.shields.io/badge/Developing Branch-develop-purple?style=for-the-badge" alt="Developing Branch"/>
+  <img src="https://img.shields.io/badge/Version-0.0.9-blue?style=for-the-badge" alt="Version"/>
 </p>
   <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js-15-black?logo=next.js" alt="Next.js"/></a>
   <a href="https://nestjs.com/"><img src="https://img.shields.io/badge/NestJS-red?logo=nestjs" alt="NestJS"/></a>
