@@ -272,57 +272,60 @@ flowchart LR
 
 <div align="center">
   <h3>🌟 Meet Our Amazing Team</h3>
+  <p><em>Passionate developers building the future of e-commerce</em></p>
 </div>
 
 <div align="center">
-<table style="margin: 0 auto; border-collapse: collapse; border: 2px solid #ddd; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 12px rgba(0,0,0,0.15);">
+
+<table>
   <tr>
-    <td align="center" style="border: 1px solid #ddd; padding: 20px; width: 220px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
-      <a href="https://github.com/mrthinh307" style="text-decoration: none; color: inherit;">
-        <img src="https://github.com/mrthinh307.png" width="90px" style="border-radius: 50%; border: 3px solid #4CAF50; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt=""/><br />
-        <strong style="font-size: 16px; color: #2c3e50;">Duy Thinh</strong><br />
-        <em style="color: #7f8c8d; font-size: 14px;">PM & Fullstack Developer</em>
+    <td align="center">
+      <a href="https://github.com/mrthinh307">
+        <img src="https://github.com/mrthinh307.png" width="100px" alt=""/><br />
+        <b>Duy Thinh</b><br />
+        <em>PM & Fullstack Developer</em>
       </a>
     </td>
-    <td align="center" style="border: 1px solid #ddd; padding: 20px; width: 220px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
-      <a href="https://github.com/Hiisam17" style="text-decoration: none; color: inherit;">
-        <img src="https://github.com/Hiisam17.png" width="90px" style="border-radius: 50%; border: 3px solid #2196F3; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt=""/><br />
-        <strong style="font-size: 16px; color: #2c3e50;">Khanh Toan</strong><br />
-        <em style="color: #7f8c8d; font-size: 14px;">Frontend Developer</em>
+    <td align="center">
+      <a href="https://github.com/Hiisam17">
+        <img src="https://github.com/Hiisam17.png" width="100px" alt=""/><br />
+        <b>Khanh Toan</b><br />
+        <em>Frontend Developer</em>
       </a>
     </td>
-    <td align="center" style="border: 1px solid #ddd; padding: 20px; width: 220px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
-      <a href="https://github.com/mingg23805" style="text-decoration: none; color: inherit;">
-        <img src="https://github.com/mingg23805.png" width="90px" style="border-radius: 50%; border: 3px solid #FF9800; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt=""/><br />
-        <strong style="font-size: 16px; color: #2c3e50;">Ngoc Minh</strong><br />
-        <em style="color: #7f8c8d; font-size: 14px;">Data Engineer</em>
+    <td align="center">
+      <a href="https://github.com/mingg23805">
+        <img src="https://github.com/mingg23805.png" width="100px" alt=""/><br />
+        <b>Ngoc Minh</b><br />
+        <em>Data Engineer</em>
       </a>
     </td>
   </tr>
   <tr>
-    <td align="center" style="border: 1px solid #ddd; padding: 20px; width: 220px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
-      <a href="https://github.com/mtuong1031" style="text-decoration: none; color: inherit;">
-        <img src="https://github.com/mtuong1031.png" width="90px" style="border-radius: 50%; border: 3px solid #9C27B0; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt=""/><br />
-        <strong style="font-size: 16px; color: #2c3e50;">Minh Tuong</strong><br />
-        <em style="color: #7f8c8d; font-size: 14px;">Frontend Developer</em>
+    <td align="center">
+      <a href="https://github.com/mtuong1031">
+        <img src="https://github.com/mtuong1031.png" width="100px" alt=""/><br />
+        <b>Minh Tuong</b><br />
+        <em>Frontend Developer</em>
       </a>
     </td>
-    <td align="center" style="border: 1px solid #ddd; padding: 20px; width: 220px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
-      <a href="https://github.com/thinh2711" style="text-decoration: none; color: inherit;">
-        <img src="https://github.com/thinh2711.png" width="90px" style="border-radius: 50%; border: 3px solid #FF5722; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt=""/><br />
-        <strong style="font-size: 16px; color: #2c3e50;">Xuan Thinh</strong><br />
-        <em style="color: #7f8c8d; font-size: 14px;">Frontend Developer</em>
+    <td align="center">
+      <a href="https://github.com/thinh2711">
+        <img src="https://github.com/thinh2711.png" width="100px" alt=""/><br />
+        <b>Xuan Thinh</b><br />
+        <em>Frontend Developer</em>
       </a>
     </td>
-    <td align="center" style="border: 1px solid #ddd; padding: 20px; width: 220px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
-      <a href="https://github.com/crisaq2410" style="text-decoration: none; color: inherit;">
-        <img src="https://github.com/crisaq2410.png" width="90px" style="border-radius: 50%; border: 3px solid #607D8B; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt=""/><br />
-        <strong style="font-size: 16px; color: #2c3e50;">Anh Quoc</strong><br />
-        <em style="color: #7f8c8d; font-size: 14px;">Backend Developer</em>
+    <td align="center">
+      <a href="https://github.com/crisaq2410">
+        <img src="https://github.com/crisaq2410.png" width="100px" alt=""/><br />
+        <b>Anh Quoc</b><br />
+        <em>Backend Developer</em>
       </a>
     </td>
   </tr>
 </table>
+
 </div>
 
 ---
