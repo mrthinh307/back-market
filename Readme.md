@@ -130,14 +130,6 @@ graph TD
 
 ## 🚀 5. Quick Start
 
-### ⚡ One-Command Setup
-
-```bash
-git clone https://github.com/mrthinh307/back-market.git
-cd back-market
-yarn install && yarn dev
-```
-
 ### 📊 Detailed Setup
 
 #### 1. 📥 Clone & Install
@@ -172,21 +164,24 @@ npx prisma db push
 
 **Terminal A - Backend:**
 ```bash
-cd server
-yarn dev
+yarn dev:server
 ```
 📍 **Server**: `http://localhost:8888`
 
 **Terminal B - Frontend:**
 ```bash
-cd client
-yarn dev
+yarn dev:client
 ```
 📍 **Client**: `http://localhost:3000`
 
+**Or run concurrenly**
+```bash
+yarn dev
+```
+
 ## 🛠️ 6. Tech Stack
 
-### 🖥️ Backend (Server)
+### 🗄️ Backend (Server)
 
 | Technology | Purpose | Details |
 |------------|---------|---------|
