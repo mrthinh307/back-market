@@ -133,10 +133,20 @@ graph TD
 ### 📊 Detailed Setup
 
 #### 1. 📥 Clone & Install
+**Clone Repository**
 ```bash
 git clone https://github.com/mrthinh307/back-market.git
 cd back-market
 corepack enable
+```
+
+**In case of Development**
+```bash
+git switch develop
+```
+
+**Install**
+```bash
 yarn install
 ```
 
