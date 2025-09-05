@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { ModeToggle } from '../../ui/mode-toggle';
+import { ModeToggle } from '../../../ui/mode-toggle';
 
 const RightSideActions = () => {
   const t = useTranslations('Header');

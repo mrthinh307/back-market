@@ -7,14 +7,14 @@ import { use, useEffect } from 'react';
 import logo from '@/public/assets/images/header-logo-1.svg';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouterRedirect } from '@/hooks/useRouterRedirect';
-import LoadingPage from '@/components/layouts/LoadingPage';
+import LoadingPage from '@/components/pages/LoadingPage';
 
 export default function AuthLayout(props: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = use(props.params);
-  const { accessToken } = useAuth();
+  const { accessToken, isLoading } = useAuth();
   const { redirectToHome } = useRouterRedirect();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function AuthLayout(props: {
     }
   }, [accessToken]);
 
-  return accessToken ? (
+  return accessToken || isLoading ? (
     <LoadingPage />
   ) : (
     <>

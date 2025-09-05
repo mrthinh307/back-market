@@ -18,7 +18,7 @@ function PressCard({ className }: { className?: string }) {
               sizes='100vw'
             />
           </div>
-          <div className='pt-6 text-xl font-semibold select-text text-center '>
+          <div className='pt-6 text-lg md:text-xl font-semibold select-text text-center '>
             "Back Market – now a certified B Corp, which guarantees certain
             ethical standards."
           </div>

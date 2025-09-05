@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import SearchBar from '../../ui/SearchBar';
+import SearchBar from '../../../ui/SearchBar';
 import RightSideActions from './RightSideActions';
 
 interface MainHeaderProps {

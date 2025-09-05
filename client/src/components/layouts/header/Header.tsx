@@ -7,7 +7,8 @@ import {
   MainHeader,
   MainNavigation,
   MobileMenu,
-} from './header/index';
+} from './components';
+import Banner from '@/components/layouts/header/components/Banner';
 
 const Header: React.FC = () => {
   const t = useTranslations('Header');
@@ -33,24 +34,28 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className='bg-white dark:bg-background border-b border-[#dfe1e7] dark:border-gray-600/30'>
-      {/* Top Navigation */}
-      <TopNavigation topNavItems={topNavItems} />
+    <>
+      <header className='bg-white dark:bg-background border-b border-[#dfe1e7] dark:border-gray-600/30'>
+        {/* Top Navigation */}
+        <TopNavigation topNavItems={topNavItems} />
 
-      {/* Main Header */}
-      <MainHeader isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+        {/* Main Header */}
+        <MainHeader isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
-      {/* Main Navigation */}
-      <MainNavigation mainNavItems={mainNavItems} />
+        {/* Main Navigation */}
+        <MainNavigation mainNavItems={mainNavItems} />
 
-      {/* Mobile Menu */}
-      <MobileMenu
-        isMenuOpen={isMenuOpen}
-        setIsMenuOpen={setIsMenuOpen}
-        mainNavItems={mainNavItems}
-        topNavItems={topNavItems}
-      />
-    </header>
+        {/* Mobile Menu */}
+        <MobileMenu
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
+          mainNavItems={mainNavItems}
+          topNavItems={topNavItems}
+        />
+      </header>
+      {/* BANNER */}
+      <Banner />
+    </>
   );
 };
 

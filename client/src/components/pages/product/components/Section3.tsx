@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import ProductSelection from '@/components/layouts/product/components/ProductSelection';
-import ColorSelection from '@/components/layouts/product/components/ColorSelection';
-import ProductFeatures from '@/components/layouts/product/components/ProductFeatures';
-import FeatureIcon from '@/components/layouts/product/components/FeatureIcon';
+import {
+  ProductSelection,
+  ColorSelection,
+  ProductFeatures,
+  FeatureIcon,
+} from '@/components/pages/product/components';
 import { SelectionOption, FeatureItem } from '@/types/product-selection.type';
 import {
   getTradeInFeatures,

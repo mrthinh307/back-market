@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/libs/i18n/I18nRouting';
 
@@ -21,7 +21,8 @@ export function LanguageSwitcher() {
   const currentLanguage = languages.find((lang) => lang.locale === locale);
 
   const switchLanguage = (newLocale: string) => {
-    router.replace(pathname, { locale: newLocale });
+    console.log('Switching language to:', newLocale);
+    router.push(pathname, { locale: newLocale });
   };
 
   return (

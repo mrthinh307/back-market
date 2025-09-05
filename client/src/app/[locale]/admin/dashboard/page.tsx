@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouterRedirect } from '@/hooks/useRouterRedirect';
-import LoadingPage from '@/components/layouts/LoadingPage';
+import LoadingPage from '@/components/pages/LoadingPage';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/admin/app-sidebar';
 import { SiteHeader } from '@/components/admin/site-header';
