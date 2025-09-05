@@ -1,5 +1,5 @@
 import React from 'react';
-import { iconData } from '@/components/product/temp-data-product';
+import { iconData } from '@/components/layouts/product/seed/temp-data-product';
 
 interface FeatureIconProps {
   iconType: keyof typeof iconData;

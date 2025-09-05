@@ -56,7 +56,7 @@
   --icon-button-hover: rgba(14, 16, 22, 0.06);
   --ring: oklch(0.704 0.04 256.788);
   --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-2: #94F5BC;
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
@@ -101,7 +101,7 @@
   --icon-button-hover: #262626;
   --ring: oklch(0.551 0.027 264.364);
   --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-2: #94F5BC;
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
@@ -238,6 +238,21 @@
   .gradient-mask-l-90 {
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 90%);
     mask-image: linear-gradient(90deg, transparent, #000 90%);
+  }
+
+  .gradient-mask-l-10 {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 90%);
+    mask-image: linear-gradient(90deg, transparent, #000 10%);
+  }
+
+  .gradient-mask-lr-10-90 {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  .gradient-mask-lr-90-90 {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 90%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 90%, #000 90%, transparent);
   }
 
   @keyframes spin-360 {

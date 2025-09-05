@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
-import ProductInfo from '../product/ProductInfo';
-import ProductFeatures from '../product/ProductFeatures';
-import FeatureIcon from '../product/FeatureIcon';
-import { getProductFeatures } from '../product/temp-data-product';
-import { FeatureItem } from '@/types/product-selection.type';
-import ProductBundle from '../product/ProductBundle';
-import ProductRecommendations from '../product/ProductRecommendations';
-import Section2 from './Section_2';
-import Section3 from './Section3';
+import React from 'react';
 
+import { FeatureItem } from '@/types/product-selection.type';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { getProductFeatures, productImages } from './seed/temp-data-product';
+import GalleryCarousel from '../../carousels/GalleryCarousel';
+import {
+  ProductInfo,
+  ProductFeatures,
+  ProductBundle,
+  ProductRecommendations,
+  FeatureIcon,
+  Section2,
+  Section3,
+} from './components';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,13 +21,11 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import GalleryCarousel from '../product/GalleryCarousel';
 
 const ProductPage: React.FC = () => {
-  const [isWishlisted, setIsWishlisted] = useState(false);
-
   // Get features for iPhone 13 (you can make this dynamic based on product ID)
   const productFeaturesData = getProductFeatures('iphone-13');
+  const isMobile = useIsMobile();
 
   // Transform data to FeatureItem format
   const features: FeatureItem[] = productFeaturesData.map((feature) => ({
@@ -34,13 +36,7 @@ const ProductPage: React.FC = () => {
     onClick: feature.onClick,
   }));
 
-  const productImages = [
-    '/assets/images/Iphone13.avif',
-    '/assets/images/Iphone13.avif',
-    '/assets/images/Iphone13.avif',
-    '/assets/images/Iphone13.avif',
-    '/assets/images/Iphone13.avif',
-  ];
+  const productVariantImages = productImages;
 
   const breadcrumbItems = [
     { name: 'Homepage', href: 'https://www.backmarket.com/en-us' },
@@ -54,6 +50,11 @@ const ProductPage: React.FC = () => {
     },
     { name: 'iPhone 13 128GB - Pink - Unlocked' },
   ];
+
+  // Filter breadcrumb items for mobile: only show last link and current page
+  const displayBreadcrumbItems = isMobile
+    ? breadcrumbItems.slice(-2) // Last 2 items: last link + current page
+    : breadcrumbItems;
 
   const relatedProducts = [
     {
@@ -116,41 +117,13 @@ const ProductPage: React.FC = () => {
     },
   ];
 
-  const handleWishlistToggle = () => {
-    setIsWishlisted(!isWishlisted);
-  };
-
-  const handleAddToCart = () => {
-    console.log('Add both to cart clicked');
-    // Implement add to cart logic here
-  };
-
-  const handleProductClick = (productId: string) => {
-    console.log(`Clicked on product ${productId}`);
-    // Implement navigation logic here
-  };
-
-  const handleAffirmClick = () => {
-    console.log('Affirm Learn more clicked');
-    // Implement Affirm logic here
-  };
-
-  const handleTradeInClick = () => {
-    console.log('Trade-in clicked');
-    // Implement Trade-in logic here
-  };
-
-  const handleUnlimitedDataClick = () => {
-    console.log('Unlimited data offer clicked');
-    // Implement unlimited data logic here
-  };
-
   return (
     <div className='flex justify-center pb-[18px] md:pb-12'>
       <div className='container'>
+        {/* Breadcrumb */}
         <Breadcrumb className='py-5'>
           <BreadcrumbList>
-            {breadcrumbItems.map((item, index) => (
+            {displayBreadcrumbItems.map((item, index) => (
               <React.Fragment key={index}>
                 <BreadcrumbItem>
                   {item.href ? (
@@ -161,36 +134,36 @@ const ProductPage: React.FC = () => {
                     <BreadcrumbPage>{item.name}</BreadcrumbPage>
                   )}
                 </BreadcrumbItem>
-                {index < breadcrumbItems.length - 1 && <BreadcrumbSeparator />}
+                {index < displayBreadcrumbItems.length - 1 && (
+                  <BreadcrumbSeparator />
+                )}
               </React.Fragment>
             ))}
           </BreadcrumbList>
         </Breadcrumb>
 
         {/* Main Product Section */}
-        <div className='mt-3 md:mt-8 flex flex-col flex-wrap md:flex-row md:flex-nowrap'>
+        <div className='mt-4 md:mt-8 flex flex-col flex-wrap items-center md:flex-row md:flex-nowrap md:justify-evenly'>
+          {/* Image Carousel */}
           <div className='relative w-full max-w-full grow md:w-1/3 lg:w-1/2'>
             <GalleryCarousel
-              galleryImages={productImages}
-              className='mt-4 md:mr-14'
+              galleryImages={productVariantImages}
+              className='md:mr-14 md:-mt-14'
               carouselItemClassName='flex justify-center'
             />
           </div>
 
-          <div className='w-full max-w-full grow-0 md:w-2/3 md:basis-2/3 lg:w-1/2 lg:basis-1/2'>
-            <div className='flex flex-col items-start md:flex-col'>
+          {/* Product Info & Features */}
+          <div className='w-full max-w-full grow md:w-2/3 md:basis-2/3 lg:w-1/2 lg:basis-1/2'>
+            <div className='flex flex-col items-start'>
               <ProductInfo
-                title='iPhone 13 128GB - Pink - Unlocked'
+                title='iPhone 13'
+                subtitle='Pink • 128 GB • Physical SIM + eSIM'
                 rating={4.4}
                 reviewCount={3743}
                 price={288.99}
                 originalPrice={629.0}
                 savings={340.01}
-                isWishlisted={isWishlisted}
-                onWishlistToggle={handleWishlistToggle}
-                onAffirmClick={handleAffirmClick}
-                onTradeInClick={handleTradeInClick}
-                onUnlimitedDataClick={handleUnlimitedDataClick}
               />
             </div>
 

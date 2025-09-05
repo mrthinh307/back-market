@@ -35,7 +35,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
         <div className='absolute left-1/2 transform -translate-x-1/2'>
           <Link href='/'>
             <Image
-              src='assets/images/header-logo-1.svg'
+              src='/assets/images/header-logo-1.svg'
               alt='Logo'
               height={15}
               width={140}
@@ -58,7 +58,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
         <div className='flex items-center'>
           <Link href='/'>
             <Image
-              src='assets/images/header-logo-1.svg'
+              src='/assets/images/header-logo-1.svg'
               alt='Logo'
               height={24}
               width={213}

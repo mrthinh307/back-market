@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
+import React, { useState, useCallback, useEffect } from 'react';
+
 import {
   Carousel,
   CarouselContent,
@@ -74,6 +75,7 @@ function GalleryCarousel({
               className='rounded-lg block !h-[66.7vw] max-h-full max-w-full w-auto leading-none md:!h-auto md:w-full lg:w-[29.125rem] object-cover'
               width={0}
               height={0}
+              sizes='100vw'
             />
           </CarouselItem>
         ))}

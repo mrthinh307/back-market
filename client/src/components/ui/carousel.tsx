@@ -680,6 +680,7 @@ function CarouselThumbnails({
                   className='h-[40px] w-auto max-h-full max-w-full leading-none object-cover'
                   width={0}
                   height={0}
+                  sizes='100vw'
                 />
               </div>
             </button>

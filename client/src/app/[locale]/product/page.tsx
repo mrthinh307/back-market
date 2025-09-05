@@ -1,8 +1,8 @@
 'use client';
 
-import ProductPage from '@/components/layouts/ProductPage';
 import Header from '@/components/layouts/Header';
 import Footer from '@/components/layouts/Footer';
+import ProductPage from '@/components/layouts/product/ProductPage';
 
 export default function Product() {
   return (

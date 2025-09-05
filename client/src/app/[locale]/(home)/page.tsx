@@ -6,13 +6,12 @@ import Link from 'next/link';
 import Header from '@/components/layouts/Header';
 import {
   Banner,
-  BannerCarousel,
   MostWantedSection,
   ProductShowcaseSection,
-  SlideCarousel,
   WhyChooseUs,
   FAQSection,
 } from '@/components/layouts/home';
+import { SlideCarousel, BannerCarousel } from '@/components/carousels';
 import {
   bestCategories,
   bestProducts,
@@ -23,7 +22,7 @@ import {
   recommendProducts,
   topCategories,
   topProducts,
-} from '@/components/layouts/home/temp-data';
+} from '@/components/layouts/home/seed/temp-data';
 import {
   ProductCard,
   AdsVideoCard,

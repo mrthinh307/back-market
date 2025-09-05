@@ -38,7 +38,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         <div className='absolute left-1/2 transform -translate-x-1/2'>
           <Link href='/' onClick={() => setIsMenuOpen(false)}>
             <Image
-              src='assets/images/header-logo-1.svg'
+              src='/assets/images/header-logo-1.svg'
               alt='Logo'
               height={14}
               width={120}
