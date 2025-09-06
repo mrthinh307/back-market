@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import SearchBar from '../../../ui/SearchBar';
 import RightSideActions from './RightSideActions';
+import { useLocale } from 'next-intl';
 
 interface MainHeaderProps {
   isMenuOpen: boolean;
@@ -13,9 +14,10 @@ const MainHeader: React.FC<MainHeaderProps> = ({
   isMenuOpen,
   setIsMenuOpen,
 }) => {
+  const locale  = useLocale();
   return (
     <div className='flex flex-col md:justify-center py-4 md:py-2'>
-      {/* Mobile Header Row 1 */}
+      {/* Mobile Header - Row 1 */}
       <div className='md:hidden flex items-center justify-between px-4 mb-3 relative'>
         {/* Menu Button */}
         <button
@@ -33,7 +35,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
 
         {/* Logo - Centered */}
         <div className='absolute left-1/2 transform -translate-x-1/2'>
-          <Link href='/'>
+          <Link href={`/${locale}/`}>
             <Image
               src='/assets/images/header-logo-1.svg'
               alt='Logo'
@@ -47,7 +49,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
         {/* Right Side Actions */}
         <RightSideActions />
       </div>
-      {/* Mobile Search Row 2 */}
+      {/* Mobile Search - Row 2 */}
       <div className='md:hidden px-4'>
         <SearchBar />
       </div>
@@ -56,7 +58,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
       <div className='hidden md:flex container items-center gap-4 lg:gap-8'>
         {/* Logo */}
         <div className='flex items-center'>
-          <Link href='/'>
+          <Link href={`/${locale}/`}>
             <Image
               src='/assets/images/header-logo-1.svg'
               alt='Logo'

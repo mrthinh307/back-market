@@ -3,5 +3,5 @@ export { default as MainHeader } from './MainHeader';
 export { default as MobileMenu } from './MobileMenu';
 export { default as TopNavigation } from './TopNavigation';
 export { default as RightSideActions } from './RightSideActions';
-export { default as Banner } from './Banner';
+
 
