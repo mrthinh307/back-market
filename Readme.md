@@ -80,6 +80,7 @@
 - **🎨 Modern & User-Friendly Interface**: Clean, professional UI for seamless experience across all devices
 - **🔐 Secure Authentication**: JWT-based auth with OAuth2 integration (Facebook & Google)
 - **📊 Data Analytics**: Comprehensive analytics and reporting capabilities
+- **🚀 Caching System**: Multi-layer caching with React Query for frontend state management and Redis for backend data caching, ensuring optimal performance and user experience
 
 ## 🏗️ 3. Project Structure
 
@@ -110,11 +111,16 @@ back-market/
 
 ```mermaid
 graph TD
-    A[Client<br/>Next.js 15] --> B[API Gateway<br/>NestJS]
-    B --> C[(Database<br/>PostgreSQL)]
+    A[Client<br/>Next.js 15] --> G[React Query<br/>Cache Layer]
+    G --> B[API Gateway<br/>NestJS]
+    B --> H[Redis<br/>Cache Layer]
+    H --> E[ORM<br/>Prisma]
+    E --> C[(Database<br/>PostgreSQL)]
     B --> D[Search Engine<br/>Elasticsearch]
-    C --> E[ORM<br/>Prisma]
     D --> F[Advanced Search]
+    
+    style G fill:#e1f5fe
+    style H fill:#fff3e0
 ```
 
 </div>
@@ -130,21 +136,23 @@ graph TD
 
 ## 🚀 5. Quick Start
 
-### ⚡ One-Command Setup
-
-```bash
-git clone https://github.com/mrthinh307/back-market.git
-cd back-market
-yarn install && yarn dev
-```
-
 ### 📊 Detailed Setup
 
 #### 1. 📥 Clone & Install
+**Clone Repository**
 ```bash
 git clone https://github.com/mrthinh307/back-market.git
 cd back-market
 corepack enable
+```
+
+**In case of Development**
+```bash
+git switch develop
+```
+
+**Install**
+```bash
 yarn install
 ```
 
@@ -172,21 +180,24 @@ npx prisma db push
 
 **Terminal A - Backend:**
 ```bash
-cd server
-yarn dev
+yarn dev:server
 ```
 📍 **Server**: `http://localhost:8888`
 
 **Terminal B - Frontend:**
 ```bash
-cd client
-yarn dev
+yarn dev:client
 ```
 📍 **Client**: `http://localhost:3000`
 
+**Or run concurrenly**
+```bash
+yarn dev
+```
+
 ## 🛠️ 6. Tech Stack
 
-### 🖥️ Backend (Server)
+### 🗄️ Backend (Server)
 
 | Technology | Purpose | Details |
 |------------|---------|---------|
@@ -194,6 +205,7 @@ yarn dev
 | **TypeScript** | Language | Type-safe JavaScript |
 | **Prisma** | ORM | Next-gen database toolkit |
 | **PostgreSQL** | Database | Robust relational database |
+| **Redis** | Cache | High-performance in-memory data store |
 | **JWT** | Authentication | Secure token-based auth |
 | **Elasticsearch** | Search | Advanced search capabilities |
 | **Jest** | Testing | Comprehensive API testing |
@@ -204,6 +216,7 @@ yarn dev
 |------------|---------|---------|
 | **Next.js 15** | Framework | React framework with App Router |
 | **TypeScript** | Language | Type-safe development |
+| **React Query** | State Management | Server state management and caching |
 | **Tailwind CSS 4** | Styling | Utility-first CSS framework |
 | **shadcn/ui** | Components | Modern UI component library |
 | **Vitest** | Testing | Fast unit testing |
