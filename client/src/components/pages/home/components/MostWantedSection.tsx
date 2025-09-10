@@ -46,7 +46,7 @@ function MostWantedSection() {
   ];
 
   return (
-    <section className='container'>
+    <section className='container mb-14'>
       <div className='w-full flex items-center mb-4'>
         <h2 className='font-semibold text-[22px]'>Shop our most wanted</h2>
       </div>

@@ -67,7 +67,7 @@ function ProductShowcaseSection({
   };
 
   return (
-    <section className='container mt-4'>
+    <section className='container mt-4 mb-14'>
       <div className='w-full flex items-center mb-4'>
         <h2 className='font-semibold text-[22px]'>{showcaseTitle}</h2>
       </div>

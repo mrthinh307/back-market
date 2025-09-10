@@ -197,10 +197,6 @@
   html.ja {
     @apply font-semibold;
   }
-
-  section {
-    @apply mb-14;
-  }
 }
 
 @layer utilities {
