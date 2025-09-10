@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ProductListDto } from './dto/product-dto';
+import { calculateAverageRating } from 'src/common/utils/calculate';
 
 @Injectable()
 export class ProductService {
@@ -131,14 +132,8 @@ export class ProductService {
           cheapestVariant.attributes[0]?.value.value || 'Default';
 
         // Calculate average rating efficiently
-        const totalRating = product.reviews.reduce(
-          (sum, review) => sum + review.rating,
-          0,
-        );
-        const averageRating =
-          product.reviews.length > 0
-            ? Number((totalRating / product.reviews.length).toFixed(2))
-            : 0;
+        const ratings = product.reviews.map((r) => r.rating) || [];
+        const ratingCount = product._count.reviews || 0;
 
         // Handle brand safely
         const brandInfo = product.brand
@@ -155,15 +150,15 @@ export class ProductService {
           },
           image: null,
           color: currentColor,
-          price: Number(cheapestVariant.price),
-          priceWithCurrency: `$${Number(cheapestVariant.price)}`,
+          price: Number(cheapestVariant.price).toFixed(2),
+          priceWithCurrency: `$ ${Number(cheapestVariant.price).toFixed(2)}`,
           stock: cheapestVariant.stock,
           variants: {
             colors: colorVariants,
           },
           reviewRating: {
-            count: product._count.reviews,
-            average: averageRating,
+            count: ratingCount,
+            average: calculateAverageRating(ratings),
           },
         };
       }),
