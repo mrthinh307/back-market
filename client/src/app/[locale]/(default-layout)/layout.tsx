@@ -7,13 +7,13 @@ export default function DefaultLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className='mx-auto bg-background-secondary dark:bg-background'>
+    <main className='mx-auto'>
       <Header />
       
-      <div className='min-h-screen'>
+      <div className='mx-auto'>
         {children}
       </div>
-      
+
       {/* <Footer /> */}
     </main>
   );

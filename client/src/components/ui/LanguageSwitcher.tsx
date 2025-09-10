@@ -21,8 +21,7 @@ export function LanguageSwitcher() {
   const currentLanguage = languages.find((lang) => lang.locale === locale);
 
   const switchLanguage = (newLocale: string) => {
-    console.log('Switching language to:', newLocale);
-    router.push(pathname, { locale: newLocale });
+    router.replace(pathname, { locale: newLocale });
   };
 
   return (
