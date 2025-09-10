@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -32,25 +33,26 @@ import { CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { ProductCardProps } from '@/types/cards.type';
 import { mailBoxIcon } from '@/public/assets/images';
 import { useIsMobile } from '@/hooks/use-mobile';
-
-const bestDealsProps = {
-  showcaseTitle: 'Shop our best deals',
-  showcaseImage:
-    'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D1920/https://images.ctfassets.net/mmeshd7gafk1/7zCu5bgeaunPJvoLyqo2go/33738f657887fc7fdee9f5a02cb6f780/Web-Desktop-Photo_table-tennis-.jpg',
-  showcaseCategories: bestCategories,
-  showcaseProducts: bestProducts,
-};
-
-const topBrandsProps = {
-  showcaseTitle: 'Top brands, refurbished',
-  showcaseImage:
-    'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D1920/https://images.ctfassets.net/mmeshd7gafk1/NqbgS5c30ueCeP3zSwFgT/bfa60cb0c156d2d2e0e2d89ea130b18b/Web-Desktop-Photo_mess.jpg',
-  showcaseCategories: topCategories,
-  showcaseProducts: topProducts,
-};
+import { useMemo } from 'react';
 
 function HomePage() {
   const isMobile = useIsMobile();
+
+  const bestDealsProps = useMemo(() => ({
+    showcaseTitle: 'Shop our best deals',
+    showcaseImage:
+      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D1920/https://images.ctfassets.net/mmeshd7gafk1/7zCu5bgeaunPJvoLyqo2go/33738f657887fc7fdee9f5a02cb6f780/Web-Desktop-Photo_table-tennis-.jpg',
+    showcaseCategories: bestCategories,
+    showcaseProducts: bestProducts,
+  }), []);
+
+  const topBrandsProps = useMemo(() => ({
+    showcaseTitle: 'Top brands, refurbished',
+    showcaseImage:
+      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D1920/https://images.ctfassets.net/mmeshd7gafk1/NqbgS5c30ueCeP3zSwFgT/bfa60cb0c156d2d2e0e2d89ea130b18b/Web-Desktop-Photo_mess.jpg',
+    showcaseCategories: topCategories,
+    showcaseProducts: topProducts,
+  }), []);
 
   return (
     <div className='flex flex-col items-center justify-center'>
@@ -63,7 +65,7 @@ function HomePage() {
       />
 
       {/* SECTION BANNER: Tech better with us */}
-      <section className='container'>
+      <section className='container mb-14'>
         <div className='w-full flex flex-col gap-2 text-center'>
           <h2 className='font-heading font-semibold text-[42px] leading-12 md:text-[56px] md:leading-16'>
             Tech better with us
@@ -78,7 +80,7 @@ function HomePage() {
       <WhyChooseUs />
 
       {/* SECTION: RECOMMENDED PRODUCTS */}
-      <section className='slide-carousel-container'>
+      <section className='slide-carousel-container mb-14'>
         <SlideCarousel
           carouselTitle='Recommended for you'
           desktopSlidesToScroll={3}
@@ -113,7 +115,7 @@ function HomePage() {
       <ProductShowcaseSection {...topBrandsProps} />
 
       {/* SECTION: REFURBISHED TECH HELPS THE PLANET */}
-      <section className='container mt-4'>
+      <section className='container mt-4 mb-14'>
         <div className='w-full content-center flex-col gap-6'>
           <div className='w-full flex flex-col gap-4 text-center'>
             <h2 className='font-heading font-semibold text-[42px] leading-12 md:text-[56px] md:leading-16'>
@@ -128,7 +130,7 @@ function HomePage() {
       </section>
 
       {/* SECTION: REVIEWS */}
-      <section className='slide-carousel-container'>
+      <section className='slide-carousel-container mb-14'>
         <SlideCarousel
           carouselTitle='Over 15 customers globally'
           desktopSlidesToScroll={isMobile ? 1 : 4}
@@ -144,7 +146,7 @@ function HomePage() {
       </section>
 
       {/* SECTION: LEARN MORE ABOUT TRADE-INS */}
-      <section className='container'>
+      <section className='container mb-14'>
         <div className='w-full overflow-hidden'>
           <Image
             src={
@@ -162,7 +164,7 @@ function HomePage() {
       </section>
 
       {/* SECTION: GET ORDER BY EMAIL FORM */}
-      <section className='container'>
+      <section className='container mb-14'>
         <div className='flex grow relative bg-[#a164e8] rounded-lg p-6 md: py-8'>
           <div className='relative mx-auto z-[2] content-center flex-col'>
             <div className='w-full md:w-[544px]'>
@@ -210,7 +212,7 @@ function HomePage() {
       </section>
 
       {/* SECTION: TAKE CARE OF YOUR TECH */}
-      <section className='slide-carousel-container'>
+      <section className='slide-carousel-container mb-14'>
         <SlideCarousel
           carouselTitle='Take care of your tech'
           desktopSlidesToScroll={3}
@@ -226,7 +228,7 @@ function HomePage() {
       </section>
 
       {/* CAROUSEL SECTION: REFURBISHED TECH HELPS THE PLANET */}
-      <section className='slide-carousel-container'>
+      <section className='slide-carousel-container mb-14'>
         <SlideCarousel
           carouselTitle='Refurbished tech helps the planet'
           desktopSlidesToScroll={isMobile ? 1 : 4}
@@ -248,7 +250,7 @@ function HomePage() {
       <FAQSection />
 
       {/* SECTION: CAROUSEL AS SEEN IN */}
-      <section className='slide-carousel-container'>
+      <section className='slide-carousel-container mb-14'>
         <SlideCarousel
           carouselTitle='As seen in'
           desktopSlidesToScroll={isMobile ? 1 : 2}
