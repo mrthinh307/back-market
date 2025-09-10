@@ -7,7 +7,7 @@ import { getAccessToken, setAccessToken } from './token-manager';
 import { refreshToken } from '@/api/auth.api';
 
 const httpRequest = axios.create({
-  baseURL: Env.NEXT_PUBLIC_NEXT_BASE_URL,
+  baseURL: Env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
 });
 
@@ -35,7 +35,6 @@ httpRequest.interceptors.response.use(
   async (err) => {
     const originalRequest = err.config;
     const status = err.response?.status;
-    const message = err.response?.data?.message;
 
     if (status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
@@ -75,14 +74,16 @@ httpRequest.interceptors.response.use(
     }
 
     if (status === 403) {
-      // FIXME: Handle 403 error
-      // window.location.href = '/en/email';
+      // FIXME: Handle 403 error: Need to delete token missing label
+      // toast.error(message || 'Invalid credentials', { ...errorToastProps });
     } else if (status === 500) {
       toast.error('Server error', { ...errorToastProps });
     } else if (!status) {
       toast.error('Network error', { ...errorToastProps });
-    } else {
-      toast.error(message, { ...errorToastProps });
+    } else if (status === 404) {
+      throw new Error('NOT_FOUND');
+    } else if (status === 400) {
+      throw new Error('BAD_REQUEST');
     }
 
     return Promise.reject(err);
