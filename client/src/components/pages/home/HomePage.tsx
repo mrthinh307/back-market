@@ -165,7 +165,7 @@ function HomePage() {
 
       {/* SECTION: GET ORDER BY EMAIL FORM */}
       <section className='container mb-14'>
-        <div className='flex grow relative bg-[#a164e8] rounded-lg p-6 md: py-8'>
+        <div className='flex grow relative bg-[#a164e8] rounded-lg p-6 md:py-8'>
           <div className='relative mx-auto z-[2] content-center flex-col'>
             <div className='w-full md:w-[544px]'>
               <div className='flex flex-col items-start text-left gap-1'>
