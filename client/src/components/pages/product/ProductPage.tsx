@@ -1,5 +1,4 @@
 'use client';
-
 import React from 'react';
 
 import { FeatureItem } from '@/types/product-selection.type';
@@ -23,8 +22,34 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { useQuery } from '@tanstack/react-query';
+import { getProductVariantById } from '@/api/product-variant.api';
+import LoadingPage from '../LoadingPage';
+import ErrorState from '@/components/ui/ErrorState';
 
-const ProductPage: React.FC = () => {
+const ProductPage: React.FC<{ productVariantId: string }> = ({
+  productVariantId,
+}) => {
+  const {
+    data: productVariant,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ['product-variant', productVariantId],
+    queryFn: () => getProductVariantById(productVariantId),
+  });
+
+  // Handle loading state
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
+  // Handle error or no data
+  if (error || !productVariant) {
+    return <ErrorState refetch={refetch} />;
+  }
+
   // Get features for iPhone 13 (you can make this dynamic based on product ID)
   const productFeaturesData = getProductFeatures('iphone-13');
   const isMobile = useIsMobile();
@@ -43,14 +68,14 @@ const ProductPage: React.FC = () => {
   const breadcrumbItems = [
     { name: 'Homepage', href: 'https://www.backmarket.com/en-us' },
     {
-      name: 'Smartphones',
-      href: 'https://www.backmarket.com/en-us/l/smartphones/0744fd27-8605-465d-8691-3b6dffda5969',
+      name: productVariant.product.category.name,
+      href: `https://www.backmarket.com/en-us/l/${productVariant.product.category.id}`,
     },
     {
-      name: 'iPhone',
+      name: productVariant.product.brand.name,
       href: 'https://www.backmarket.com/en-us/l/iphone/e8724fea-197e-4815-85ce-21b8068020cc',
     },
-    { name: 'iPhone 13 128GB - Pink - Unlocked' },
+    { name: productVariant.title },
   ];
 
   // Filter breadcrumb items for mobile: only show last link and current page
@@ -159,13 +184,13 @@ const ProductPage: React.FC = () => {
           <div className='w-full max-w-full grow md:w-2/3 md:basis-2/3 lg:w-1/2 lg:basis-1/2'>
             <div className='flex flex-col items-start'>
               <ProductInfo
-                title='iPhone 13'
-                subtitle='Pink • 128 GB • Physical SIM + eSIM'
-                rating={4.4}
-                reviewCount={3743}
-                price={288.99}
-                originalPrice={629.0}
-                savings={340.01}
+                title={productVariant.product.name}
+                subtitle={productVariant.subtitle.text}
+                rating={productVariant.reviewRating.average}
+                reviewCount={productVariant.reviewRating.count}
+                price={productVariant.priceWithCurrency}
+                // originalPrice={629.0}
+                // savings={340.01}
               />
             </div>
 
