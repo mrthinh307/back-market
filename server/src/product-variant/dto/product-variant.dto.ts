@@ -26,8 +26,8 @@ export class ProductVariantDetailDto {
   available: boolean;
   selected?: boolean;
 
-  price: number;
-  priceWithCurrency: `$${number}`;
+  price: string;
+  priceWithCurrency: `$ ${string}`;
 
   product?: {
     id: string;
@@ -43,6 +43,11 @@ export class ProductVariantDetailDto {
   };
 
   attributes: AttributeDto[];
+
+  reviewRating: {
+    count: number;
+    average: number;
+  };
 }
 
 export class VariantItemDto {
@@ -50,7 +55,7 @@ export class VariantItemDto {
   slug: string;
   available: boolean;
   selected: boolean;
-  price: number;
+  price: string;
   priceWithCurrency: string;
   grade: AttributeValueDto;
 }

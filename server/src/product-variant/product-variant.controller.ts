@@ -7,7 +7,9 @@ import { GetRelevantVariantsQueryDto } from './dto/get-relevant-variants.dto';
 
 @Controller('variants')
 export class ProductVariantController {
-  constructor(private productVariantService: ProductVariantService) {}
+  constructor(
+    private productVariantService: ProductVariantService,
+  ) {}
 
   // Get relevant variants for product detail page
   @Get('relevants')
@@ -29,4 +31,6 @@ export class ProductVariantController {
   async deleteProductVariant(@Param('id', ParseUUIDPipe) variantId: string): Promise<void> {
     await this.productVariantService.deleteProductVariant(variantId);
   }
+
+
 }
