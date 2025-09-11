@@ -65,7 +65,7 @@ export class AppCacheService {
    */
   async bumpVersion(nsKey: string) {
     // Use ioredis raw client if want INCR; here write simple: store timestamp
-    await this.set(nsKey, Date.now(), 60 * 60 * 24 * 7 * 1000); // keep 7 days
+    await this.set(nsKey, Date.now(), 60 * 60 * 24 * 7); // keep 7 days
   }
 
   async getVersion(nsKey: string): Promise<string> {

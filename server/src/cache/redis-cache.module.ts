@@ -25,7 +25,7 @@ import { AppCacheService } from './cache.service';
         try {
           const store = await redisStore({
             url: redisUrl,
-            ttl: config.get<number>('CACHE_TTL_MS', 600000), // Convert to milliseconds
+            ttl: config.get<number>('CACHE_TTL_SEC', 600), 
           });
 
           console.log('✅ Redis Cache Store connected successfully');

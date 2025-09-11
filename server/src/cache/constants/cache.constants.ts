@@ -2,16 +2,16 @@
  * Cache configuration constants for product variants
  */
 
-// Cache TTL (Time To Live) in milliseconds
+// Cache TTL (Time To Live) in seconds
 export const CACHE_TTL = {
   // Individual variant details - cache longer since they change less frequently
-  VARIANT_DETAIL: 30 * 60 * 1000, // 30 minutes
+  VARIANT_DETAIL: 30 * 60, // 30 minutes
 
   // Product relevant variants - cache shorter due to stock changes
-  RELEVANT_VARIANTS: 15 * 60 * 1000, // 15 minutes
+  RELEVANT_VARIANTS: 15 * 60, // 15 minutes
 
   // Version keys for invalidation - keep longer
-  VERSION: 24 * 60 * 60 * 1000, // 24 hours
+  VERSION: 24 * 60 * 60, // 24 hours
 } as const;
 
 // Cache key prefixes
