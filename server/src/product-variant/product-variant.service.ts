@@ -136,7 +136,7 @@ export class ProductVariantService {
         text: getSubtitle(attributes).text,
       },
       available: variant.stock > 0,
-      price: variant.price.toNumber().toFixed(2),
+      priceValue: variant.price.toNumber(),
       priceWithCurrency: `$ ${variant.price.toNumber().toFixed(2)}`,
       product: {
         id: variant.product.id,
@@ -388,7 +388,7 @@ export class ProductVariantService {
               available: variant.stock > 0,
               selected:
                 defaultCombination[attributeId] === variantAttr!.valueId,
-              price: variant.price.toNumber().toFixed(2),
+              priceValue: variant.price.toNumber(),
               priceWithCurrency: `$ ${variant.price.toNumber().toFixed(2)}`,
               grade: {
                 id: variantAttr!.value.id,

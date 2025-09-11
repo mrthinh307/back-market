@@ -150,7 +150,7 @@ export class ProductService {
           },
           image: null,
           color: currentColor,
-          price: Number(cheapestVariant.price).toFixed(2),
+          priceValue: Number(cheapestVariant.price),
           priceWithCurrency: `$ ${Number(cheapestVariant.price).toFixed(2)}`,
           stock: cheapestVariant.stock,
           variants: {

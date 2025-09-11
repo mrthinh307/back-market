@@ -32,7 +32,7 @@ export class ProductListDto {
     };
     image: string | null; // Allow null for now
     color: string;
-    price: string;
+    priceValue: number;
     priceWithCurrency: `$ ${string}`;
     stock: number;
     variants: {

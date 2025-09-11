@@ -26,7 +26,7 @@ export class ProductVariantDetailDto {
   available: boolean;
   selected?: boolean;
 
-  price: string;
+  priceValue: number;
   priceWithCurrency: `$ ${string}`;
 
   product?: {
@@ -55,7 +55,7 @@ export class VariantItemDto {
   slug: string;
   available: boolean;
   selected: boolean;
-  price: string;
+  priceValue: number;
   priceWithCurrency: string;
   grade: AttributeValueDto;
 }
