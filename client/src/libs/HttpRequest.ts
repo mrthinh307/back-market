@@ -73,15 +73,15 @@ httpRequest.interceptors.response.use(
         isRefreshing = false;
       }
     }
-
+    
     if (status === 403) {
-      // TODO: Need to consider for better optimization
-      setAccessToken(null as any);
-      toast.error(
-        'You do not have permission to perform this action',
-        { ...errorToastProps }
-      );
-      window.location.href = '/en/email';
+      // TODO: Need to optimization
+      // setAccessToken(null as any);
+      // toast.error(
+      //   'You do not have permission to perform this action',
+      //   { ...errorToastProps }
+      // );
+      // window.location.href = '/en/email';
     } else if (status === 500) {
       toast.error('Server error', { ...errorToastProps });
     } else if (!status) {

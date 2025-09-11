@@ -2,6 +2,14 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import crypto from 'crypto';
 
+/**
+ * Cache Service that wraps cache-manager
+ * 
+ * IMPORTANT: All TTL parameters are in SECONDS for consistency across the app,
+ * but cache-manager internally uses MILLISECONDS, so we convert automatically.
+ * 
+ * Example: ttlSecs = 600 means 10 minutes (600 seconds = 600,000 milliseconds)
+ */
 @Injectable()
 export class AppCacheService {
   constructor(@Inject('CACHE_MANAGER') private cache: Cache) {}
@@ -24,8 +32,16 @@ export class AppCacheService {
     }
   }
 
-  async set<T>(key: string, value: T, ttlMs?: number) {
+  /**
+   * Set cache value with TTL in seconds (will be converted to milliseconds internally)
+   * @param key Cache key
+   * @param value Value to cache
+   * @param ttlSecs TTL in SECONDS (e.g., 600 = 10 minutes)
+   */
+  async set<T>(key: string, value: T, ttlSecs?: number) {
     try {
+      // Convert seconds to milliseconds since cache-manager uses milliseconds
+      const ttlMs = ttlSecs ? ttlSecs * 1000 : undefined;
       await this.cache.set(key, value, ttlMs);
     } catch (error) {
       console.error(`❌ Cache set error for key ${key}:`, error);
@@ -42,7 +58,12 @@ export class AppCacheService {
     }
   }
 
-  // Pattern: wrap: check cache -> if miss call factory -> set cache -> return data
+  /**
+   * Pattern: wrap: check cache -> if miss call factory -> set cache -> return data
+   * @param key Cache key
+   * @param ttlSecs TTL in SECONDS (e.g., 600 = 10 minutes)
+   * @param factory Function to execute if cache miss
+   */
   async wrap<T>(
     key: string,
     ttlSecs: number,
@@ -54,6 +75,7 @@ export class AppCacheService {
       return hit;
     }
     const data = await factory();
+    // Convert seconds to milliseconds since cache-manager uses milliseconds
     await this.set(key, data, ttlSecs);
     return data;
   }
@@ -65,6 +87,7 @@ export class AppCacheService {
    */
   async bumpVersion(nsKey: string) {
     // Use ioredis raw client if want INCR; here write simple: store timestamp
+    // Convert 7 days to milliseconds since cache-manager uses milliseconds
     await this.set(nsKey, Date.now(), 60 * 60 * 24 * 7); // keep 7 days
   }
 

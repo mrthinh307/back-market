@@ -29,7 +29,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
       {/* Product info */}
       <div className='mb-4 mt-6 md:mt-0'>
         {/* Title + Subtitle */}
-        <div className='flex justify-between items-start'>
+        <div className='flex justify-between items-start gap-6'>
           <h1 className='mb-3 flex flex-col'>
             <span className='text-3xl font-heading font-semibold text-secondary leading-10'>
               {title}
@@ -39,13 +39,13 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
             </span>
           </h1>
 
-          <button className='inline-flex md:hidden p-2 hover:bg-icon-button-hover rounded-full cursor-pointer dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-200'>
+          <button className='size-[40px] rounded-full content-center md:!hidden hover:!bg-icon-button-hover cursor-pointer dark:!bg-gray-700 dark:hover:!bg-gray-600 transition-colors duration-200'>
             <Image
               src={heartIcon}
               alt='Heart Icon'
-              width={0}
-              height={0}
-              className='size-6 dark:invert'
+              width={24}
+              height={24}
+              className='dark:invert'
             />
           </button>
           {/* <a

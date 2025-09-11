@@ -5,7 +5,7 @@
 // Cache TTL (Time To Live) in seconds
 export const CACHE_TTL = {
   // Individual variant details - cache longer since they change less frequently
-  VARIANT_DETAIL: 30 * 60, // 30 minutes
+  VARIANT_DETAIL: 20 * 60, // 20 minutes
 
   // Product relevant variants - cache shorter due to stock changes
   RELEVANT_VARIANTS: 15 * 60, // 15 minutes
