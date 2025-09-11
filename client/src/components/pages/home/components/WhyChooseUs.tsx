@@ -21,7 +21,7 @@ function WhyChooseUs() {
   ];
 
   return (
-    <section className='container'>
+    <section className='container mb-14'>
       <div className='w-full bg-background-secondary rounded-lg grid gap-3 grid-cols-2 md:grid-cols-4 p-3'>
         {whyChooseUsCOntent.map((item, index) => (
           <div key={index} className='flex gap-3 items-center justify-start'>

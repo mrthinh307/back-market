@@ -11,7 +11,7 @@ function ProductCard({
   className?: string;
 }) {
   return (
-    <Link href={'/'}>
+    <Link href={'/en/product/00078f17-62a0-46ec-8a9c-5631a910c1c3'}>
       <div className={`h-full ${className}`}>
         <div className='rounded-lg shadow-sm focus-within:shadow-md hover:shadow-md bg-background-secondary h-full border-transparent'>
           <div className='group relative flex h-full flex-col pt-4 md:pt-10'>

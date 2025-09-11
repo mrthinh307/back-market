@@ -10,9 +10,9 @@ interface ProductInfoProps {
   subtitle?: string;
   rating: number;
   reviewCount: number;
-  price: number;
-  originalPrice: number;
-  savings: number;
+  price: string;
+  // originalPrice: number;
+  // savings: number;
 }
 
 const ProductInfo: React.FC<ProductInfoProps> = ({
@@ -21,8 +21,8 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   rating,
   reviewCount,
   price,
-  originalPrice,
-  savings,
+  // originalPrice,
+  // savings,
 }) => {
   return (
     <div className='w-full'>
@@ -48,8 +48,8 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
               className='size-6 dark:invert'
             />
           </button>
-          <a
-            className='bg-chart-2 rounded-sm hidden md:inline-flex items-center self-center p-2 pr-4 isolate mb-4 font-semibold text-sm dark:hidden'
+          {/* <a
+            className='bg-chart-2 rounded-sm hidden lg:inline-flex items-center self-center p-2 pr-4 isolate mb-4 font-semibold text-sm dark:hidden'
             href='#ecoBlocks'
           >
             <Image
@@ -60,7 +60,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
               width='24'
             />
             <span className='ml-1 underline'>More sustainable than new</span>
-          </a>
+          </a> */}
         </div>
 
         {/* Rating */}
@@ -87,13 +87,13 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
         <div className='mt-6 flex items-center gap-4'>
           <div className='grow'>
             <span
-              className='text-2xl font-semibold text-secondary'
+              className='text-3xl font-semibold text-secondary'
               data-qa='productpage-product-price'
               data-test='productpage-product-price'
             >
-              $ {price.toFixed(2)}
+              {price}
             </span>
-            <div className='flex flex-wrap items-center gap-x-3'>
+            {/* <div className='flex flex-wrap items-center gap-x-3'>
               <span
                 id='trigger-v-0-5-0-0'
                 className='text-sm z-[1] text-muted line-through whitespace-nowrap'
@@ -106,7 +106,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
               >
                 Save $ {savings.toFixed(2)}
               </span>
-            </div>
+            </div> */}
           </div>
 
           {/* Add to cart Button */}

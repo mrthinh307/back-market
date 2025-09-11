@@ -7,12 +7,14 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AdminModule } from './admin/admin.module';
 import { ProductVariantModule } from './product-variant/product-variant.module';
 import { ProductModule } from './product/product.module';
+import { RedisCacheModule } from './cache/redis-cache.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    RedisCacheModule,
     AuthModule,
     AdminModule,
     UserModule,

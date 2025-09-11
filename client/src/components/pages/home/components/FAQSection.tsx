@@ -29,7 +29,7 @@ function FAQSection() {
   ];
 
   return (
-    <section className='w-full bg-background-secondary'>
+    <section className='w-full bg-background-secondary mb-14'>
       <div className='px-4 md:px-6 lg:px-8 mx-auto max-w-[720px] py-8 md:py-14'>
         <div className='flex flex-col mb-4'>
           <h2 className='text-[22px] font-semibold text-center md:text-left'>

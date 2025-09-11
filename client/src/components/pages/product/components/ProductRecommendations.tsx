@@ -23,7 +23,7 @@ const ProductRecommendations: React.FC<ProductRecommendationsProps> = ({
   title,
   products,
   onProductClick,
-  maxColumns = 4
+  maxColumns = 4,
 }) => {
   const handleProductClick = (product: Product) => {
     if (onProductClick) {
@@ -39,7 +39,9 @@ const ProductRecommendations: React.FC<ProductRecommendationsProps> = ({
         <h2 className='font-duplet text-2xl font-bold text-foreground mb-8'>
           {title}
         </h2>
-        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-${maxColumns} gap-6`}>
+        <div
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-${maxColumns} gap-6`}
+        >
           {products.map((product) => (
             <ProductCard
               key={product.id}
