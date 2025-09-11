@@ -22,7 +22,7 @@ import {
   refreshToken,
   signUp,
 } from '@/api/auth.api';
-import { errorToastProps, successToastProps } from '@/libs/toast/toast-props';
+import { successToastProps } from '@/libs/toast/toast-props';
 import { parseAxiosError } from '@/utils/AxiosError';
 import { Env } from '@/libs/Env';
 import { fetchProfile } from '@/api/user.api';
@@ -109,7 +109,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const { access_token } = response;
         setAccessToken(access_token);
 
-        router.push(`/${locale}`);
+        router.back(); // Redirect to previous page
       }
     } catch (err: any) {
       const { message } = parseAxiosError(err);
@@ -120,10 +120,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           message,
         );
       }
-
-      toast.error(message || 'Login failed. Please try again.', {
-        ...errorToastProps,
-      });
     } finally {
       setIsLoading(false);
     }
@@ -165,10 +161,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           message,
         );
       }
-
-      toast.error(message || 'Sign up failed. Please try again.', {
-        ...errorToastProps,
-      });
     } finally {
       setIsLoading(false);
     }
@@ -188,10 +180,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (Env.NODE_ENV === 'development') {
         console.warn('Development Environment Message - Error login:', message);
       }
-
-      toast.error(message || 'Login failed. Please try again.', {
-        ...errorToastProps,
-      });
       setIsLoading(false);
     } finally {
       setIsLoading(false);
@@ -208,8 +196,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsLoading(true);
       initiateFacebookOAuth();
     } catch (err: any) {
-      const { message } = parseAxiosError(err);
-      toast.error(message || 'Facebook login failed. Please try again.');
+      setIsLoading(false);
+    } finally {
       setIsLoading(false);
     }
   };
@@ -226,10 +214,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.log('User data fetched:', userData);
       return userData;
     } catch (err: any) {
-      const { message } = parseAxiosError(err);
-      toast.error(message || 'Failed to fetch user data.', {
-        ...errorToastProps,
-      });
+      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }

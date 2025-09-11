@@ -12,6 +12,7 @@ import Image from 'next/image';
 
 import { cn } from '@/libs/utils';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 
 // Types
 type CarouselApi = UseEmblaCarouselType[1];
@@ -451,10 +452,9 @@ function CarouselWithAutoplay({
 
 // Sub-components
 function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
-  const { carouselRef, orientation, canScrollPrev, canScrollNext } =
-    useCarousel();
+  const { carouselRef, orientation } = useCarousel();
 
-  return (
+  return (  
     <div
       ref={carouselRef}
       className='overflow-hidden'
@@ -463,7 +463,6 @@ function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
       <div
         className={cn(
           'flex',
-          !canScrollPrev && !canScrollNext ? 'justify-center items-center' : '',
           orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
           className,
         )}
@@ -657,37 +656,60 @@ function CarouselThumbnails({
   onThumbnailClick: (index: number) => void;
   className?: string;
 }) {
+  const [thumbnailsLoaded, setThumbnailsLoaded] = React.useState<boolean[]>([]);
+
+  // Initialize loading state for thumbnails
+  React.useEffect(() => {
+    setThumbnailsLoaded(new Array(images.length).fill(false));
+  }, [images.length]);
+
+  // Handle thumbnail load
+  const handleThumbnailLoad = (index: number) => {
+    setThumbnailsLoaded(prev => {
+      const newState = [...prev];
+      newState[index] = true;
+      return newState;
+    });
+  };
+
   return (
-
-      <ul className='flex list-none gap-2 overflow-hidden py-1 px-0.5 justify-center'>
-        {images.map((image: string, index: number) => (
-          <li key={index} className='flex'>
-            <button 
-              className='flex rounded-sm cursor-pointer'
-              onClick={() => onThumbnailClick(index)}
+    <ul className='flex list-none gap-2 overflow-hidden py-1 px-0.5 justify-center'>
+      {images.map((image: string, index: number) => (
+        <li key={index} className='flex'>
+          <button 
+            className='flex rounded-sm cursor-pointer'
+            onClick={() => onThumbnailClick(index)}
+          >
+            <div 
+              className={cn(
+                'appearance-none overflow-hidden no-underline transition-colors -inset-y-1 left-0 rounded-sm flex size-10 justify-center border border-solid relative',
+                selectedIndex === index 
+                  ? 'border-dark dark:border-chart-2' 
+                  : 'border-[#818388]'
+              )}
             >
-              <div 
-                className={cn(
-                  'appearance-none overflow-hidden no-underline transition-colors -inset-y-1 left-0 rounded-sm flex size-10 justify-center border border-solid',
-                  selectedIndex === index 
-                    ? 'border-dark dark:border-chart-2' 
-                    : 'border-[#818388]'
-                )}
-              >
-                <Image
-                  src={image}
-                  alt={`Thumbnail ${index + 1}`}
-                  className='h-[40px] w-auto max-h-full max-w-full leading-none object-cover'
-                  width={0}
-                  height={0}
-                  sizes='100vw'
-                />
-              </div>
-            </button>
-          </li>
-        ))}
-      </ul>
-
+              {/* Thumbnail skeleton */}
+              {!thumbnailsLoaded[index] && (
+                <Skeleton className="absolute inset-0 w-full h-full rounded-sm" />
+              )}
+              
+              {/* Thumbnail image */}
+              <Image
+                src={image}
+                alt={`Thumbnail ${index + 1}`}
+                className={`h-[40px] w-auto max-h-full max-w-full leading-none object-cover transition-opacity duration-300 ${
+                  thumbnailsLoaded[index] ? 'opacity-100' : 'opacity-0'
+                }`}
+                width={0}
+                height={0}
+                sizes='40px'
+                onLoad={() => handleThumbnailLoad(index)}
+              />
+            </div>
+          </button>
+        </li>
+      ))}
+    </ul>
   );
 }
 

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 
 import {
   Carousel,
@@ -13,6 +13,7 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 import Fade from 'embla-carousel-fade';
+import { Skeleton } from '@/components/ui/skeleton';
 
 function GalleryCarousel({
   galleryImages,
@@ -27,7 +28,24 @@ function GalleryCarousel({
 }) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
-  const [fade] = useState(() => Fade());
+  const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([]);
+  
+  // ✅ Memoize plugin to avoid reinitialize
+  const plugins = useMemo(() => [Fade()], []);
+
+  // ✅ Initialize loading state for all images
+  useEffect(() => {
+    setImagesLoaded(new Array(galleryImages.length).fill(false));
+  }, [galleryImages.length]);
+
+  // ✅ Handle image load
+  const handleImageLoad = (index: number) => {
+    setImagesLoaded(prev => {
+      const newState = [...prev];
+      newState[index] = true;
+      return newState;
+    });
+  };
 
   const handleThumbnailClick = useCallback(
     (index: number) => {
@@ -52,6 +70,11 @@ function GalleryCarousel({
     };
   }, [api, handleCarouselSelect]);
 
+  // ✅ Early return if no images
+  if (!galleryImages || galleryImages.length === 0) {
+    return <div className="text-center p-4">No images to display</div>;
+  }
+
   return (
     <Carousel
       setApi={setApi}
@@ -59,7 +82,7 @@ function GalleryCarousel({
         align: 'start',
         loop: true,
       }}
-      plugins={[fade]}
+      plugins={plugins}
       className={className}
     >
       {/* Main Carousel Content */}
@@ -69,14 +92,26 @@ function GalleryCarousel({
             key={index}
             className={`pl-0 ${carouselItemClassName || ''}`}
           >
-            <Image
-              src={image}
-              alt={`Gallery image ${index + 1}`}
-              className='rounded-lg block !h-[66.7vw] max-h-full max-w-full w-auto leading-none md:!h-auto md:w-full lg:w-[29.125rem] object-cover'
-              width={0}
-              height={0}
-              sizes='100vw'
-            />
+            <div className="relative w-full h-full">
+              {/* Skeleton loader */}
+              {!imagesLoaded[index] && (
+                <Skeleton className="absolute inset-0 w-full h-full rounded-lg" />
+              )}
+              
+              {/* Actual image */}
+              <Image
+                src={image}
+                alt={`Gallery image ${index + 1}`}
+                className={`rounded-lg block h-[66.7vw] max-h-full max-w-full w-auto leading-none md:h-auto md:w-full lg:w-[29.125rem] object-cover transition-opacity duration-500 ${
+                  imagesLoaded[index] ? 'opacity-100' : 'opacity-0'
+                }`}
+                width={0}
+                height={0}
+                sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 29.125rem'
+                onLoad={() => handleImageLoad(index)}
+                priority={index === 0} // Prioritize first image
+              />
+            </div>
           </CarouselItem>
         ))}
       </CarouselContent>

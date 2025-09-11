@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import Image from 'next/image';
 import {
   CarouselWithAutoplay,
@@ -11,9 +9,10 @@ import {
   CarouselDotsWithProgress,
   CarouselDots,
 } from '@/components/ui/carousel';
-import { useIsMobile } from '@/hooks/use-mobile';
 import Autoplay from 'embla-carousel-autoplay';
 import Fade from 'embla-carousel-fade';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 function BannerCarousel({
   desktopBannerImages,
@@ -29,31 +28,52 @@ function BannerCarousel({
   navigationClassName?: string;
 }) {
   const isMobile = useIsMobile();
-
-  // ✅ Autoplay instance
   const [hasInteracted, setHasInteracted] = useState(false);
-  const [autoplay] = useState(() =>
-    Autoplay({
-      delay: 5000,
-      stopOnInteraction: true,
-    }),
+  const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([]);
+
+  // ✅ Memoize plugins để tránh reinitialize
+  const plugins = useMemo(
+    () => [
+      Fade(),
+      Autoplay({
+        delay: 5000,
+        stopOnInteraction: true,
+      }),
+    ],
+    [],
   );
 
-  // ✅ Fade instance - memoized to prevent reinitializing Embla
-  const [fade] = useState(() => Fade());
+  const bannerImages = isMobile ? mobileBannerImages : desktopBannerImages;
+
+  // ✅ Initialize loading state for all images
+  useEffect(() => {
+    setImagesLoaded(new Array(bannerImages.length).fill(false));
+  }, [bannerImages.length]);
+
+  // ✅ Handle image load
+  const handleImageLoad = (index: number) => {
+    setImagesLoaded(prev => {
+      const newState = [...prev];
+      newState[index] = true;
+      return newState;
+    });
+  };
 
   // ✅ Follow interaction
   useEffect(() => {
+    const autoplayPlugin = plugins.find(
+      (plugin) => plugin.name === 'autoplay',
+    ) as any;
+    if (!autoplayPlugin) return;
+
     const interval = setInterval(() => {
-      if (!hasInteracted && !autoplay.isPlaying()) {
+      if (!hasInteracted && !autoplayPlugin.isPlaying()) {
         setHasInteracted(true);
       }
     }, 300);
 
     return () => clearInterval(interval);
-  }, [autoplay, hasInteracted]);
-
-  const bannerImages = isMobile ? mobileBannerImages : desktopBannerImages;
+  }, [plugins, hasInteracted]);
 
   return (
     <CarouselWithAutoplay
@@ -61,20 +81,32 @@ function BannerCarousel({
         align: 'start',
         loop: true,
       }}
-      plugins={[fade, autoplay]}
+      plugins={plugins}
       className={`w-full ${className}`}
     >
       <CarouselContent className='ml-0'>
         {bannerImages.map((image: string, index: number) => (
           <CarouselItem key={index} className={`pl-0 ${carouselItemClassName}`}>
-            <Image
-              src={image}
-              alt={`Banner carousel ${index + 1}`}
-              className='size-full object-cover'
-              width={0}
-              height={0}
-              sizes='100vw'
-            />
+            <div className="relative h-full">
+              {/* Skeleton loader */}
+              {!imagesLoaded[index] && (
+                <Skeleton className="absolute inset-0 w-full h-full rounded-none xl:rounded-lg" />
+              )}
+              
+              {/* Actual image */}
+              <Image
+                src={image}
+                alt={`Banner carousel ${index + 1}`}
+                className={`size-full object-cover transition-opacity duration-300 ${
+                  imagesLoaded[index] ? 'opacity-100' : 'opacity-0'
+                }`}
+                width={0}
+                height={0}
+                sizes='100vw'
+                onLoad={() => handleImageLoad(index)}
+                priority={index === 0} // Prioritize first image
+              />
+            </div>
           </CarouselItem>
         ))}
       </CarouselContent>
