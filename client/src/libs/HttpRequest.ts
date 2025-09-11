@@ -9,6 +9,7 @@ import { refreshToken } from '@/api/auth.api';
 const httpRequest = axios.create({
   baseURL: Env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
+  timeout: 15000, // 15s
 });
 
 httpRequest.interceptors.request.use((config) => {
@@ -74,8 +75,13 @@ httpRequest.interceptors.response.use(
     }
 
     if (status === 403) {
-      // FIXME: Handle 403 error: Need to delete token missing label
-      // toast.error(message || 'Invalid credentials', { ...errorToastProps });
+      // TODO: Need to consider for better optimization
+      setAccessToken(null as any);
+      toast.error(
+        'You do not have permission to perform this action',
+        { ...errorToastProps }
+      );
+      window.location.href = '/en/email';
     } else if (status === 500) {
       toast.error('Server error', { ...errorToastProps });
     } else if (!status) {
