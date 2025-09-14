@@ -673,7 +673,7 @@ function CarouselThumbnails({
   };
 
   return (
-    <ul className='flex list-none gap-2 overflow-hidden py-1 px-0.5 justify-center'>
+    <ul className='flex list-none gap-2 overflow-hidden py-1 px-0.5 justify-center items-center'>
       {images.map((image: string, index: number) => (
         <li key={index} className='flex'>
           <button 
@@ -682,7 +682,7 @@ function CarouselThumbnails({
           >
             <div 
               className={cn(
-                'appearance-none overflow-hidden no-underline transition-colors -inset-y-1 left-0 rounded-sm flex size-10 justify-center border border-solid relative',
+                'appearance-none overflow-hidden no-underline transition-colors rounded-sm flex size-10 justify-center border border-solid relative',
                 selectedIndex === index 
                   ? 'border-dark dark:border-chart-2' 
                   : 'border-[#818388]'

@@ -10,9 +10,9 @@ interface ProductInfoProps {
   subtitle?: string;
   rating: number;
   reviewCount: number;
-  price: string;
-  // originalPrice: number;
-  // savings: number;
+  priceWithCurrency: string;
+  originalPrice?: string;
+  savings?: string;
 }
 
 const ProductInfo: React.FC<ProductInfoProps> = ({
@@ -20,9 +20,9 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   subtitle,
   rating,
   reviewCount,
-  price,
-  // originalPrice,
-  // savings,
+  priceWithCurrency,
+  originalPrice,
+  savings,
 }) => {
   return (
     <div className='w-full'>
@@ -30,11 +30,11 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
       <div className='mb-4 mt-6 md:mt-0'>
         {/* Title + Subtitle */}
         <div className='flex justify-between items-start gap-6'>
-          <h1 className='mb-3 flex flex-col'>
+          <h1 className='mb-2 flex flex-col'>
             <span className='text-3xl font-heading font-semibold text-secondary leading-10'>
               {title}
             </span>
-            <span className='text-sm font-medium text-secondary'>
+            <span className='text-sm md:text-base font-medium text-secondary'>
               {subtitle}
             </span>
           </h1>
@@ -48,8 +48,9 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
               className='dark:invert'
             />
           </button>
+
           {/* <a
-            className='bg-chart-2 rounded-sm hidden lg:inline-flex items-center self-center p-2 pr-4 isolate mb-4 font-semibold text-sm dark:hidden'
+            className='bg-chart-2 rounded-sm hidden lg:inline-flex items-center self-center p-2 pr-4 isolate mb-4 font-semibold text-sm dark:hidden shrink-0'
             href='#ecoBlocks'
           >
             <Image
@@ -91,22 +92,25 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
               data-qa='productpage-product-price'
               data-test='productpage-product-price'
             >
-              {price}
+              {priceWithCurrency}
             </span>
-            {/* <div className='flex flex-wrap items-center gap-x-3'>
-              <span
-                id='trigger-v-0-5-0-0'
-                className='text-sm z-[1] text-muted line-through whitespace-nowrap'
-              >
-                $ {originalPrice.toFixed(2)}
-              </span>
-              <span
-                className='bg-[#94F5BC] rounded-xs inline-block max-w-full truncate px-2 text-sm font-semibold text-[#006B40]'
-                title={`Save $${savings.toFixed(2)}`}
-              >
-                Save $ {savings.toFixed(2)}
-              </span>
-            </div> */}
+
+            {originalPrice && savings && (
+              <div className='mt-1 flex items-center gap-2'>
+                <span
+                  id='trigger-v-0-5-0-0'
+                  className='text-sm z-[1] text-muted line-through whitespace-nowrap'
+                >
+                  {originalPrice}
+                </span>
+                <span
+                  className='bg-[#94F5BC] rounded-xs inline-block max-w-full truncate px-2 text-sm font-semibold text-[#006B40]'
+                  title={`Save ${savings}`}
+                >
+                  Save {savings}
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Add to cart Button */}

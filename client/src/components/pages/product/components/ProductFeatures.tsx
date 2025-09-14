@@ -1,12 +1,22 @@
 import React from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
-import { ProductFeaturesProps } from '@/types/product-selection.type';
 import { useHorizontalScrollGradientMask } from '@/hooks/useHorizontalScrollGradientMask';
+import { getProductFeatures } from '../seed/temp-data-product';
+import FeatureIcon from './FeatureIcon';
 
-const ProductFeatures: React.FC<ProductFeaturesProps> = ({
-  features,
+export interface FeatureItem {
+  id: string;
+  title: string;
+  description?: string;
+  icon: React.ReactNode;
+  onClick?: () => void;
+}
+
+const ProductFeatures: React.FC = ({
   className = '',
+}: {
+  className?: string;
 }) => {
   const {
     scrollContainerRef,
@@ -16,6 +26,15 @@ const ProductFeatures: React.FC<ProductFeaturesProps> = ({
     isAtEnd,
     gradientMaskClass,
   } = useHorizontalScrollGradientMask();
+
+  // Get features for iPhone 13 (you can make this dynamic based on product ID)
+  const features: FeatureItem[] = getProductFeatures('iphone-13').map((feature) => ({
+    id: feature.id,
+    title: feature.title,
+    description: feature.description,
+    icon: <FeatureIcon iconType={feature.iconType} />,
+    onClick: feature.onClick,
+  }));
 
   return (
     <div className={`mb-7 md:mb-8 mt-6 w-full ${className}`}>

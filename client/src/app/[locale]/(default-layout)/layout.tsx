@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header} from '@/components/layouts';
+import { Footer, Header} from '@/components/layouts';
 
 export default function DefaultLayout({
   children,
@@ -14,7 +14,7 @@ export default function DefaultLayout({
         {children}
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </main>
   );
 }

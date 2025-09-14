@@ -92,7 +92,7 @@ function GalleryCarousel({
             key={index}
             className={`pl-0 ${carouselItemClassName || ''}`}
           >
-            <div className="relative w-full h-full">
+            <div className="relative h-full">
               {/* Skeleton loader */}
               {!imagesLoaded[index] && (
                 <Skeleton className="absolute inset-0 w-full h-full rounded-lg" />
@@ -117,15 +117,15 @@ function GalleryCarousel({
       </CarouselContent>
 
       {/* Thumbnail Navigation */}
-      <div className='flex items-center justify-center pt-3'>
-        <CarouselPrevious className='size-8 mx-2 my-1' />
+      <div className='content-center pt-3'>
+        <CarouselPrevious className='size-8 mx-2' />
         <CarouselThumbnails
           images={galleryImages}
           selectedIndex={selectedImageIndex}
           onThumbnailClick={handleThumbnailClick}
           className={`mt-4 ${navigationClassName || ''}`}
         />
-        <CarouselNext className='size-8 mx-2 my-1' />
+        <CarouselNext className='size-8 mx-2' />
       </div>
     </Carousel>
   );

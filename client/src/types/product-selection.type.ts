@@ -1,54 +1,62 @@
-export interface SelectionOption {
-  id: string;
+// Backend API Response Types
+export interface Grade {
+  id: number;
   name: string;
-  price: string;
-  color?: string; 
-  isGoodDeal?: boolean;
+  displayOrder: number;
 }
 
-export interface ProductSelectionProps {
-  title: string;
-  options: SelectionOption[];
-  selectedOption: string;
-  onSelectionChange: (optionId: string) => void;
-  leftImage?: {
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
+export interface RelevantVariantGroup {
+  attribute: {
+    id: number;
+    code: string;
+    name: string;
   };
-  leftContent?: React.ReactNode;
-  showInfoButton?: boolean;
-  infoButtonText?: string;
-  infoButtonIcon?: React.ReactNode;
-  gridColumns?: 1 | 2; // Number of columns for options grid
-  customOptionRenderer?: (option: SelectionOption, isSelected: boolean) => React.ReactNode;
+  items: {
+    variantId: string;
+    slug: string;
+    available: boolean;
+    selected: boolean;
+    priceValue: number;
+    priceWithCurrency: string;
+    grade: Grade;
+  }[];
 }
 
-export interface BannerProps {
-  title: string;
-  description: string;
-  buttonText: string;
-  buttonOnClick?: () => void;
-  backgroundColor?: string;
-  textColor?: string;
-  buttonColor?: string;
-  buttonTextColor?: string;
-  leftContent?: React.ReactNode;
-  rightContent?: React.ReactNode;
-  footerContent?: React.ReactNode;
-  className?: string;
+export interface RelevantVariantsResponse {
+  relevantVariants: RelevantVariantGroup[];
 }
 
-export interface FeatureItem {
+export interface ProductVariantDetail {
   id: string;
+  slug: string;
   title: string;
-  description?: string;
-  icon: React.ReactNode;
-  onClick?: () => void;
-}
-
-export interface ProductFeaturesProps {
-  features: FeatureItem[];
-  className?: string;
+  subtitle: {
+    raw: string[];
+    text: string;
+  };
+  available: boolean;
+  priceValue: number;
+  priceWithCurrency: string;
+  product: {
+    id: string;
+    name: string;
+    brand: {
+      id: string;
+      name: string;
+    } | null;
+    category: {
+      id: number;
+      name: string;
+    };
+  };
+  attributes: Array<{
+    id: number;
+    code: string;
+    name: string;
+    grade: Grade;
+  }>;
+  reviewRating: {
+    count: number;
+    average: number;
+  };
 }
