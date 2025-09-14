@@ -12,7 +12,11 @@
     "commit": "commit",
     "commitlint": "commitlint",
     "format": "prettier --write \"client/src/**/*.{ts,tsx,js,jsx,json,md}\" \"server/src/**/*.{ts,tsx,js,jsx,json,md}\"",
-    "format:check": "prettier --check \"client/src/**/*.{ts,tsx,js,jsx,json,md}\" \"server/src/**/*.{ts,tsx,js,jsx,json,md}\""
+    "format:check": "prettier --check \"client/src/**/*.{ts,tsx,js,jsx,json,md}\" \"server/src/**/*.{ts,tsx,js,jsx,json,md}\"",
+    "prisma:generate": "yarn --cwd server prisma generate",
+    "prisma:migrate": "yarn --cwd server prisma migrate dev",
+    "prisma:deploy": "yarn --cwd server prisma migrate deploy",
+    "prisma:studio": "yarn --cwd server prisma studio"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
