@@ -5,17 +5,14 @@ import { Prisma } from '@prisma/client';
 import { generateSlug, getSubtitle } from 'src/common/utils/string';
 import { calculateAverageRating } from 'src/common/utils/calculate';
 import { AppCacheService } from '../cache/cache.service';
-import {
-  CACHE_TTL,
-  getVariantDetailCacheKey,
-  getVariantDetailVersionKey,
-} from '../cache/constants/cache.constants';
+import { CACHE_TTL } from '../cache/constants/cache-key.constants';
 import {
   AttributeDto,
   ProductVariantDetailDto,
   ProductDto,
   VariantItemDto,
 } from './dto/product-variant.dto';
+import { CacheKeyFactory } from 'src/cache/cache-key.factory';
 
 // Type for Prisma raw query result (before transformation to DTO)
 type PrismaProductVariant = {
@@ -45,6 +42,7 @@ export class ProductVariantService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly cacheService: AppCacheService,
+    private readonly cacheKeyFactory: CacheKeyFactory,
   ) {}
 
   /**
@@ -56,15 +54,19 @@ export class ProductVariantService {
     variantId: string,
   ): Promise<ProductVariantDetailDto> {
     // Generate cache key with version for cache invalidation
-    const baseKey = getVariantDetailCacheKey(variantId); // e.g. "pv:123"
-    const version = await this.cacheService.getVersion(getVariantDetailVersionKey()); // e.g. "1"
-    const cacheKey = `${baseKey}:v${version}`; // e.g. "pv:123:v1"
+    const baseKey = this.cacheKeyFactory.getVariantDetailCacheKey(variantId); // e.g. "dev:product-variant:detail:123"
+    const version = await this.cacheService.getVersion(
+      this.cacheKeyFactory.getVariantDetailVersionKey(),
+    ); // e.g. "1"
+    const cacheKey = `${baseKey}:v${version}`; // e.g. "dev:product-variant:detail:123:v1"
 
     return this.cacheService.wrap(
       cacheKey,
       CACHE_TTL.VARIANT_DETAIL,
       async () => {
-        console.log(`🔍 Cache miss for variant ${variantId} - fetching from database`)
+        console.log(
+          `🔍 Cache miss for variant ${variantId} - fetching from database`,
+        );
         return this.fetchVariantFromDatabase(variantId);
       },
     );
@@ -193,13 +195,17 @@ export class ProductVariantService {
    */
   private async invalidateVariantCache(variantId: string): Promise<void> {
     // Optionally, explicitly delete the specific variant cache
-    const baseKey = getVariantDetailCacheKey(variantId);
-    const version = await this.cacheService.getVersion(getVariantDetailVersionKey());
+    const baseKey = this.cacheKeyFactory.getVariantDetailCacheKey(variantId);
+    const version = await this.cacheService.getVersion(
+      this.cacheKeyFactory.getVariantDetailVersionKey(),
+    );
     const cacheKey = `${baseKey}:v${version}`;
     await this.cacheService.del(cacheKey);
 
     // Bump global variants version to invalidate all variant caches
-    await this.cacheService.bumpVersion(getVariantDetailVersionKey());
+    await this.cacheService.bumpVersion(
+      this.cacheKeyFactory.getVariantDetailVersionKey(),
+    );
 
     //TODO: Need to BUMP VERSION relevant namespaces: relevant variants, product listing, etc.
   }
@@ -212,7 +218,36 @@ export class ProductVariantService {
    */
   async getRelevantVariants(
     productId: string,
-    defaultVariantId?: string,
+    defaultVariantId: string,
+  ): Promise<ProductDto> {
+    // Generate cache key with version for cache invalidation
+    const baseKey = this.cacheKeyFactory.getRelevantVariantsCacheKey(
+      productId,
+      defaultVariantId,
+    ); // e.g. "dev:product-variant:relevant:123"
+    const version = await this.cacheService.getVersion(
+      this.cacheKeyFactory.getRelevantVariantsVersionKey(),
+    ); // e.g. "1"
+    const cacheKey = `${baseKey}:v${version}`; // e.g. "dev:product-variant:relevant:123:v1"
+
+    return this.cacheService.wrap(
+      cacheKey,
+      CACHE_TTL.RELEVANT_VARIANTS,
+      async () => {
+        console.log(
+          `🔍 Cache miss for relevant variants of product ${productId} - fetching from database`,
+        );
+        return this.fetchRelevantVariantsFromDatabase(
+          productId,
+          defaultVariantId,
+        );
+      },
+    );
+  }
+
+  async fetchRelevantVariantsFromDatabase(
+    productId: string,
+    defaultVariantId: string,
   ): Promise<ProductDto> {
     const product = await this.prisma.product.findUnique({
       where: { id: productId },
@@ -236,13 +271,12 @@ export class ProductVariantService {
 
     // Get default variant or first variant if not specified
     let defaultVariant = product.variants[0] as PrismaProductVariant;
-    if (defaultVariantId) {
-      const foundVariant = product.variants.find(
-        (v) => v.id === defaultVariantId,
-      ) as PrismaProductVariant;
-      if (foundVariant) {
-        defaultVariant = foundVariant;
-      }
+    const foundVariant = product.variants.find(
+      (v) => v.id === defaultVariantId,
+    ) as PrismaProductVariant;
+    
+    if (foundVariant) {
+      defaultVariant = foundVariant;
     }
 
     if (!defaultVariant) {
