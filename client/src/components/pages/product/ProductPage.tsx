@@ -28,7 +28,7 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
   productVariantId,
 }) => {
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ['pv', productVariantId],
+    queryKey: ['product-variant', productVariantId],
     queryFn: () => getProductVariantById(productVariantId),
   });
 
@@ -53,7 +53,7 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
       name: productVariant.product.brand?.name || 'Brand',
       href: `/${locale}/brand`,
     },
-    { name: productVariant.title },
+    { name: productVariant.title }, 
   ];
 
   const { items: displayBreadcrumbItems } = useBreadcrumb(breadcrumbItems);
