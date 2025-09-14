@@ -159,7 +159,7 @@ yarn install
 #### 2. 🔧 Environment Setup
 ```bash
 # Copy environment files
-cp client/.env.example client/.env.local
+cp client/.env.example client/.env
 cp server/.env.example server/.env
 ```
 
@@ -171,9 +171,7 @@ yarn docker:up
 
 #### 4. 🗄️ Database Setup
 ```bash
-cd server
-npx prisma generate
-npx prisma db push
+yarn prisma:generate
 ```
 
 #### 5. ▶️ Run Applications
