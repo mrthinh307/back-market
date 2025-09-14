@@ -15,6 +15,11 @@ const baseConfig: NextConfig = {
         hostname: '**.backmarket.co.uk',
         pathname: '/**',
       },
+            {
+        protocol: 'https',
+        hostname: '**.backmarket.de',
+        pathname: '/**',
+      },
       {
         protocol: 'https',
         hostname: '**.backmarket.com',
