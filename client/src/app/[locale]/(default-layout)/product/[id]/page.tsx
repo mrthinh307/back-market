@@ -7,6 +7,7 @@ import {
 import ProductPage from '@/components/pages/product/ProductPage';
 import { isValidUUID } from '@/utils/string';
 import { getProductVariantServer } from '@/libs/server-fetchers/product-variant';
+import { USE_QUERY_KEY } from '@/constants/use-query-key';
 
 type ProductPageParams = {
   params: Promise<{ locale: string; id: string }>;
@@ -46,7 +47,7 @@ export default async function Product({ params }: ProductPageParams) {
 
   try {
     const data = await queryClient.fetchQuery({
-      queryKey: ['product-variant', id],
+      queryKey: USE_QUERY_KEY.PRODUCT_VARIANT(id),
       queryFn: () => getProductVariantServer(id),
     });
 

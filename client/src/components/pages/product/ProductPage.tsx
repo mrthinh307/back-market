@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ProductVariantDetail } from '@/types/product-selection.type';
 import { getProductVariantById } from '@/api/product-variant.api';
 import { useBreadcrumb } from '@/hooks/useBreadcumb';
+import { USE_QUERY_KEY } from '@/constants/use-query-key';
 import ErrorState from '@/components/ui/ErrorState';
 import { productImages } from './seed/temp-data-product';
 import GalleryCarousel from '../../carousels/GalleryCarousel';
@@ -28,7 +29,7 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
   productVariantId,
 }) => {
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ['product-variant', productVariantId],
+    queryKey: USE_QUERY_KEY.PRODUCT_VARIANT(productVariantId),
     queryFn: () => getProductVariantById(productVariantId),
   });
 
