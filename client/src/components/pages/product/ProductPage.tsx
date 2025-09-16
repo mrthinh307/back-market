@@ -7,10 +7,10 @@ import { ProductVariantDetail } from '@/types/product-selection.type';
 import { getProductVariantById } from '@/api/product-variant.api';
 import { useBreadcrumb } from '@/hooks/useBreadcumb';
 import { USE_QUERY_KEY } from '@/constants/use-query-key';
+import BreadcumbCustom from '@/components/ui/BreadcumbCustom';
 import ErrorState from '@/components/ui/ErrorState';
 import { productImages } from './seed/temp-data-product';
 import GalleryCarousel from '../../carousels/GalleryCarousel';
-import BreadcumbCustom from '../BreadcumbCustom';
 import LoadingPage from '../LoadingPage';
 import {
   ProductInfo,
@@ -54,7 +54,7 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
       name: productVariant.product.brand?.name || 'Brand',
       href: `/${locale}/brand`,
     },
-    { name: productVariant.title }, 
+    { name: productVariant.title },
   ];
 
   const { items: displayBreadcrumbItems } = useBreadcrumb(breadcrumbItems);
@@ -144,16 +144,11 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
               desktopSlidesToScroll={3}
             >
               <CarouselContent className='pt-3 pb-5'>
-                {topProducts.map(
-                  (product: ProductCardProps, index: number) => (
-                    <CarouselItem key={index} className='basis-auto'>
-                      <ProductCard
-                        productCard={product}
-                        className='w-[256px]'
-                      />
-                    </CarouselItem>
-                  ),
-                )}
+                {topProducts.map((product: ProductCardProps, index: number) => (
+                  <CarouselItem key={index} className='basis-auto'>
+                    <ProductCard productCard={product} className='w-[256px]' />
+                  </CarouselItem>
+                ))}
               </CarouselContent>
             </SlideCarousel>
           </div>
