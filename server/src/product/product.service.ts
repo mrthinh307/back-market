@@ -2,10 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ProductListDto } from './dto/product-dto';
 import { calculateAverageRating } from 'src/common/utils/calculate';
+import { AppCacheService } from '../cache/cache.service';
+import { CACHE_TTL } from '../cache/constants/cache-key.constants';
+import { CacheKeyFactory } from 'src/cache/cache-key.factory';
 
 @Injectable()
 export class ProductService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly cacheService: AppCacheService,
+    private readonly cacheKeyFactory: CacheKeyFactory,
+  ) {}
 
   /**
    * Retrieve a list of products filtered by category (required)
@@ -20,6 +27,42 @@ export class ProductService {
    * @returns Promise<ProductListDto> - A list of matching products.
    */
   async getProductList(
+    categoryId: string,
+    brandId?: string,
+    isExcludedBrand = false,
+  ): Promise<ProductListDto> {
+    // Generate cache key with version for cache invalidation
+    const baseKey = this.cacheKeyFactory.getProductListCacheKey(
+      categoryId,
+      brandId,
+      isExcludedBrand,
+    ); // e.g. "dev:product:list:cat123:brand456:include"
+    const version = await this.cacheService.getVersion(
+      this.cacheKeyFactory.getProductListVersionKey(),
+    ); // e.g. "1"
+    const cacheKey = `${baseKey}:v${version}`; // e.g. "dev:product:list:cat123:brand456:include:v1"
+
+    return this.cacheService.wrap(
+      cacheKey,
+      CACHE_TTL.PRODUCT_LIST,
+      async () => {
+        console.log(
+          `🔍 Cache miss for product list (category: ${categoryId}, brand: ${brandId || 'all'}) - fetching from database`,
+        );
+        return this.fetchProductListFromDatabase(
+          categoryId,
+          brandId,
+          isExcludedBrand,
+        );
+      },
+    );
+  }
+
+  /**
+   * Private method to fetch product list data from database
+   * Separated for better testability and cleaner cache logic
+   */
+  private async fetchProductListFromDatabase(
     categoryId: string,
     brandId?: string,
     isExcludedBrand = false,
@@ -141,7 +184,7 @@ export class ProductService {
           : { id: '', name: 'Unknown Brand' };
 
         return {
-          id: product.id,
+          id: product.variants[0].id.toString(),
           title: product.name,
           brand: brandInfo,
           category: {
@@ -163,5 +206,18 @@ export class ProductService {
         };
       }),
     };
+  }
+
+  /**
+   * Invalidate cache for product list
+   * Called after product updates/deletes that affect the list
+   */
+  async invalidateProductListCache(): Promise<void> {
+    // Bump global product list version to invalidate all product list caches
+    await this.cacheService.bumpVersion(
+      this.cacheKeyFactory.getProductListVersionKey(),
+    );
+
+    console.log('📦 Product list cache invalidated');
   }
 }

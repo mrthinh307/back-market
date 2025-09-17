@@ -16,6 +16,12 @@ export const CACHE_TTL = {
   RELEVANT_VARIANTS: 15 * 60, // 15 minutes
 
   /**
+   * Product list filtered by category and brand:
+   * - Cached for moderate periods since stock and new products change regularly.
+   */
+  PRODUCT_LIST: 10 * 60, // 10 minutes
+
+  /**
    * Version keys used for cache invalidation:
    * - Cached for a long period and only updated (bumped) when invalidation is required.
    */
@@ -30,9 +36,11 @@ export const CACHE_TTL = {
 export const CACHE_KEYS = {
   VARIANT_DETAIL: 'product-variant:detail',
   RELEVANT_VARIANTS: 'product-variant:relevant',
+  PRODUCT_LIST: 'product:list',
 
   VERSION: {
     PRODUCT: 'version:product',
+    PRODUCT_LIST: 'version:product:list',
     VARIANT_DETAIL: 'version:product-variant:detail',
     RELEVANT_VARIANTS: 'version:product-variant:relevant',
   },
