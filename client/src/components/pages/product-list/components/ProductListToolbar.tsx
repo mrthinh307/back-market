@@ -12,7 +12,7 @@ export function ProductListToolbar({
 }: ProductListToolbarProps) {
   return (
     <div className='container px-6 py-4'>
-      <div className='flex items-center lg:justify-between gap-2'>
+      <div className='flex items-center lg:justify-between gap-2 overflow-auto scrollbar-none'>
         <FilterSection />
         <SortDropdown 
           currentSort={currentSort} 

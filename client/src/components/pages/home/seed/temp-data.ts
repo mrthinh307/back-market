@@ -30,79 +30,34 @@ export const mobileBannerImages2 = [
 
 export const recommendProducts: ProductCardProps[] = [
   {
+    id: '00078f17-62a0-46ec-8a9c-5631a910c1c3',
     image:
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    name: 'iPhone 14',
+    title: 'iPhone 14',
     description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    reviewsCount: 100,
-    price: '$261.00',
+    reviewRating: { count: 100, average: 4.5 },
+    priceWithCurrency: '$261.00',
     newPrice: '$599.99 new',
   },
   {
+    id: '00078f17-62a0-46ec-8a9c-5631a910c1c3',
     image:
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/00e60dbb-24fc-4061-9d6f-228410f5a22e-1_914fb782-39f0-4745-91e8-2e668b888aa8.jpg',
-    name: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
+    title: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
     description: 'Apple M1 8-core - 7-core GPU • 128 GB • RAM 8GB • Space Gray',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
+    reviewRating: { count: 120, average: 4.5 },
+    priceWithCurrency: '$499.00',
+    newPrice: '$999.99 new',
   },
   {
+    id: '00078f17-62a0-46ec-8a9c-5631a910c1c3',
     image:
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/7b0d7cf2-735b-4e69-b953-e4bceae3306b-1_558182e3-6eb9-4d06-a580-c77b8d96d5cf.jpg',
-    name: 'PlayStation 5',
+    title: 'PlayStation 5',
     description: '825 GB • White',
-    starsValue: 4.5,
-    reviewsCount: 150,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    name: 'iPhone 14',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    reviewsCount: 100,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    name: 'iPhone 14',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    name: 'iPhone 14',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    name: 'iPhone 14',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    name: 'iPhone 14',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
+    reviewRating: { count: 150, average: 4.5 },
+    priceWithCurrency: '$399.00',
+    newPrice: '$499.99 new',
   },
 ];
 
@@ -146,1143 +101,64 @@ export const bestCategories: { name: string; image: string }[] = [
 
 export const bestProducts: ProductCardProps[] = [
   {
+    id: '00078f17-62a0-46ec-8a9c-5631a910c1c3',
     image:
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Purple',
-        color: '#a67cfa',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    name: 'iPhone 14',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
+    variants: {
+      colors: [{ name: 'Purple' }, { name: 'Starlight' }],
+    },
+    title: 'iPhone 14',
+    reviewRating: { count: 100, average: 4.5 },
+    priceWithCurrency: '$261.00',
     newPrice: '$599.99 new',
   },
   {
+    id: '00078f17-62a0-46ec-8a9c-5631a910c1c3',
     image:
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/00e60dbb-24fc-4061-9d6f-228410f5a22e-1_914fb782-39f0-4745-91e8-2e668b888aa8.jpg',
-    name: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
-    colors: [
-      {
-        label: 'Space Gray',
-        color: '#4a4a4a',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Midnight',
-        color: '#000000',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 150,
-    price: '$261.00',
+    variants: {
+      colors: [
+        { name: 'Space Gray' },
+        { name: 'Gold' },
+        { name: 'Silver' },
+        { name: 'Midnight' },
+        { name: 'Starlight' },
+      ],
+    },
+    title: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
+    reviewRating: { count: 150, average: 4.5 },
+    priceWithCurrency: '$261.00',
+    newPrice: undefined,
   },
   {
+    id: '00078f17-62a0-46ec-8a9c-5631a910c1c3',
     image:
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/7b0d7cf2-735b-4e69-b953-e4bceae3306b-1_558182e3-6eb9-4d06-a580-c77b8d96d5cf.jpg',
-    name: 'PlayStation 5',
-    colors: [
-      {
-        label: 'White',
-        color: '#ffffff',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 200,
-    price: '$261.00',
+    variants: {
+      colors: [{ name: 'White' }],
+    },
+    title: 'PlayStation 5',
+    reviewRating: { count: 200, average: 4.5 },
+    priceWithCurrency: '$261.00',
     newPrice: '$599.99 new',
   },
   {
+    id: '00078f17-62a0-46ec-8a9c-5631a910c1c3',
     image:
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Graphite',
-        color: '#1c1c1e',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Sierra Blue',
-        color: '#a7c6ed',
-      },
-      { label: 'Midnight', color: '#000000' },
-      { label: 'Starlight', color: '#f5f5f5' },
-      { label: 'Silver', color: '#c0c0c0' },
-      { label: 'Gold', color: '#ffd700' },
-    ],
-    name: 'iPhone 14 Pro Max Unlocked Smartphone',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-    {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Purple',
-        color: '#a67cfa',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    name: 'iPhone 14',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/00e60dbb-24fc-4061-9d6f-228410f5a22e-1_914fb782-39f0-4745-91e8-2e668b888aa8.jpg',
-    name: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
-    colors: [
-      {
-        label: 'Space Gray',
-        color: '#4a4a4a',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Midnight',
-        color: '#000000',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 150,
-    price: '$261.00',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/7b0d7cf2-735b-4e69-b953-e4bceae3306b-1_558182e3-6eb9-4d06-a580-c77b8d96d5cf.jpg',
-    name: 'PlayStation 5',
-    colors: [
-      {
-        label: 'White',
-        color: '#ffffff',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 200,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Graphite',
-        color: '#1c1c1e',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Sierra Blue',
-        color: '#a7c6ed',
-      },
-      { label: 'Midnight', color: '#000000' },
-      { label: 'Starlight', color: '#f5f5f5' },
-      { label: 'Silver', color: '#c0c0c0' },
-      { label: 'Gold', color: '#ffd700' },
-    ],
-    name: 'iPhone 14 Pro Max Unlocked Smartphone',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-    {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Purple',
-        color: '#a67cfa',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    name: 'iPhone 14',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/00e60dbb-24fc-4061-9d6f-228410f5a22e-1_914fb782-39f0-4745-91e8-2e668b888aa8.jpg',
-    name: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
-    colors: [
-      {
-        label: 'Space Gray',
-        color: '#4a4a4a',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Midnight',
-        color: '#000000',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 150,
-    price: '$261.00',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/7b0d7cf2-735b-4e69-b953-e4bceae3306b-1_558182e3-6eb9-4d06-a580-c77b8d96d5cf.jpg',
-    name: 'PlayStation 5',
-    colors: [
-      {
-        label: 'White',
-        color: '#ffffff',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 200,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Graphite',
-        color: '#1c1c1e',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Sierra Blue',
-        color: '#a7c6ed',
-      },
-      { label: 'Midnight', color: '#000000' },
-      { label: 'Starlight', color: '#f5f5f5' },
-      { label: 'Silver', color: '#c0c0c0' },
-      { label: 'Gold', color: '#ffd700' },
-    ],
-    name: 'iPhone 14 Pro Max Unlocked Smartphone',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-    {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Purple',
-        color: '#a67cfa',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    name: 'iPhone 14',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/00e60dbb-24fc-4061-9d6f-228410f5a22e-1_914fb782-39f0-4745-91e8-2e668b888aa8.jpg',
-    name: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
-    colors: [
-      {
-        label: 'Space Gray',
-        color: '#4a4a4a',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Midnight',
-        color: '#000000',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 150,
-    price: '$261.00',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/7b0d7cf2-735b-4e69-b953-e4bceae3306b-1_558182e3-6eb9-4d06-a580-c77b8d96d5cf.jpg',
-    name: 'PlayStation 5',
-    colors: [
-      {
-        label: 'White',
-        color: '#ffffff',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 200,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Graphite',
-        color: '#1c1c1e',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Sierra Blue',
-        color: '#a7c6ed',
-      },
-      { label: 'Midnight', color: '#000000' },
-      { label: 'Starlight', color: '#f5f5f5' },
-      { label: 'Silver', color: '#c0c0c0' },
-      { label: 'Gold', color: '#ffd700' },
-    ],
-    name: 'iPhone 14 Pro Max Unlocked Smartphone',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-    {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Purple',
-        color: '#a67cfa',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    name: 'iPhone 14',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/00e60dbb-24fc-4061-9d6f-228410f5a22e-1_914fb782-39f0-4745-91e8-2e668b888aa8.jpg',
-    name: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
-    colors: [
-      {
-        label: 'Space Gray',
-        color: '#4a4a4a',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Midnight',
-        color: '#000000',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 150,
-    price: '$261.00',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/7b0d7cf2-735b-4e69-b953-e4bceae3306b-1_558182e3-6eb9-4d06-a580-c77b8d96d5cf.jpg',
-    name: 'PlayStation 5',
-    colors: [
-      {
-        label: 'White',
-        color: '#ffffff',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 200,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Graphite',
-        color: '#1c1c1e',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Sierra Blue',
-        color: '#a7c6ed',
-      },
-      { label: 'Midnight', color: '#000000' },
-      { label: 'Starlight', color: '#f5f5f5' },
-      { label: 'Silver', color: '#c0c0c0' },
-      { label: 'Gold', color: '#ffd700' },
-    ],
-    name: 'iPhone 14 Pro Max Unlocked Smartphone',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-    {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Purple',
-        color: '#a67cfa',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    name: 'iPhone 14',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/00e60dbb-24fc-4061-9d6f-228410f5a22e-1_914fb782-39f0-4745-91e8-2e668b888aa8.jpg',
-    name: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
-    colors: [
-      {
-        label: 'Space Gray',
-        color: '#4a4a4a',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Midnight',
-        color: '#000000',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 150,
-    price: '$261.00',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/7b0d7cf2-735b-4e69-b953-e4bceae3306b-1_558182e3-6eb9-4d06-a580-c77b8d96d5cf.jpg',
-    name: 'PlayStation 5',
-    colors: [
-      {
-        label: 'White',
-        color: '#ffffff',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 200,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Graphite',
-        color: '#1c1c1e',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Sierra Blue',
-        color: '#a7c6ed',
-      },
-      { label: 'Midnight', color: '#000000' },
-      { label: 'Starlight', color: '#f5f5f5' },
-      { label: 'Silver', color: '#c0c0c0' },
-      { label: 'Gold', color: '#ffd700' },
-    ],
-    name: 'iPhone 14 Pro Max Unlocked Smartphone',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-    {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Purple',
-        color: '#a67cfa',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    name: 'iPhone 14',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/00e60dbb-24fc-4061-9d6f-228410f5a22e-1_914fb782-39f0-4745-91e8-2e668b888aa8.jpg',
-    name: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
-    colors: [
-      {
-        label: 'Space Gray',
-        color: '#4a4a4a',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Midnight',
-        color: '#000000',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 150,
-    price: '$261.00',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/7b0d7cf2-735b-4e69-b953-e4bceae3306b-1_558182e3-6eb9-4d06-a580-c77b8d96d5cf.jpg',
-    name: 'PlayStation 5',
-    colors: [
-      {
-        label: 'White',
-        color: '#ffffff',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 200,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Graphite',
-        color: '#1c1c1e',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Sierra Blue',
-        color: '#a7c6ed',
-      },
-      { label: 'Midnight', color: '#000000' },
-      { label: 'Starlight', color: '#f5f5f5' },
-      { label: 'Silver', color: '#c0c0c0' },
-      { label: 'Gold', color: '#ffd700' },
-    ],
-    name: 'iPhone 14 Pro Max Unlocked Smartphone',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-    {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Purple',
-        color: '#a67cfa',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    name: 'iPhone 14',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/00e60dbb-24fc-4061-9d6f-228410f5a22e-1_914fb782-39f0-4745-91e8-2e668b888aa8.jpg',
-    name: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
-    colors: [
-      {
-        label: 'Space Gray',
-        color: '#4a4a4a',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Midnight',
-        color: '#000000',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 150,
-    price: '$261.00',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/7b0d7cf2-735b-4e69-b953-e4bceae3306b-1_558182e3-6eb9-4d06-a580-c77b8d96d5cf.jpg',
-    name: 'PlayStation 5',
-    colors: [
-      {
-        label: 'White',
-        color: '#ffffff',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 200,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Graphite',
-        color: '#1c1c1e',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Sierra Blue',
-        color: '#a7c6ed',
-      },
-      { label: 'Midnight', color: '#000000' },
-      { label: 'Starlight', color: '#f5f5f5' },
-      { label: 'Silver', color: '#c0c0c0' },
-      { label: 'Gold', color: '#ffd700' },
-    ],
-    name: 'iPhone 14 Pro Max Unlocked Smartphone',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-    {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Purple',
-        color: '#a67cfa',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    name: 'iPhone 14',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/00e60dbb-24fc-4061-9d6f-228410f5a22e-1_914fb782-39f0-4745-91e8-2e668b888aa8.jpg',
-    name: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
-    colors: [
-      {
-        label: 'Space Gray',
-        color: '#4a4a4a',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Midnight',
-        color: '#000000',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 150,
-    price: '$261.00',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/7b0d7cf2-735b-4e69-b953-e4bceae3306b-1_558182e3-6eb9-4d06-a580-c77b8d96d5cf.jpg',
-    name: 'PlayStation 5',
-    colors: [
-      {
-        label: 'White',
-        color: '#ffffff',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 200,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Graphite',
-        color: '#1c1c1e',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Sierra Blue',
-        color: '#a7c6ed',
-      },
-      { label: 'Midnight', color: '#000000' },
-      { label: 'Starlight', color: '#f5f5f5' },
-      { label: 'Silver', color: '#c0c0c0' },
-      { label: 'Gold', color: '#ffd700' },
-    ],
-    name: 'iPhone 14 Pro Max Unlocked Smartphone',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-    {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Purple',
-        color: '#a67cfa',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    name: 'iPhone 14',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/00e60dbb-24fc-4061-9d6f-228410f5a22e-1_914fb782-39f0-4745-91e8-2e668b888aa8.jpg',
-    name: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
-    colors: [
-      {
-        label: 'Space Gray',
-        color: '#4a4a4a',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Midnight',
-        color: '#000000',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 150,
-    price: '$261.00',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/7b0d7cf2-735b-4e69-b953-e4bceae3306b-1_558182e3-6eb9-4d06-a580-c77b8d96d5cf.jpg',
-    name: 'PlayStation 5',
-    colors: [
-      {
-        label: 'White',
-        color: '#ffffff',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 200,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Graphite',
-        color: '#1c1c1e',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Sierra Blue',
-        color: '#a7c6ed',
-      },
-      { label: 'Midnight', color: '#000000' },
-      { label: 'Starlight', color: '#f5f5f5' },
-      { label: 'Silver', color: '#c0c0c0' },
-      { label: 'Gold', color: '#ffd700' },
-    ],
-    name: 'iPhone 14 Pro Max Unlocked Smartphone',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-    {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Purple',
-        color: '#a67cfa',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    name: 'iPhone 14',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/00e60dbb-24fc-4061-9d6f-228410f5a22e-1_914fb782-39f0-4745-91e8-2e668b888aa8.jpg',
-    name: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
-    colors: [
-      {
-        label: 'Space Gray',
-        color: '#4a4a4a',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Midnight',
-        color: '#000000',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 150,
-    price: '$261.00',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/7b0d7cf2-735b-4e69-b953-e4bceae3306b-1_558182e3-6eb9-4d06-a580-c77b8d96d5cf.jpg',
-    name: 'PlayStation 5',
-    colors: [
-      {
-        label: 'White',
-        color: '#ffffff',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 200,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Graphite',
-        color: '#1c1c1e',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Sierra Blue',
-        color: '#a7c6ed',
-      },
-      { label: 'Midnight', color: '#000000' },
-      { label: 'Starlight', color: '#f5f5f5' },
-      { label: 'Silver', color: '#c0c0c0' },
-      { label: 'Gold', color: '#ffd700' },
-    ],
-    name: 'iPhone 14 Pro Max Unlocked Smartphone',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-    {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Purple',
-        color: '#a67cfa',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    name: 'iPhone 14',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/00e60dbb-24fc-4061-9d6f-228410f5a22e-1_914fb782-39f0-4745-91e8-2e668b888aa8.jpg',
-    name: 'MacBook Air (13", 2020, M1 series) • QWERTY - English',
-    colors: [
-      {
-        label: 'Space Gray',
-        color: '#4a4a4a',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Midnight',
-        color: '#000000',
-      },
-      {
-        label: 'Starlight',
-        color: '#f5f5f5',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 150,
-    price: '$261.00',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/7b0d7cf2-735b-4e69-b953-e4bceae3306b-1_558182e3-6eb9-4d06-a580-c77b8d96d5cf.jpg',
-    name: 'PlayStation 5',
-    colors: [
-      {
-        label: 'White',
-        color: '#ffffff',
-      },
-    ],
-    starsValue: 4.5,
-    reviewsCount: 200,
-    price: '$261.00',
-    newPrice: '$599.99 new',
-  },
-  {
-    image:
-      'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/400b5725-cbcb-4b97-a7b8-0a2c1d4098ef-1_ea517b48-9556-4e8a-9cdf-38072d2682df.jpg',
-    colors: [
-      {
-        label: 'Graphite',
-        color: '#1c1c1e',
-      },
-      {
-        label: 'Gold',
-        color: '#d4af37',
-      },
-      {
-        label: 'Silver',
-        color: '#c0c0c0',
-      },
-      {
-        label: 'Sierra Blue',
-        color: '#a7c6ed',
-      },
-      { label: 'Midnight', color: '#000000' },
-      { label: 'Starlight', color: '#f5f5f5' },
-      { label: 'Silver', color: '#c0c0c0' },
-      { label: 'Gold', color: '#ffd700' },
-    ],
-    name: 'iPhone 14 Pro Max Unlocked Smartphone',
-    description: 'Midnight • 128 GB • Physical SIM + eSIM',
-    starsValue: 4.5,
-    price: '$261.00',
+    variants: {
+      colors: [
+        { name: 'Graphite' },
+        { name: 'Gold' },
+        { name: 'Silver' },
+        { name: 'Sierra Blue' },
+        { name: 'Midnight' },
+        { name: 'Starlight' },
+      ],
+    },
+    title: 'iPhone 14 Pro Max Unlocked Smartphone',
+    reviewRating: { count: 0, average: 4.5 },
+    priceWithCurrency: '$261.00',
     newPrice: '$599.99 new',
   },
 ];
@@ -1332,45 +208,53 @@ export const topCategories: { name: string; image: string }[] = [
 
 export const topProducts: ProductCardProps[] = [
   {
+    id: '00078f17-62a0-46ec-8a9c-5631a910c1c3',
     image:
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/08374b57-cca2-436c-8e7f-2363631beb2c-1_9604c3fa-fa9f-4747-8b8e-d905ddbb92d5.jpg',
-    name: 'Coffee maker with grinder Without capsule Sage The Barista Express BES875 2.0000L - Silver',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
+    title:
+      'Coffee maker with grinder Without capsule Sage The Barista Express BES875 2.0000L - Silver',
+    reviewRating: { count: 120, average: 4.5 },
+    priceWithCurrency: '$261.00',
     newPrice: '$599.99 new',
   },
   {
+    id: '00078f17-62a0-46ec-8a9c-5631a910c1c3',
     image:
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/08374b57-cca2-436c-8e7f-2363631beb2c-1_9604c3fa-fa9f-4747-8b8e-d905ddbb92d5.jpg',
-    name: 'Coffee maker with grinder Without capsule Sage The Barista Express BES875 2.0000L - Silver',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
+    title:
+      'Coffee maker with grinder Without capsule Sage The Barista Express BES875 2.0000L - Silver',
+    reviewRating: { count: 120, average: 4.5 },
+    priceWithCurrency: '$261.00',
     newPrice: '$599.99 new',
   },
   {
+    id: '00078f17-62a0-46ec-8a9c-5631a910c1c3',
     image:
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/08374b57-cca2-436c-8e7f-2363631beb2c-1_9604c3fa-fa9f-4747-8b8e-d905ddbb92d5.jpg',
-    name: 'Coffee maker with grinder Without capsule Sage The Barista Express BES875 2.0000L - Silver',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
+    title:
+      'Coffee maker with grinder Without capsule Sage The Barista Express BES875 2.0000L - Silver',
+    reviewRating: { count: 120, average: 4.5 },
+    priceWithCurrency: '$261.00',
     newPrice: '$599.99 new',
   },
   {
+    id: '00078f17-62a0-46ec-8a9c-5631a910c1c3',
     image:
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/08374b57-cca2-436c-8e7f-2363631beb2c-1_9604c3fa-fa9f-4747-8b8e-d905ddbb92d5.jpg',
-    name: 'Coffee maker with grinder Without capsule Sage The Barista Express BES875 2.0000L - Silver',
-    starsValue: 4.5,
-    reviewsCount: 120,
-    price: '$261.00',
+    title:
+      'Coffee maker with grinder Without capsule Sage The Barista Express BES875 2.0000L - Silver',
+    reviewRating: { count: 120, average: 4.5 },
+    priceWithCurrency: '$261.00',
     newPrice: '$599.99 new',
   },
   {
+    id: '00078f17-62a0-46ec-8a9c-5631a910c1c3',
     image:
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/08374b57-cca2-436c-8e7f-2363631beb2c-1_9604c3fa-fa9f-4747-8b8e-d905ddbb92d5.jpg',
-    name: 'Coffee maker with grinder Without capsule Sage The Barista Express BES875 2.0000L - Silver',
-    price: '$261.00',
+    title:
+      'Coffee maker with grinder Without capsule Sage The Barista Express BES875 2.0000L - Silver',
+    reviewRating: { count: 0, average: 0 }, // chưa có rating nên để mặc định
+    priceWithCurrency: '$261.00',
+    newPrice: undefined,
   },
 ];
