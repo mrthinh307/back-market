@@ -40,6 +40,11 @@ const baseConfig: NextConfig = {
         hostname: 'product-page.statics.backmarket.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net',
+        pathname: '/**',
+      },
     ],
   },
   async redirects() {

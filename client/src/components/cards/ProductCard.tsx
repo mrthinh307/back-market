@@ -2,14 +2,134 @@ import { StarIcon } from 'lucide-react';
 import { ProductCardProps } from '@/types/cards.type';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+
 
 function ProductCard({
   productCard,
   className,
+  variant = 'default',
+  cartProps,
 }: {
   productCard: ProductCardProps;
   className?: string;
+  variant?: 'default' | 'cart';
+  cartProps?: {
+    quantity?: number;
+    deliveryInfo?: string;
+    availability?: string;
+    savings?: number;
+    badge?: string;
+    condition?: 'Excellent' | 'Good' | 'Fair' | 'New';
+    onQuantityChange?: (quantity: number) => void;
+    onRemove?: () => void;
+  };
 }) {
+  // Cart variant
+  if (variant === 'cart' && cartProps) {
+    return (
+      <div className={`h-full ${className}`}>
+        <div className='rounded-lg shadow-sm bg-white h-full border border-gray-200'>
+          <div className='p-6'>
+            <div className='flex gap-4'>
+              <div className='relative w-20 h-20 flex-shrink-0'>
+                <Image
+                  src={productCard.image}
+                  alt={productCard.name}
+                  fill
+                  className='object-cover rounded-md'
+                />
+              </div>
+
+              {/* Product Details - Left side */}
+              <div className='flex-1 min-w-0'>
+                <h3 className='font-semibold text-base mb-2 line-clamp-2'>
+                  {productCard.name}
+                </h3>
+                
+                <div className='flex flex-wrap gap-2 mb-2'>
+                  {cartProps.condition && (
+                    <div className="inline-flex items-center px-2 py-1 text-xs font-medium bg-white border border-gray-300 rounded text-gray-900">
+                      {cartProps.condition}
+                    </div>
+                  )}
+                  {cartProps.badge && (
+                    <Badge variant="outline" className="text-xs bg-purple-100 text-purple-800">
+                      {cartProps.badge}
+                    </Badge>
+                  )}
+                </div>
+
+                {cartProps.deliveryInfo && (
+                  <p className='text-sm text-gray-600 mb-2'>{cartProps.deliveryInfo}</p>
+                )}
+              </div>
+
+              {/* Price, Quantity and Remove - Right side */}
+              <div className='flex flex-col items-end gap-3 min-w-[200px]'>
+                {/* Price and Savings */}
+                <div className='text-right'>
+                  <div className='text-lg font-bold mb-1'>
+                    £{typeof productCard.price === 'string' ? productCard.price : productCard.price.toFixed(2)}
+                  </div>
+                  {productCard.newPrice && (
+                    <div className='flex items-center gap-2 justify-end'>
+                      {cartProps.savings && (
+                        <Badge variant="outline" className="text-xs bg-green-100 text-green-800">
+                          Save £{cartProps.savings.toFixed(2)}
+                        </Badge>
+                      )}
+                      <span className='text-sm text-gray-500 line-through'>
+                        £{typeof productCard.newPrice === 'string' ? productCard.newPrice : productCard.newPrice.toFixed(2)} new
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Quantity and Remove */}
+                <div className='flex items-center justify-between gap-4'>
+                  {cartProps.availability && (
+                    <span className={`text-sm font-medium ${
+                      cartProps.availability === 'Only 1 left' 
+                        ? 'text-purple-600' 
+                        : cartProps.availability === 'Out of stock'
+                        ? 'text-red-600'
+                        : 'text-green-600'
+                    }`}>
+                      {cartProps.availability}
+                    </span>
+                  )}
+                  <div className='flex items-center gap-2'>
+                    <span className='text-sm'>Quantity:</span>
+                    <select 
+                      value={cartProps.quantity || 1}
+                      onChange={(e) => cartProps.onQuantityChange?.(parseInt(e.target.value))}
+                      className='border rounded px-2 py-1 text-sm w-16'
+                    >
+                      {[1,2,3,4,5].map(num => (
+                        <option key={num} value={num}>{num}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={cartProps.onRemove}
+                    className="text-red-600 border-red-300 hover:bg-red-50"
+                  >
+                    Remove
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Default variant
   return (
     <Link href={'/en/product/00078f17-62a0-46ec-8a9c-5631a910c1c3'}>
       <div className={`h-full ${className}`}>
