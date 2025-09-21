@@ -4,10 +4,10 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
 import ProductCard from '@/components/cards/ProductCard';
-import { CartItem, sampleCartItems } from './sample_cart_data';
+import { SlideCarousel } from '@/components/carousels';
+import { CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { CartItem, sampleCartItems, recommendedProducts } from './sample_cart_data';
 
 function CartPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>(sampleCartItems);
@@ -76,48 +76,70 @@ function CartPage() {
 
       <div className="bg-surface-default-mid h-screen flex flex-col overflow-auto pb-[140px] lg:flex-row lg:overflow-y-hidden lg:pb-0">
           {/* SECTION: YOUR CART */}
-          <div className='relative grow px-24 md:pt-12 lg:overflow-y-scroll'> 
-            <div className='flex-shrink-0 pb-4 p-6'>
-              <h2 className="text-xl font-semibold text-gray-800">Your cart</h2>
-            </div>
-            <div className="flex-1 overflow-y-auto">
-              <div className="p-6 space-y-4">
-                {cartItems.map((item) => (
-                  <div key={item.id}>
-                    <ProductCard
-                      productCard={{
-                        name: item.name,
-                        image: item.image,
-                        price: item.price,
-                        newPrice: item.originalPrice,
-                        colors: item.color
-                          ? [{ label: item.color, color: "#000000" }]
-                          : undefined,
-                      }}
-                      variant="cart"
-                      cartProps={{
-                        quantity: item.quantity,
-                        deliveryInfo: item.deliveryInfo,
-                        availability:
-                          item.stockQuantity === 1
-                            ? "Only 1 left"
-                            : item.stockQuantity === 0
-                            ? "Out of stock"
-                            : "In stock",
-                        savings: item.savings,
-                        badge: item.badge,
-                        condition: item.condition,
-                        onQuantityChange: (newQuantity) =>
-                          updateQuantity(item.id, newQuantity),
-                        onRemove: () => removeItem(item.id),
-                      }}
-                      className="mb-4"
-                    />
-                  </div>
-                ))}
+          <div className='relative grow md:pt-24 lg:overflow-y-scroll'> 
+            <div className='mx-auto mb-6 w-full grow md:mb-12 md:max-w-[820px]'>
+              <div className='flex-shrink-0 pb-4 p-6'>
+                <h2 className="text-xl font-semibold text-gray-800">Your cart</h2>
+              </div>
+              <div className="flex-1 overflow-y-auto">
+                <div className="p-6 space-y-4">
+                  {cartItems.map((item) => (
+                    <div key={item.id}>
+                      <ProductCard
+                        productCard={{
+                          name: item.name,
+                          image: item.image,
+                          price: item.price,
+                          newPrice: item.originalPrice,
+                          colors: item.color
+                            ? [{ label: item.color, color: "#000000" }]
+                            : undefined,
+                        }}
+                        variant="cart"
+                        cartProps={{
+                          quantity: item.quantity,
+                          deliveryInfo: item.deliveryInfo,
+                          availability:
+                            item.stockQuantity === 1
+                              ? "Only 1 left"
+                              : item.stockQuantity === 0
+                              ? "Out of stock"
+                              : "In stock",
+                          savings: item.savings,
+                          badge: item.badge,
+                          condition: item.condition,
+                          onQuantityChange: (newQuantity) =>
+                            updateQuantity(item.id, newQuantity),
+                          onRemove: () => removeItem(item.id),
+                        }}
+                        className="mb-4"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <hr className='border-static-default-low border-t my-10 md:my-14'></hr>
+
+              {/* SECTION: COMPLETE YOUR CART */}
+              <div className='overflow-y-auto'>
+                <SlideCarousel
+                  carouselTitle='Complete your cart:'
+                  desktopSlidesToScroll={3}
+                >
+                  <CarouselContent className='pt-3 pb-5'>
+                    {recommendedProducts.map((product) => (
+                      <CarouselItem key={product.id} className='basis-auto'>
+                        <ProductCard productCard={product} className='w-[256px]' />
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                </SlideCarousel>
               </div>
             </div>
           </div>
+
+          
 
           {/* SECTION: SUMMARY */}
           <div className='flex justify-center px-4 pt-10 lg:bg-surface-default-hi md:pt-12 lg:w-[27.5rem] lg:overflow-auto'>
