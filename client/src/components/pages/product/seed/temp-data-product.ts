@@ -1,6 +1,6 @@
 // Icon data structure
 export interface IconData {
-  type: 'delivery' | 'carrier' | 'warranty' | 'verified' | 'trade-in';
+  type: 'delivery' | 'carrier' | 'warranty' | 'verified' | 'trade-in' | 'returns' | 'support';
   className: string;
   viewBox: string;
   paths: Array<{
@@ -87,6 +87,39 @@ export const iconData: Record<string, IconData> = {
       },
       {
         d: 'M14.5 13.25a1.25 1.25 0 0 0-1.25 1.25v5a1.25 1.25 0 0 0 1.25 1.25h5a1.25 1.25 0 0 0 1.25-1.25v-5a1.25 1.25 0 0 0-1.25-1.25h-5m.25 6v-4.5h4.5v4.5h-4.5',
+        fillRule: 'evenodd',
+        clipRule: 'evenodd',
+      },
+    ],
+  },
+  'returns': {
+    type: 'returns',
+    className: 'h-6 w-6 md:h-8 md:w-8',
+    viewBox: '0 0 24 24',
+    paths: [
+      {
+        d: 'M2.25 12A9.75 9.75 0 0 1 12 2.25a9.72 9.72 0 0 1 6.75 2.714V3a.75.75 0 0 1 1.5 0v3.5A1.25 1.25 0 0 1 19 7.75h-3a.75.75 0 0 1 0-1.5h1.916l-.043-.044A8.25 8.25 0 1 0 12 20.25 8.25 8.25 0 0 0 20.25 12a.75.75 0 0 1 1.5 0c0 5.385-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12',
+      },
+      {
+        d: 'M12 11.5c2.21 0 4-.672 4-1.5s-1.79-1.5-4-1.5S8 9.172 8 10s1.79 1.5 4 1.5',
+      },
+      {
+        d: 'M15.092 11.763C14.264 12.073 13.17 12.25 12 12.25c-1.17 0-2.264-.177-3.092-.487a4.305 4.305 0 0 1-.644-.3C8.094 11.63 8 11.811 8 12c0 .829 1.79 1.5 4 1.5s4-.671 4-1.5c0-.19-.093-.37-.264-.537a4.307 4.307 0 0 1-.644.3',
+      },
+      {
+        d: 'M12 14.25c1.17 0 2.264-.177 3.092-.487a4.307 4.307 0 0 0 .644-.3C15.906 13.63 16 13.811 16 14c0 .829-1.79 1.5-4 1.5S8 14.83 8 14c0-.19.093-.37.264-.537a4.305 4.305 0 0 0 .644.3C9.736 14.073 10.83 14.25 12 14.25',
+        fillRule: 'evenodd',
+        clipRule: 'evenodd',
+      },
+    ],
+  },
+  'support': {
+    type: 'support',
+    className: 'h-6 w-6 md:h-8 md:w-8',
+    viewBox: '0 0 24 24',
+    paths: [
+      {
+        d: 'M12 3.75a6.251 6.251 0 0 0-6.21 5.534A1.25 1.25 0 0 1 6.75 10.5v5a1.25 1.25 0 0 1-1.25 1.25 3.25 3.25 0 0 1-3.25-3.25v-1a3.251 3.251 0 0 1 2.016-3.008 7.75 7.75 0 0 1 15.468 0A3.251 3.251 0 0 1 21.75 12.5v1a3.251 3.251 0 0 1-2.242 3.09l-.993 1.49a3.75 3.75 0 0 1-3.12 1.67h-.748a2.751 2.751 0 1 1 0-1.5h.747a2.25 2.25 0 0 0 1.873-1.002l.493-.74a1.248 1.248 0 0 1-.51-1.008v-5a1.25 1.25 0 0 1 .96-1.216A6.25 6.25 0 0 0 12 3.75m-6.75 7.018a1.75 1.75 0 0 0-1.5 1.732v1a1.75 1.75 0 0 0 1.5 1.732v-4.464M12 20.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5m6.75-9.482v4.464a1.75 1.75 0 0 0 1.5-1.732v-1a1.75 1.75 0 0 0-1.5-1.732',
         fillRule: 'evenodd',
         clipRule: 'evenodd',
       },
@@ -182,6 +215,28 @@ export const productFeaturesData: Record<string, ProductFeatureData[]> = {
       title: 'Verified Refurbished',
       iconType: 'verified',
       onClick: () => console.log('Verified clicked'),
+    },
+  ],
+  'cart-perks': [
+    {
+      id: 'warranty',
+      title: '1-year minimum warranty',
+      iconType: 'warranty',
+    },
+    {
+      id: 'returns',
+      title: 'Free 30-day returns',
+      iconType: 'returns',
+    },
+    {
+      id: 'delivery',
+      title: 'Free delivery on all items',
+      iconType: 'delivery',
+    },
+    {
+      id: 'support',
+      title: 'Excellent customer support',
+      iconType: 'support',
     },
   ],
 };

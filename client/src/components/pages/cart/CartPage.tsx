@@ -8,6 +8,7 @@ import ProductCard from '@/components/cards/ProductCard';
 import { SlideCarousel } from '@/components/carousels';
 import { CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { CartItem, sampleCartItems, recommendedProducts } from './sample_cart_data';
+import CartPerksSection from './components/CartPerksSection';
 
 function CartPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>(sampleCartItems);
@@ -68,15 +69,9 @@ function CartPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-2xl font-bold text-gray-900">Back Market</h1>
-        </div>
-      </header> */}
-
       <div className="bg-surface-default-mid h-screen flex flex-col overflow-auto pb-[140px] lg:flex-row lg:overflow-y-hidden lg:pb-0">
           {/* SECTION: YOUR CART */}
-          <div className='relative grow md:pt-24 lg:overflow-y-scroll'> 
+          <div className='relative grow lg:overflow-y-scroll'> 
             <div className='mx-auto mb-6 w-full grow md:mb-12 md:max-w-[820px]'>
               <div className='flex-shrink-0 pb-4 p-6'>
                 <h2 className="text-xl font-semibold text-gray-800">Your cart</h2>
@@ -136,6 +131,13 @@ function CartPage() {
                   </CarouselContent>
                 </SlideCarousel>
               </div>
+
+              <hr className='border-static-default-low border-t my-10 md:my-14'></hr>
+
+              {/* SECTION: YOUR PERKS */}
+              <div className='px-6'>
+                <CartPerksSection />
+              </div>
             </div>
           </div>
 
@@ -177,23 +179,24 @@ function CartPage() {
                             </div>
                         ))}
                         </div>
-
+                        <hr className='border-static-default-low border-t my-4'></hr>
                         <div className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                            <span>Subtotal</span>
-                            <span>£{subtotal.toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between text-sm">
-                            <span className="underline">Quality Assurance Fee</span>
-                            <span>£7.49</span>
-                        </div>
-                        <div className="flex justify-between text-lg font-semibold">
-                            <span>Total including taxes</span>
-                            <span>£{(subtotal + 7.49).toFixed(2)}</span>
-                        </div>
+                          <div className="flex justify-between text-sm">
+                              <span>Subtotal</span>
+                              <span>£{subtotal.toFixed(2)}</span>
+                          </div>
+                          <div className="flex justify-between text-sm">
+                              <span className="underline">Quality Assurance Fee</span>
+                              <span>£7.49</span>
+                          </div>
+                          <hr className='border-static-default-low border-t my-4'></hr>
+                          <div className="flex justify-between text-lg font-semibold">
+                              <span>Total including taxes</span>
+                              <span>£{(subtotal + 7.49).toFixed(2)}</span>
+                          </div>
                         </div>
                       </div>
-                      <div className="mt-4 flex-shrink-0">
+                      <div className="mt-4 flex-shrink-0 mb-[140px]">
                         <Button
                         size="lg"
                         className="w-full bg-black hover:bg-gray-800 h-12 text-base font-semibold"
