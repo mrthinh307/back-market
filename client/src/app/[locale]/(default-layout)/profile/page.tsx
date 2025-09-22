@@ -1,7 +1,7 @@
 "use client";
 
-import { PersonalDetailsCard } from "@/components/profile/PersonalDetailsCard";
-import { AddressCard } from "@/components/profile/AddressCard";
+import { PersonalDetailsCard } from "@/components/pages/profile/PersonalDetailsCard";
+import { AddressCard } from "@/components/pages/profile/AddressCard";
 
 export default function ProfilePage() {
   return (
