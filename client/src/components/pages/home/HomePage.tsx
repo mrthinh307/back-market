@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {
   MostWantedSection,
   ProductShowcaseSection,
-  WhyChooseUs,
+  ServiceHighlights,
   FAQSection,
 } from '@/components/pages/home/components';
 import { SlideCarousel, BannerCarousel } from '@/components/carousels';
@@ -77,7 +77,7 @@ function HomePage() {
       </section>
 
       {/* SECTION: WHY CHOOSE US */}
-      <WhyChooseUs />
+      <ServiceHighlights />
 
       {/* SECTION: RECOMMENDED PRODUCTS */}
       <section className='slide-carousel-container mb-14'>

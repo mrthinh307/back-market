@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { getRelevantVariants } from '@/api/product-variant.api';
+import { USE_QUERY_KEY } from '@/constants/use-query-key';
 import ErrorState from '@/components/ui/ErrorState';
 import {
   RelevantVariantGroup,
@@ -21,7 +22,7 @@ const SelectVariantSection: React.FC<{
 
   // Fetch relevant variants data from API
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ['relevant-variants', productId, defaultVariantId],
+    queryKey: USE_QUERY_KEY.PRODUCT_VARIANT_RELEVANTS(productId, defaultVariantId),
     queryFn: () => getRelevantVariants(productId, defaultVariantId),
     enabled: !!productId && !!defaultVariantId,
   });
