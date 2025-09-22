@@ -33,15 +33,8 @@ function CartPage() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <header className="bg-white border-b border-gray-200 px-4 py-4">
-          <div className="max-w-7xl mx-auto">
-            <h1 className="text-2xl font-bold text-gray-900">Back Market</h1>
-          </div>
-        </header>
-
-        <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="min-h-screen bg-background">
+        <div className="container py-8">
           <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
             <div className="mb-6">
               <Image
@@ -52,12 +45,12 @@ function CartPage() {
                 className="mx-auto opacity-50"
               />
             </div>
-            <h2 className="text-2xl font-semibold mb-2">Your cart is empty</h2>
-            <p className="text-gray-600 mb-6">
+            <h2 className="text-2xl font-semibold mb-2 text-primary">Your cart is empty</h2>
+            <p className="text-muted-foreground mb-6">
               Looks like you haven't added any items to your cart yet.
             </p>
             <Link href="/">
-              <Button size="lg" className="bg-black hover:bg-gray-800">
+              <Button size="lg" className="bg-primary hover:bg-button-hover text-primary-foreground">
                 Continue Shopping
               </Button>
             </Link>
@@ -68,16 +61,16 @@ function CartPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-surface-default-mid h-screen flex flex-col overflow-auto pb-[140px] lg:flex-row lg:overflow-y-hidden lg:pb-0">
+    <div className="bg-background">
+      <div className="bg-sub-background h-screen flex flex-col overflow-y-auto lg:flex-row lg:overflow-y-hidden lg:pb-0">
           {/* SECTION: YOUR CART */}
-          <div className='relative grow lg:overflow-y-scroll'> 
+          <div className='relative grow h-auto lg:h-[calc(100dvh-60px)] lg:overflow-y-scroll'> 
             <div className='mx-auto mb-6 w-full grow md:mb-12 md:max-w-[820px]'>
-              <div className='flex-shrink-0 pb-4 p-6'>
-                <h2 className="text-xl font-semibold text-gray-800">Your cart</h2>
+              <div className='flex-shrink-0 pb-4 pt-6 mt-6'>
+                <h2 className="text-xl font-semibold text-primary">Your cart</h2>
               </div>
               <div className="flex-1 overflow-y-auto">
-                <div className="p-6 space-y-4">
+                <div className="p-2 space-y-4">
                   {cartItems.map((item) => (
                     <div key={item.id}>
                       <ProductCard
@@ -114,7 +107,7 @@ function CartPage() {
                 </div>
               </div>
 
-              <hr className='border-static-default-low border-t my-10 md:my-14'></hr>
+              <hr className='border-static-default-low border-t my-10 md:my-10'></hr>
 
               {/* SECTION: COMPLETE YOUR CART */}
               <div className='overflow-y-auto'>
@@ -132,7 +125,7 @@ function CartPage() {
                 </SlideCarousel>
               </div>
 
-              <hr className='border-static-default-low border-t my-10 md:my-14'></hr>
+              <hr className='border-static-default-low border-t my-10 md:my-10'></hr>
 
               {/* SECTION: YOUR PERKS */}
               <div className='px-6'>
@@ -141,19 +134,16 @@ function CartPage() {
             </div>
           </div>
 
-          
-
           {/* SECTION: SUMMARY */}
-          <div className='flex justify-center px-4 pt-10 lg:bg-surface-default-hi md:pt-12 lg:w-[27.5rem] lg:overflow-auto'>
+          <div className='flex justify-center px-4 lg:bg-sub-background lg:w-[27.5rem] h-auto lg:h-[calc(100dvh-60px)] lg:overflow-auto'>
             <div className="lg:col-span-2 flex flex-col">
               <div className="flex-1 flex flex-col">
-                <div className='flex-shrink-0 pb-4 p-6'>
-                    <h2 className="text-xl font-semibold text-gray-800">Summary</h2>
+                <div className='flex-shrink-0 pb-4 pt-6 mt-6'>
+                    <h2 className="text-xl font-semibold text-primary">Summary</h2>
                 </div>
-                <div className='rounded-lg shadow-sm bg-white h-full border border-gray-200 mt-12'>
+                <div className='rounded-lg shadow-sm bg-background-secondary h-full border border-border mt-3'>
                   <div className="flex-1 flex flex-col overflow-y-auto p-6 pb-6">
                     <div className="space-y-4 flex-1">
-                        
                       <div className="space-y-4">
                         {cartItems.map((item) => (
                           <div key={item.id} className="flex items-start gap-3">
@@ -168,10 +158,10 @@ function CartPage() {
 
                             <div className="flex-1 flex flex-col">
                                 <div className="flex justify-between">
-                                <p className="text-sm font-medium text-gray-800 leading-snug flex-1">{item.name}</p>
-                                <p className="text-sm font-semibold whitespace-nowrap ml-2">£{(item.price * item.quantity).toFixed(2)}</p>
+                                <p className="text-sm font-medium text-primary leading-snug flex-1">{item.name}</p>
+                                <p className="text-sm font-semibold whitespace-nowrap ml-2 text-primary">£{(item.price * item.quantity).toFixed(2)}</p>
                                 </div>
-                                <div className="flex justify-between text-sm text-gray-600">
+                                <div className="flex justify-between text-sm text-muted-foreground">
                                 <p>Shipping</p>
                                 <p>Free</p>
                                 </div>
@@ -179,7 +169,7 @@ function CartPage() {
                             </div>
                         ))}
                         </div>
-                        <hr className='border-static-default-low border-t my-4'></hr>
+                        <hr className='border-border border-t my-4'></hr>
                         <div className="space-y-2">
                           <div className="flex justify-between text-sm">
                               <span>Subtotal</span>
@@ -189,7 +179,7 @@ function CartPage() {
                               <span className="underline">Quality Assurance Fee</span>
                               <span>£7.49</span>
                           </div>
-                          <hr className='border-static-default-low border-t my-4'></hr>
+                          <hr className='border-border border-t my-4'></hr>
                           <div className="flex justify-between text-lg font-semibold">
                               <span>Total including taxes</span>
                               <span>£{(subtotal + 7.49).toFixed(2)}</span>
@@ -199,26 +189,26 @@ function CartPage() {
                       <div className="mt-4 flex-shrink-0 mb-[140px]">
                         <Button
                         size="lg"
-                        className="w-full bg-black hover:bg-gray-800 h-12 text-base font-semibold"
+                        className="w-full bg-primary hover:bg-button-hover text-primary-foreground h-12 text-base font-semibold"
                         disabled={cartItems.length === 0}
                         >
                         Go to shipping
                         </Button>
 
-                        <p className="text-xs text-gray-500 text-center mt-3 leading-relaxed">
+                        <p className="text-xs text-muted-foreground text-center mt-3 leading-relaxed">
                         By confirming this order you accept our{" "}
                         <Link
                             href="#"
-                            className="underline hover:text-gray-700"
+                            className="underline hover:text-primary"
                         >
                             Terms of Use Agreement
                         </Link>
                         ,{" "}
-                        <Link href="#" className="underline hover:text-gray-700">
+                        <Link href="#" className="underline hover:text-primary">
                             Terms of Sale
                         </Link>
                         , and our{" "}
-                        <Link href="#" className="underline hover:text-gray-700">
+                        <Link href="#" className="underline hover:text-primary">
                             data protection policy
                         </Link>
                         .

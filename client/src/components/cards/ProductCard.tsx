@@ -30,10 +30,10 @@ function ProductCard({
   if (variant === 'cart' && cartProps) {
     return (
       <div className={`h-full ${className}`}>
-        <div className='rounded-lg shadow-sm bg-white h-full border border-gray-200'>
-          <div className='p-6'>
-            <div className='flex gap-4'>
-              <div className='relative w-20 h-20 flex-shrink-0'>
+        <div className='rounded-lg shadow-sm bg-background-secondary h-full border border-border'>
+          <div className='p-4 sm:p-6'>
+            <div className='flex flex-col sm:flex-row gap-4 sm:gap-6'>
+              <div className='relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0'>
                 <Image
                   src={productCard.image}
                   alt={productCard.name}
@@ -42,15 +42,14 @@ function ProductCard({
                 />
               </div>
 
-              {/* Product Details - Left side */}
               <div className='flex-1 min-w-0'>
-                <h3 className='font-semibold text-base mb-2 line-clamp-2'>
+                <h3 className='font-semibold text-base sm:text-lg mb-2 line-clamp-2 text-primary'>
                   {productCard.name}
                 </h3>
                 
                 <div className='flex flex-wrap gap-2 mb-2'>
                   {cartProps.condition && (
-                    <div className="inline-flex items-center px-2 py-1 text-xs font-medium bg-white border border-gray-300 rounded text-gray-900">
+                    <div className="inline-flex items-center px-2 py-1 text-xs font-medium bg-background-secondary border border-border rounded text-primary">
                       {cartProps.condition}
                     </div>
                   )}
@@ -62,50 +61,48 @@ function ProductCard({
                 </div>
 
                 {cartProps.deliveryInfo && (
-                  <p className='text-sm text-gray-600 mb-2'>{cartProps.deliveryInfo}</p>
+                  <p className='text-sm text-primary mb-2 pt-6'>{cartProps.deliveryInfo}</p>
                 )}
               </div>
 
-              {/* Price, Quantity and Remove - Right side */}
-              <div className='flex flex-col items-end gap-3 min-w-[200px]'>
-                {/* Price and Savings */}
-                <div className='text-right'>
-                  <div className='text-lg font-bold mb-1'>
+              <div className='flex flex-col relative sm:items-end gap-3 min-w-full sm:min-w-[200px] w-full sm:w-auto'>
+                <div className='text-left sm:text-right'>
+                  <div className='text-lg sm:text-xl font-bold mb-1 text-primary'>
                     £{typeof productCard.price === 'string' ? productCard.price : productCard.price.toFixed(2)}
                   </div>
                   {productCard.newPrice && (
-                    <div className='flex items-center gap-2 justify-end'>
+                    <div className='flex items-center gap-2 justify-start sm:justify-end'>
                       {cartProps.savings && (
                         <Badge variant="outline" className="text-xs bg-green-100 text-green-800">
                           Save £{cartProps.savings.toFixed(2)}
                         </Badge>
                       )}
-                      <span className='text-sm text-gray-500 line-through'>
+                      <span className='text-sm text-muted-foreground line-through'>
                         £{typeof productCard.newPrice === 'string' ? productCard.newPrice : productCard.newPrice.toFixed(2)} new
                       </span>
                     </div>
                   )}
                 </div>
 
-                {/* Quantity and Remove */}
-                <div className='flex items-center justify-between gap-4'>
+                <div className='flex items-center gap-3 mt-2 sm:mt-0 sm:absolute sm:bottom-0 sm:right-0'>
                   {cartProps.availability && (
-                    <span className={`text-sm font-medium ${
-                      cartProps.availability === 'Only 1 left' 
-                        ? 'text-purple-600' 
-                        : cartProps.availability === 'Out of stock'
-                        ? 'text-red-600'
-                        : 'text-green-600'
-                    }`}>
+                    <span
+                      className={`whitespace-nowrap text-sm font-medium ${
+                        cartProps.availability === 'Only 1 left'
+                          ? 'text-purple-600'
+                          : cartProps.availability === 'Out of stock'
+                          ? 'text-red-600'
+                          : 'text-green-600'
+                      }`}
+                    >
                       {cartProps.availability}
                     </span>
                   )}
                   <div className='flex items-center gap-2'>
-                    <span className='text-sm'>Quantity:</span>
                     <select 
                       value={cartProps.quantity || 1}
                       onChange={(e) => cartProps.onQuantityChange?.(parseInt(e.target.value))}
-                      className='border rounded px-2 py-1 text-sm w-16'
+                      className='border border-border rounded px-2 py-1 text-sm w-16 bg-background-secondary'
                     >
                       {[1,2,3,4,5].map(num => (
                         <option key={num} value={num}>{num}</option>
