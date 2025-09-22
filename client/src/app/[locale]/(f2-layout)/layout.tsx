@@ -1,5 +1,5 @@
 import React from 'react';
-import { Footer, F2Header } from '@/components/layouts';
+import { F2Header } from '@/components/layouts';
 
 export default function F2Layout({
   children,
@@ -7,10 +7,10 @@ export default function F2Layout({
   children: React.ReactNode;
 }) {
   return (
-    <main className='mx-auto overflow-hidden'>
+    <main className='mx-auto overflow-hidden pt-[60px] h-screen'>
       <F2Header />
       
-      <div className='mx-auto pt-[80px] h-[calc(100vh-80px)]'>
+      <div className='mx-auto overflow-hidden h-screen'>
         {children}
       </div>
     </main>
