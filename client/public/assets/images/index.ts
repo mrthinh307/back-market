@@ -8,3 +8,4 @@ export { default as hidePasswordIcon } from './hide-password.svg';
 export { default as facebookIcon } from './facebook.svg';
 export { default as playVideoIcon } from './play-video-icon.svg';
 export { default as heartIcon } from './heart-icon.svg';
+export { default as heartedIcon } from './hearted-icon.svg';

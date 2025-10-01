@@ -9,11 +9,13 @@ import {
   ProductVariantDetail,
 } from '@/types/product-selection.type';
 import { AttributeSelection, SkeletonSection } from './';
+import { useSectionTracking } from '@/hooks/useSectionTracking';
 
 // Main component - ultra simple with Link navigation
 const SelectVariantSection: React.FC<{
   productVariant: ProductVariantDetail;
-}> = ({ productVariant }) => {
+  onProgressChange?: (currentSection: number, totalSections: number, progressPercentage: number) => void;
+}> = ({ productVariant, onProgressChange }) => {
   // Extract data from productVariant
   const { productId, defaultVariantId } = useMemo(() => ({
     productId: productVariant.product.id,
@@ -31,6 +33,19 @@ const SelectVariantSection: React.FC<{
     data?.relevantVariants || [], 
     [data?.relevantVariants]
   );
+
+  // Calculate available sections (excluding sections with <= 1 option)
+  const availableSections = useMemo(() => 
+    relevantVariantsData.filter(group => group.items.length > 1),
+    [relevantVariantsData]
+  );
+
+  // Setup section tracking
+  const { containerRef, registerSection } = useSectionTracking({
+    sectionCount: availableSections.length,
+    trackingEnabled: availableSections.length > 0,
+    onProgressChange
+  });
 
   // Handle loading state
   if (isLoading) {
@@ -60,15 +75,19 @@ const SelectVariantSection: React.FC<{
   return (
     <div className='flex justify-center'>
       {relevantVariantsData.length > 0 && (
-        <div className='w-full mb-7 md:space-y-6'>
-          {relevantVariantsData.map((attributeGroup: RelevantVariantGroup) => {
-            if (attributeGroup.items.length <= 1) return null; // Skip if only one or no option
+        <div ref={containerRef} className='w-full mb-7 md:space-y-6'>
+          {availableSections.map((attributeGroup: RelevantVariantGroup, index: number) => {
             const attributeCode = attributeGroup.attribute.code;
             return (
-              <AttributeSelection
+              <div
                 key={attributeCode}
-                attributeGroup={attributeGroup}
-              />
+                ref={(el) => registerSection(el, index)}
+              >
+                <AttributeSelection
+                  attributeGroup={attributeGroup}
+                  productVariant={productVariant}
+                />
+              </div>
             );
           })}
         </div>

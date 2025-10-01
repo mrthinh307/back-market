@@ -15,7 +15,7 @@ export const PRODUCT_VARIANT_COLORS: { [key: string]: string } = {
   'midnight green': '#004851',
   'natural titanium': '#F7F2ED',
   'pacific blue': '#98ABEE',
-  'pink': '#FF2D92',
+  'pink': '#FDE9E8',
   'purple': '#AF52DE',
   'red': '#FF3B30',
   'rose gold': '#E8B5A0',

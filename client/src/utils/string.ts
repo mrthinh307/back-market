@@ -1,4 +1,4 @@
-import { PRODUCT_VARIANT_COLORS } from "@/constants/product-variant-colors";
+import { PRODUCT_VARIANT_COLORS } from '@/constants/product-variant-colors';
 
 export function isValidUUID(id: string): boolean {
   const uuidRegex =
@@ -9,4 +9,8 @@ export function isValidUUID(id: string): boolean {
 export function getColorHex(name: string): string | undefined {
   const key = name.trim().toLowerCase();
   return PRODUCT_VARIANT_COLORS[key] || undefined;
+}
+
+export function replaceBulletWithDash(str: string): string {
+  return str.replace(/•/g, '-');
 }

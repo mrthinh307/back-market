@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { useLocale } from 'next-intl';
 import { useQuery } from '@tanstack/react-query';
 
@@ -9,7 +9,6 @@ import { useBreadcrumb } from '@/hooks/useBreadcumb';
 import { USE_QUERY_KEY } from '@/constants/use-query-key';
 import BreadcumbCustom from '@/components/ui/BreadcumbCustom';
 import ErrorState from '@/components/ui/ErrorState';
-import { productImages } from './seed/temp-data-product';
 import GalleryCarousel from '../../carousels/GalleryCarousel';
 import LoadingPage from '../LoadingPage';
 import {
@@ -24,10 +23,33 @@ import { CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import ProductCard from '@/components/cards/ProductCard';
 import { ProductCardProps } from '@/types/cards.type';
 import { recommendProducts, topProducts } from '../home/seed/temp-data';
+import BannerProduct from './components/BannerProduct';
+import { replaceBulletWithDash } from '@/utils/string';
 
 const ProductPage: React.FC<{ productVariantId: string }> = ({
   productVariantId,
 }) => {
+  // Progress tracking state
+  const [progressData, setProgressData] = useState({
+    currentSection: 0,
+    totalSections: 0,
+    progressPercentage: 0,
+  });
+
+  const handleProgressChange = useCallback(
+    (
+      currentSection: number,
+      totalSections: number,
+      progressPercentage: number,
+    ) => {
+      setProgressData({ currentSection, totalSections, progressPercentage });
+    },
+    [],
+  );
+
+  // Memoize progressData to avoid unnecessary re-renders of BannerProduct
+  const memoizedProgressData = useMemo(() => progressData, [progressData]);
+
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: USE_QUERY_KEY.PRODUCT_VARIANT(productVariantId),
     queryFn: () => getProductVariantById(productVariantId),
@@ -61,6 +83,14 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
 
   return (
     <div className='content-center flex-col'>
+      <BannerProduct
+        imageUrl={productVariant.images[0]?.imageUrl}
+        subtitleText={replaceBulletWithDash(productVariant.subtitle.text)}
+        priceWithCurrency={productVariant.priceWithCurrency}
+        onAddToCart={() => console.log('Add to cart clicked')}
+        progressData={memoizedProgressData}
+      />
+
       {/* Breadcrumb */}
       <aside className='container'>
         <BreadcumbCustom items={displayBreadcrumbItems} />
@@ -72,7 +102,7 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
           {/* Image Carousel */}
           <div className='relative w-full max-w-full grow md:w-1/3 lg:w-1/2'>
             <GalleryCarousel
-              galleryImages={productImages}
+              galleryImages={productVariant.images.map((img) => img.imageUrl)}
               className='md:mr-14 md:-mt-14'
               carouselItemClassName='flex justify-center'
             />
@@ -99,7 +129,8 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
 
       <section className='container'>
         <SelectVariantSection
-          productVariant={productVariant} // Single prop - contains all needed data
+          productVariant={productVariant}
+          onProgressChange={handleProgressChange}
         />
       </section>
 
@@ -107,14 +138,8 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
         <div className='container mt-14'>
           {productVariant && (
             <ProductBundle
-              mainProduct={{
-                id: productVariant.id,
-                name: productVariant.product.name,
-                description: productVariant.subtitle.text,
-                priceWithCurrency: productVariant.priceWithCurrency,
-                image: productImages[0] || '',
-                alt: `${productVariant.product.name} - ${productVariant.subtitle.text}`,
-              }}
+              mainProduct={productVariant}
+
             />
           )}
 

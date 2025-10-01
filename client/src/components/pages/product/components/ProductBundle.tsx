@@ -1,24 +1,24 @@
 import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { ProductVariantDetail } from '@/types/product-selection.type';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface ProductBundleProps {
   title?: string;
-  mainProduct?: {
-    id: string;
-    name: string;
-    description: string;
-    priceWithCurrency: string;
-    image: string;
-    alt: string;
-  };
+  mainProduct?: ProductVariantDetail;
   products?: Array<{
     id: string;
-    name: string;
+    product: {
+      name: string;
+    };
     description: string;
     priceWithCurrency: string;
     originalPriceWithCurrency?: string;
-    image: string;
+    images?: Array<{
+      imageUrl: string;
+      alt: string;
+    }>;
     alt: string;
   }>;
   onAddToCart?: () => void;
@@ -30,14 +30,20 @@ const ProductBundle: React.FC<ProductBundleProps> = ({
   products = [
     {
       id: '2',
-      name: 'Case iPhone 15 Plus and 2 protective screens - TPU -...',
+      product: {
+        name: `Case for ${mainProduct?.product.name} and 2 protective screens - TPU -...`,
+      },
       description: '',
       priceWithCurrency: '$ 23.99',
-      image:
-        'https://www.backmarket.de/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/170345b6-ae48-44b4-acf2-fdc272f3a4a1-1_b5c747cb-67da-4b6a-b6e5-7770fb6d9519.jpg',
-      alt: 'Case iPhone 15 Plus',
+      images: [
+        {
+          imageUrl:
+            'https://www.backmarket.de/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/170345b6-ae48-44b4-acf2-fdc272f3a4a1-1_b5c747cb-67da-4b6a-b6e5-7770fb6d9519.jpg',
+          alt: 'Case for product and 2 protective screens - TPU -...',
+        },
+      ],
     },
-  ],  
+  ],
   onAddToCart,
 }) => {
   // Return null if no mainProduct provided
@@ -51,12 +57,12 @@ const ProductBundle: React.FC<ProductBundleProps> = ({
       ...mainProduct,
       originalPriceWithCurrency: undefined, // Main product doesn't have original price in bundle context
     },
-    ...products
+    ...products,
   ];
 
   // Helper function to extract numeric value from priceWithCurrency
   const extractPrice = (priceWithCurrency: string): number => {
-    return parseFloat(priceWithCurrency.replace(/[^0-9.-]+/g, "")) || 0;
+    return parseFloat(priceWithCurrency.replace(/[^0-9.-]+/g, '')) || 0;
   };
 
   // Helper function to format total price with same currency symbol as first product
@@ -71,13 +77,18 @@ const ProductBundle: React.FC<ProductBundleProps> = ({
     return `$ ${total.toFixed(2)}`;
   };
 
-  const totalPrice = allProducts.reduce((sum, product) => sum + extractPrice(product.priceWithCurrency), 0);
+  const totalPrice = allProducts.reduce(
+    (sum, product) => sum + extractPrice(product.priceWithCurrency),
+    0,
+  );
   const totalPriceWithCurrency = formatTotalPrice(totalPrice);
 
   return (
     <div className='mb-12 lg:mb-16'>
       <div>
-        <h2 className='text-[22px] font-semibold text-foreground mb-4'>{title}</h2>
+        <h2 className='text-[22px] font-semibold text-foreground mb-4'>
+          {title}
+        </h2>
         <div className='bg-background-secondary rounded-xl p-4 md:p-6 lg:p-8 shadow-sm'>
           {/* Mobile & Tablet layout */}
           <div className='block xl:hidden'>
@@ -86,20 +97,26 @@ const ProductBundle: React.FC<ProductBundleProps> = ({
                 <React.Fragment key={product.id}>
                   <div className='flex items-start space-x-4'>
                     <div className='shrink-0'>
-                      <Image
-                        className='rounded-lg w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24'
-                        alt='{product.name}'
-                        decoding='async'
-                        height='96'
-                        loading='eager'
-                        sizes='(max-width: 640px) 64px, (max-width: 768px) 80px, 96px'
-                        src={product.image}
-                        width='96'
-                      />
+                      {product.images?.[0]?.imageUrl ? (
+                        <Image
+                          className='rounded-lg w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24'
+                          alt='{product.name}'
+                          decoding='async'
+                          height='96'
+                          loading='eager'
+                          sizes='(max-width: 640px) 64px, (max-width: 768px) 80px, 96px'
+                          src={product.images?.[0]?.imageUrl}
+                          width='96'
+                        />
+                      ) : (
+                        <div className='rounded-lg w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24'>
+                          <Skeleton className='w-full h-full' />
+                        </div>
+                      )}
                     </div>
                     <div className='flex-1 min-w-0'>
                       <h3 className='font-duplet font-semibold text-foreground text-sm sm:text-base md:text-lg line-clamp-2'>
-                        {product.name}
+                        {product.product?.name}
                       </h3>
                       {product.description && (
                         <p className='font-duplet text-xs sm:text-sm md:text-base text-muted-foreground mt-1 line-clamp-2'>
@@ -110,11 +127,11 @@ const ProductBundle: React.FC<ProductBundleProps> = ({
                         <span className='font-duplet text-lg md:text-xl font-bold text-foreground'>
                           {product.priceWithCurrency}
                         </span>
-                        {product.originalPriceWithCurrency && (
+                        {/* {product.originalPriceWithCurrency && (
                           <span className='font-duplet text-sm md:text-base text-muted-foreground line-through'>
                             {product.originalPriceWithCurrency} new
                           </span>
-                        )}
+                        )} */}
                       </div>
                     </div>
                   </div>
@@ -166,20 +183,26 @@ const ProductBundle: React.FC<ProductBundleProps> = ({
                     <div className='flex flex-col items-center max-w-[280px]'>
                       <div className='flex flex-col items-center text-center space-y-4 p-6'>
                         <div className='shrink-0'>
-                          <Image
-                            className='rounded-xl w-32 h-32 lg:w-40 lg:h-40 object-cover'
-                            alt='{product.name}'
-                            decoding='async'
-                            height='160'
-                            loading='eager'
-                            sizes='(max-width: 1024px) 128px, 160px'
-                            src={product.image}
-                            width='160'
-                          />
+                          {product.images?.[0]?.imageUrl ? (
+                            <Image
+                              className='rounded-xl w-32 h-32 lg:w-40 lg:h-40 object-cover'
+                              alt='{product.name}'
+                              decoding='async'
+                              height='160'
+                              loading='eager'
+                              sizes='(max-width: 1024px) 128px, 160px'
+                              src={product.images?.[0]?.imageUrl}
+                              width='160'
+                            />
+                          ) : (
+                            <div className='rounded-sm w-32 h-32 lg:w-40 lg:h-40 flex items-center justify-center'>
+                              <Skeleton className='w-full h-full' />
+                            </div>
+                          )}
                         </div>
                         <div className='space-y-2'>
                           <h3 className='font-duplet font-semibold text-foreground text-lg line-clamp-2'>
-                            {product.name}
+                            {product.product?.name}
                           </h3>
                           {product.description && (
                             <p className='font-duplet text-sm text-muted-foreground line-clamp-2'>
@@ -190,11 +213,11 @@ const ProductBundle: React.FC<ProductBundleProps> = ({
                             <span className='font-duplet text-xl font-bold text-foreground'>
                               {product.priceWithCurrency}
                             </span>
-                            {product.originalPriceWithCurrency && (
+                            {/* {product.originalPriceWithCurrency && (
                               <span className='font-duplet text-sm text-muted-foreground line-through'>
                                 {product.originalPriceWithCurrency} new
                               </span>
-                            )}
+                            )} */}
                           </div>
                         </div>
                       </div>

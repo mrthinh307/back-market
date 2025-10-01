@@ -72,7 +72,7 @@ function GalleryCarousel({
 
   // ✅ Early return if no images
   if (!galleryImages || galleryImages.length === 0) {
-    return <div className="text-center p-4">No images to display</div>;
+    return <div className="text-center p-4 text-lg">Images being refurbished !!</div>;
   }
 
   return (
