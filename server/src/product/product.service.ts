@@ -110,6 +110,25 @@ export class ProductService {
             id: true,
             stock: true,
             price: true,
+            // Include images for the variant
+            ProductVariantImage: {
+              select: {
+                image: {
+                  select: {
+                    id: true,
+                    imageUrl: true,
+                    altText: true,
+                    displayOrder: true,
+                  },
+                },
+              },
+              orderBy: {
+                image: {
+                  displayOrder: 'asc',
+                },
+              },
+              take: 1, // Only get the first image
+            },
             attributes: {
               where: {
                 attribute: {
@@ -134,7 +153,17 @@ export class ProductService {
               },
             },
           },
-          orderBy: { price: 'asc' },
+          //TODO: Need to remove
+          orderBy: [
+            // Priority 1: Variants with images first
+            {
+              ProductVariantImage: {
+                _count: 'desc',
+              },
+            },
+            // Priority 2: Then by price ascending
+            { price: 'asc' },
+          ],
         },
         // Get review stats in a single aggregation
         _count: {
@@ -183,6 +212,10 @@ export class ProductService {
           ? { id: product.brand.id, name: product.brand.name }
           : { id: '', name: 'Unknown Brand' };
 
+        // Get the first image from the cheapest variant
+        const firstImage = cheapestVariant.ProductVariantImage?.[0]?.image;
+        const imageUrl = firstImage?.imageUrl || null;
+
         return {
           id: product.variants[0].id.toString(),
           title: product.name,
@@ -191,7 +224,7 @@ export class ProductService {
             id: product.category.id.toString(),
             name: product.category.name,
           },
-          image: null,
+          image: imageUrl,
           color: currentColor,
           priceValue: Number(cheapestVariant.price),
           priceWithCurrency: `$ ${Number(cheapestVariant.price).toFixed(2)}`,

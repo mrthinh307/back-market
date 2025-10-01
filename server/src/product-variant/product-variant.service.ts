@@ -11,6 +11,7 @@ import {
   ProductVariantDetailDto,
   ProductDto,
   VariantItemDto,
+  ImageDto,
 } from './dto/product-variant.dto';
 import { CacheKeyFactory } from 'src/cache/cache-key.factory';
 
@@ -32,6 +33,14 @@ type PrismaProductVariant = {
     value: {
       id: number;
       value: string;
+      displayOrder: number;
+    };
+  }[];
+  ProductVariantImage?: {
+    image: {
+      id: number;
+      imageUrl: string;
+      altText: string | null;
       displayOrder: number;
     };
   }[];
@@ -108,6 +117,17 @@ export class ProductVariantService {
             rating: true,
           },
         },
+        // Include images through junction table
+        ProductVariantImage: {
+          include: {
+            image: true,
+          },
+          orderBy: {
+            image: {
+              displayOrder: 'asc',
+            },
+          },
+        },
       },
     });
 
@@ -128,6 +148,14 @@ export class ProductVariantService {
 
     const ratings = variant.reviews.map((r) => r.rating) || [];
     const ratingCount = variant._count.reviews || 0;
+
+    // Map images from junction table
+    const images: ImageDto[] = variant.ProductVariantImage.map((pvi) => ({
+      id: pvi.image.id,
+      imageUrl: pvi.image.imageUrl,
+      altText: pvi.image.altText,
+      displayOrder: pvi.image.displayOrder,
+    }));
 
     return {
       id: variant.id,
@@ -159,7 +187,7 @@ export class ProductVariantService {
         count: ratingCount,
         average: calculateAverageRating(ratings),
       },
-      // images: [],
+      images,
     };
   }
 
@@ -258,6 +286,16 @@ export class ProductVariantService {
               include: {
                 attribute: true,
                 value: true,
+              },
+            },
+            ProductVariantImage: {
+              include: {
+                image: true,
+              },
+              orderBy: {
+                image: {
+                  displayOrder: 'asc',
+                },
               },
             },
           },

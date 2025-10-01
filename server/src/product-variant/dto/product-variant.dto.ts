@@ -1,3 +1,10 @@
+export class ImageDto {
+  id: number;
+  imageUrl: string;
+  altText: string | null;
+  displayOrder: number;
+}
+
 export class AttributeValueDto {
   id: number;
   name: string;
@@ -48,6 +55,8 @@ export class ProductVariantDetailDto {
     count: number;
     average: number;
   };
+
+  images: ImageDto[];
 }
 
 export class VariantItemDto {
