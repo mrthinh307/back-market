@@ -109,7 +109,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const { access_token } = response;
         setAccessToken(access_token);
 
-        router.back(); // Redirect to previous page
+        router.push(`/${locale}`); // Redirect to previous page
       }
     } catch (err: any) {
       const { message } = parseAxiosError(err);
