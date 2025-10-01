@@ -8,11 +8,13 @@ import { useLocale } from 'next-intl';
 interface MainHeaderProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (value: boolean) => void;
+  avatarUrl?: string | null;
 }
 
 const MainHeader: React.FC<MainHeaderProps> = ({
   isMenuOpen,
   setIsMenuOpen,
+  avatarUrl,
 }) => {
   const locale  = useLocale();
   return (
@@ -75,7 +77,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
         </div>
 
         {/* Right Side Actions */}
-        <RightSideActions />
+        <RightSideActions avatarUrl={avatarUrl} />
       </div>
     </div>
   );

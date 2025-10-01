@@ -10,7 +10,7 @@ export default function DefaultLayout({
     <main className='mx-auto'>
       <Header />
       
-      <div className='mx-auto'>
+      <div className='mx-auto pt-[124px] md:pt-[133px]'>
         {children}
       </div>
 

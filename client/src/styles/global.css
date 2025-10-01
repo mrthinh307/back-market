@@ -307,4 +307,15 @@
   .animate-slide-in-left {
     animation: slide-in-left 0.2s ease-out;
   }
+
+  /* Header hide/show animations */
+  .header-slide-up {
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .header-slide-down {
+    transform: translateY(0);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }

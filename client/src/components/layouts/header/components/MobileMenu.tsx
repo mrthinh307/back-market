@@ -109,7 +109,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       </div>
 
       {/* Mobile Menu Footer - Fixed at bottom */}
-      <div className='bg-white dark:bg-background'>
+      <div className='bg-white dark:bg-background flex-1'>
         {/* Additional Links Section */}
         <div className='px-6 py-4 border-b border-gray-200 dark:border-gray-600/30'>
           {topNavItems.map((item, index) => (
@@ -125,7 +125,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         </div>
 
         {/* Footer Section */}
-        <div className='px-6 py-4'>
+        <div className='px-6 py-4 flex'>
           <LanguageSwitcher />
         </div>
       </div>
