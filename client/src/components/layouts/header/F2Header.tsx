@@ -2,8 +2,9 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useLocale } from 'next-intl';
+import Link from 'next/link';
+
 import logo from '@/public/assets/images/header-logo-1.svg';
 
 const F2Header: React.FC = () => {

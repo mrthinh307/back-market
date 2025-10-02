@@ -1,9 +1,10 @@
-import { StarIcon } from 'lucide-react';
-import { ProductCardProps } from '@/types/cards.type';
+import { useLocale } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
+
+import { StarIcon } from 'lucide-react';
+import { ProductCardProps } from '@/types/cards.type';
 import { getColorHex } from '@/utils/string';
-import { useLocale } from 'next-intl';
 
 function ProductCard({
   productCard,

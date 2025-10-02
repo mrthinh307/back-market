@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+
 import { Button } from '@/components/ui/button';
 import { CartItem, sampleCartItems } from './sample_cart_data';
 import YourCartSection from './YourCartSection';
@@ -85,3 +86,4 @@ function CartPage() {
 }
 
 export default CartPage;
+  
