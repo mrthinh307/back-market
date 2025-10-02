@@ -3,7 +3,7 @@ import logo from '@/public/assets/images/header-logo-1.svg';
 
 function LoadingPage() {
   return (
-    <div className='fixed inset-0 flex flex-col z-50 bg-background'>
+    <div className='fixed inset-0 flex flex-col z-50 bg-background overflow-y-hidden'>
       <header className='bg-background border-b border-[#dfe1e7] dark:border-gray-600/30 min-h-16 flex justify-start items-center px-8 py-4 flex-shrink-0'>
         <div className='h-[14px] shrink-0'>
           <Image src={logo} alt='logo' className='h-full w-auto dark:invert' />
