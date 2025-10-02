@@ -13,6 +13,7 @@ function ProductCard({
   className?: string;
 }) {
   const locale = useLocale();
+
   return (
     <Link
       href={`/${locale}/product/${productCard.id}`}
