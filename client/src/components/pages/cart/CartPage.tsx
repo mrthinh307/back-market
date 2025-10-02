@@ -5,9 +5,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { CartItem, sampleCartItems } from './sample_cart_data';
-import YourCartSection from './YourCartSection';
-import CartSummarySection from './CartSummarySection';
+import { CartItem, sampleCartItems } from './seed/sample_cart_data';
+import { YourCartSection, CartSummarySection } from './components';
 
 function CartPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>(sampleCartItems);
@@ -48,7 +47,8 @@ function CartPage() {
                     Your shopping cart is empty.
                   </h2>
                   <p className='text-muted'>
-                    All these excellent products don't just add themselves to your shopping cart!
+                    All these excellent products don't just add themselves to
+                    your shopping cart!
                   </p>
                   <Button className='mt-5 hidden md:block'>
                     <Link href='/'>Start shopping now !</Link>
@@ -86,4 +86,3 @@ function CartPage() {
 }
 
 export default CartPage;
-  
