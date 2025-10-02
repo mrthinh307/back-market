@@ -1,9 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
+import { toast } from 'sonner';
 import { StarIcon } from 'lucide-react';
 import { Button } from '../../../ui/button';
-import { heartIcon } from '@/public/assets/images';
+import { heartedIcon, heartIcon } from '@/public/assets/images';
+import { infoToastProps, successToastProps } from '@/libs/toast/toast-props';
+import { useLocale } from 'next-intl';
 
 interface ProductInfoProps {
   title: string;
@@ -24,6 +28,29 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   originalPrice,
   savings,
 }) => {
+  const router = useRouter();
+  const locale = useLocale();
+  const [isLiked, setIsLiked] = React.useState(true);
+  
+  const handleLikeClick = () => {
+    const newLikedState = !isLiked;
+    setIsLiked(newLikedState);
+    
+    toast(newLikedState ? 'Saved to Favorites' : 'Not ready to say goodbye?', {
+      ...(newLikedState ? successToastProps : infoToastProps),
+      action: {
+        label: newLikedState ? 'View Favorites' : 'Undo',
+        onClick: () => {
+          if (newLikedState) {
+            router.push(`/${locale}/dashboard/favourites`);
+          } else {
+            setIsLiked(true);
+          }
+        },
+      },
+    });
+  };
+
   return (
     <div className='w-full'>
       {/* Product info */}
@@ -39,13 +66,16 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
             </span>
           </h1>
 
-          <button className='size-[40px] rounded-full content-center md:!hidden hover:!bg-icon-button-hover cursor-pointer dark:!bg-gray-700 dark:hover:!bg-gray-600 transition-colors duration-200'>
+          <button
+            className='size-[40px] rounded-full content-center md:!hidden hover:!bg-icon-button-hover cursor-pointer dark:!bg-gray-700 dark:hover:!bg-gray-600 transition-colors duration-200'
+            onClick={handleLikeClick}
+          >
             <Image
-              src={heartIcon}
+              src={isLiked ? heartedIcon : heartIcon}
               alt='Heart Icon'
               width={24}
               height={24}
-              className='dark:invert'
+              className={`dark:invert`}
             />
           </button>
 
@@ -114,14 +144,17 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
           </div>
 
           {/* Add to cart Button */}
-          <Button className='md:min-w-[164px] md:max-w-[256px] md:grow'>
+          <Button className='md:min-w-[164px] md:max-w-[256px] md:grow' onClick={() => {
+            toast('Added to cart ! Navigating...', successToastProps);
+            router.push(`/${locale}/cart`);
+          }}>
             Add to cart
           </Button>
 
           {/* Save/Like Button */}
-          <Button variant='outline' className='px-3 hidden md:inline-flex'>
+          <Button variant='outline' className='px-3 hidden md:inline-flex' onClick={handleLikeClick}>
             <Image
-              src={heartIcon}
+              src={isLiked ? heartedIcon : heartIcon}
               alt='Heart Icon'
               width={0}
               height={0}

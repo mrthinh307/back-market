@@ -15,7 +15,7 @@ const baseConfig: NextConfig = {
         hostname: '**.backmarket.co.uk',
         pathname: '/**',
       },
-            {
+      {
         protocol: 'https',
         hostname: '**.backmarket.de',
         pathname: '/**',
@@ -38,6 +38,11 @@ const baseConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'product-page.statics.backmarket.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.googleusercontent.com',
         pathname: '/**',
       },
       {

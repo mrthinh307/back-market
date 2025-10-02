@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import Image from 'next/image';
 import { GalleryCarousel } from '@/components/carousels';
-import { productImages } from '../seed/temp-data-product';
 
 const CheckIcon = () => (
   <svg className='h-4 w-4 shrink-0' fill='currentColor' viewBox='0 0 24 24'>
@@ -96,7 +95,7 @@ const LeftSideSelectionSection = memo(
           )}
           {leftCarouselImages && (
             <GalleryCarousel
-              galleryImages={productImages}
+              galleryImages={leftCarouselImages}
               carouselItemClassName='flex justify-center'
             />
           )}

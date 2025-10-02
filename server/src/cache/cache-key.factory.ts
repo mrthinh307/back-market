@@ -64,6 +64,46 @@ export class CacheKeyFactory {
   }
 
   /**
+   * Generate cache key for product list filtered by category and optionally by brand.
+   *
+   * @param categoryId - The category ID (string)
+   * @param brandId - (Optional) The brand ID (UUID string)
+   * @param isExcludedBrand - Whether brand is excluded or included
+   * @returns Redis cache key string
+   *
+   * Examples:
+   *   prod:product:list:cat123
+   *   prod:product:list:cat123:brand456:include
+   *   prod:product:list:cat123:brand456:exclude
+   */
+  getProductListCacheKey(
+    categoryId: string,
+    brandId?: string,
+    isExcludedBrand = false,
+  ): string {
+    let key = `${this.envPrefix}:${CACHE_KEYS.PRODUCT_LIST}:cat${categoryId}`;
+    
+    if (brandId) {
+      const brandFilter = isExcludedBrand ? 'exclude' : 'include';
+      key += `:brand${brandId}:${brandFilter}`;
+    }
+    
+    return key;
+  }
+
+  /**
+   * Generate version key for global product list invalidation.
+   *
+   * @returns Redis version key string
+   *
+   * Example:
+   *   prod:version:product:list
+   */
+  getProductListVersionKey(): string {
+    return `${this.envPrefix}:${CACHE_KEYS.VERSION.PRODUCT_LIST}`;
+  }
+
+  /**
    * Generate version key for product-level cache invalidation.
    *
    * @param productId - The UUID of the product

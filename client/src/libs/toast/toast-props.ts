@@ -4,7 +4,7 @@ export const errorToastProps = {
   style: {
     fontSize: '16px',
     fontFamily: 'var(--font-duplet)',
-    color: 'var(--color-primary)',
+    color: '#0e1016',
     backgroundColor: 'var(--color-destructive-secondary)',
     boxShadow: 'var(--shadow-lg)',
     border: 'none',
@@ -19,5 +19,14 @@ export const successToastProps = {
   style: {
     ...errorToastProps.style,
     backgroundColor: 'var(--color-chart-2)',
+  },
+};
+
+export const infoToastProps = {
+  ...errorToastProps,
+  style: {
+    ...errorToastProps.style,
+    backgroundColor: 'var(--color-sidebar)',
+    color: 'var(--color-text-secondary)',
   },
 };

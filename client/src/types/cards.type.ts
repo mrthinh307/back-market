@@ -6,17 +6,40 @@ export interface ColorOption {
 }
 
 export interface ProductCardProps {
-  image: string;
-  name: string;
-  /** Base price, in the smallest currency unit or a major unit, but always as a number */
-  price: string | number;
-  starsValue?: number;
+  id: string;
+  title: string;
+  brand?: {
+    id: string;
+    name: string;
+  };
+  category?: {
+    id: string;
+    name: string;
+  };
+  image: string | null;
+  color?: string;
+  priceValue?: number;
+  priceWithCurrency: string;
+  stock?: number;
+  variants?: {
+    colors: {
+      name: string;
+    }[];
+  };
+  reviewRating: {
+    count: number;
+    average: number;
+  };
   description?: string;
-  reviewsCount?: number;
+  // Legacy properties for backward compatibility (optional)
   newPrice?: string | number;
-  colors?: ColorOption[];
 }
 export interface CategoryCardProps {
   image: string;
   name: string;
+  api?: {
+    categoryId: string;
+    brandId?: string;
+    isExcludedBrand?: boolean;
+  }
 }

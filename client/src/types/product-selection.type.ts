@@ -59,4 +59,10 @@ export interface ProductVariantDetail {
     count: number;
     average: number;
   };
+  images: {
+    id: number;
+    imageUrl: string;
+    altText: string | null;
+    displayOrder: number;
+  }[];
 }

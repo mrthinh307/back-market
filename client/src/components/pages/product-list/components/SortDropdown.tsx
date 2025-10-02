@@ -32,7 +32,7 @@ export function SortDropdown({
 
   return (
     <Popover>
-      <PopoverTrigger className='rounded-full flex h-8 items-center gap-x-3 px-3 text-sm bg-input-hover dark:bg-input hover:bg-input cursor-pointer'>
+      <PopoverTrigger className='rounded-full flex h-8 items-center gap-x-3 px-3 text-sm bg-input-hover dark:bg-input hover:bg-input cursor-pointer shrink-0'>
         <span>
           Sort <strong>{currentSort}</strong>
         </span>

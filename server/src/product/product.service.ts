@@ -2,10 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ProductListDto } from './dto/product-dto';
 import { calculateAverageRating } from 'src/common/utils/calculate';
+import { AppCacheService } from '../cache/cache.service';
+import { CACHE_TTL } from '../cache/constants/cache-key.constants';
+import { CacheKeyFactory } from 'src/cache/cache-key.factory';
 
 @Injectable()
 export class ProductService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly cacheService: AppCacheService,
+    private readonly cacheKeyFactory: CacheKeyFactory,
+  ) {}
 
   /**
    * Retrieve a list of products filtered by category (required)
@@ -20,6 +27,42 @@ export class ProductService {
    * @returns Promise<ProductListDto> - A list of matching products.
    */
   async getProductList(
+    categoryId: string,
+    brandId?: string,
+    isExcludedBrand = false,
+  ): Promise<ProductListDto> {
+    // Generate cache key with version for cache invalidation
+    const baseKey = this.cacheKeyFactory.getProductListCacheKey(
+      categoryId,
+      brandId,
+      isExcludedBrand,
+    ); // e.g. "dev:product:list:cat123:brand456:include"
+    const version = await this.cacheService.getVersion(
+      this.cacheKeyFactory.getProductListVersionKey(),
+    ); // e.g. "1"
+    const cacheKey = `${baseKey}:v${version}`; // e.g. "dev:product:list:cat123:brand456:include:v1"
+
+    return this.cacheService.wrap(
+      cacheKey,
+      CACHE_TTL.PRODUCT_LIST,
+      async () => {
+        console.log(
+          `🔍 Cache miss for product list (category: ${categoryId}, brand: ${brandId || 'all'}) - fetching from database`,
+        );
+        return this.fetchProductListFromDatabase(
+          categoryId,
+          brandId,
+          isExcludedBrand,
+        );
+      },
+    );
+  }
+
+  /**
+   * Private method to fetch product list data from database
+   * Separated for better testability and cleaner cache logic
+   */
+  private async fetchProductListFromDatabase(
     categoryId: string,
     brandId?: string,
     isExcludedBrand = false,
@@ -67,6 +110,25 @@ export class ProductService {
             id: true,
             stock: true,
             price: true,
+            // Include images for the variant
+            ProductVariantImage: {
+              select: {
+                image: {
+                  select: {
+                    id: true,
+                    imageUrl: true,
+                    altText: true,
+                    displayOrder: true,
+                  },
+                },
+              },
+              orderBy: {
+                image: {
+                  displayOrder: 'asc',
+                },
+              },
+              take: 1, // Only get the first image
+            },
             attributes: {
               where: {
                 attribute: {
@@ -91,7 +153,17 @@ export class ProductService {
               },
             },
           },
-          orderBy: { price: 'asc' },
+          //TODO: Need to remove
+          orderBy: [
+            // Priority 1: Variants with images first
+            {
+              ProductVariantImage: {
+                _count: 'desc',
+              },
+            },
+            // Priority 2: Then by price ascending
+            { price: 'asc' },
+          ],
         },
         // Get review stats in a single aggregation
         _count: {
@@ -140,15 +212,19 @@ export class ProductService {
           ? { id: product.brand.id, name: product.brand.name }
           : { id: '', name: 'Unknown Brand' };
 
+        // Get the first image from the cheapest variant
+        const firstImage = cheapestVariant.ProductVariantImage?.[0]?.image;
+        const imageUrl = firstImage?.imageUrl || null;
+
         return {
-          id: product.id,
+          id: product.variants[0].id.toString(),
           title: product.name,
           brand: brandInfo,
           category: {
             id: product.category.id.toString(),
             name: product.category.name,
           },
-          image: null,
+          image: imageUrl,
           color: currentColor,
           priceValue: Number(cheapestVariant.price),
           priceWithCurrency: `$ ${Number(cheapestVariant.price).toFixed(2)}`,
@@ -163,5 +239,18 @@ export class ProductService {
         };
       }),
     };
+  }
+
+  /**
+   * Invalidate cache for product list
+   * Called after product updates/deletes that affect the list
+   */
+  async invalidateProductListCache(): Promise<void> {
+    // Bump global product list version to invalidate all product list caches
+    await this.cacheService.bumpVersion(
+      this.cacheKeyFactory.getProductListVersionKey(),
+    );
+
+    console.log('📦 Product list cache invalidated');
   }
 }

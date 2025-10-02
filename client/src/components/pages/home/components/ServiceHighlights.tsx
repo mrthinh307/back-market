@@ -4,9 +4,11 @@ import { useMemo } from 'react';
 function ServiceHighlights({
   className,
   content,
+  contentSize = 'md',
 }: {
   className?: string;
   content?: Array<{ icon: string; text: string }>;
+  contentSize?: 'sm' | 'md' | 'lg';
 }) {
   const displayContent = useMemo(() => {
     return content && content.length > 0
@@ -31,8 +33,11 @@ function ServiceHighlights({
         ];
   }, []);
 
+  const contentSizeNumber = contentSize === 'sm' ? 20 : contentSize === 'md' ? 24 : 28;
+  const contentSizeText = contentSize === 'sm' ? 'text-xs' : contentSize === 'md' ? 'text-sm' : 'text-base';
+
   return (
-    <section className={`container mb-14`}>
+    <section className={`mb-14`}>
       <div
         className={`w-full bg-background-secondary rounded-lg grid gap-3 grid-cols-2 md:grid-cols-4 p-3 ${className}`}
       >
@@ -42,12 +47,12 @@ function ServiceHighlights({
               <Image
                 src={item.icon}
                 alt={item.text}
-                width={24}
-                height={24}
+                width={contentSizeNumber}
+                height={contentSizeNumber}
                 className='dark:invert'
               />
             </div>
-            <span className='font-semibold text-sm underline'>{item.text}</span>
+            <span className={`font-semibold ${contentSizeText} underline`}>{item.text}</span>
           </div>
         ))}
       </div>

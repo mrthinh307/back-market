@@ -7,10 +7,10 @@ export default function F2Layout({
   children: React.ReactNode;
 }) {
   return (
-    <main className='mx-auto overflow-hidden pt-[60px] h-screen'>
+    <main className='mx-auto'>
       <F2Header />
-      
-      <div className='mx-auto overflow-hidden h-screen'>
+
+      <div className='mx-auto pt-16 h-[calc(100vh-4rem)]'>
         {children}
       </div>
     </main>

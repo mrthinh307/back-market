@@ -1,6 +1,5 @@
 import React, { memo, useMemo } from 'react';
-import { RelevantVariantGroup } from '@/types/product-selection.type';
-import { productImages } from '../seed/temp-data-product';
+import { RelevantVariantGroup, ProductVariantDetail } from '@/types/product-selection.type';
 import { LeftSideSelectionSection, RightSideSelectionSection } from './';
 
 // Configuration type for attribute sections
@@ -21,71 +20,82 @@ type AttributeConfig = {
 };
 
 // Configuration for different selection types based on attribute codes
-const ATTRIBUTE_SECTION_MAPPING: Record<string, AttributeConfig> = {
-  GRADES: {
-    title: 'Select the condition',
-    leftImage: {
-      src: 'https://product-page.statics.backmarket.com/images/pickers/models/iphone_13_grade_11_body.png',
-      alt: 'Product condition',
-      width: 498,
-      height: 498,
+const getAttributeSectionConfig = (
+  attributeCode: string,
+  attributeName: string,
+  productVariant: ProductVariantDetail
+): AttributeConfig => {
+  const baseConfigs: Record<string, AttributeConfig> = {
+    GRADES: {
+      title: 'Select the condition',
+      leftImage: {
+        src: 'https://product-page.statics.backmarket.com/images/pickers/models/iphone_13_grade_11_body.png',
+        alt: 'Product condition',
+        width: 498,
+        height: 498,
+      },
+      showLeftImageDescriptions: true,
+      showExampleImageBadge: true,
+      gridColumns: 2,
+      showBadge: true,
+      className: 'md:py-6',
     },
-    showLeftImageDescriptions: true,
-    showExampleImageBadge: true,
-    gridColumns: 2,
-    showBadge: true,
-    className: 'md:py-6',
-  },
-  BATTERY: {
-    title: 'Choose a battery option',
-    leftImage: {
-      src: 'https://www.backmarket.de/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://front-office.statics.backmarket.com/7ccc56c52347115f382912877b19318a77c9ac9c/img/product/funnel/smartphone/step-battery.jpg',
-      alt: 'Battery health',
-      width: 498,
-      height: 498,
+    BATTERY: {
+      title: 'Choose a battery option',
+      leftImage: {
+        src: 'https://www.backmarket.de/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://front-office.statics.backmarket.com/7ccc56c52347115f382912877b19318a77c9ac9c/img/product/funnel/smartphone/step-battery.jpg',
+        alt: 'Battery health',
+        width: 498,
+        height: 498,
+      },
+      gridColumns: 1,
     },
-    gridColumns: 1,
-  },
-  STORAGE: {
-    title: 'Select storage',
-    leftImage: {
-      src: 'https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/product/funnel/desktop/smartphone/step-storage.jpg',
-      alt: 'Storage selection',
-      width: 498,
-      height: 498,
+    STORAGE: {
+      title: 'Select storage',
+      leftImage: {
+        src: 'https://front-office.statics.backmarket.com/9c0fed50e64a2e15e6b5469ecfd36c97597d1517/img/product/funnel/desktop/smartphone/step-storage.jpg',
+        alt: 'Storage selection',
+        width: 498,
+        height: 498,
+      },
+      gridColumns: 1,
     },
-    gridColumns: 1,
-  },
-  COLOR: {
-    title: 'Select the color',
-    leftCarouselImages: productImages,
-    gridColumns: 2,
-  },
-  DUAL_SIM: {
-    title: 'Choose your type of SIM card',
-    leftImage: {
-      src: 'https://www.backmarket.de/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://front-office.statics.backmarket.com/7ccc56c52347115f382912877b19318a77c9ac9c/img/product/funnel/smartphone/step-sim.jpg',
-      alt: 'SIM type',
-      width: 498,
-      height: 498,
+    COLOR: {
+      title: 'Select the color',
+      leftCarouselImages: productVariant.images?.map((img) => img.imageUrl) || [],
+      gridColumns: 2,
     },
-    gridColumns: 1,
-  },
+    DUAL_SIM: {
+      title: 'Choose your type of SIM card',
+      leftImage: {
+        src: 'https://www.backmarket.de/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://front-office.statics.backmarket.com/7ccc56c52347115f382912877b19318a77c9ac9c/img/product/funnel/smartphone/step-sim.jpg',
+        alt: 'SIM type',
+        width: 498,
+        height: 498,
+      },
+      gridColumns: 1,
+    },
+  };
+
+  return baseConfigs[attributeCode] || {
+    title: attributeName,
+    gridColumns: 1 as const,
+  };
 };
 
 // Universal Selection Component - optimized with memo and useMemo
 const AttributeSelection: React.FC<{
   attributeGroup: RelevantVariantGroup;
-}> = memo(({ attributeGroup }) => {
+  productVariant: ProductVariantDetail;
+}> = memo(({ attributeGroup, productVariant }) => {
   // Memoize config để tránh re-calculate mỗi render
   const config = useMemo(() => {
-    return ATTRIBUTE_SECTION_MAPPING[
-      attributeGroup.attribute.code as keyof typeof ATTRIBUTE_SECTION_MAPPING
-    ] || {
-      title: attributeGroup.attribute.name,
-      gridColumns: 1 as const,
-    };
-  }, [attributeGroup.attribute.code, attributeGroup.attribute.name]);
+    return getAttributeSectionConfig(
+      attributeGroup.attribute.code,
+      attributeGroup.attribute.name,
+      productVariant
+    );
+  }, [attributeGroup.attribute.code, attributeGroup.attribute.name, productVariant]);
 
   // Memoize options array để tránh re-create mỗi render
   const options = useMemo(() => 
