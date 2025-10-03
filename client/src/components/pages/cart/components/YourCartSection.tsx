@@ -3,9 +3,9 @@ import ProductCard from '@/components/cards/ProductCard';
 import CartProductCard from '@/components/cards/CartProductCard';
 import { SlideCarousel } from '@/components/carousels';
 import { CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import { CartItem } from './sample_cart_data';
-import { recommendProducts } from '../home/seed/temp-data';
-import { ServiceHighlights } from '../home/components';
+import { CartItem } from '../seed/sample_cart_data';
+import { recommendProducts } from '../../home/seed/temp-data';
+import { ServiceHighlights } from '../../home/components';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface YourCartSectionProps {

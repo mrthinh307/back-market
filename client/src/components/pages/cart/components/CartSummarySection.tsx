@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { CartItem } from './sample_cart_data';
+import { CartItem } from '../seed/sample_cart_data';
 
 interface CartSummarySectionProps {
   cartItems: CartItem[];
