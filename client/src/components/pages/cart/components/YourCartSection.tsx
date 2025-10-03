@@ -89,7 +89,7 @@ function YourCartSection({
             Your benefits with every order:
           </h2>
           <ServiceHighlights
-            className='!grid-cols-2 p-6'
+            className='!grid-cols-1 sm:!grid-cols-2 p-6 -mx-8'
             contentSize={isMobile ? 'md' : 'lg'}
           />
 

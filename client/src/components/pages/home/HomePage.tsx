@@ -77,7 +77,7 @@ function HomePage() {
       </section>
 
       {/* SECTION: WHY CHOOSE US */}
-      <ServiceHighlights className='container' />
+      <ServiceHighlights />
 
       {/* SECTION: RECOMMENDED PRODUCTS */}
       <section className='slide-carousel-container mb-14'>

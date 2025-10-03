@@ -97,7 +97,7 @@ function ProductListPage() {
       </aside>
 
       {/* Service Highlights */}
-      <ServiceHighlights className='container px-6 py-4 -mb-8 bg-input-hover !grid-cols-2 lg:!grid-cols-4' />
+      <ServiceHighlights className='px-6 py-4 -mb-8 bg-input-hover !grid-cols-2 lg:!grid-cols-4' />
 
       <section className='mb-18'>
         {/* Header */}
