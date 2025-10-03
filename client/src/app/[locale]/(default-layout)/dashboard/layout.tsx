@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useLocale } from 'next-intl';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
+import ProtectedRoute from '@/components/providers/ProtectedRoute';
 
 export default function ProfileSectionLayout({
   children,
@@ -36,38 +37,40 @@ export default function ProfileSectionLayout({
   ];
 
   return (
-    <div className='container mb-16'>
-      <div className='mb-6 mt-2 flex pl-6 md:my-8 justify-center md:pl-0 z-[9]'>
-        <nav className='relative -mx-1 px-1 max-w-full overflow-x-auto'>
-          <div className="w-max after:absolute after:inset-x-1 after:bottom-0 after:h-[2px] after:bg-border after:content-['']">
-            <ul className='-mx-1 flex max-w-full list-none px-1 gap-8'>
-              {tabs.map((tab) => {
-                const isActive = pathname === tab.href;
-                return (
-                  <li
-                    key={tab.href}
-                    className='relative flex h-[56px] list-none items-center whitespace-nowrap'
-                  >
-                    <Link
-                      href={tab.href}
-                      className={clsx(
-                        'flex h-full items-center border-none bg-transparent px-4 py-2 text-center no-underline motion-safe:transition motion-safe:duration-200 cursor-pointer overflow-hidden text-ellipsis md:text-[17px] rounded-t-sm relative z-[8]',
-                        isActive
-                          ? 'text-foreground font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:bg-foreground after:content-[""]'
-                          : 'text-muted hover:text-foreground hover:bg-input-hover',
-                      )}
+    <ProtectedRoute>
+      <div className='container mb-16'>
+        <div className='mb-6 mt-2 flex pl-6 md:my-8 justify-center md:pl-0 z-[9]'>
+          <nav className='relative -mx-1 px-1 max-w-full overflow-x-auto'>
+            <div className="w-max after:absolute after:inset-x-1 after:bottom-0 after:h-[2px] after:bg-border after:content-['']">
+              <ul className='-mx-1 flex max-w-full list-none px-1 gap-8'>
+                {tabs.map((tab) => {
+                  const isActive = pathname === tab.href;
+                  return (
+                    <li
+                      key={tab.href}
+                      className='relative flex h-[56px] list-none items-center whitespace-nowrap'
                     >
-                      <span>{tab.label}</span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </nav>
-      </div>
+                      <Link
+                        href={tab.href}
+                        className={clsx(
+                          'flex h-full items-center border-none bg-transparent px-4 py-2 text-center no-underline motion-safe:transition motion-safe:duration-200 cursor-pointer overflow-hidden text-ellipsis md:text-[17px] rounded-t-sm relative z-[8]',
+                          isActive
+                            ? 'text-foreground font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:bg-foreground after:content-[""]'
+                            : 'text-muted hover:text-foreground hover:bg-input-hover',
+                        )}
+                      >
+                        <span>{tab.label}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </nav>
+        </div>
 
-      <div className='flex justify-center'>{children}</div>
-    </div>
+        <div className='flex justify-center'>{children}</div>
+      </div>
+    </ProtectedRoute>
   );
 }
