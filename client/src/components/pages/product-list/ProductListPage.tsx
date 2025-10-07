@@ -18,9 +18,19 @@ import {
   BackForumBanner,
 } from './components';
 import { ProductCardProps } from '@/types/cards.type';
-import ErrorState from '@/components/ui/ErrorState';
 
-function ProductListPage() {
+interface CategoryMetadata {
+  pageTitle: string;
+  pageSubtitle: string;
+  seoTitle: string;
+  seoDescription: string;
+}
+
+interface ProductListPageProps {
+  metadata: CategoryMetadata;
+}
+
+function ProductListPage({ metadata }: ProductListPageProps) {
   const locale = useLocale();
   const searchParams = useSearchParams();
 
@@ -30,7 +40,7 @@ function ProductListPage() {
   const isExcludedBrand = searchParams.get('isExcludedBrand') === 'true';
 
   // Fetch products using useQuery
-  const { data, isLoading, error, refetch } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: USE_QUERY_KEY.PRODUCTS(
       categoryId || '',
       brandId || undefined,
@@ -48,16 +58,6 @@ function ProductListPage() {
   // Show loading state
   if (isLoading) {
     return <LoadingPage />;
-  }
-
-  // Show error state
-  if (error) {
-    return <ErrorState refetch={refetch} />;
-  }
-
-  // Use server data or fallback to temp data for now
-  if (!data || data.products.length === 0) {
-    return <ErrorState message='No products found.' />;
   }
 
   const products = data.products;
@@ -104,12 +104,10 @@ function ProductListPage() {
         <div className='container'>
           <div className='flex flex-col justify-center text-secondary mb-4'>
             <h1 className='text-3xl xl:text-[56px] xl:leading-[68px] font-heading font-semibold'>
-              Refurbished Apple iPhones
+              {metadata.pageTitle}
             </h1>
             <p className='text-sm'>
-              Buy a certified refurbished iPhone for less for the same quality
-              as new. Browse our huge selection of affordable iPhone deals to
-              choose from.
+              {metadata.pageSubtitle}
             </p>
           </div>
         </div>

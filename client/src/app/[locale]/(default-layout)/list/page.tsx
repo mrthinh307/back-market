@@ -7,6 +7,7 @@ import {
 import ProductListPage from '@/components/pages/product-list/ProductListPage';
 import { getProductListServer } from '@/libs/server-fetchers/product';
 import { USE_QUERY_KEY } from '@/constants/use-query-key';
+import { getCategoryMetadata } from '@/components/pages/product-list/data/categories';
 
 type ProductListPageParams = {
   params: Promise<{ locale: string }>;
@@ -18,11 +19,35 @@ type ProductListPageParams = {
   }>;
 };
 
+// Helper function to get metadata from search params
+async function getMetadataFromParams(searchParams: ProductListPageParams['searchParams']) {
+  const { categoryId, brandId, isExcludedBrand } = await searchParams;
+  
+  if (!categoryId) {
+    return null;
+  }
+
+  return getCategoryMetadata({
+    categoryId,
+    brandId,
+    isExcludedBrand: isExcludedBrand === 'true',
+  });
+}
+
 // 📝 SEO metadata
-export async function generateMetadata() {
+export async function generateMetadata({ searchParams }: ProductListPageParams) {
+  const metadata = await getMetadataFromParams(searchParams);
+  
+  if (!metadata) {
+    return {
+      title: 'Back Market',
+      description: 'Refurbished electronics at unbeatable prices.',
+    };
+  }
+
   return {
-    title: `Cheap Refurbished iPhones | Back Market`,
-    description: `Discover our refurbished products at unbeatable prices. Shop now and save big on quality electronics! Buy Cheap Refurbished iPhones today!`,
+    title: metadata.seoTitle,
+    description: metadata.seoDescription,
   };
 }
 
@@ -37,6 +62,14 @@ export default async function ProductList({
     notFound();
   }
 
+  // Get category metadata (reusing the same logic)
+  const metadata = await getMetadataFromParams(searchParams);
+  
+  // This should never happen since we already validated categoryId above
+  if (!metadata) {
+    notFound();
+  }
+
   const queryClient = new QueryClient();
 
   try {
@@ -47,7 +80,7 @@ export default async function ProductList({
       isExcludedBrand === 'true',
     );
 
-    const data = await queryClient.fetchQuery({
+    await queryClient.fetchQuery({
       queryKey,
       queryFn: () =>
         getProductListServer({
@@ -57,14 +90,10 @@ export default async function ProductList({
         }),
     });
 
-    if (!data) {
-      notFound(); // ❌ Products not found → 404
-    }
-
     return (
       <HydrationBoundary state={dehydrate(queryClient)}>
         <main>
-          <ProductListPage />
+          <ProductListPage metadata={metadata} />
         </main>
       </HydrationBoundary>
     );

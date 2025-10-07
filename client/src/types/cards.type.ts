@@ -41,5 +41,9 @@ export interface CategoryCardProps {
     categoryId: string;
     brandId?: string;
     isExcludedBrand?: boolean;
+    pageTitle: string;
+    pageSubtitle: string;
+    seoTitle: string;
+    seoDescription: string;
   }
 }
