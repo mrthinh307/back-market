@@ -12,10 +12,10 @@ const RightSideActions = ({ avatarUrl }: { avatarUrl?: string | null }) => {
   const t = useTranslations('Header');
   const locale = useLocale();
   const router = useRouter();
-  const { accessToken } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   const handleButtonClick = (url: string) => {
-    if (accessToken) {
+    if (isAuthenticated) {
       router.push(url);
     } else {
       router.push(`/${locale}/email`);
@@ -43,7 +43,7 @@ const RightSideActions = ({ avatarUrl }: { avatarUrl?: string | null }) => {
           width={0}
           height={0}
           sizes='100vw'
-          className={`dark:invert ${avatarUrl ? 'w-8 h-8 rounded-full object-cover' : 'w-6 h-6'}`}
+          className={`${avatarUrl ? 'w-8 h-8 rounded-full object-cover' : 'w-6 h-6 dark:invert'}`}
         />
       </button>
 

@@ -12,13 +12,10 @@ import {
 
 import { toast } from 'sonner';
 import {
-  getAccessToken,
-  setAccessToken as setTokenGlobal,
-} from '@/libs/token-manager';
-import {
   initiateFacebookOAuth,
   initiateGoogleOAuth,
   loginWithPassword,
+  logOut,
   refreshToken,
   signUp,
 } from '@/api/auth.api';
@@ -28,14 +25,15 @@ import { Env } from '@/libs/Env';
 import { fetchProfile } from '@/api/user.api';
 
 interface AuthContextType {
-  accessToken: string | null;
-  setAccessToken: (token: string | null) => void;
+  isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
   signup: (params: SignUpParams) => Promise<void>;
+  logout: () => void;
   loginWithGoogle: () => void;
   loginWithFacebook: () => void;
   getMe: () => Promise<any> | undefined;
+  checkAuth: () => Promise<void>;
 }
 
 interface SignUpParams {
@@ -46,49 +44,40 @@ interface SignUpParams {
 }
 
 const AuthContext = createContext<AuthContextType>({
-  accessToken: null,
-  setAccessToken: () => {},
+  isAuthenticated: false,
   isLoading: true,
   login: async () => {},
   signup: async () => {},
+  logout: async () => {},
   loginWithGoogle: () => {},
   loginWithFacebook: () => {},
   getMe: async () => undefined,
+  checkAuth: async () => {},
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const locale = useLocale();
-  const [accessToken, setAccessTokenState] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const setAccessToken = (token: string | null) => {
-    setTokenGlobal(token);
-    setAccessTokenState(token);
+  // Helper function to check authentication status
+  const checkAuth = async () => {
+    try {
+      // Try to refresh token (this will validate cookies on server)
+      await refreshToken();
+      setIsAuthenticated(true);
+    } catch (err) {
+      console.warn('User not authenticated:', err);
+      setIsAuthenticated(false);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
-    const tryRefresh = async () => {
-      try {
-        const tokens = await refreshToken();
-        setAccessToken(tokens.access_token);
-      } catch (err) {
-        console.warn('Error refreshing access token:', err);
-        setAccessToken(null);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    tryRefresh();
+    checkAuth();
   }, []);
-
-  // Sync state with token-manager (for UI reactivity)
-  useEffect(() => {
-    const currentToken = getAccessToken();
-    if (currentToken !== accessToken) {
-      setAccessTokenState(currentToken);
-    }
-  }, [accessToken]);
 
   const login = async (initialEmail: string, password: string) => {
     if (isLoading) {
@@ -99,16 +88,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsLoading(true);
 
       if (initialEmail && password) {
-        const response = await loginWithPassword(initialEmail, password);
+        await loginWithPassword(initialEmail, password);
 
         toast.success('Welcome back !', {
           description: 'Navigate to dashboard ...',
           ...successToastProps,
         });
 
-        const { access_token } = response;
-        setAccessToken(access_token);
-
+        setIsAuthenticated(true);
         router.push(`/${locale}`); // Redirect to previous page
       }
     } catch (err: any) {
@@ -120,6 +107,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           message,
         );
       }
+      setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
     }
@@ -135,7 +123,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       setIsLoading(true);
       if (initialEmail && password && firstName && lastName) {
-        const response = await signUp(
+        await signUp(
           initialEmail,
           password,
           firstName,
@@ -147,9 +135,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           ...successToastProps,
         });
 
-        const { access_token } = response;
-        setAccessToken(access_token);
-
+        setIsAuthenticated(true);
         router.push(`/${locale}`);
       }
     } catch (err: any) {
@@ -161,6 +147,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           message,
         );
       }
+      setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
     }
@@ -202,8 +189,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const logout = async () => {
+    try {
+      await logOut();
+    } catch (error) {
+      console.error('Logout failed:', error);
+    } finally {
+      setIsAuthenticated(false);
+      window.location.href = `/${locale}/email`;
+    }
+  };
+
   const getMe = async () => {
-    if (!accessToken) {
+    if (!isAuthenticated) {
       return;
     }
 
@@ -223,14 +221,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AuthContext.Provider
       value={{
-        accessToken,
-        setAccessToken,
+        isAuthenticated,
         isLoading,
         login,
         signup,
+        logout,
         loginWithGoogle,
         loginWithFacebook,
         getMe,
+        checkAuth,
       }}
     >
       {children}

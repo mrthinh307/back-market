@@ -3,7 +3,6 @@ import type { AxiosRequestConfig } from 'axios';
 import { toast } from 'sonner';
 import { Env } from '@/libs/Env';
 import { errorToastProps } from './toast/toast-props';
-import { getAccessToken, setAccessToken } from './token-manager';
 import { refreshToken } from '@/api/auth.api';
 
 const httpRequest = axios.create({
@@ -12,21 +11,16 @@ const httpRequest = axios.create({
   timeout: 15000, // 15s
 });
 
-httpRequest.interceptors.request.use((config) => {
-  const token = getAccessToken();
-  if (token && config.headers) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+// No need for request interceptor since we're using cookies now
+// The browser will automatically send cookies with each request
 
 let isRefreshing = false;
 let failedQueue: any[] = [];
 
-const processQueue = (error: any, token: string | null = null) => {
+const processQueue = (error: any) => {
   failedQueue.forEach((prom) => {
     if (error) prom.reject(error);
-    else prom.resolve(token);
+    else prom.resolve();
   });
   failedQueue = [];
 };
@@ -43,8 +37,7 @@ httpRequest.interceptors.response.use(
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({
-            resolve: (token: string) => {
-              originalRequest.headers.Authorization = `Bearer ${token}`;
+            resolve: () => {
               resolve(httpRequest(originalRequest));
             },
             reject,
@@ -55,17 +48,14 @@ httpRequest.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const newTokens = await refreshToken();
-        const newAccessToken = newTokens.access_token;
-
-        setAccessToken(newAccessToken);
-        httpRequest.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
-        processQueue(null, newAccessToken);
-
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        await refreshToken();
+        
+        // No need to store token since it's now in cookies
+        // Just retry the requests - cookies will be sent automatically
+        processQueue(null);
         return httpRequest(originalRequest);
       } catch (refreshError) {
-        processQueue(refreshError, null);
+        processQueue(refreshError);
         // FIXME: Handle refresh token error
         window.location.href = '/en/email';
         return Promise.reject(refreshError);
@@ -76,7 +66,6 @@ httpRequest.interceptors.response.use(
     
     if (status === 403) {
       // TODO: Need to optimization
-      // setAccessToken(null as any);
       // toast.error(
       //   'You do not have permission to perform this action',
       //   { ...errorToastProps }

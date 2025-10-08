@@ -10,16 +10,16 @@ export default function AuthLayout(props: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  const { accessToken, isLoading } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
   const { redirectToHome } = useRouterRedirect();
 
   useEffect(() => {
-    if (accessToken) {
+    if (isAuthenticated) {
       redirectToHome();
     }
-  }, [accessToken]);
+  }, [isAuthenticated]);
 
-  return accessToken || isLoading ? (
+  return isAuthenticated || isLoading ? (
     <LoadingPage />
   ) : (
     <>

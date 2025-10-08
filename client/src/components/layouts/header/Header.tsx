@@ -15,14 +15,14 @@ import {
 import { useAuth } from '@/contexts/AuthContext';
 
 const Header: React.FC = () => {
-  const { accessToken, getMe } = useAuth();
+  const { isAuthenticated, getMe } = useAuth();
   const t = useTranslations('Header');
   const pathname = usePathname();
   const isProductPage = pathname.includes('/product/');
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    if (accessToken && getMe) {
+    if (isAuthenticated && getMe) {
       const result = getMe();
       if (result) {
         result
@@ -42,7 +42,7 @@ const Header: React.FC = () => {
     } else {
       setAvatarUrl(null);
     }
-  }, [accessToken]);
+  }, [isAuthenticated]);
 
   const headerConfig = {
     threshold: 300,

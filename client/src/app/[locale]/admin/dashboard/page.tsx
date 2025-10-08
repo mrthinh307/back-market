@@ -16,7 +16,7 @@ import data from './data.json';
 import { Env } from '@/libs/Env';
 
 export default function AdminDashboard() {
-  const { accessToken, isLoading, getMe } = useAuth();
+  const { isAuthenticated, isLoading, getMe } = useAuth();
   const { redirectToLogin, redirectToHome } = useRouterRedirect();
 
   const [isAdmin, setIsAdmin] = useState(false);
@@ -24,7 +24,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      if (!accessToken) {
+      if (!isAuthenticated) {
         if (!hasRedirected) {
           setHasRedirected(true);
           redirectToLogin();
@@ -52,7 +52,7 @@ export default function AdminDashboard() {
     if (!isLoading && !isAdmin && !hasRedirected) {
       checkAuth();
     }
-  }, [accessToken, isLoading, isAdmin, hasRedirected]);
+  }, [isAuthenticated, isLoading, isAdmin, hasRedirected]);
 
   if (isLoading || !isAdmin) {
     return <LoadingPage />;

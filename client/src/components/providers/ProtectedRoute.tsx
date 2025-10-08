@@ -7,15 +7,15 @@ import { useAuth } from '@/contexts/AuthContext';
 import LoadingPage from '../pages/LoadingPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { accessToken, isLoading } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
   const locale = useLocale();
 
   useEffect(() => {
-    if (!isLoading && !accessToken) {
+    if (!isLoading && !isAuthenticated) {
       router.replace(`/${locale}/email`);
     }
-  }, [accessToken, isLoading, router, locale]);
+  }, [isAuthenticated, isLoading, router, locale]);
 
   if (isLoading) {
     return <LoadingPage />;
