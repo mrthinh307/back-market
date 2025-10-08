@@ -38,7 +38,7 @@ function DeliveryAddressCard({ deliveryInfo, onAddressUpdate }: DeliveryAddressC
         title='Delivery Address'
       >
         {deliveryData ? (
-          <div className='text-secondary whitespace-pre-line leading-7 text-ellipsis'>
+          <div className='text-secondary whitespace-pre-line leading-7 truncate'>
             {formatDeliveryAddress(deliveryData)}
           </div>
         ) : (

@@ -17,7 +17,7 @@ function UserProfileCard({ userInfo }: UserProfileCardProps) {
       onEditButtonClick={handleEditButtonClick}
       title='Personal details'
     >
-      <div className='w-[20ch] truncate lg:w-[40ch]'>
+      <div className='truncate'>
         {userInfo?.profile?.firstName} {userInfo?.profile?.lastName}
       </div>
       <div>
@@ -44,7 +44,7 @@ function UserProfileCard({ userInfo }: UserProfileCardProps) {
           </div>
         </div>
       </div>
-      <div className='w-[20ch] truncate lg:w-[40ch]'>
+      <div className='truncate'>
         {userInfo?.email}
       </div>
       <div className='mt-4 flex flex-col gap-4'>
