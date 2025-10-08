@@ -1,3 +1,5 @@
+import { Request } from 'express';
+
 export interface LoginPhaseResponse {
   action: 'login' | 'signup';
   message: string;
@@ -14,6 +16,7 @@ export interface JwtPayload {
 
 export interface RequestWithCookies extends Request {
   cookies: {
+    access_token?: string;
     refresh_token?: string;
   };
 }

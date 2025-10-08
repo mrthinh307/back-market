@@ -17,7 +17,7 @@ import { AuthService } from './auth.service';
 import { LoginDto, SignupDto } from './dto';
 import { OAuthUserInfo, RequestWithCookies } from './auth.types';
 import { GoogleOAuthGuard, FacebookOAuthGuard } from './guard';
-import { setAuthCookies } from '../common/utils/cookie';
+import { setAuthCookies, getRefreshTokenFromCookies } from '../common/utils/cookie';
 
 @Controller('auth')
 export class AuthController {
@@ -42,7 +42,7 @@ export class AuthController {
     setAuthCookies(res, tokens);
 
     return {
-      access_token: tokens.access_token,
+      message: 'Signup successful',
     };
   }
 
@@ -58,7 +58,7 @@ export class AuthController {
     if (typeof result === 'object' && 'access_token' in result) {
       setAuthCookies(res, result);
       return {
-        access_token: result.access_token,
+        message: 'Login successful',
       };
     }
 
@@ -115,7 +115,7 @@ export class AuthController {
     @Req() req: RequestWithCookies,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const refreshToken = req.cookies?.['refresh_token'];
+    const refreshToken = getRefreshTokenFromCookies(req);
     if (!refreshToken) {
       throw new ForbiddenException('Refresh token missing');
     }
@@ -124,12 +124,16 @@ export class AuthController {
 
     setAuthCookies(res, newTokens);
 
-    return { access_token: newTokens.access_token };
+    return { 
+      message: 'Tokens refreshed successfully',
+    };
   }
 
   @HttpCode(HttpStatus.OK)
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
+    // Clear both access_token and refresh_token cookies
+    res.clearCookie('access_token');
     res.clearCookie('refresh_token');
     return {
       message: 'Logged out successfully',
