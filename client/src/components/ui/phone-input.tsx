@@ -63,7 +63,7 @@ const InputComponent = React.forwardRef<
   React.ComponentProps<"input">
 >(({ className, ...props }, ref) => (
   <Input
-    className={cn("h-12 border border-dark rounded-none rounded-r-sm placeholder:text-base", className)}
+    className={cn("h-12 border border-dark rounded-none rounded-r-sm placeholder:text-base !text-base", className)}
     {...props}
     ref={ref}
     placeholder="Phone number"

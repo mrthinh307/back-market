@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { StarIcon } from 'lucide-react';
 import { Button } from '../../../ui/button';
 import { heartedIcon, heartIcon } from '@/public/assets/images';
-import { infoToastProps, successToastProps } from '@/libs/toast/toast-props';
+import { successToastProps } from '@/libs/toast/toast-props';
 import { useLocale } from 'next-intl';
 
 interface ProductInfoProps {
@@ -37,7 +37,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
     setIsLiked(newLikedState);
     
     toast(newLikedState ? 'Saved to Favorites' : 'Not ready to say goodbye?', {
-      ...(newLikedState ? successToastProps : infoToastProps),
+      ...(newLikedState ? successToastProps : {}),
       action: {
         label: newLikedState ? 'View Favorites' : 'Undo',
         onClick: () => {

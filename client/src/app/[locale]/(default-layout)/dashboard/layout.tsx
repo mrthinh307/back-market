@@ -1,8 +1,8 @@
 'use client';
-
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
 import clsx from 'clsx';
+
 import { usePathname } from 'next/navigation';
 import ProtectedRoute from '@/components/providers/ProtectedRoute';
 
@@ -44,7 +44,12 @@ export default function ProfileSectionLayout({
             <div className="w-max after:absolute after:inset-x-1 after:bottom-0 after:h-[2px] after:bg-border after:content-['']">
               <ul className='-mx-1 flex max-w-full list-none px-1 gap-8'>
                 {tabs.map((tab) => {
-                  const isActive = pathname === tab.href;
+                  // Try multiple matching strategies
+                  const exactMatch = pathname === tab.href;
+                  const withoutLocale = pathname === tab.href.replace(`/${locale}`, '');
+                  const endsWithPath = pathname.endsWith(tab.href.split('/').pop() || '');
+                  const isActive = exactMatch || withoutLocale || endsWithPath;
+
                   return (
                     <li
                       key={tab.href}
@@ -55,7 +60,7 @@ export default function ProfileSectionLayout({
                         className={clsx(
                           'flex h-full items-center border-none bg-transparent px-4 py-2 text-center no-underline motion-safe:transition motion-safe:duration-200 cursor-pointer overflow-hidden text-ellipsis md:text-[17px] rounded-t-sm relative z-[8]',
                           isActive
-                            ? 'text-foreground font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:bg-foreground after:content-[""]'
+                            ? 'text-foreground font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-foreground after:content-[""]'
                             : 'text-muted hover:text-foreground hover:bg-input-hover',
                         )}
                       >

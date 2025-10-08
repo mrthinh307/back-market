@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Router from 'next/router';
 
 import { ProductCard } from '@/components/cards';
 import { Button } from '@/components/ui/button';
@@ -21,7 +20,7 @@ export function ProductGrid({ products, className = '' }: ProductGridProps) {
             exist on our platform. Try your luck with another search or check
             out our other great deals.
           </p>
-          <Button onClick={() => Router.push('/')} className='w-full md:w-fit'>Click here to shop</Button>
+          <Button className='w-full md:w-fit'>Click here to shop</Button>
         </div>
         <div className='order-first content-center md:order-none'>
           <Image
