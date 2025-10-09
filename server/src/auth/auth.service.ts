@@ -147,16 +147,6 @@ export class AuthService {
       if (!user.emailVerified && emailVerified)
         updateUserAuthData.emailVerified = emailVerified;
 
-      // Update profile data if missing and profile exists
-      if (user.profile) {
-        if (!user.profile.avatarUrl && avatarUrl)
-          updateUserProfileData.avatarUrl = avatarUrl;
-        if (!user.profile.firstName && firstName)
-          updateUserProfileData.firstName = firstName;
-        if (!user.profile.lastName && lastName)
-          updateUserProfileData.lastName = lastName;
-      }
-
       // Perform updates in transaction if needed
       if (
         Object.keys(updateUserAuthData).length > 0 ||
@@ -209,6 +199,7 @@ export class AuthService {
             authId: userAuth.id,
             firstName: dto.firstName,
             lastName: dto.lastName,
+            avatarUrl: `https://api.dicebear.com/9.x/initials/svg?seed=${dto.firstName}%20${dto.lastName}`,
           },
         });
 
