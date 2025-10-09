@@ -43,7 +43,7 @@ const RightSideActions = ({ avatarUrl }: { avatarUrl?: string | null }) => {
           width={0}
           height={0}
           sizes='100vw'
-          className={`${avatarUrl ? 'w-8 h-8 rounded-full object-cover' : 'w-6 h-6 dark:invert'}`}
+          className={`${avatarUrl ? 'size-8 rounded-full object-cover' : 'size-6 dark:invert'}`}
         />
       </button>
 

@@ -50,6 +50,11 @@ const baseConfig: NextConfig = {
         hostname: 'images.ctfassets.net',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'ui-avatars.com',
+        pathname: '/**',
+      }
     ],
   },
   async redirects() {

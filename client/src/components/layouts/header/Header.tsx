@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { VerifiedIcon } from 'lucide-react';
 
 import { useScrollDirection } from '@/hooks/useScrollDirection';
@@ -12,37 +12,11 @@ import {
   MainNavigation,
   MobileMenu,
 } from './components';
-import { useAuth } from '@/contexts/AuthContext';
 
-const Header: React.FC = () => {
-  const { isAuthenticated, getMe } = useAuth();
+const Header: React.FC<{ avatarUrl: string | null }> = ({ avatarUrl }) => {
   const t = useTranslations('Header');
   const pathname = usePathname();
   const isProductPage = pathname.includes('/product/');
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (isAuthenticated && getMe) {
-      const result = getMe();
-      if (result) {
-        result
-          .then((payload) => {
-            if (payload && payload.profile) {
-              setAvatarUrl(payload.profile.avatarUrl || null);
-            } else {
-              setAvatarUrl(null);
-            }
-          })
-          .catch(() => {
-            setAvatarUrl(null);
-          });
-      } else {
-        setAvatarUrl(null);
-      }
-    } else {
-      setAvatarUrl(null);
-    }
-  }, [isAuthenticated]);
 
   const headerConfig = {
     threshold: 300,
