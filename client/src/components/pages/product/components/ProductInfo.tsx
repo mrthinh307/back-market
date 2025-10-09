@@ -36,8 +36,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
     const newLikedState = !isLiked;
     setIsLiked(newLikedState);
     
-    toast(newLikedState ? 'Saved to Favorites' : 'Not ready to say goodbye?', {
-      ...(newLikedState ? successToastProps : {}),
+    toast.message(newLikedState ? 'Saved to Favorites' : 'Not ready to say goodbye?', {
       action: {
         label: newLikedState ? 'View Favorites' : 'Undo',
         onClick: () => {
@@ -145,7 +144,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
 
           {/* Add to cart Button */}
           <Button className='md:min-w-[164px] md:max-w-[256px] md:grow' onClick={() => {
-            toast('Added to cart ! Navigating...', successToastProps);
+            toast.success('Added to cart ! Navigating...', successToastProps);
             router.push(`/${locale}/cart`);
           }}>
             Add to cart

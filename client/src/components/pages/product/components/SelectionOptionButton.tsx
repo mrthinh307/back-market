@@ -17,6 +17,7 @@ interface SelectionOptionButtonProps {
   isDisabled: boolean;
   gridColumns: 1 | 2;
   onOptionChange: (optionId: string) => void;
+  className?: string;
 }
 
 export const SelectionOptionButton = memo<SelectionOptionButtonProps>(
@@ -27,6 +28,7 @@ export const SelectionOptionButton = memo<SelectionOptionButtonProps>(
     isDisabled,
     gridColumns,
     onOptionChange,
+    className
   }) => {
     option.color = getColorHex(option.name);
     
@@ -37,7 +39,7 @@ export const SelectionOptionButton = memo<SelectionOptionButtonProps>(
           isSelected
             ? 'bg-[#f6f2fd] dark:bg-accent dark:border-foreground'
             : 'bg-transparent dark:bg-sub-background dark:border-border hover:bg-input-hover'
-        }`}
+        } ${className}`}
         onClick={() => onOptionChange(option.id)}
       >
         <div className='m-auto flex w-full flex-row items-center pl-2 pr-4'>

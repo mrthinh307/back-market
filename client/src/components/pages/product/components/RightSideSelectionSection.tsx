@@ -131,6 +131,7 @@ export const RightSideSelectionSection = memo(
                     isDisabled={isDisabled}
                     gridColumns={gridColumns}
                     onOptionChange={handleChangeOption}
+                    className={`${gridColumns === 2 && 'min-h-[70px]'}`}
                   />
                 </li>
               ))}
