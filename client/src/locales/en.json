@@ -40,7 +40,8 @@
     "where_is_your_email": "Where is your email ? =))",
     "password_label": "Password",
     "forgot_password": "Forgot your Password ?",
-    "sign_in_button": "Sign in"
+    "sign_in_button": "Sign in",
+    "meta_title": "Log in"
   },
   "SignUpCredentials": {
     "meta_title": "Sign up",

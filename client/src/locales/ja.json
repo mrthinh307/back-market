@@ -40,7 +40,8 @@
     "where_is_your_email": "あなたのメールアドレスはどこですか？=))",
     "password_label": "パスワード",
     "forgot_password": "パスワードをお忘れですか？",
-    "sign_in_button": "サインイン"
+    "sign_in_button": "サインイン",
+    "meta_title": "ログイン"
   },
   "SignUpCredentials": {
     "meta_title": "アカウントを作成",

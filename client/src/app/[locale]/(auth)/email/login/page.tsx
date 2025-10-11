@@ -11,7 +11,7 @@ export async function generateMetadata(props: ISignInPageProps) {
   const { locale } = await props.params;
   const t = await getTranslations({
     locale,
-    namespace: 'SignUpCredentials',
+    namespace: 'LoginCredentials',
   });
 
   return {
