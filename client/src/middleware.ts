@@ -10,11 +10,9 @@ const intlMiddleware = createIntlMiddleware({
   localePrefix: 'as-needed',
 });
 
-// Danh sách protected routes (không bao gồm locale prefix)
 const protectedRoutes = ['/cart', '/profile', '/dashboard'];
 
-// Danh sách public routes (không cần auth)
-const publicRoutes = ['/email', '/login', '/register', '/forgot-password'];
+const publicRoutes = ['/email', '/email/login', '/signup', '/forgot-password'];
 
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
