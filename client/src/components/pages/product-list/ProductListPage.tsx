@@ -103,7 +103,7 @@ function ProductListPage({ metadata }: ProductListPageProps) {
         {/* Header */}
         <div className='container'>
           <div className='flex flex-col justify-center text-secondary mb-4'>
-            <h1 className='text-3xl xl:text-[56px] xl:leading-[68px] font-heading font-semibold'>
+            <h1 className='text-3xl xl:text-[56px] xl:leading-[68px] font-heading font-bold'>
               {metadata.pageTitle}
             </h1>
             <p className='text-sm'>

@@ -1,8 +1,9 @@
 interface LoadingSpinnerProps {
   size?: 'small' | 'medium' | 'large';
+  className?: string;
 }
 
-function LoadingSpinner({ size = 'medium' }: LoadingSpinnerProps) {
+function LoadingSpinner({ size = 'medium', className }: LoadingSpinnerProps) {
   const sizeMap = {
     small: 4,
     medium: 6,
@@ -21,7 +22,7 @@ function LoadingSpinner({ size = 'medium' }: LoadingSpinnerProps) {
       viewBox='0 0 24 24'
       width={spinnerSize * 4}
       xmlns='http://www.w3.org/2000/svg'
-      className={`animate-spin text-inherit !size-${spinnerSize}`}
+      className={`animate-spin-speed text-inherit !size-${spinnerSize} ${className}`}
     >
       <path
         fillRule='evenodd'

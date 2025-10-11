@@ -67,7 +67,7 @@ function HomePage() {
       {/* SECTION BANNER: Tech better with us */}
       <section className='container mb-14'>
         <div className='w-full flex flex-col gap-2 text-center'>
-          <h2 className='font-heading font-semibold text-[42px] leading-12 md:text-[56px] md:leading-16'>
+          <h2 className='font-heading font-bold text-[42px] leading-12 md:text-[56px] md:leading-16'>
             Tech better with us
           </h2>
           <p className='font-semibold text-lg md:text-xl'>
@@ -118,7 +118,7 @@ function HomePage() {
       <section className='container mt-4 mb-14'>
         <div className='w-full content-center flex-col gap-6'>
           <div className='w-full flex flex-col gap-4 text-center'>
-            <h2 className='font-heading font-semibold text-[42px] leading-12 md:text-[56px] md:leading-16'>
+            <h2 className='font-heading font-bold text-[42px] leading-12 md:text-[56px] md:leading-16'>
               Refurbished tech helps the planet
             </h2>
             <p className='font-semibold text-lg md:text-xl'>
@@ -169,7 +169,7 @@ function HomePage() {
           <div className='relative mx-auto z-[2] content-center flex-col'>
             <div className='w-full md:w-[544px]'>
               <div className='flex flex-col items-start text-left gap-1'>
-                <h3 className='font-heading font-semibold text-2xl md:text-[28px] leading-10'>
+                <h3 className='font-heading font-bold text-2xl md:text-[28px] leading-10'>
                   Get $1 off your first order.
                 </h3>
                 <span>

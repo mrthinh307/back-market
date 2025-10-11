@@ -17,7 +17,7 @@ function FavouritesPage() {
   return (
     <div className='container'>
       <div className='mb-8 space-y-1 text-center'>
-        <h2 className='text-3xl font-heading font-semibold'>Favourites</h2>
+        <h2 className='text-3xl font-heading font-bold'>Favourites</h2>
         <p className='text-center text-muted mt-2'>
           Your favorite items, all in one place.
         </p>

@@ -19,7 +19,7 @@ function ProfilePage({ userInfo, deliveryInfo }: ProfilePageProps) {
     <>
       <div className='container'>
         <div className='mb-8 space-y-1 text-center'>
-          <h2 className='text-3xl font-heading font-semibold'>Profile</h2>
+          <h2 className='text-3xl font-heading font-bold'>Profile</h2>
           <p className='text-center text-muted mt-2'>
             Who am I? Where am I? Why am I? Look no further for the answers.
           </p>

@@ -86,7 +86,7 @@ export const RightSideSelectionSection = memo(
         <div className='opacity-100 transition-opacity duration-500 ease-out'>
           <fieldset role='radiogroup'>
             <legend className='mb-3 flex items-baseline justify-between'>
-              <h2 className='text-2xl md:text-3xl font-heading font-semibold text-secondary mb-2 hidden md:block'>
+              <h2 className='text-[28px] font-heading font-bold text-secondary mb-2 hidden md:block'>
                 <span>{title}</span>
               </h2>
             </legend>

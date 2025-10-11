@@ -14,7 +14,7 @@ export function ProductGrid({ products, className = '' }: ProductGridProps) {
     return (
       <div className='container bg-background-secondary shadow-sm rounded-lg flex flex-col md:flex-row gap-4 !p-4 md:!p-18 my-8'>
         <div className='flex flex-1 flex-col items-center gap-4 md:items-start'>
-          <h2 className='text-2xl md:text-3xl font-semibold font-heading'>Oohh shit!</h2>
+          <h2 className='text-2xl md:text-3xl font-bold font-heading'>Oohh shit!</h2>
           <p className='text-center md:text-left'>
             We've looked everywhere: the item you're looking for simply does not
             exist on our platform. Try your luck with another search or check

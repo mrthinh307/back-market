@@ -116,9 +116,9 @@ const AttributeSelection: React.FC<{
 
   return (
     <div className={`py-8 ${config.className}`}>
-      {/* Title - Always at the top */}
+      {/* Mobile Title - Always at the top */}
       <div className='mb-4 md:hidden'>
-        <h2 className='text-2xl font-heading font-semibold text-foreground'>
+        <h2 className='text-2xl font-heading font-bold text-foreground'>
           <span>{config.title}</span>
         </h2>
       </div>
