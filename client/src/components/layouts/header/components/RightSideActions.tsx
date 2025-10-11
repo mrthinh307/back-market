@@ -2,17 +2,19 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
-import { ModeToggle } from '../../../ui/mode-toggle';
+import { useCartCount } from '@/hooks/useCartCount';
 import { useAuth } from '@/contexts/AuthContext';
-import { useRouter } from 'next/navigation';
+import { ModeToggle } from '../../../ui/mode-toggle';
 
 const RightSideActions = ({ avatarUrl }: { avatarUrl?: string | null }) => {
   const t = useTranslations('Header');
   const locale = useLocale();
   const router = useRouter();
   const { isAuthenticated } = useAuth();
+  const { data: cartCount } = useCartCount();
 
   const handleButtonClick = (url: string) => {
     if (isAuthenticated) {
@@ -34,7 +36,7 @@ const RightSideActions = ({ avatarUrl }: { avatarUrl?: string | null }) => {
 
       {/* User Account */}
       <button
-        className='p-2 rounded-full hover:bg-icon-button-hover transition-colors duration-300 cursor-pointer'
+        className={`rounded-full hover:bg-icon-button-hover transition-colors duration-300 cursor-pointer ${isAuthenticated && 'bg-icon-button-hover'}`}
         onClick={() => handleButtonClick(`/${locale}/dashboard/profile`)}
       >
         <Image
@@ -43,7 +45,7 @@ const RightSideActions = ({ avatarUrl }: { avatarUrl?: string | null }) => {
           width={0}
           height={0}
           sizes='100vw'
-          className={`${avatarUrl ? 'size-8 rounded-full object-cover' : 'size-6 dark:invert'}`}
+          className={`${avatarUrl ? 'w-8 h-8 rounded-full object-cover m-1' : 'w-6 h-6 dark:invert m-2'}`}
         />
       </button>
 
@@ -59,9 +61,11 @@ const RightSideActions = ({ avatarUrl }: { avatarUrl?: string | null }) => {
           height={24}
           className='dark:invert'
         />
-        {/* <span className='absolute top-[2px] -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center'>
-          0
-        </span> */}
+        {(isAuthenticated && cartCount?.totalItems && cartCount.totalItems > 0) ? (
+          <span className='absolute top-[1px] right-[1px] bg-chart-5 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold border border-popover'>
+            {cartCount.totalItems > 99 ? '99+' : cartCount.totalItems}
+          </span>
+        ) : null}
       </button>
 
       {/* Module Toggle Theme */}

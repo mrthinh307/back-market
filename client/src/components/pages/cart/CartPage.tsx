@@ -1,86 +1,94 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
-import { Button } from '@/components/ui/button';
-import { CartItem, sampleCartItems } from './seed/sample_cart_data';
-import { YourCartSection, CartSummarySection } from './components';
+import { toast } from 'sonner';
+import { getCartItems } from '@/api/cart.api';
+import { USE_QUERY_KEY } from '@/constants/use-query-key';
+import { useRemoveFromCart } from '@/hooks/useCartMutations';
+import { CartItem } from '@/types/cards.type';
+import { errorToastProps, successToastProps } from '@/libs/toast/toast-props';
+import { YourCartSection, CartSummarySection, EmptyCart } from './components';
+import LoadingPage from '../LoadingPage';
 
 function CartPage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>(sampleCartItems);
+  const removeFromCartMutation = useRemoveFromCart();
 
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
+  const {
+    data: cartData,
+    isLoading,
+    isFetching,
+    error,
+  } = useQuery({
+    queryKey: USE_QUERY_KEY.CART_ITEMS(),
+    queryFn: () => getCartItems(),
+    retry: true,
+    staleTime: 3 * 60 * 1000,
+  });
 
-  const updateQuantity = (id: string, newQuantity: number) => {
-    if (newQuantity <= 0) {
-      removeItem(id);
-      return;
+  const [cartItems, setCartItems] = useState<CartItem[]>(cartData?.items || []);
+
+  useEffect(() => {
+    if (cartData?.items) {
+      setCartItems(cartData.items);
     }
-    setCartItems((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity } : item,
-      ),
-    );
+  }, [cartData]);
+
+  const handleRemoveItem = async (productVariantId: string, productName: string) => {
+    try {
+      await removeFromCartMutation.mutateAsync(productVariantId);
+      toast.success('Item removed from cart successfully!', {
+        description: productName,
+        ...successToastProps,
+      });
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message || error.message || 'Failed to remove item';
+      toast.error(errorMessage, {
+        description: productName,
+        ...errorToastProps,
+      });
+    }
   };
 
-  const removeItem = (id: string) => {
-    setCartItems((items) => items.filter((item) => item.id !== id));
-  };
+  useEffect(() => {
+    if (!error) return;
+    switch (error.message) {
+      case 'FORBIDDEN':
+        toast.error('You must be logged in to view the cart.', errorToastProps);
+        break;
+      case 'NOT_FOUND':
+        toast.error('Cart not found.', errorToastProps);
+        break;
+      case 'BAD_REQUEST':
+        toast.error('Invalid request.', errorToastProps);
+        break;
+      default:
+        toast.error('An unexpected error occurred.', errorToastProps);
+        break;
+    }
+  }, [error]);
 
-  if (cartItems.length === 0) {
-    return (
-      <div className='bg-background'>
-        <div className='relative grow px-6 pt-0 md:pt-12 lg:overflow-y-hidden'>
-          <div className='mx-auto mb-6 w-full grow md:mb-12 md:max-w-[820px]'>
-            <div className='flex flex-col gap-6 md:gap-12'>
-              <div className='flex flex-col md:flex-row md:items-center pt-6 md:px-6 md:pt-0 lg:px-0'>
-                <div className='flex flex-col justify-center md:mb-0 mb-4 md:mr-14'>
-                  <p className='text-muted text-sm mb-[2px]'>
-                    Hey! Don't miss it.
-                  </p>
-                  <h2 className='text-3xl font-semibold mb-2 text-primary font-heading'>
-                    Your shopping cart is empty.
-                  </h2>
-                  <p className='text-muted'>
-                    All these excellent products don't just add themselves to
-                    your shopping cart!
-                  </p>
-                  <Button className='mt-5 hidden md:block'>
-                    <Link href='/'>Start shopping now !</Link>
-                  </Button>
-                </div>
-                <div className='min-w-[40%] flex-initial items-center justify-center md:mb-0 md:w-[448px] md:min-w-[448px] order-1 md:ml-auto'>
-                  <Image
-                    src='https://front-office.statics.backmarket.com/09f25aadc0b9878a750cc5f71b09a9184000c6d1/img/checkout/emptyBasket.svg'
-                    alt='Empty cart'
-                    width={0}
-                    height={0}
-                    sizes='100vw'
-                    className='w-full h-auto max-h-full max-w-full leading-none'
-                    loading='lazy'
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+  if (isLoading) return <LoadingPage />;
+
+  // Show empty cart only when we have data and it's empty
+  // This prevents flashing EmptyCart during refetch
+  if (!isFetching && (!cartData || cartData?.items.length === 0)) {
+    return <EmptyCart />;
   }
+
+  // If still fetching and no data yet, show loading
+  if (isFetching && !cartData) return <LoadingPage />;
 
   return (
     <div className='bg-sub-background flex flex-col lg:flex-row h-[calc(100vh-4rem)] overflow-y-auto'>
       <YourCartSection
         cartItems={cartItems}
-        updateQuantity={updateQuantity}
-        removeItem={removeItem}
+        onRemoveItem={handleRemoveItem}
+        isRemoving={removeFromCartMutation.isPending}
       />
-      <CartSummarySection cartItems={cartItems} subtotal={subtotal} />
+      <CartSummarySection cartItems={cartItems} subtotal={cartData.totalPrice} isRemoving={removeFromCartMutation.isPending} />
     </div>
   );
 }

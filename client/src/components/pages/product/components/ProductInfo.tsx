@@ -6,10 +6,11 @@ import { toast } from 'sonner';
 import { StarIcon } from 'lucide-react';
 import { Button } from '../../../ui/button';
 import { heartedIcon, heartIcon } from '@/public/assets/images';
-import { successToastProps } from '@/libs/toast/toast-props';
 import { useLocale } from 'next-intl';
+import { AddToCartButton } from './AddToCartButton';
 
 interface ProductInfoProps {
+  id: string;
   title: string;
   subtitle?: string;
   rating: number;
@@ -20,6 +21,7 @@ interface ProductInfoProps {
 }
 
 const ProductInfo: React.FC<ProductInfoProps> = ({
+  id,
   title,
   subtitle,
   rating,
@@ -31,23 +33,26 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   const router = useRouter();
   const locale = useLocale();
   const [isLiked, setIsLiked] = React.useState(true);
-  
+
   const handleLikeClick = () => {
     const newLikedState = !isLiked;
     setIsLiked(newLikedState);
-    
-    toast.message(newLikedState ? 'Saved to Favorites' : 'Not ready to say goodbye?', {
-      action: {
-        label: newLikedState ? 'View Favorites' : 'Undo',
-        onClick: () => {
-          if (newLikedState) {
-            router.push(`/${locale}/dashboard/favourites`);
-          } else {
-            setIsLiked(true);
-          }
+
+    toast.message(
+      newLikedState ? 'Saved to Favorites' : 'Not ready to say goodbye?',
+      {
+        action: {
+          label: newLikedState ? 'View Favorites' : 'Undo',
+          onClick: () => {
+            if (newLikedState) {
+              router.push(`/${locale}/dashboard/favourites`);
+            } else {
+              setIsLiked(true);
+            }
+          },
         },
       },
-    });
+    );
   };
 
   return (
@@ -57,7 +62,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
         {/* Title + Subtitle */}
         <div className='flex justify-between items-start gap-6'>
           <h1 className='mb-2 flex flex-col'>
-            <span className='text-3xl font-heading font-semibold text-secondary leading-10'>
+            <span className='text-2xl md:text-3xl font-heading font-bold text-secondary leading-10'>
               {title}
             </span>
             <span className='text-sm md:text-base font-medium text-secondary'>
@@ -143,15 +148,24 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
           </div>
 
           {/* Add to cart Button */}
-          <Button className='md:min-w-[164px] md:max-w-[256px] md:grow' onClick={() => {
+          {/* <Button className='md:min-w-[164px] md:max-w-[256px] md:grow' onClick={() => {
             toast.success('Added to cart ! Navigating...', successToastProps);
             router.push(`/${locale}/cart`);
           }}>
             Add to cart
-          </Button>
+          </Button> */}
+          <AddToCartButton
+            className='md:min-w-[164px] md:max-w-[256px] md:grow'
+            productVariantId={id}
+            productName={title}
+          />
 
           {/* Save/Like Button */}
-          <Button variant='outline' className='px-3 hidden md:inline-flex' onClick={handleLikeClick}>
+          <Button
+            variant='outline'
+            className='px-3 hidden md:inline-flex'
+            onClick={handleLikeClick}
+          >
             <Image
               src={isLiked ? heartedIcon : heartIcon}
               alt='Heart Icon'

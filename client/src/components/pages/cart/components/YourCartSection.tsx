@@ -1,23 +1,26 @@
 'use client';
 import ProductCard from '@/components/cards/ProductCard';
 import CartProductCard from '@/components/cards/CartProductCard';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { CartItem } from '@/types/cards.type';
 import { SlideCarousel } from '@/components/carousels';
 import { CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import { CartItem } from '../seed/sample_cart_data';
 import { recommendProducts } from '../../home/seed/temp-data';
 import { ServiceHighlights } from '../../home/components';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 interface YourCartSectionProps {
   cartItems: CartItem[];
-  updateQuantity: (id: string, newQuantity: number) => void;
-  removeItem: (id: string) => void;
+  onRemoveItem: (
+    productVariantId: string,
+    productName: string,
+  ) => Promise<void>;
+  isRemoving: boolean;
 }
 
 function YourCartSection({
   cartItems,
-  updateQuantity,
-  removeItem,
+  onRemoveItem,
+  isRemoving,
 }: YourCartSectionProps) {
   const isMobile = useIsMobile();
   return (
@@ -33,28 +36,31 @@ function YourCartSection({
                 <div key={item.id}>
                   <CartProductCard
                     productCard={{
-                      id: item.id,
-                      title: item.name,
-                      image: item.image,
-                      priceWithCurrency: `$ ${item.price.toFixed(2)}`,
-                      newPrice: item.originalPrice ? `$ ${item.originalPrice.toFixed(2)}` : undefined,
-                      color: item.color || undefined,
+                      id: item.productVariant.id,
+                      title: item.productVariant.product.name,
+                      image: item.productVariant.ProductVariantImage[0]?.image || '/assets/images/placeholder-image.png',
+                      priceWithCurrency: `$ ${Number(item.productVariant.price).toFixed(2)}`,
                     }}
                     cartProps={{
                       quantity: item.quantity,
-                      deliveryInfo: item.deliveryInfo,
-                      availability:
-                        item.stockQuantity === 1
-                          ? 'Only 1 left'
-                          : item.stockQuantity === 0
-                            ? 'Out of stock'
-                            : 'In stock',
-                      savings: item.savings,
-                      badge: item.badge,
-                      condition: item.condition,
-                      onQuantityChange: (newQuantity: number) =>
-                        updateQuantity(item.id, newQuantity),
-                      onRemove: () => removeItem(item.id),
+                      stock: item.productVariant.stock,
+                      deliveryInfo: 'Delivery by: Oct. 16–17 • Free',
+                      subDeliveryInfo:
+                        'Express delivery by Oct. 15–16 • from $ 15.00',
+                      attributes: item.productVariant.attributes.map(
+                        (attr) => ({
+                          id: attr.attribute.id,
+                          name: attr.attribute.name,
+                          valueId: attr.value.id,
+                          value: attr.value.value,
+                        }),
+                      ),
+                      onRemove: () =>
+                        onRemoveItem(
+                          item.productVariantId,
+                          item.productVariant.product.name,
+                        ),
+                      isRemoving: isRemoving,
                     }}
                     className='w-full'
                   />

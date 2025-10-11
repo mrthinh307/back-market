@@ -20,4 +20,8 @@ export const USE_QUERY_KEY = {
 
   // Auth related queries
   AUTH_USER: () => ['auth-user'],
+
+  // Cart related queries
+  CART_ITEMS: () => ['cart-items'],
+  CART_COUNT: () => ['cart-count'],
 } as const;

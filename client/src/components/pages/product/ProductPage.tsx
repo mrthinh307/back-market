@@ -84,10 +84,11 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
   return (
     <div className='content-center flex-col'>
       <BannerProduct
+        productVariantId={productVariant.id}
+        productName={productVariant.product.name}
         imageUrl={productVariant.images[0]?.imageUrl}
         subtitleText={replaceBulletWithDash(productVariant.subtitle.text)}
         priceWithCurrency={productVariant.priceWithCurrency}
-        onAddToCart={() => console.log('Add to cart clicked')}
         progressData={memoizedProgressData}
       />
 
@@ -112,6 +113,7 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
           <div className='w-full max-w-full grow md:w-2/3 md:basis-2/3 lg:w-1/2 lg:basis-1/2'>
             <div className='flex flex-col items-start'>
               <ProductInfo
+                id={productVariant.id}
                 title={productVariant.product.name}
                 subtitle={productVariant.subtitle.text}
                 rating={productVariant.reviewRating.average}

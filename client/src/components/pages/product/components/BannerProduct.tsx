@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button';
 import { useScrollDirection } from '@/hooks/useScrollDirection';
 import Image from 'next/image';
+import { AddToCartButton } from './AddToCartButton';
 
 interface ProgressData {
   currentSection: number;
@@ -9,16 +9,18 @@ interface ProgressData {
 }
 
 function BannerProduct({
+  productVariantId,
+  productName,
   imageUrl,
   subtitleText,
   priceWithCurrency,
-  onAddToCart,
   progressData,
 }: {
+  productVariantId: string;
+  productName: string;
   imageUrl?: string;
   subtitleText: string;
   priceWithCurrency: string;
-  onAddToCart: () => void;
   progressData: ProgressData;
 }) {
   const { isHidden } = useScrollDirection({
@@ -58,9 +60,11 @@ function BannerProduct({
                 </div>
               </div>
               <div className='hidden md:block ml-3 lg:ml-5 w-full max-w-[256px]'>
-                <Button className='w-full' onClick={onAddToCart}>
-                  Add to cart
-                </Button>
+                <AddToCartButton
+                  className='w-full'
+                  productVariantId={productVariantId}
+                  productName={productName}
+                />
               </div>
             </div>
           </div>
@@ -87,9 +91,11 @@ function BannerProduct({
           </div>
         </div>
         <div className='ml-3 lg:ml-5 w-full max-w-[256px]'>
-          <Button className='w-full' onClick={onAddToCart}>
-            Add to cart
-          </Button>
+          <AddToCartButton
+            className='w-full'
+            productVariantId={productVariantId}
+            productName={productName}
+          />
         </div>
       </div>
     </>
