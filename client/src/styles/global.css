@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700;900&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
+
 
 @font-face {
   font-family: 'DupletOpen';
@@ -59,7 +61,7 @@
   --chart-2: #94f5bc;
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --chart-5: #b71029;
   --sidebar: #fafafa;
   --sidebar-foreground: #0c0a09;
   --sidebar-primary: #1c1917;
@@ -104,7 +106,7 @@
   --chart-2: #94f5bc;
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
+  --chart-5: #b71029;
   --sidebar: #1c1917;
   --sidebar-foreground: #fafafa;
   --sidebar-primary: #1447e6;
@@ -169,7 +171,7 @@
   --color-button-hover: var(--button-hover);
   --color-button-hover-foreground: var(--button-hover-foreground);
 
-  --font-heading: 'Cormorand Garamond', serif;
+  --font-heading: 'Noto Serif JP', serif;
   --font-duplet: 'DupletOpen', sans-serif;
   --font-duplet-bold: 'DupletOpen-Bold', sans-serif;
 
@@ -291,7 +293,11 @@
   }
 
   .animate-spin {
-    animation: spin-360 2.8s linear infinite;
+    animation: spin-360 4s linear infinite;
+  }
+
+  .animate-spin-speed {
+    animation: spin-360 1s linear infinite;
   }
 
   /* Mobile menu slide in animation */
