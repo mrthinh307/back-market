@@ -19,7 +19,7 @@ import {
   refreshToken,
   signUp,
 } from '@/api/auth.api';
-import { successToastProps } from '@/libs/toast/toast-props';
+import { errorToastProps, successToastProps } from '@/libs/toast/toast-props';
 import { parseAxiosError } from '@/utils/AxiosError';
 import { Env } from '@/libs/Env';
 import { fetchProfile } from '@/api/user.api';
@@ -99,13 +99,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         router.push(`/${locale}`); // Redirect to previous page
       }
     } catch (err: any) {
-      const { message } = parseAxiosError(err);
-
-      if (Env.NODE_ENV === 'development') {
-        console.warn(
-          'Development Environtment Message - Error login:',
-          message,
-        );
+      if (err.response && err.response.status === 403) {
+        toast.error('Invalid credentials.', {
+          ...errorToastProps,
+        });
       }
       setIsAuthenticated(false);
     } finally {
@@ -139,14 +136,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         router.push(`/${locale}`);
       }
     } catch (err: any) {
-      const { message } = parseAxiosError(err);
-
-      if (Env.NODE_ENV === 'development') {
-        console.warn(
-          'Development Environtment Message - Error sign up:',
-          message,
-        );
-      }
       setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
@@ -209,7 +198,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsLoading(true);
 
       const userData = await fetchProfile();
-      console.log('User data fetched:', userData);
       return userData;
     } catch (err: any) {
       setIsLoading(false);
