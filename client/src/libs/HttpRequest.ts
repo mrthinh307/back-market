@@ -11,9 +11,6 @@ const httpRequest = axios.create({
   timeout: 15000, // 15s
 });
 
-// No need for request interceptor since we're using cookies now
-// The browser will automatically send cookies with each request
-
 let isRefreshing = false;
 let failedQueue: any[] = [];
 
@@ -30,6 +27,7 @@ httpRequest.interceptors.response.use(
   async (err) => {
     const originalRequest = err.config;
     const status = err.response?.status;
+    const message = err.response?.data?.message;
 
     if (status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
@@ -49,36 +47,26 @@ httpRequest.interceptors.response.use(
 
       try {
         await refreshToken();
-        
-        // No need to store token since it's now in cookies
-        // Just retry the requests - cookies will be sent automatically
+
         processQueue(null);
         return httpRequest(originalRequest);
       } catch (refreshError) {
         processQueue(refreshError);
-        // FIXME: Handle refresh token error
-        window.location.href = '/en/email';
+        window.location.href = '/email';
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
       }
     }
-    
+
     if (status === 403) {
-      // TODO: Need to optimization
-      // toast.error(
-      //   'You do not have permission to perform this action',
-      //   { ...errorToastProps }
-      // );
-      // window.location.href = '/en/email';
+      //TODO: NEED TO HANDLE 403 ERROR
     } else if (status === 500) {
       toast.error('Server error', { ...errorToastProps });
     } else if (!status) {
       toast.error('Network error', { ...errorToastProps });
-    } else if (status === 404) {
-      throw new Error('NOT_FOUND');
-    } else if (status === 400) {
-      throw new Error('BAD_REQUEST');
+    } else if (status === 404 || status === 400) {
+      err.customMessage = message;
     }
 
     return Promise.reject(err);
