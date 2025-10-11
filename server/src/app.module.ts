@@ -8,6 +8,7 @@ import { AdminModule } from './admin/admin.module';
 import { ProductVariantModule } from './product-variant/product-variant.module';
 import { ProductModule } from './product/product.module';
 import { RedisCacheModule } from './cache/redis-cache.module';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { RedisCacheModule } from './cache/redis-cache.module';
     UserModule,
     PrismaModule,
     ProductModule,
-    ProductVariantModule
+    ProductVariantModule,
+    CartModule
   ],
 })
 export class AppModule {}

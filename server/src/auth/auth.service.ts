@@ -199,7 +199,7 @@ export class AuthService {
             authId: userAuth.id,
             firstName: dto.firstName,
             lastName: dto.lastName,
-            avatarUrl: `https://api.dicebear.com/9.x/initials/svg?seed=${dto.firstName}%20${dto.lastName}`,
+            avatarUrl: `https://ui-avatars.com/api/?name=${dto.firstName}+${dto.lastName}&background=0D8ABC&color=fff`,
           },
         });
 
