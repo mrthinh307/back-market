@@ -103,7 +103,7 @@ export class CartService {
     const cart = await this.getOrCreateCart(userId);
 
     // Calculate total items and total price
-    const totalItems = cart.items.reduce((sum, item) => sum + item.quantity, 0);
+    const totalItems = cart.items.length;
     const totalPrice = cart.items.reduce(
       (sum, item) => sum + item.quantity * Number(item.productVariant.price),
       0,
@@ -327,7 +327,7 @@ export class CartService {
       return { totalItems: 0 };
     }
 
-    const totalItems = cart.items.reduce((sum, item) => sum + item.quantity, 0);
+    const totalItems = cart.items.length;
     
     return { totalItems };
   }
