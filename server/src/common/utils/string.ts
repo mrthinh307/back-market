@@ -1,4 +1,4 @@
-import { AttributeDto } from 'src/product-variant/dto/product-variant.dto';
+import { AttributeDto } from '../../product-variant/dto/product-variant.dto';
 
 export function generateSlug(name: string): string {
   return name

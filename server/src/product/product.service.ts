@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 import { ProductListDto } from './dto/product-dto';
-import { calculateAverageRating } from 'src/common/utils/calculate';
+import { calculateAverageRating } from '../common/utils/calculate';
 import { AppCacheService } from '../cache/cache.service';
 import { CACHE_TTL } from '../cache/constants/cache-key.constants';
-import { CacheKeyFactory } from 'src/cache/cache-key.factory';
+import { CacheKeyFactory } from '../cache/cache-key.factory';
 
 @Injectable()
 export class ProductService {
@@ -68,6 +68,17 @@ export class ProductService {
     isExcludedBrand = false,
   ): Promise<ProductListDto> {
     const categoryIdNum = parseInt(categoryId, 10);
+    
+    // Validate categoryId is a valid positive integer
+    if (
+      isNaN(categoryIdNum) || 
+      categoryIdNum < 0 || 
+      !Number.isInteger(categoryIdNum) ||
+      categoryId.includes('.') || // Check for decimal point
+      categoryId !== categoryIdNum.toString() // Check if original string matches parsed integer
+    ) {
+      throw new BadRequestException('Invalid categoryId: must be a positive integer');
+    }
 
     // Single optimized query with aggregations and filtering at DB level
     const products = await this.prisma.product.findMany({

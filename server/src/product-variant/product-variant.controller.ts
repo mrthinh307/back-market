@@ -1,6 +1,6 @@
 import { Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Query, UseGuards } from '@nestjs/common';
 
-import { Roles } from 'src/auth/decorator';
+import { Roles } from '../auth/decorator';
 import { JwtGuard, RoleGuard } from '../auth/guard';
 import { ProductVariantService } from './product-variant.service';
 import { GetRelevantVariantsQueryDto } from './dto/get-relevant-variants.dto';

@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Delete, Body, UseGuards } from '@nestjs/common';
 import { GetUser } from '../auth/decorator';
 import { JwtGuard } from '../auth/guard';
-import { User } from 'src/auth/auth.types';
+import { User } from '../auth/auth.types';
 import { UserService } from './user.service';
 import { UserAddressDto } from './dto';
 

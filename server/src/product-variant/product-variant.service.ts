@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
-import { generateSlug, getSubtitle } from 'src/common/utils/string';
-import { calculateAverageRating } from 'src/common/utils/calculate';
+import { generateSlug, getSubtitle } from '../common/utils/string';
+import { calculateAverageRating } from '../common/utils/calculate';
+import { PrismaService } from '../prisma/prisma.service';
 import { AppCacheService } from '../cache/cache.service';
 import { CACHE_TTL } from '../cache/constants/cache-key.constants';
 import {
@@ -13,7 +13,7 @@ import {
   VariantItemDto,
   ImageDto,
 } from './dto/product-variant.dto';
-import { CacheKeyFactory } from 'src/cache/cache-key.factory';
+import { CacheKeyFactory } from '../cache/cache-key.factory';
 
 // Type for Prisma raw query result (before transformation to DTO)
 type PrismaProductVariant = {
