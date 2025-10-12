@@ -13,6 +13,7 @@ export class LoginDto {
 
   @IsOptional()
   @IsString()
+  @Length(8, 255)
   password?: string;
 }
 
@@ -23,7 +24,7 @@ export class SignupDto {
 
   @IsString()
   @IsNotEmpty()
-  @Length(6, 20)
+  @Length(8, 255)
   password: string;
 
   @IsString()
