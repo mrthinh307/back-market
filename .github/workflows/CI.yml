@@ -182,12 +182,6 @@ jobs:
           AUTHORITATIVE_ROLE="admin"
           REDIS_URL="${{ secrets.REDIS_URL }}"
           CACHE_TTL_SEC=600
-          GOOGLE_CLIENT_ID="test-google-client-id"
-          GOOGLE_CLIENT_SECRET="test-google-client-secret"
-          GOOGLE_CALLBACK_URL="test-google-callback-url"
-          FACEBOOK_CLIENT_ID="test-facebook-client-id"
-          FACEBOOK_CLIENT_SECRET="test-facebook-client-secret"
-          FACEBOOK_CALLBACK_URL="test-facebook-callback-url"
           EOF
 
       - name: Run server E2E tests
@@ -197,10 +191,12 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           REDIS_URL: ${{ secrets.REDIS_URL }}
-          GOOGLE_CLIENT_ID: "test-google-client-id"
-          GOOGLE_CLIENT_SECRET: "test-google-client-secret"
-          FACEBOOK_CLIENT_ID: "test-facebook-client-id"
-          FACEBOOK_CLIENT_SECRET: "test-facebook-client-secret"
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_CALLBACK_URL: ${{ secrets.GOOGLE_CALLBACK_URL }}
+          FACEBOOK_CLIENT_ID: ${{ secrets.FACEBOOK_CLIENT_ID }}
+          FACEBOOK_CLIENT_SECRET: ${{ secrets.FACEBOOK_CLIENT_SECRET }}
+          FACEBOOK_CALLBACK_URL: ${{ secrets.FACEBOOK_CALLBACK_URL }}
 
   e2e-client:
     name: E2E Tests - Client (Playwright)
@@ -260,8 +256,10 @@ jobs:
           CACHE_TTL_SEC=600
           GOOGLE_CLIENT_ID="test-google-client-id"
           GOOGLE_CLIENT_SECRET="test-google-client-secret"
+          GOOGLE_CALLBACK_URL="http://localhost:8888/auth/google/callback"
           FACEBOOK_CLIENT_ID="test-facebook-client-id"
           FACEBOOK_CLIENT_SECRET="test-facebook-client-secret"
+          FACEBOOK_CALLBACK_URL="http://localhost:8888/auth/facebook/callback"
           EOF
 
       - name: Start server in background
@@ -277,8 +275,10 @@ jobs:
           REDIS_URL: ${{ secrets.REDIS_URL }}
           GOOGLE_CLIENT_ID: "test-google-client-id"
           GOOGLE_CLIENT_SECRET: "test-google-client-secret"
+          GOOGLE_CALLBACK_URL: "http://localhost:8888/auth/google/callback"
           FACEBOOK_CLIENT_ID: "test-facebook-client-id"
           FACEBOOK_CLIENT_SECRET: "test-facebook-client-secret"
+          FACEBOOK_CALLBACK_URL: "http://localhost:8888/auth/facebook/callback"
 
       - name: Run Playwright E2E tests
         working-directory: client

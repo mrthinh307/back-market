@@ -9,6 +9,31 @@ import { SignupDto } from '../../src/auth/dto';
 export class TestSetup {
   private static instances: Map<number, { app: INestApplication; prisma: PrismaService }> = new Map();
 
+  /**
+   * Wait for the server to be ready by checking if it responds
+   */
+  private static async waitForServer(port: number, maxRetries: number = 15, delayMs: number = 500): Promise<void> {
+    for (let i = 0; i < maxRetries; i++) {
+      try {
+        // Try to connect to server (any response = server is up)
+        const response = await fetch(`http://localhost:${port}`).catch(() => null);
+        if (response) {
+          console.log(`✅ Server ready on port ${port} after ${i + 1} attempt(s)`);
+          // Extra delay to ensure all modules are fully initialized
+          await new Promise(resolve => setTimeout(resolve, 500));
+          return;
+        }
+      } catch {
+        // Ignore and retry
+      }
+      
+      console.log(`⏳ Waiting for server on port ${port} (attempt ${i + 1}/${maxRetries})...`);
+      await new Promise(resolve => setTimeout(resolve, delayMs));
+    }
+    
+    throw new Error(`Server on port ${port} did not become ready after ${maxRetries} attempts`);
+  }
+
   static async setupApp(port: number = 3333) {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
@@ -31,6 +56,9 @@ export class TestSetup {
     this.instances.set(port, { app, prisma });
 
     pactum.request.setBaseUrl(`http://localhost:${port}`);
+
+    // Wait for server to be fully ready (especially important in CI)
+    await this.waitForServer(port);
 
     return { app, prisma };
   }
