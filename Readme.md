@@ -2,8 +2,6 @@
 
 <p>
   <img src="https://img.shields.io/badge/Status-Developing-orange?style=for-the-badge" alt="Status"/>
-  <img src="https://img.shields.io/badge/Developing Branch-develop-purple?style=for-the-badge" alt="Developing Branch"/>
-  <img src="https://img.shields.io/badge/Version-0.0.9-blue?style=for-the-badge" alt="Version"/>
 </p>
   <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js-15-black?logo=next.js" alt="Next.js"/></a>
   <a href="https://nestjs.com/"><img src="https://img.shields.io/badge/NestJS-red?logo=nestjs" alt="NestJS"/></a>
@@ -80,6 +78,7 @@
 - **🎨 Modern & User-Friendly Interface**: Clean, professional UI for seamless experience across all devices
 - **🔐 Secure Authentication**: JWT-based auth with OAuth2 integration (Facebook & Google)
 - **📊 Data Analytics**: Comprehensive analytics and reporting capabilities
+- **🚀 Caching System**: Multi-layer caching with React Query for frontend state management and Redis for backend data caching, ensuring optimal performance and user experience
 
 ## 🏗️ 3. Project Structure
 
@@ -110,11 +109,16 @@ back-market/
 
 ```mermaid
 graph TD
-    A[Client<br/>Next.js 15] --> B[API Gateway<br/>NestJS]
-    B --> C[(Database<br/>PostgreSQL)]
+    A[Client<br/>Next.js 15] --> G[React Query<br/>Cache Layer]
+    G --> B[API Gateway<br/>NestJS]
+    B --> H[Redis<br/>Cache Layer]
+    H --> E[ORM<br/>Prisma]
+    E --> C[(Database<br/>PostgreSQL)]
     B --> D[Search Engine<br/>Elasticsearch]
-    C --> E[ORM<br/>Prisma]
     D --> F[Advanced Search]
+    
+    style G fill:#e1f5fe
+    style H fill:#fff3e0
 ```
 
 </div>
@@ -153,7 +157,7 @@ yarn install
 #### 2. 🔧 Environment Setup
 ```bash
 # Copy environment files
-cp client/.env.example client/.env.local
+cp client/.env.example client/.env
 cp server/.env.example server/.env
 ```
 
@@ -165,9 +169,7 @@ yarn docker:up
 
 #### 4. 🗄️ Database Setup
 ```bash
-cd server
-npx prisma generate
-npx prisma db push
+yarn prisma:generate
 ```
 
 #### 5. ▶️ Run Applications
@@ -199,6 +201,7 @@ yarn dev
 | **TypeScript** | Language | Type-safe JavaScript |
 | **Prisma** | ORM | Next-gen database toolkit |
 | **PostgreSQL** | Database | Robust relational database |
+| **Redis** | Cache | High-performance in-memory data store |
 | **JWT** | Authentication | Secure token-based auth |
 | **Elasticsearch** | Search | Advanced search capabilities |
 | **Jest** | Testing | Comprehensive API testing |
@@ -209,6 +212,7 @@ yarn dev
 |------------|---------|---------|
 | **Next.js 15** | Framework | React framework with App Router |
 | **TypeScript** | Language | Type-safe development |
+| **React Query** | State Management | Server state management and caching |
 | **Tailwind CSS 4** | Styling | Utility-first CSS framework |
 | **shadcn/ui** | Components | Modern UI component library |
 | **Vitest** | Testing | Fast unit testing |
@@ -282,21 +286,18 @@ flowchart LR
       <a href="https://github.com/mrthinh307">
         <img src="https://github.com/mrthinh307.png" width="100px" alt=""/><br />
         <b>Duy Thinh</b><br />
-        <em>PM & Fullstack Developer</em>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/Hiisam17">
         <img src="https://github.com/Hiisam17.png" width="100px" alt=""/><br />
         <b>Khanh Toan</b><br />
-        <em>Fullstack Developer</em>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/mingg23805">
         <img src="https://github.com/mingg23805.png" width="100px" alt=""/><br />
         <b>Ngoc Minh</b><br />
-        <em>Data Engineer</em>
       </a>
     </td>
   </tr>
@@ -305,21 +306,12 @@ flowchart LR
       <a href="https://github.com/mtuong1031">
         <img src="https://github.com/mtuong1031.png" width="100px" alt=""/><br />
         <b>Minh Tuong</b><br />
-        <em>Fullstack Developer</em>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/thinh2711">
         <img src="https://github.com/thinh2711.png" width="100px" alt=""/><br />
         <b>Xuan Thinh</b><br />
-        <em>Frontend Developer</em>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/crisaq2410">
-        <img src="https://github.com/crisaq2410.png" width="100px" alt=""/><br />
-        <b>Anh Quoc</b><br />
-        <em>Backend Developer</em>
       </a>
     </td>
   </tr>
