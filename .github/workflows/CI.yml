@@ -184,8 +184,10 @@ jobs:
           CACHE_TTL_SEC=600
           GOOGLE_CLIENT_ID="test-google-client-id"
           GOOGLE_CLIENT_SECRET="test-google-client-secret"
+          GOOGLE_CALLBACK_URL="test-google-callback-url"
           FACEBOOK_CLIENT_ID="test-facebook-client-id"
           FACEBOOK_CLIENT_SECRET="test-facebook-client-secret"
+          FACEBOOK_CALLBACK_URL="test-facebook-callback-url"
           EOF
 
       - name: Run server E2E tests
@@ -227,6 +229,23 @@ jobs:
       - name: Generate Prisma Client (for server)
         working-directory: server
         run: yarn prisma generate
+
+      - name: Restore server build
+        uses: actions/cache/restore@v4
+        with:
+          path: server/dist
+          key: server-build-${{ runner.os }}-${{ github.sha }}
+          fail-on-cache-miss: false
+
+      - name: Build server (if cache missed)
+        working-directory: server
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "Cache miss - building server..."
+            yarn build
+          else
+            echo "Using cached server build"
+          fi
 
       - name: Create server .env.test
         working-directory: server
