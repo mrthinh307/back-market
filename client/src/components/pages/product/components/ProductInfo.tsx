@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { StarIcon } from 'lucide-react';
 import { Button } from '../../../ui/button';
-import { heartedIcon, heartIcon } from '@/public/assets/images';
+import heartedIcon from '@/public/assets/images/hearted-icon.svg?url';
+import heartIcon from '@/public/assets/images/heart-icon.svg?url';
 import { useLocale } from 'next-intl';
 import { AddToCartButton } from './AddToCartButton';
 

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import logo from '@/public/assets/images/header-logo-1.svg';
+import logo from '@/public/assets/images/header-logo-1.svg?url';
 
 function LoadingPage() {
   return (

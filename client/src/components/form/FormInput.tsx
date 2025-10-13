@@ -3,8 +3,9 @@
 import Image from 'next/image';
 import React, { memo, useRef, useState } from 'react';
 
-import { hidePasswordIcon, showPasswordIcon } from '@/public/assets/images';
-import clearIcon from '@/public/assets/images/clear-input.svg';
+import hidePasswordIcon from '@/public/assets/images/hide-password.svg?url';
+import showPasswordIcon from '@/public/assets/images/show-password.svg?url';
+import clearIcon from '@/public/assets/images/clear-input.svg?url';
 import { Input } from '../ui/input';
 
 type InputProps = {

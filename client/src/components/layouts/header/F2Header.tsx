@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useLocale } from 'next-intl';
 import Link from 'next/link';
 
-import logo from '@/public/assets/images/header-logo-1.svg';
+import logo from '@/public/assets/images/header-logo-1.svg?url';
 
 const F2Header: React.FC = () => {
   const locale = useLocale();

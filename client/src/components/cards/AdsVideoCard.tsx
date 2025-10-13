@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { playVideoIcon } from '@/public/assets/images';
+import playVideoIcon from '@/public/assets/images/play-video-icon.svg?url';
 import { Button } from '../ui/button';
 
 function AdsDetailVideo({
