@@ -19,10 +19,7 @@ export async function generateMetadata(props: ISignInPageProps) {
   };
 }
 
-export default async function SignUpPage(props: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
+export default async function SignUpPage(props: ISignInPageProps) {
   const { locale } = await props.params;
   const t = await getTranslations({
     locale,
