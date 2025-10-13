@@ -1,5 +1,5 @@
 name: Setup Node.js and dependencies
-description: Setup Node.js environment with npm dependencies
+description: Setup Node.js environment with Yarn workspaces
 
 inputs:
   node-version:
@@ -17,17 +17,17 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
-        cache: npm
+        cache: yarn
 
     - name: Install dependencies
       shell: bash
-      run: npm ci
+      run: yarn install --frozen-lockfile
 
     - name: Restore Next.js build output
       if: inputs.restore-nextjs-cache == 'true'
       uses: actions/cache/restore@v4
       with:
         path: |
-          .next
+          client/.next
         key: nextjs-build-${{ inputs.node-version }}-${{ github.sha }}
         fail-on-cache-miss: true
