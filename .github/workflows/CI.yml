@@ -93,6 +93,10 @@ jobs:
         with:
           node-version: '20.x'
 
+      - name: Generate Prisma Client
+        working-directory: server
+        run: yarn prisma generate
+
       - name: Type check client
         working-directory: client
         run: yarn check:types
@@ -182,7 +186,7 @@ jobs:
 
       - name: Run server E2E tests
         working-directory: server
-        run: yarn test:e2e
+        run: yarn test:e2e:ci
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
@@ -191,7 +195,7 @@ jobs:
   e2e-client:
     name: E2E Tests - Client (Playwright)
     runs-on: ubuntu-latest
-    needs: [build-client, build-server]
+    needs: [build-server]
 
     steps:
       - name: Checkout code
@@ -201,7 +205,6 @@ jobs:
         uses: ./.github/actions/setup-project
         with:
           node-version: '20.x'
-          restore-nextjs-cache: true
 
       - name: Install Playwright browsers
         working-directory: client
@@ -279,9 +282,41 @@ jobs:
         uses: ./.github/actions/setup-project
         with:
           node-version: '20.x'
-          restore-nextjs-cache: true
+
+      - name: Restore Next.js build cache (optional)
+        uses: actions/cache/restore@v4
+        with:
+          path: client/.next
+          key: nextjs-build-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            nextjs-build-${{ runner.os }}-
+        continue-on-error: true
+
+      - name: Build Next.js (if cache missed)
+        working-directory: client
+        run: |
+          if [ ! -d ".next" ]; then
+            echo "Cache miss - building Next.js..."
+            yarn build
+          else
+            echo "Using cached build"
+          fi
+        env:
+          NEXT_PUBLIC_SENTRY_DISABLED: 'true'
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_DEV_FACEBOOK_URL: ${{ secrets.NEXT_PUBLIC_DEV_FACEBOOK_URL }}
+          NEXT_PUBLIC_AUTHORITATIVE_ROLE: 'admin'
 
       - name: Run Unlighthouse
         working-directory: client
         run: yarn test:lighthouse
         continue-on-error: true # Don't fail CI on performance issues
+
+      - name: Upload Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: client/.unlighthouse/
+          retention-days: 7
+        continue-on-error: true

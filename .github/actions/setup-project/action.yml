@@ -30,4 +30,4 @@ runs:
         path: |
           client/.next
         key: nextjs-build-${{ inputs.node-version }}-${{ github.sha }}
-        fail-on-cache-miss: true
+        fail-on-cache-miss: false
