@@ -2,8 +2,6 @@
 
 <p>
   <img src="https://img.shields.io/badge/Status-Developing-orange?style=for-the-badge" alt="Status"/>
-  <img src="https://img.shields.io/badge/Developing Branch-develop-purple?style=for-the-badge" alt="Developing Branch"/>
-  <img src="https://img.shields.io/badge/Version-0.0.9-blue?style=for-the-badge" alt="Version"/>
 </p>
   <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js-15-black?logo=next.js" alt="Next.js"/></a>
   <a href="https://nestjs.com/"><img src="https://img.shields.io/badge/NestJS-red?logo=nestjs" alt="NestJS"/></a>
@@ -288,21 +286,18 @@ flowchart LR
       <a href="https://github.com/mrthinh307">
         <img src="https://github.com/mrthinh307.png" width="100px" alt=""/><br />
         <b>Duy Thinh</b><br />
-        <em>PM & Fullstack Developer</em>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/Hiisam17">
         <img src="https://github.com/Hiisam17.png" width="100px" alt=""/><br />
         <b>Khanh Toan</b><br />
-        <em>Fullstack Developer</em>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/mingg23805">
         <img src="https://github.com/mingg23805.png" width="100px" alt=""/><br />
         <b>Ngoc Minh</b><br />
-        <em>Data Engineer</em>
       </a>
     </td>
   </tr>
@@ -311,21 +306,12 @@ flowchart LR
       <a href="https://github.com/mtuong1031">
         <img src="https://github.com/mtuong1031.png" width="100px" alt=""/><br />
         <b>Minh Tuong</b><br />
-        <em>Fullstack Developer</em>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/thinh2711">
         <img src="https://github.com/thinh2711.png" width="100px" alt=""/><br />
         <b>Xuan Thinh</b><br />
-        <em>Frontend Developer</em>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/crisaq2410">
-        <img src="https://github.com/crisaq2410.png" width="100px" alt=""/><br />
-        <b>Anh Quoc</b><br />
-        <em>Backend Developer</em>
       </a>
     </td>
   </tr>

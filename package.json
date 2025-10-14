@@ -1,0 +1,29 @@
+{
+  "name": "backmarket",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"yarn --cwd server start:dev\" \"yarn --cwd client dev\"",
+    "dev:server": "yarn --cwd server start:dev",
+    "dev:client": "yarn --cwd client dev",
+    "commit": "commit",
+    "commitlint": "commitlint",
+    "format": "prettier --write \"client/src/**/*.{ts,tsx,js,jsx,json,md}\" \"server/src/**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"client/src/**/*.{ts,tsx,js,jsx,json,md}\" \"server/src/**/*.{ts,tsx,js,jsx,json,md}\"",
+    "prisma:generate": "yarn --cwd server prisma generate",
+    "prisma:migrate": "yarn --cwd server prisma migrate dev",
+    "prisma:deploy": "yarn --cwd server prisma migrate deploy",
+    "prisma:studio": "yarn --cwd server prisma studio"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/prompt-cli": "^19.8.1",
+    "concurrently": "^9.2.0",
+    "lefthook": "^1.12.2",
+    "prettier": "^3.6.2"
+  }
+}

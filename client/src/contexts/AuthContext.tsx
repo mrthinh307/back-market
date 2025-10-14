@@ -12,20 +12,28 @@ import {
 
 import { toast } from 'sonner';
 import {
-  getAccessToken,
-  setAccessToken as setTokenGlobal,
-} from '@/libs/token-manager';
-import { loginWithPassword, refreshToken, signUp } from '@/api/auth.api';
+  initiateFacebookOAuth,
+  initiateGoogleOAuth,
+  loginWithPassword,
+  logOut,
+  refreshToken,
+  signUp,
+} from '@/api/auth.api';
 import { errorToastProps, successToastProps } from '@/libs/toast/toast-props';
 import { parseAxiosError } from '@/utils/AxiosError';
 import { Env } from '@/libs/Env';
+import { fetchProfile } from '@/api/user.api';
 
 interface AuthContextType {
-  accessToken: string | null;
-  setAccessToken: (token: string | null) => void;
+  isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
   signup: (params: SignUpParams) => Promise<void>;
+  logout: () => void;
+  loginWithGoogle: () => void;
+  loginWithFacebook: () => void;
+  getMe: () => Promise<any> | undefined;
+  checkAuth: () => Promise<void>;
 }
 
 interface SignUpParams {
@@ -36,46 +44,40 @@ interface SignUpParams {
 }
 
 const AuthContext = createContext<AuthContextType>({
-  accessToken: null,
-  setAccessToken: () => {},
+  isAuthenticated: false,
   isLoading: true,
   login: async () => {},
   signup: async () => {},
+  logout: async () => {},
+  loginWithGoogle: () => {},
+  loginWithFacebook: () => {},
+  getMe: async () => undefined,
+  checkAuth: async () => {},
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const locale = useLocale();
-  const [accessToken, setAccessTokenState] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const setAccessToken = (token: string | null) => {
-    setTokenGlobal(token);
-    setAccessTokenState(token);
+  // Helper function to check authentication status
+  const checkAuth = async () => {
+    try {
+      // Try to refresh token (this will validate cookies on server)
+      await refreshToken();
+      setIsAuthenticated(true);
+    } catch (err) {
+      console.warn('User not authenticated:', err);
+      setIsAuthenticated(false);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
-    const tryRefresh = async () => {
-      try {
-        const tokens = await refreshToken();
-        setAccessToken(tokens.access_token);
-      } catch (err) {
-        console.warn('Error refreshing access token:', err);
-        setAccessToken(null);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    tryRefresh();
+    checkAuth();
   }, []);
-
-  // Sync state with token-manager (for UI reactivity)
-  useEffect(() => {
-    const currentToken = getAccessToken();
-    if (currentToken !== accessToken) {
-      setAccessTokenState(currentToken);
-    }
-  }, [accessToken]);
 
   const login = async (initialEmail: string, password: string) => {
     if (isLoading) {
@@ -85,32 +87,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       setIsLoading(true);
 
-      if (initialEmail) {
-        const response = await loginWithPassword(initialEmail, password);
+      if (initialEmail && password) {
+        await loginWithPassword(initialEmail, password);
 
         toast.success('Welcome back !', {
           description: 'Navigate to dashboard ...',
           ...successToastProps,
         });
 
-        const { access_token } = response;
-        setAccessToken(access_token);
-
-        router.push(`/${locale}`);
+        setIsAuthenticated(true);
+        router.push(`/${locale}`); // Redirect to previous page
       }
     } catch (err: any) {
-      const { message } = parseAxiosError(err);
-
-      if (Env.NODE_ENV === 'development') {
-        console.warn(
-          'Development Environtment Message - Error login:',
-          message,
-        );
+      if (err.response && err.response.status === 403) {
+        toast.error('Invalid credentials.', {
+          ...errorToastProps,
+        });
       }
-
-      toast.error(message || 'Login failed. Please try again.', {
-        ...errorToastProps,
-      });
+      setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
     }
@@ -126,7 +120,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       setIsLoading(true);
       if (initialEmail && password && firstName && lastName) {
-        const response = await signUp(
+        await signUp(
           initialEmail,
           password,
           firstName,
@@ -138,24 +132,75 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           ...successToastProps,
         });
 
-        const { access_token } = response;
-        setAccessToken(access_token);
-
+        setIsAuthenticated(true);
         router.push(`/${locale}`);
       }
+    } catch (err: any) {
+      setIsAuthenticated(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loginWithGoogle = () => {
+    if (isLoading) {
+      return; // Prevent multiple submissions
+    }
+
+    try {
+      setIsLoading(true);
+      initiateGoogleOAuth(); // Redirect browser to Google
     } catch (err: any) {
       const { message } = parseAxiosError(err);
 
       if (Env.NODE_ENV === 'development') {
-        console.warn(
-          'Development Environtment Message - Error sign up:',
-          message,
-        );
+        console.warn('Development Environment Message - Error login:', message);
       }
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-      toast.error(message || 'Sign up failed. Please try again.', {
-        ...errorToastProps,
-      });
+  //FIXME: Facebook login function
+  const loginWithFacebook = () => {
+    if (isLoading) {
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      initiateFacebookOAuth();
+    } catch (err: any) {
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await logOut();
+    } catch (error) {
+      console.error('Logout failed:', error);
+    } finally {
+      setIsAuthenticated(false);
+      window.location.href = `/${locale}/email`;
+    }
+  };
+
+  const getMe = async () => {
+    if (!isAuthenticated) {
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+
+      const userData = await fetchProfile();
+      return userData;
+    } catch (err: any) {
+      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }
@@ -163,7 +208,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ accessToken, setAccessToken, isLoading, login, signup }}
+      value={{
+        isAuthenticated,
+        isLoading,
+        login,
+        signup,
+        logout,
+        loginWithGoogle,
+        loginWithFacebook,
+        getMe,
+        checkAuth,
+      }}
     >
       {children}
     </AuthContext.Provider>

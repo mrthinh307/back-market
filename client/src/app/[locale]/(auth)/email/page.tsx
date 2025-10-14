@@ -26,7 +26,7 @@ export default async function EmailPage(props: ISignInPageProps) {
     locale,
     namespace: 'EmailCredentials',
   });
-  
+
   return (
     <>
       <AuthFormContainer

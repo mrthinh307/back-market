@@ -3,29 +3,21 @@ import type { AxiosRequestConfig } from 'axios';
 import { toast } from 'sonner';
 import { Env } from '@/libs/Env';
 import { errorToastProps } from './toast/toast-props';
-import { getAccessToken, setAccessToken } from './token-manager';
 import { refreshToken } from '@/api/auth.api';
 
 const httpRequest = axios.create({
-  baseURL: Env.NEXT_PUBLIC_NEXT_BASE_URL,
+  baseURL: Env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
-});
-
-httpRequest.interceptors.request.use((config) => {
-  const token = getAccessToken();
-  if (token && config.headers) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
+  timeout: 15000, // 15s
 });
 
 let isRefreshing = false;
 let failedQueue: any[] = [];
 
-const processQueue = (error: any, token: string | null = null) => {
+const processQueue = (error: any) => {
   failedQueue.forEach((prom) => {
     if (error) prom.reject(error);
-    else prom.resolve(token);
+    else prom.resolve();
   });
   failedQueue = [];
 };
@@ -43,8 +35,7 @@ httpRequest.interceptors.response.use(
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({
-            resolve: (token: string) => {
-              originalRequest.headers.Authorization = `Bearer ${token}`;
+            resolve: () => {
               resolve(httpRequest(originalRequest));
             },
             reject,
@@ -55,19 +46,13 @@ httpRequest.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const newTokens = await refreshToken();
-        const newAccessToken = newTokens.access_token;
+        await refreshToken();
 
-        setAccessToken(newAccessToken);
-        httpRequest.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
-        processQueue(null, newAccessToken);
-
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        processQueue(null);
         return httpRequest(originalRequest);
       } catch (refreshError) {
-        processQueue(refreshError, null);
-        // FIXME: Handle refresh token error
-        window.location.href = '/en/email';
+        processQueue(refreshError);
+        window.location.href = '/email';
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
@@ -75,14 +60,13 @@ httpRequest.interceptors.response.use(
     }
 
     if (status === 403) {
-      // FIXME: Handle 403 error
-      // window.location.href = '/en/email';
+      //TODO: NEED TO HANDLE 403 ERROR
     } else if (status === 500) {
       toast.error('Server error', { ...errorToastProps });
     } else if (!status) {
       toast.error('Network error', { ...errorToastProps });
-    } else {
-      toast.error(message, { ...errorToastProps });
+    } else if (status === 404 || status === 400) {
+      err.customMessage = message;
     }
 
     return Promise.reject(err);

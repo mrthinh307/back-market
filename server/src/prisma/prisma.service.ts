@@ -15,26 +15,31 @@ export class PrismaService extends PrismaClient {
   }
 
   cleanDb() {
+    // Only clean user-related data, keep product data intact
     return this.$transaction([
-      this.review.deleteMany(),
-      this.order.deleteMany(),
-      this.productImage.deleteMany(),
-      this.product.deleteMany(),
-      this.category.deleteMany(),
-      this.user.deleteMany(),
+      // 1. Delete cart and order items first (child tables with FK constraints)
+      this.cartItem.deleteMany(),      // FK: cartId (ShoppingCart), productVariantId (ProductVariant)
+      this.orderItem.deleteMany(),     // FK: orderId (Order), productVariantId (ProductVariant)
+      
+      // 2. Delete reviews (user-generated content, FK to Product/ProductVariant/UserAuth)
+      this.review.deleteMany(),        // FK: productId, variantId (nullable), userId (nullable)
+
+      // 3. Delete user's carts and orders (parent tables of items)
+      this.shoppingCart.deleteMany(),  // FK: userId (UserAuth)
+      this.order.deleteMany(),         // FK: userId (UserAuth, nullable)
+      
+      // 4. Delete user addresses and profiles (FK to UserAuth)
+      this.userAddress.deleteMany(),   // FK: userId (UserAuth)
+      this.userProfile.deleteMany(),   // FK: authId (UserAuth)
+
+      // 5. Delete user auth table last (referenced by most user tables)
+      this.userAuth.deleteMany(),      // Root user table
     ]);
-    // * Based on your schema.prisma, the correct deletion order is:
-
-    // Review (depends on User and Product)
-
-    // Order (depends on User and Product)
-
-    // ProductImage (depends on Product)
-
-    // Product (depends on User and Category)
-
-    // Category (parent of Product)
-
-    // User (parent of Product, Order, and Review)
+    // * Product catalog tables are NOT cleaned:
+    // * - Product, ProductVariant, ProductVariantImage
+    // * - Brand, Category, Attribute, AttributeValue, AttributeGroup
+    // * - ProductVariantAttribute, GroupAttribute, CategoryAttribute
+    // * - VariantAttributeImage
+    // * This preserves product catalog data across test runs
   }
 }

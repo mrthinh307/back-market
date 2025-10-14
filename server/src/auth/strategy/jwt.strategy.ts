@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Request } from 'express';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { JwtPayload } from '../types';
+import { JwtPayload } from '../auth.types';
 import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
@@ -19,18 +19,30 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     }
 
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        (request: Request) => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          return request?.cookies?.access_token || null;
+        },
+        // Fallback to Authorization header for backward compatibility
+        ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ]),
       secretOrKey: secret,
     });
   }
 
   async validate(payload: JwtPayload) {
-    const user = await this.prisma.user.findUnique({
+    const user = await this.prisma.userAuth.findUnique({
       where: { id: payload.sub },
+      include: { profile: true },
     });
 
-    const { hash, ...userWithoutHash } = user || {};
-
-    return userWithoutHash;
+    if (!user) {
+      throw new Error('User not found');
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { hash, ...userWithoutPassword } = user;
+      return userWithoutPassword;
+    }
   }
 }

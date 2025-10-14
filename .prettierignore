@@ -1,0 +1,4 @@
+client/.next/
+client/node_modules/
+client/out/
+client/.turbo/

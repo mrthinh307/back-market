@@ -3,7 +3,6 @@ import nextPlugin from '@next/eslint-plugin-next';
 import jestDom from 'eslint-plugin-jest-dom';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import playwright from 'eslint-plugin-playwright';
-import storybook from 'eslint-plugin-storybook';
 
 export default antfu(
   {
@@ -49,8 +48,6 @@ export default antfu(
     files: ['**/*.spec.ts', '**/*.e2e.ts'],
     ...playwright.configs['flat/recommended'],
   },
-  // --- Storybook Rules ---
-  ...storybook.configs['flat/recommended'],
   // --- Custom Rule Overrides ---
   {
     rules: {
@@ -64,8 +61,9 @@ export default antfu(
       'style/jsx-quotes': 'off', // JSX code
       'no-console': 'off', // Allow console logs
       'style/multiline-ternary': 'off',
-      'perfectionist/sort-imports': 'on', // Enable sorting of imports
-      'perfectionist/sort-named-imports': 'on', // Enable sorting of named imports
+      // 'style/indent': 'off', // Disable indent rule
+      'perfectionist/sort-imports': 'off', // Enable sorting of imports
+      'perfectionist/sort-named-imports': 'off', // Enable sorting of named imports
       'perfectionist/sort-exports': 'off', // Disable sorting of exports
       'style/jsx-closing-tag-location': 'off', // Disable closing tag location rule
       'style/no-trailing-spaces': 'off', // Disable trailing spaces rule

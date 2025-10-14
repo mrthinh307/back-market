@@ -1,5 +1,5 @@
-import { useLocale } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 export function useRouterRedirect() {
   const router = useRouter();
@@ -10,7 +10,7 @@ export function useRouterRedirect() {
   };
 
   const redirectToLogin = () => {
-    router.push(`/${locale}/login`);
+    router.push(`/${locale}/email`);
   };
 
   return { redirectToHome, redirectToLogin };
