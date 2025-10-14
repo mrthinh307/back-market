@@ -9,6 +9,7 @@ import { ProductVariantModule } from './product-variant/product-variant.module';
 import { ProductModule } from './product/product.module';
 import { RedisCacheModule } from './cache/redis-cache.module';
 import { CartModule } from './cart/cart.module';
+import { HealthController } from './common/health.controller';
 
 @Module({
   imports: [
@@ -24,5 +25,6 @@ import { CartModule } from './cart/cart.module';
     ProductVariantModule,
     CartModule
   ],
+  controllers: [HealthController],
 })
 export class AppModule {}
