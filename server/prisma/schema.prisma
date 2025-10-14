@@ -175,6 +175,8 @@ model ProductVariant {
   reviews             Review[]
   ProductVariantImage ProductVariantImage[]
 
+  @@index([productId])
+  @@index([stock])
   @@map("product_variants")
 }
 
@@ -189,6 +191,7 @@ model ProductVariantAttribute {
 
   @@unique([variantId, attributeId])
   @@index([variantId])
+  @@index([attributeId, valueId])
   @@map("product_variant_attributes")
 }
 
@@ -228,6 +231,8 @@ model Review {
   variant   ProductVariant? @relation(fields: [variantId], references: [id], onDelete: Cascade)
   user      UserAuth?       @relation(fields: [userId], references: [id])
 
+  @@index([variantId])
+  @@index([productId])
   @@map("reviews")
 }
 

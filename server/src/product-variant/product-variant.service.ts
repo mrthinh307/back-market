@@ -90,23 +90,53 @@ export class ProductVariantService {
   ): Promise<ProductVariantDetailDto> {
     const variant = await this.prisma.productVariant.findUnique({
       where: { id: variantId },
-      include: {
+      select: {
+        id: true,
+        sku: true,
+        title: true,
+        stock: true,
+        price: true,
         product: {
-          include: {
-            brand: true,
-            category: true,
+          select: {
+            id: true,
+            name: true,
+            brand: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+            category: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
           },
         },
         attributes: {
-          include: {
-            attribute: true,
-            value: true,
+          select: {
+            attributeId: true,
+            valueId: true,
+            attribute: {
+              select: {
+                id: true,
+                code: true,
+                name: true,
+              },
+            },
+            value: {
+              select: {
+                id: true,
+                value: true,
+                displayOrder: true,
+              },
+            },
           },
           orderBy: {
             attributeId: 'asc',
           },
         },
-        // Get review stats in a single aggregation
         _count: {
           select: {
             reviews: true,
@@ -117,10 +147,16 @@ export class ProductVariantService {
             rating: true,
           },
         },
-        // Include images through junction table
         ProductVariantImage: {
-          include: {
-            image: true,
+          select: {
+            image: {
+              select: {
+                id: true,
+                imageUrl: true,
+                altText: true,
+                displayOrder: true,
+              },
+            },
           },
           orderBy: {
             image: {
