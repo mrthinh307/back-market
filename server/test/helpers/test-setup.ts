@@ -56,6 +56,9 @@ export class TestSetup {
     this.instances.set(port, { app, prisma });
 
     pactum.request.setBaseUrl(`http://localhost:${port}`);
+    
+    // Set default timeout for all requests (important for CI environment)
+    pactum.request.setDefaultTimeout(30000); // 30 seconds
 
     // Wait for server to be fully ready (especially important in CI)
     await this.waitForServer(port);

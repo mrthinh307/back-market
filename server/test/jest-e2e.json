@@ -8,5 +8,5 @@
   },
   "maxWorkers": 1,
   "forceExit": true,
-  "testTimeout": 60000
+  "testTimeout": 30000
 }
