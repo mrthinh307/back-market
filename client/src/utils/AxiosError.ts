@@ -3,13 +3,13 @@ import type { AxiosError } from 'axios';
 export const parseAxiosError = (
   err: unknown,
 ): {
-  status?: number;
+  statusCode?: number;
   message: string;
 } => {
   if (err && (err as AxiosError).isAxiosError) {
     const axiosErr = err as AxiosError<any>;
     return {
-      status: axiosErr.response?.status,
+      statusCode: axiosErr.response?.status,
       message: axiosErr.response?.data?.message || 'Unknown error occurred',
     };
   }

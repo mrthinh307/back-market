@@ -5,7 +5,5 @@ export async function getProductVariantServer(id: string) {
     next: { revalidate: 600 },
   });
 
-  if (res.status === 404) return null;
-  if (!res.ok) throw new Error('Failed to fetch product variant');
   return res.json();
 }
