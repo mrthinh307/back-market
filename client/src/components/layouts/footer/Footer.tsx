@@ -9,6 +9,7 @@ import {
   Twitter,
 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import Input from '@/components/form/FormInput';
@@ -25,7 +26,7 @@ const Footer: React.FC = () => {
         { label: 'About us', href: '/about' },
         { label: 'Press', href: '/press' },
         { label: 'Our impact', href: '/impact' },
-        { label: "We're hiring!", href: '/careers' },
+        { label: `We're hiring!`, href: '/careers' },
         { label: 'Trustpilot', href: '/trustpilot' },
       ],
     },
@@ -102,10 +103,10 @@ const Footer: React.FC = () => {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
           <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6'>
             <div className='flex-1 lg:max-w-md'>
-              <h3 className='text-xl lg:text-2xl font-semibold text-foreground mb-2'>
+              <h3 className='text-xl lg:text-2xl font-semibold mb-2'>
                 Get £15 off your first order.
               </h3>
-              <p className='text-muted-foreground'>
+              <p className='text-muted'>
                 On orders of £250 or more, when you sign up for emails.
               </p>
             </div>
@@ -130,8 +131,9 @@ const Footer: React.FC = () => {
               </form>
 
               <button
+                type='button'
                 onClick={() => setShowLearnMore(!showLearnMore)}
-                className='flex items-center text-sm font-medium underline text-foreground hover:text-muted-foreground transition-colors mt-3 md:mt-0'
+                className='flex items-center text-sm font-medium underline cursor-pointer transition-colors mt-3 md:mt-0'
               >
                 <ChevronDown
                   className={`h-4 w-4 mr-1 transition-transform ${showLearnMore ? 'rotate-180' : ''}`}
@@ -140,7 +142,7 @@ const Footer: React.FC = () => {
               </button>
 
               {showLearnMore && (
-                <div className='mt-3 p-4 bg-muted-secondary rounded-lg text-sm text-muted-foreground'>
+                <div className='mt-3 p-4 bg-muted-secondary rounded-sm text-sm'>
                   <p>
                     Terms and conditions apply. Discount valid for new
                     subscribers only. Minimum order value £250. Cannot be
@@ -163,15 +165,15 @@ const Footer: React.FC = () => {
                 ${index === 4 ? 'lg:col-span-2 md:col-span-2' : 'lg:col-span-1 md:col-span-1'}
               `}
             >
-              <h4 className='text-lg font-semibold text-foreground mb-4'>
+              <h4 className='text-lg font-semibold mb-2'>
                 {section.title}
               </h4>
-              <ul className='space-y-3'>
+              <ul className='space-y-2'>
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
                     <a
                       href={link.href}
-                      className='text-sm text-muted-foreground hover:text-foreground transition-colors block'
+                      className='text-sm text-muted hover:text-foreground transition-colors block'
                     >
                       {link.label}
                     </a>
@@ -181,44 +183,41 @@ const Footer: React.FC = () => {
 
               {/* Social Media Icons - Über uns section */}
               {index === 0 && (
-                <div className='flex gap-3 mt-6'>
-                  <a
+                <div className='flex gap-2 mt-4'>
+                  <Link
                     href='#'
                     className='p-2 bg-muted rounded-full hover:bg-muted-foreground transition-colors w-fit'
                     aria-label='Twitter'
                   >
                     <Twitter className='h-4 w-4 text-background-secondary' />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href='#'
                     className='p-2 bg-muted rounded-full hover:bg-muted-foreground transition-colors w-fit'
                     aria-label='LinkedIn'
                   >
                     <Linkedin className='h-4 w-4 text-background-secondary' />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href='#'
                     className='p-2 bg-muted rounded-full hover:bg-muted-foreground transition-colors w-fit'
                     aria-label='Facebook'
                   >
                     <Facebook className='h-4 w-4 text-background-secondary' />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href='#'
                     className='p-2 bg-muted rounded-full hover:bg-muted-foreground transition-colors w-fit'
                     aria-label='Instagram'
                   >
                     <Instagram className='h-4 w-4 text-background-secondary' />
-                  </a>
+                  </Link>
                 </div>
               )}
 
               {/* Payment Methods - Services section */}
               {index === 2 && (
                 <div className='mt-6'>
-                  <p className='text-sm font-medium text-foreground mb-3'>
-                    Payments 100% secured
-                  </p>
                   <div className='flex flex-wrap gap-2 max-w-xs'>
                     {paymentMethods.map((payment, idx) => (
                       <div
@@ -228,9 +227,10 @@ const Footer: React.FC = () => {
                         <Image
                           src={payment.src}
                           alt={payment.alt}
-                          height={20}
-                          width={32}
-                          className='object-contain'
+                          height={0}
+                          width={0}
+                          sizes='100vw'
+                          className='object-contain w-8 h-auto'
                         />
                       </div>
                     ))}
@@ -245,29 +245,29 @@ const Footer: React.FC = () => {
         <div className='mt-12 pt-8 border-t border-border'>
           <div className='flex flex-col md:flex-row md:items-center md:justify-between gap-6'>
             <div className='text-center md:text-left'>
-              <p className='text-sm text-muted-foreground font-medium'>
+              <p className='text-sm text-muted font-medium'>
                 © 2025 Back Market
               </p>
             </div>
 
             {/* App Download Links */}
             <div className='flex justify-center md:justify-end gap-4'>
-              <a href='#' className='block hover:opacity-80 transition-opacity'>
+              <Link href='#' className='block hover:opacity-80 transition-opacity'>
                 <Image
                   src='/assets/images/GooglePlay.svg'
                   alt='Download on Google Play'
                   height={40}
                   width={135}
                 />
-              </a>
-              <a href='#' className='block hover:opacity-80 transition-opacity'>
+              </Link>
+              <Link href='#' className='block hover:opacity-80 transition-opacity'>
                 <Image
                   src='/assets/images/apple-store.svg'
                   alt='Download on App Store'
                   height={40}
                   width={120}
                 />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

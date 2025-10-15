@@ -35,7 +35,10 @@ function CartPage() {
     }
   }, [cartData]);
 
-  const handleRemoveItem = async (productVariantId: string, productName: string) => {
+  const handleRemoveItem = async (
+    productVariantId: string,
+    productName: string,
+  ) => {
     try {
       await removeFromCartMutation.mutateAsync(productVariantId);
       toast.success('Item removed from cart successfully!', {
@@ -44,7 +47,9 @@ function CartPage() {
       });
     } catch (error: any) {
       const errorMessage =
-        error.response?.data?.message || error.message || 'Failed to remove item';
+        error.response?.data?.message ||
+        error.message ||
+        'Failed to remove item';
       toast.error(errorMessage, {
         description: productName,
         ...errorToastProps,
@@ -82,13 +87,17 @@ function CartPage() {
   if (isFetching && !cartData) return <LoadingPage />;
 
   return (
-    <div className='bg-sub-background flex flex-col lg:flex-row h-[calc(100vh-4rem)] overflow-y-auto'>
+    <div className='bg-background flex flex-col lg:flex-row h-[calc(100vh-4rem)] overflow-y-auto'>
       <YourCartSection
         cartItems={cartItems}
         onRemoveItem={handleRemoveItem}
         isRemoving={removeFromCartMutation.isPending}
       />
-      <CartSummarySection cartItems={cartItems} subtotal={cartData.totalPrice} isRemoving={removeFromCartMutation.isPending} />
+      <CartSummarySection
+        cartItems={cartItems}
+        subtotal={cartData.totalPrice}
+        isRemoving={removeFromCartMutation.isPending}
+      />
     </div>
   );
 }
