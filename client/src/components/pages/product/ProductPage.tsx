@@ -36,8 +36,6 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
     totalSections: 0,
     progressPercentage: 0,
   });
-  let breadcrumbItems: { name: string; href?: string }[] = [];
-  const { items: displayBreadcrumbItems } = useBreadcrumb(breadcrumbItems);
 
   const handleProgressChange = useCallback(
     (
@@ -58,20 +56,43 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
     queryFn: () => getProductVariantById(productVariantId),
   });
 
+  const productVariant = data as ProductVariantDetail;
+
+  // Compute breadcrumb items from productVariant data using useMemo
+  const breadcrumbItems = useMemo(() => {
+    if (!productVariant) {
+      return [{ name: 'Homepage', href: `/${locale}` }];
+    }
+    return [
+      { name: 'Homepage', href: `/${locale}` },
+      {
+        name: productVariant.product.category?.name || 'Category',
+        href: `/${locale}/category`,
+      },
+      {
+        name: productVariant.product.brand?.name || 'Brand',
+        href: `/${locale}/brand`,
+      },
+      { name: productVariant.title },
+    ];
+  }, [productVariant, locale]);
+
+  const { items: displayBreadcrumbItems } = useBreadcrumb(breadcrumbItems);
+
   if (isLoading) {
     return <LoadingPage />;
   }
 
-  const productVariant = data as ProductVariantDetail;
-  // Handle error or no data
+  // Handle error or no dataii
   if (error || !productVariant) {
-    console.log('Error fetching product variant:', error);
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('Error fetching product variant:', error);
+    }
     return (
       <GlobalErrorComponent
         statusCode='500'
         title='This product is taking a nap :))'
         message={
-          error?.message ||
           'If you’re here, it might be because this product isn’t available right now. Please try again later.'
         }
         buttonText='Try again'
@@ -79,19 +100,6 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
       />
     );
   }
-
-  breadcrumbItems = [
-    { name: 'Homepage', href: `/${locale}` },
-    {
-      name: productVariant.product.category?.name || 'Category',
-      href: `/${locale}/category`,
-    },
-    {
-      name: productVariant.product.brand?.name || 'Brand',
-      href: `/${locale}/brand`,
-    },
-    { name: productVariant.title },
-  ];
 
   return (
     <div className='content-center flex-col'>

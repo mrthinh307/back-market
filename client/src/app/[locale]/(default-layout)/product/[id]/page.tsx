@@ -22,17 +22,19 @@ export async function generateMetadata({ params }: ProductPageParams) {
   }
 
   const pv = await getProductVariantServer(id);
-  const title = pv?.title || 'Product not found';
+  if (!pv) {
+    notFound();
+  }
 
   return {
-    title: `${title} | Back Market`,
-    description: `Discover our refurbished products at unbeatable prices. Shop now and save big on quality electronics! Buy ${title} today!`,
+    title: `${pv.title} | Back Market`,
+    description: `Discover our refurbished products at unbeatable prices. Shop now and save big on quality electronics! Buy ${pv.title} today!`,
   };
 }
 
 // 🏗️ Server Component
 export default async function Product({ params }: ProductPageParams) {
-  const { id } = await params;
+  const { id } = await params;  
 
   if (!isValidUUID(id)) {
     notFound();
@@ -40,12 +42,12 @@ export default async function Product({ params }: ProductPageParams) {
 
   const queryClient = new QueryClient();
 
-  const data = await queryClient.fetchQuery({
+  const pv = await queryClient.fetchQuery({
     queryKey: USE_QUERY_KEY.PRODUCT_VARIANT(id),
     queryFn: () => getProductVariantServer(id),
   });
 
-  if (data?.statusCode === 404 || !data) {
+  if (!pv) {
     notFound();
   }
 
