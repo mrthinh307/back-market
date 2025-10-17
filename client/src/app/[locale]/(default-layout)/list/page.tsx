@@ -20,9 +20,11 @@ type ProductListPageParams = {
 };
 
 // Helper function to get metadata from search params
-async function getMetadataFromParams(searchParams: ProductListPageParams['searchParams']) {
+async function getMetadataFromParams(
+  searchParams: ProductListPageParams['searchParams'],
+) {
   const { categoryId, brandId, isExcludedBrand } = await searchParams;
-  
+
   if (!categoryId) {
     return null;
   }
@@ -35,9 +37,11 @@ async function getMetadataFromParams(searchParams: ProductListPageParams['search
 }
 
 // 📝 SEO metadata
-export async function generateMetadata({ searchParams }: ProductListPageParams) {
+export async function generateMetadata({
+  searchParams,
+}: ProductListPageParams) {
   const metadata = await getMetadataFromParams(searchParams);
-  
+
   if (!metadata) {
     return {
       title: 'Back Market',
@@ -64,41 +68,46 @@ export default async function ProductList({
 
   // Get category metadata (reusing the same logic)
   const metadata = await getMetadataFromParams(searchParams);
-  
+
   // This should never happen since we already validated categoryId above
   if (!metadata) {
     notFound();
   }
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 5 * 60 * 1000,
+        gcTime: 10 * 60 * 1000,
+      },
+    },
+  });
 
-  try {
-    // Prepare query key and parameters
-    const queryKey = USE_QUERY_KEY.PRODUCTS(
-      categoryId,
-      brandId,
-      isExcludedBrand === 'true',
-    );
+  const queryKey = USE_QUERY_KEY.PRODUCTS(
+    categoryId,
+    brandId,
+    isExcludedBrand === 'true',
+  );
 
-    await queryClient.fetchQuery({
-      queryKey,
-      queryFn: () =>
-        getProductListServer({
-          categoryId,
-          brandId,
-          isExcludedBrand: isExcludedBrand === 'true',
-        }),
-    });
+  const productList = await queryClient.fetchQuery({
+    queryKey,
+    queryFn: () =>
+      getProductListServer({
+        categoryId,
+        brandId,
+        isExcludedBrand: isExcludedBrand === 'true',
+      }),
+  });
 
-    return (
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <main>
-          <ProductListPage metadata={metadata} />
-        </main>
-      </HydrationBoundary>
-    );
-  } catch (error) {
-    console.error('Error fetching product list:', error);
-    throw error;
+  if (!productList) {
+    notFound();
   }
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <main>
+        <ProductListPage metadata={metadata} />
+      </main>
+    </HydrationBoundary>
+  );
 }

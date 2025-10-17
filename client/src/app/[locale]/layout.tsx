@@ -13,6 +13,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import ReactQueryProvider from '@/components/providers/ReactQueryProvider';
+import { ServerHealthProvider } from '@/components/providers/ServerHealthProvider';
 
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>;
@@ -58,7 +59,9 @@ export default async function RootLayout(props: {
               enableSystem
               disableTransitionOnChange
             >
-              <AuthProvider>{props.children}</AuthProvider>
+              <ServerHealthProvider>
+                <AuthProvider>{props.children}</AuthProvider>
+              </ServerHealthProvider>
             </ThemeProvider>
           </ReactQueryProvider>
         </NextIntlClientProvider>

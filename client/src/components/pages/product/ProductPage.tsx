@@ -8,8 +8,8 @@ import { getProductVariantById } from '@/api/product-variant.api';
 import { useBreadcrumb } from '@/hooks/useBreadcumb';
 import { USE_QUERY_KEY } from '@/constants/use-query-key';
 import BreadcumbCustom from '@/components/ui/BreadcumbCustom';
-import ErrorState from '@/components/ui/ErrorState';
 import GalleryCarousel from '../../carousels/GalleryCarousel';
+import GlobalErrorComponent from '../GlobalErrorComponent';
 import LoadingPage from '../LoadingPage';
 import {
   ProductInfo,
@@ -29,6 +29,7 @@ import { replaceBulletWithDash } from '@/utils/string';
 const ProductPage: React.FC<{ productVariantId: string }> = ({
   productVariantId,
 }) => {
+  const locale = useLocale();
   // Progress tracking state
   const [progressData, setProgressData] = useState({
     currentSection: 0,
@@ -53,33 +54,64 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: USE_QUERY_KEY.PRODUCT_VARIANT(productVariantId),
     queryFn: () => getProductVariantById(productVariantId),
+
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: true,
+    refetchOnMount: false,
+
+    retry: 1,
+    retryDelay: 1000,
+
+    placeholderData: (previouseData) => previouseData,
   });
+
+  const productVariant = data as ProductVariantDetail;
+
+  // Compute breadcrumb items from productVariant data using useMemo
+  const breadcrumbItems = useMemo(() => {
+    if (!productVariant) {
+      return [{ name: 'Homepage', href: `/${locale}` }];
+    }
+    return [
+      { name: 'Homepage', href: `/${locale}` },
+      {
+        name: productVariant.product.category?.name || 'Category',
+        href: `/${locale}/category`,
+      },
+      {
+        name: productVariant.product.brand?.name || 'Brand',
+        href: `/${locale}/brand`,
+      },
+      { name: productVariant.title },
+    ];
+  }, [productVariant, locale]);
+
+  const { items: displayBreadcrumbItems } = useBreadcrumb(breadcrumbItems);
 
   if (isLoading) {
     return <LoadingPage />;
   }
 
-  const productVariant = data as ProductVariantDetail;
-  // Handle error or no data
+  // Handle error or no dataii
   if (error || !productVariant) {
-    return <ErrorState refetch={refetch} />;
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('Error fetching product variant:', error);
+    }
+    return (
+      <GlobalErrorComponent
+        statusCode='500'
+        title='This product is taking a nap :))'
+        message={
+          'If you’re here, it might be because this product isn’t available right now. Please try again later.'
+        }
+        buttonText='Try again'
+        onButtonClick={() => refetch()}
+      />
+    );
   }
-
-  const locale = useLocale();
-  const breadcrumbItems = [
-    { name: 'Homepage', href: `/${locale}` },
-    {
-      name: productVariant.product.category?.name || 'Category',
-      href: `/${locale}/category`,
-    },
-    {
-      name: productVariant.product.brand?.name || 'Brand',
-      href: `/${locale}/brand`,
-    },
-    { name: productVariant.title },
-  ];
-
-  const { items: displayBreadcrumbItems } = useBreadcrumb(breadcrumbItems);
 
   return (
     <div className='content-center flex-col'>
@@ -138,12 +170,7 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
 
       <div className='bg-background w-full'>
         <div className='container mt-14'>
-          {productVariant && (
-            <ProductBundle
-              mainProduct={productVariant}
-
-            />
-          )}
+          {productVariant && <ProductBundle mainProduct={productVariant} />}
 
           <div className='mb-12 lg:mb-16'>
             <SlideCarousel

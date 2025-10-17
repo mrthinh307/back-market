@@ -6,64 +6,68 @@ import {
 } from '@tanstack/react-query';
 import ProductPage from '@/components/pages/product/ProductPage';
 import { isValidUUID } from '@/utils/string';
-import { getProductVariantServer } from '@/libs/server-fetchers/product-variant';
 import { USE_QUERY_KEY } from '@/constants/use-query-key';
+import { cache } from 'react';
+import { getProductVariantServer } from '@/libs/server-fetchers/product-variant';
 
 type ProductPageParams = {
   params: Promise<{ locale: string; id: string }>;
 };
 
-// 📝 SEO metadata
+const getProductVariantCached = cache(async (id: string) => {
+  return getProductVariantServer(id);
+});
+
 export async function generateMetadata({ params }: ProductPageParams) {
   const { id } = await params;
 
+  // Validate that the ID is a valid UUID
   if (!isValidUUID(id)) {
-    notFound(); // ❌ UUID invalid → 404
+    notFound();
   }
 
-  try {
-    const pv = await getProductVariantServer(id);
-    if (!pv) notFound(); // ❌ Product not found → 404
+  const pv = await getProductVariantCached(id);
 
-    return {
-      title: `${pv.title} | Back Market`,
-      description: `Discover our refurbished products at unbeatable prices. Shop now and save big on quality electronics! Buy ${pv.title} today!`,
-    };
-  } catch (error) {
-    // ❌ Server bugs (API down, JSON parse fail, v.v.)
-    throw error; 
+  if (!pv) {
+    notFound();
   }
+
+  return {
+    title: `${pv.title} | Back Market`,
+    description: `Discover our refurbished products at unbeatable prices. Shop now and save big on quality electronics! Buy ${pv.title} today!`,
+  };
 }
 
-// 🏗️ Server Component
 export default async function Product({ params }: ProductPageParams) {
   const { id } = await params;
 
   if (!isValidUUID(id)) {
-    notFound(); // ❌ UUID invalid → 404
+    notFound();
   }
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 5 * 60 * 1000,
+        gcTime: 10 * 60 * 1000,
+      },
+    },
+  });
 
-  try {
-    const data = await queryClient.fetchQuery({
-      queryKey: USE_QUERY_KEY.PRODUCT_VARIANT(id),
-      queryFn: () => getProductVariantServer(id),
-    });
+  const pv = await queryClient.fetchQuery({
+    queryKey: USE_QUERY_KEY.PRODUCT_VARIANT(id),
+    queryFn: () => getProductVariantCached(id),
+  });
 
-    if (!data?.id) {
-      notFound(); // ❌ Product not found → 404
-    }
-
-    return (
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <main className="bg-background-secondary dark:bg-background">
-          <ProductPage productVariantId={id} />
-        </main>
-      </HydrationBoundary>
-    );
-  } catch (error) {
-    console.error('Error fetching product variant:', error);
-    throw error;
+  if (!pv) {
+    notFound();
   }
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <main className='bg-background-secondary dark:bg-background'>
+        <ProductPage productVariantId={id} />
+      </main>
+    </HydrationBoundary>
+  );
 }

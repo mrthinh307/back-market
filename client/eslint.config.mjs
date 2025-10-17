@@ -52,25 +52,30 @@ export default antfu(
   {
     rules: {
       'antfu/no-top-level-await': 'off', // Allow top-level await
+      'curly': 'off', // Disable curly rule
       'style/brace-style': ['error', '1tbs'], // Use the default brace style
-      'ts/consistent-type-definitions': ['error', 'type'], // Use `type` instead of `interface`
       'react/prefer-destructuring-assignment': 'off', // Vscode doesn't support automatically destructuring, it's a pain to add a new variable
       'node/prefer-global/process': 'off', // Allow using `process.env`
       'test/padding-around-all': 'error', // Add padding in test files
       'test/prefer-lowercase-title': 'off', // Allow using uppercase titles in test titles
       'style/jsx-quotes': 'off', // JSX code
+      'ts/consistent-type-definitions': 'off', // Disable consistent type definitions rule
+      'ts/consistent-type-imports': 'off', // Disable consistent type imports rule
       'no-console': 'off', // Allow console logs
       'style/multiline-ternary': 'off',
+      'style/comma-dangle': 'off', // Disable comma dangle rule
       // 'style/indent': 'off', // Disable indent rule
-      'perfectionist/sort-imports': 'off', // Enable sorting of imports
-      'perfectionist/sort-named-imports': 'off', // Enable sorting of named imports
-      'perfectionist/sort-exports': 'off', // Disable sorting of exports
+      'perfectionist/sort-imports': 'on', // Enable sorting of imports
+      'perfectionist/sort-named-imports': 'on', // Enable sorting of named imports
+      'perfectionist/sort-exports': 'on', // Enable sorting of exports
       'style/jsx-closing-tag-location': 'off', // Disable closing tag location rule
       'style/no-trailing-spaces': 'off', // Disable trailing spaces rule
       'style/arrow-parens': 'off', // Disable arrow parens rule
+      'style/eol-last': 'off', // Disable newline at end of file rule
       'prefer-arrow-callback': 'off', // Disable prefer arrow callback rule
       'style/jsx-curly-newline': 'off', // Disable JSX curly newline rule
       'react-hooks-extra/no-direct-set-state-in-use-effect': 'off', // Disable direct set state in useEffect
+      'react/no-array-index-key': 'off', // Disable array index key rule
       'style/operator-linebreak': 'off', // Disable operator linebreak rule
       'style/jsx-one-expression-per-line': 'off', // Disable one expression per line in JSX
     },

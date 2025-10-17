@@ -13,7 +13,7 @@ import {
   MobileMenu,
 } from './components';
 
-const Header: React.FC<{ avatarUrl: string | null }> = ({ avatarUrl }) => {
+const Header: React.FC<{ avatarUrl?: string | null }> = ({ avatarUrl }) => {
   const t = useTranslations('Header');
   const pathname = usePathname();
   const isProductPage = pathname.includes('/product/');

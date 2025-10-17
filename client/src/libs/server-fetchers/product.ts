@@ -26,6 +26,6 @@ export async function getProductListServer(params: GetProductListParams) {
   });
 
   if (res.status === 404) return null;
-  if (!res.ok) throw new Error('Failed to fetch product list');
+  if (!res.ok) throw new Error('If you\'re here, it might be because the product list isn\'t available right now. Please try again later!');
   return res.json();
 }
