@@ -54,6 +54,18 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: USE_QUERY_KEY.PRODUCT_VARIANT(productVariantId),
     queryFn: () => getProductVariantById(productVariantId),
+
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: true,
+    refetchOnMount: false,
+
+    retry: 1,
+    retryDelay: 1000,
+
+    placeholderData: (previouseData) => previouseData,
   });
 
   const productVariant = data as ProductVariantDetail;

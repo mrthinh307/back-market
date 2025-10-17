@@ -53,6 +53,17 @@ function ProductListPage({ metadata }: ProductListPageProps) {
         isExcludedBrand,
       }),
     enabled: !!categoryId, // Only fetch if categoryId exists
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: true,
+    refetchOnMount: false,
+
+    retry: 1,
+    retryDelay: 1000,
+
+    placeholderData: (previouseData) => previouseData,
   });
 
   // Show loading state
@@ -106,9 +117,7 @@ function ProductListPage({ metadata }: ProductListPageProps) {
             <h1 className='text-3xl xl:text-[56px] xl:leading-[68px] font-heading font-bold'>
               {metadata.pageTitle}
             </h1>
-            <p className='text-sm'>
-              {metadata.pageSubtitle}
-            </p>
+            <p className='text-sm'>{metadata.pageSubtitle}</p>
           </div>
         </div>
 
