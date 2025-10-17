@@ -171,12 +171,12 @@ const Footer: React.FC = () => {
               <ul className='space-y-2'>
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
-                    <a
+                    <Link
                       href={link.href}
                       className='text-sm text-muted hover:text-foreground transition-colors block'
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
