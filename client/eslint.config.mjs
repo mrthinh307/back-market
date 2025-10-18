@@ -65,9 +65,9 @@ export default antfu(
       'style/multiline-ternary': 'off',
       'style/comma-dangle': 'off', // Disable comma dangle rule
       // 'style/indent': 'off', // Disable indent rule
-      'perfectionist/sort-imports': 'off', // Enable sorting of imports
-      'perfectionist/sort-named-imports': 'off', // Enable sorting of named imports
-      'perfectionist/sort-exports': 'off', // Enable sorting of exports
+      'perfectionist/sort-imports': 'on', // Enable sorting of imports
+      'perfectionist/sort-named-imports': 'on', // Enable sorting of named imports
+      'perfectionist/sort-exports': 'on', // Enable sorting of exports
       'style/jsx-closing-tag-location': 'off', // Disable closing tag location rule
       'style/no-trailing-spaces': 'off', // Disable trailing spaces rule
       'style/arrow-parens': 'off', // Disable arrow parens rule
