@@ -1,0 +1,13 @@
+# Ignore vitest config during Vercel build
+vitest.config.mts
+
+# Ignore test files
+**/*.test.*
+**/*.spec.*
+tests/
+__tests__/
+
+# Ignore Playwright
+playwright.config.ts
+playwright-report/
+test-results/
