@@ -13,6 +13,7 @@ async function bootstrap() {
       transform: true, // Enable transformation of incoming data
     }),
   );
+  
   app.enableCors({
     origin: (origin, callback) => {
       if (!origin || origin.includes('localhost')) return callback(null, true);

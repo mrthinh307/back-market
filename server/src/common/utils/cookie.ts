@@ -1,10 +1,12 @@
 import { Response, CookieOptions } from 'express';
 
 export function getCookieOptions(): CookieOptions {
+  const isProd = process.env.NODE_ENV === 'production';
   return {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    secure: isProd,
+    sameSite: isProd ? 'none' : 'lax',
+    domain: isProd ? '.x10.mx' : undefined,
     path: '/',
   };
 }
@@ -14,7 +16,7 @@ export function setAuthCookies(
   tokens: { access_token: string; refresh_token: string },
 ) {
   const cookieOptions = getCookieOptions();
-  
+
   // Set both access_token and refresh_token in cookies
   res.cookie('access_token', tokens.access_token, cookieOptions);
   res.cookie('refresh_token', tokens.refresh_token, cookieOptions);
