@@ -26,3 +26,15 @@ export const getI18nPath = (url: string, locale: string) => {
 
   return `/${locale}${url}`;
 };
+
+export async function serverFetch(url: string, options: RequestInit = {}) {
+  const defaultOptions: RequestInit = {
+    credentials: 'include', 
+    headers: {
+      'Content-Type': 'application/json',
+      ...(options.headers || {}),
+    },
+  };
+  return fetch(url, { ...defaultOptions, ...options });
+}
+
