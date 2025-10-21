@@ -17,7 +17,7 @@ import { AuthService } from './auth.service';
 import { LoginDto, SignupDto } from './dto';
 import { OAuthUserInfo, RequestWithCookies } from './auth.types';
 import { GoogleOAuthGuard, FacebookOAuthGuard } from './guard';
-import { setAuthCookies, getRefreshTokenFromCookies } from '../common/utils/cookie';
+import { setAuthCookies, getRefreshTokenFromCookies, clearAuthCookies } from '../common/utils/cookie';
 
 @Controller('auth')
 export class AuthController {
@@ -133,8 +133,8 @@ export class AuthController {
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
     // Clear both access_token and refresh_token cookies
-    res.clearCookie('access_token');
-    res.clearCookie('refresh_token');
+    clearAuthCookies(res);
+    
     return {
       message: 'Logged out successfully',
     };

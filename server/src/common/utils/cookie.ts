@@ -5,8 +5,8 @@ export function getCookieOptions(): CookieOptions {
   return {
     httpOnly: true,
     secure: isProd,
-    sameSite: isProd ? 'none' : 'lax',
-    domain: isProd ? '.x10.mx' : undefined,
+    sameSite: 'lax',
+    domain: isProd ? process.env.DOMAIN_NAME || 'mrthinh.site' : undefined,
     path: '/',
   };
 }
@@ -25,6 +25,13 @@ export function setAuthCookies(
 export function getAccessTokenFromCookies(req: any): string | null {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return req.cookies?.access_token || null;
+}
+
+export function clearAuthCookies(res: Response) {
+  const cookieOptions = getCookieOptions();
+  
+  res.clearCookie('access_token', cookieOptions);
+  res.clearCookie('refresh_token', cookieOptions);
 }
 
 export function getRefreshTokenFromCookies(req: any): string | null {
