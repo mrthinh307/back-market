@@ -17,6 +17,7 @@ export const USE_QUERY_KEY = {
 
   // User related queries
   USER_PROFILE: (userId: string) => ['user-profile', userId],
+  USER_ADDRESS: () => ['user-address'],
 
   // Auth related queries
   AUTH_USER: () => ['auth-user'],

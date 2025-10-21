@@ -49,7 +49,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
         </div>
 
         {/* Right Side Actions */}
-        <RightSideActions />
+        <RightSideActions avatarUrl={avatarUrl} />
       </div>
       {/* Mobile Search - Row 2 */}
       <div className='md:hidden px-4'>

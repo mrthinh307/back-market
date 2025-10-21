@@ -20,6 +20,8 @@ async function bootstrap() {
 
       if (origin.endsWith('.vercel.app')) return callback(null, true);
 
+      if (origin.endsWith(process.env.DOMAIN_NAME || 'mrthinh.site')) return callback(null, true);
+
       return callback(new Error('Not allowed by CORS'));
     },
     credentials: true,
