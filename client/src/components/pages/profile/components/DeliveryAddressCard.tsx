@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProfileCardContainer from './ProfileCardContainer';
 import DeliveryAddressDialog, { DeliveryAddressData } from './DeliveryAddressDialog';
 
@@ -12,6 +12,11 @@ interface DeliveryAddressCardProps {
 function DeliveryAddressCard({ deliveryInfo, onAddressUpdate }: DeliveryAddressCardProps) {
   const [showDeliveryDialog, setShowDeliveryDialog] = useState(false);
   const [deliveryData, setDeliveryData] = useState<DeliveryAddressData | null>(deliveryInfo);
+
+  // Sync deliveryData state with deliveryInfo prop when it changes
+  useEffect(() => {
+    setDeliveryData(deliveryInfo);
+  }, [deliveryInfo]);
 
   const handleDeliveryAddressSave = (data: DeliveryAddressData) => {
     setDeliveryData(data);
