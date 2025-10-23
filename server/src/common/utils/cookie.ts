@@ -5,8 +5,8 @@ export function getCookieOptions(): CookieOptions {
   return {
     httpOnly: true,
     secure: isProd,
-    sameSite: 'lax',
-    domain: isProd ? process.env.DOMAIN_NAME || 'mrthinh.site' : undefined,
+    sameSite: isProd ? 'none' : 'lax',
+    domain: isProd ? '.mrthinh.site' : undefined,
     path: '/',
   };
 }
