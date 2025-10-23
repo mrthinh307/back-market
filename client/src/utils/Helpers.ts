@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import { routing } from '@/libs/i18n/I18nRouting';
 
 export const getBaseUrl = () => {
@@ -27,14 +28,34 @@ export const getI18nPath = (url: string, locale: string) => {
   return `/${locale}${url}`;
 };
 
-export async function serverFetch(url: string, options: RequestInit = {}) {
-  const defaultOptions: RequestInit = {
-    credentials: 'include', 
-    headers: {
-      'Content-Type': 'application/json',
-      ...(options.headers || {}),
-    },
-  };
-  return fetch(url, { ...defaultOptions, ...options });
-}
+/**
+ * Server-side wrapper for serverFetch that automatically forwards cookies from Next.js request.
+ * Use this in server components/actions when making authenticated requests to the backend.
+ *
+ * @param url - The URL to fetch
+ * @param options - Fetch options (headers, cache, etc.)
+ * @returns Promise<Response>
+ *
+ * @example
+ * ```ts
+ * const res = await serverFetchWithCookies(`${Env.NEXT_PUBLIC_API_URL}/users/me`, {
+ *   cache: 'no-store',
+ * });
+ * ```
+ */
+export async function serverFetchWithCookies(
+  url: string,
+  options: RequestInit = {},
+) {
+  const cookieStore = await cookies();
+  const cookieHeader = cookieStore.toString();
 
+  return fetch(url, {
+    credentials: 'include',
+    headers: {
+      ...(options.headers || {}),
+      ...(cookieHeader ? { Cookie: cookieHeader } : {}),
+    },
+    ...options,
+  });
+}
