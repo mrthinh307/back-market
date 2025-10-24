@@ -1,22 +1,24 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ProfileCardContainer from './ProfileCardContainer';
-import DeliveryAddressDialog, { DeliveryAddressData } from './DeliveryAddressDialog';
+import DeliveryAddressDialog, {
+  DeliveryAddressData,
+} from './DeliveryAddressDialog';
 
 interface DeliveryAddressCardProps {
   deliveryInfo: DeliveryAddressData | null;
   onAddressUpdate?: (data: DeliveryAddressData) => void;
 }
 
-function DeliveryAddressCard({ deliveryInfo, onAddressUpdate }: DeliveryAddressCardProps) {
+function DeliveryAddressCard({
+  deliveryInfo,
+  onAddressUpdate,
+}: DeliveryAddressCardProps) {
   const [showDeliveryDialog, setShowDeliveryDialog] = useState(false);
-  const [deliveryData, setDeliveryData] = useState<DeliveryAddressData | null>(deliveryInfo);
-
-  // Sync deliveryData state with deliveryInfo prop when it changes
-  useEffect(() => {
-    setDeliveryData(deliveryInfo);
-  }, [deliveryInfo]);
+  const [deliveryData, setDeliveryData] = useState<DeliveryAddressData | null>(
+    deliveryInfo,
+  );
 
   const handleDeliveryAddressSave = (data: DeliveryAddressData) => {
     setDeliveryData(data);
@@ -47,9 +49,7 @@ function DeliveryAddressCard({ deliveryInfo, onAddressUpdate }: DeliveryAddressC
             {formatDeliveryAddress(deliveryData)}
           </div>
         ) : (
-          <div className='text-muted'>
-            There is no address registered yet.
-          </div>
+          <div className='text-muted'>There is no address registered yet.</div>
         )}
       </ProfileCardContainer>
 
@@ -58,14 +58,16 @@ function DeliveryAddressCard({ deliveryInfo, onAddressUpdate }: DeliveryAddressC
         isOpen={showDeliveryDialog}
         onClose={() => setShowDeliveryDialog(false)}
         onSave={handleDeliveryAddressSave}
-        initialData={deliveryData || {
-          fullName: '',
-          phone: '',
-          city: '',
-          district: '',
-          ward: '',
-          addressLine: '',
-        }}
+        initialData={
+          deliveryData || {
+            fullName: '',
+            phone: '',
+            city: '',
+            district: '',
+            ward: '',
+            addressLine: '',
+          }
+        }
       />
     </>
   );

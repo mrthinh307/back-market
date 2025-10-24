@@ -17,35 +17,64 @@ export interface City {
   Districts: District[];
 }
 
-
+// Global cache to avoid re-fetching data
+let cachedCities: City[] | null = null;
+let fetchPromise: Promise<City[]> | null = null;
 
 export const useVietnameseAddress = () => {
-  const [cities, setCities] = useState<City[]>([]);
+  const [cities, setCities] = useState<City[]>(cachedCities || []);
   const [districts, setDistricts] = useState<District[]>([]);
   const [wards, setWards] = useState<Ward[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!cachedCities);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(
-          'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json'
-        );
+    // If already cached, use it immediately
+    if (cachedCities) {
+      setCities(cachedCities);
+      setLoading(false);
+      return;
+    }
+
+    // If already fetching, wait for it
+    if (fetchPromise) {
+      fetchPromise
+        .then((data) => {
+          setCities(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setError(err instanceof Error ? err.message : 'Unknown error');
+          setLoading(false);
+        });
+      return;
+    }
+
+    // Start fetching
+    fetchPromise = fetch(
+      'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json'
+    )
+      .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch address data');
         }
-        const data: City[] = await response.json();
-        setCities(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
-      } finally {
-        setLoading(false);
-      }
-    };
+        return response.json();
+      })
+      .then((data: City[]) => {
+        cachedCities = data;
+        return data;
+      });
 
-    fetchData();
+    fetchPromise
+      .then((data) => {
+        setCities(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err instanceof Error ? err.message : 'Unknown error');
+        setLoading(false);
+        fetchPromise = null;
+      });
   }, []);
 
   const updateDistricts = (cityId: string) => {
@@ -59,16 +88,19 @@ export const useVietnameseAddress = () => {
     if (selectedCity) {
       setDistricts(selectedCity.Districts);
       setWards([]);
+      return selectedCity.Districts;
     }
+    return [];
   };
 
-  const updateWards = (districtId: string) => {
+  const updateWards = (districtId: string, districtsToSearch?: District[]) => {
     if (!districtId) {
       setWards([]);
       return;
     }
 
-    const selectedDistrict = districts.find(district => district.Id === districtId);
+    const searchDistricts = districtsToSearch || districts;
+    const selectedDistrict = searchDistricts.find(district => district.Id === districtId);
     if (selectedDistrict) {
       setWards(selectedDistrict.Wards);
     }
