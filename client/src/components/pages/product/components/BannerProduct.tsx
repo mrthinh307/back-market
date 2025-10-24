@@ -82,7 +82,12 @@ function BannerProduct({
           ></div>
         </div>
       </div>
-      <div className='bg-background-secondary py-3 px-6 fixed inset-x-0 bottom-0 flex md:hidden z-10 border-[#dfe1e7] dark:border-[#3b3f45] border-t'>
+      {/* Mobile bottom banner */}
+      <div 
+        className={`bg-background-secondary py-3 px-6 flex md:hidden z-10 border-[#dfe1e7] dark:border-[#3b3f45] border-t fixed bottom-0 left-0 right-0 transition-transform duration-300 ${
+          isHidden ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
         <div className='flex-1 pr-10'>
           <div className='size-full flex items-center justify-start'>
             <span className='text-secondary text-xl sm:text-2xl font-semibold whitespace-nowrap'>

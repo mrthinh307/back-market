@@ -24,26 +24,30 @@ interface ProductBundleProps {
   onAddToCart?: () => void;
 }
 
+// Default products array - defined outside component to prevent infinite render loop
+const DEFAULT_PRODUCTS: ProductBundleProps['products'] = [
+  {
+    id: '2',
+    product: {
+      name: `Case and 2 protective screens - TPU -...`,
+    },
+    description: '',
+    priceWithCurrency: '$ 23.99',
+    images: [
+      {
+        imageUrl:
+          'https://www.backmarket.de/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/170345b6-ae48-44b4-acf2-fdc272f3a4a1-1_b5c747cb-67da-4b6a-b6e5-7770fb6d9519.jpg',
+        alt: 'Case for product and 2 protective screens - TPU -...',
+      },
+    ],
+    alt: 'Case for product and 2 protective screens - TPU -...',
+  },
+];
+
 const ProductBundle: React.FC<ProductBundleProps> = ({
   title = 'Often bought together',
   mainProduct,
-  products = [
-    {
-      id: '2',
-      product: {
-        name: `Case for ${mainProduct?.product.name} and 2 protective screens - TPU -...`,
-      },
-      description: '',
-      priceWithCurrency: '$ 23.99',
-      images: [
-        {
-          imageUrl:
-            'https://www.backmarket.de/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D260/https://d2e6ccujb3mkqf.cloudfront.net/170345b6-ae48-44b4-acf2-fdc272f3a4a1-1_b5c747cb-67da-4b6a-b6e5-7770fb6d9519.jpg',
-          alt: 'Case for product and 2 protective screens - TPU -...',
-        },
-      ],
-    },
-  ],
+  products = DEFAULT_PRODUCTS,
   onAddToCart,
 }) => {
   // Return null if no mainProduct provided
@@ -62,7 +66,7 @@ const ProductBundle: React.FC<ProductBundleProps> = ({
 
   // Helper function to extract numeric value from priceWithCurrency
   const extractPrice = (priceWithCurrency: string): number => {
-    return parseFloat(priceWithCurrency.replace(/[^0-9.-]+/g, '')) || 0;
+    return Number.parseFloat(priceWithCurrency.replace(/[^0-9.-]+/g, '')) || 0;
   };
 
   // Helper function to format total price with same currency symbol as first product
@@ -118,11 +122,6 @@ const ProductBundle: React.FC<ProductBundleProps> = ({
                       <h3 className='font-duplet font-semibold text-foreground text-sm sm:text-base md:text-lg line-clamp-2'>
                         {product.product?.name}
                       </h3>
-                      {product.description && (
-                        <p className='font-duplet text-xs sm:text-sm md:text-base text-muted-foreground mt-1 line-clamp-2'>
-                          {product.description}
-                        </p>
-                      )}
                       <div className='flex items-center space-x-2 mt-2'>
                         <span className='font-duplet text-lg md:text-xl font-bold text-foreground'>
                           {product.priceWithCurrency}
@@ -163,7 +162,9 @@ const ProductBundle: React.FC<ProductBundleProps> = ({
                 <div className='font-duplet text-xl md:text-2xl font-bold text-foreground mb-6'>
                   Total price: {totalPriceWithCurrency}
                 </div>
-                <Button onClick={onAddToCart}>Add all to cart</Button>
+                <Button onClick={onAddToCart} className='w-full'>
+                  Add all to cart
+                </Button>
                 <div className='mt-4 font-duplet text-muted-foreground text-sm md:text-base'>
                   <span>
                     These items might be sold and delivered by different sellers
@@ -204,11 +205,6 @@ const ProductBundle: React.FC<ProductBundleProps> = ({
                           <h3 className='font-duplet font-semibold text-foreground text-lg line-clamp-2'>
                             {product.product?.name}
                           </h3>
-                          {product.description && (
-                            <p className='font-duplet text-sm text-muted-foreground line-clamp-2'>
-                              {product.description}
-                            </p>
-                          )}
                           <div className='flex flex-col items-center space-y-1'>
                             <span className='font-duplet text-xl font-bold text-foreground'>
                               {product.priceWithCurrency}

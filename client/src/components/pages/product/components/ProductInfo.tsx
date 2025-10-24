@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { toast } from 'sonner';
@@ -72,15 +73,17 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
           </h1>
 
           <button
-            className='size-[40px] rounded-full content-center md:!hidden hover:!bg-icon-button-hover cursor-pointer dark:!bg-gray-700 dark:hover:!bg-gray-600 transition-colors duration-200'
+            type='button'
+            className='flex shrink-0 size-10 p-2 content-center md:!hidden hover:!bg-icon-button-hover cursor-pointer dark:hover:!bg-gray-600 transition-colors duration-200'
             onClick={handleLikeClick}
           >
             <Image
               src={isLiked ? heartedIcon : heartIcon}
               alt='Heart Icon'
-              width={24}
-              height={24}
-              className={`dark:invert`}
+              width={0}
+              height={0}
+              sizes='100vw'
+              className='dark:invert w-full h-auto'
             />
           </button>
 
@@ -104,7 +107,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
           <div className='flex mt-[1px] gap-0.5'>
             {(() => {
               const stars = rating as number;
-              return [...Array(5)].map((_, index) => (
+              return [...Array.from({ length: 5 })].map((_, index) => (
                 <StarIcon
                   key={index}
                   className={`size-[15px] text-primary ${index + 1 <= stars ? 'fill-primary' : ''}`}
@@ -197,14 +200,14 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
         </div>
         <div className='grow text-secondary'>
           <span>Buy now, pay later. </span>
-          <a
+          <Link
             className='affirm-product-modal font-semibold underline'
             data-qa='affirm-product-modal'
             data-test='affirm-product-modal'
-            href='#'
+            href='/'
           >
             Learn more
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -38,7 +38,7 @@ export default function ProfileSectionLayout({
 
   return (
     <ProtectedRoute>
-      <div className='container mb-16'>
+      <div className='mb-16'>
         <div className='mb-6 mt-2 flex pl-6 md:my-8 justify-center md:pl-0 z-[9]'>
           <nav className='relative -mx-1 px-1 max-w-full overflow-x-auto'>
             <div className="w-max after:absolute after:inset-x-1 after:bottom-0 after:h-[2px] after:bg-border after:content-['']">

@@ -1,6 +1,13 @@
 // Icon data structure
 export interface IconData {
-  type: 'delivery' | 'carrier' | 'warranty' | 'verified' | 'trade-in' | 'returns' | 'support';
+  type:
+    | 'delivery'
+    | 'carrier'
+    | 'warranty'
+    | 'verified'
+    | 'trade-in'
+    | 'returns'
+    | 'support';
   className: string;
   viewBox: string;
   paths: Array<{
@@ -12,7 +19,7 @@ export interface IconData {
 
 // Icon data
 export const iconData: Record<string, IconData> = {
-  delivery: {
+  'delivery': {
     type: 'delivery',
     className: 'h-6 w-6 md:h-8 md:w-8',
     viewBox: '0 0 24 24',
@@ -27,7 +34,7 @@ export const iconData: Record<string, IconData> = {
       },
     ],
   },
-  carrier: {
+  'carrier': {
     type: 'carrier',
     className: 'h-6 w-6 md:h-8 md:w-8',
     viewBox: '0 0 24 24',
@@ -42,7 +49,7 @@ export const iconData: Record<string, IconData> = {
       },
     ],
   },
-  warranty: {
+  'warranty': {
     type: 'warranty',
     className: 'h-6 w-6 md:h-8 md:w-8',
     viewBox: '0 0 24 24',
@@ -57,7 +64,7 @@ export const iconData: Record<string, IconData> = {
       },
     ],
   },
-  verified: {
+  'verified': {
     type: 'verified',
     className: 'h-6 w-6 md:h-8 md:w-8',
     viewBox: '0 0 24 24',
@@ -204,7 +211,7 @@ export const productFeaturesData: Record<string, ProductFeatureData[]> = {
       onClick: () => console.log('Verified clicked'),
     },
   ],
-  default: [
+  'default': [
     {
       id: 'delivery',
       title: 'Free delivery',
@@ -241,95 +248,9 @@ export const productFeaturesData: Record<string, ProductFeatureData[]> = {
   ],
 };
 
-// Trade-in features data
-export const tradeInFeaturesData: ProductFeatureData[] = [
-  {
-    id: 'trade-in-info',
-    title: 'See how Trade-in works',
-    iconType: 'trade-in',
-    onClick: () => console.log('Trade-in info clicked'),
-  },
-];
-
-// Selection options data
-export interface SelectionOptionData {
-  id: string;
-  name: string;
-  price: string;
-  color?: string;
-  isGoodDeal?: boolean;
-}
-
-// Product condition options
-export const productConditionOptions: SelectionOptionData[] = [
-  { id: 'fair', name: 'Fair', price: '$ 349.00' },
-  { id: 'good', name: 'Good', price: '$ 308.99', isGoodDeal: true },
-  { id: 'excellent', name: 'Excellent', price: '$ 341.00' },
-  { id: 'premium', name: 'Premium', price: '$ 439.56' },
-];
-
-// Storage options
-export const storageOptions: SelectionOptionData[] = [
-  { id: '128', name: '128 GB', price: '$ 308.99' },
-  { id: '256', name: '256 GB', price: '$ 378.99' },
-  { id: '512', name: '512 GB', price: '$ 430.92' },
-];
-
-// Color options
-export const colorOptions: SelectionOptionData[] = [
-  {
-    id: 'midnight',
-    name: 'Midnight',
-    price: '$ 316.00',
-    color: 'rgb(24, 32, 40)',
-  },
-  { id: 'red', name: 'Red', price: '$ 342.00', color: 'rgb(255, 0, 0)' },
-  { id: 'blue', name: 'Blue', price: '$ 308.99', color: 'rgb(156, 176, 196)' },
-  {
-    id: 'green',
-    name: 'Green',
-    price: '$ 342.00',
-    color: 'rgb(217, 239, 213)',
-  },
-  {
-    id: 'starlight',
-    name: 'Starlight',
-    price: '$ 308.99',
-    color: 'rgb(238, 233, 229)',
-  },
-  { id: 'pink', name: 'Pink', price: '$ 308.99', color: 'rgb(252, 231, 231)' },
-];
-
-// Product images
-export const productImages = [
-  'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
-  'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-2_4afc23ba-0d58-4702-a96b-285ff6754398.jpg',
-  'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-3_ee749f47-ef5e-498c-bce1-fe3d67463bb7.jpg',
-];
-
 // Helper functions
 export const getProductFeatures = (productId: string): ProductFeatureData[] => {
   return productFeaturesData[productId] || productFeaturesData.default || [];
-};
-
-export const getTradeInFeatures = (): ProductFeatureData[] => {
-  return tradeInFeaturesData;
-};
-
-export const getProductConditionOptions = (): SelectionOptionData[] => {
-  return productConditionOptions;
-};
-
-export const getStorageOptions = (): SelectionOptionData[] => {
-  return storageOptions;
-};
-
-export const getColorOptions = (): SelectionOptionData[] => {
-  return colorOptions;
-};
-
-export const getProductImages = (): string[] => {
-  return productImages;
 };
 
 // Product inspection data structure
@@ -729,72 +650,3 @@ export const productInspectionData: ProductInspectionData[] = [
 export const getProductInspectionData = (): ProductInspectionData[] => {
   return productInspectionData;
 };
-
-const relatedProducts = [
-  {
-    id: '1',
-    name: 'iPhone 14',
-    description: 'Midnight · 128 GB · Physical SIM + eSIM',
-    image:
-      'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-1_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
-    price: 263.0,
-    originalPrice: 599.0,
-    rating: 4.5,
-    reviewCount: 16490,
-  },
-  {
-    id: '2',
-    name: 'iPhone 14 Pro',
-    description: 'Space Black · 256 GB · Physical SIM + eSIM',
-    image:
-      'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-2_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
-    price: 389.0,
-    originalPrice: 699.0,
-    rating: 4.6,
-    reviewCount: 12850,
-  },
-  {
-    id: '3',
-    name: 'iPhone 13 Pro',
-    description: 'Sierra Blue · 128 GB · Physical SIM + eSIM',
-    image:
-      'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-3_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
-    price: 299.0,
-    originalPrice: 599.0,
-    rating: 4.4,
-    reviewCount: 9870,
-  },
-  {
-    id: '4',
-    name: 'iPhone 12',
-    description: 'Blue · 64 GB · Physical SIM + eSIM',
-    image:
-      'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-4_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
-    price: 199.0,
-    originalPrice: 499.0,
-    rating: 4.3,
-    reviewCount: 7560,
-  },
-];
-
-const pairsWellProducts = [
-  {
-    id: '5',
-    name: 'iPhone 14 Plus',
-    description: 'Midnight · 128 GB · Physical SIM + eSIM',
-    image:
-      'https://d2e6ccujb3mkqf.cloudfront.net/9336fa24-8094-4de3-9e2b-6dafaf3ab882-5_1873fdb9-e7ef-4a78-a9fb-9247b8858054.jpg',
-    price: 391.0,
-    originalPrice: 1099.0,
-    rating: 3.5,
-    reviewCount: 12099,
-  },
-];
-
-export const getRelatedProducts = () => {
-  return relatedProducts;
-}
-
-export const getPairsWellProducts = () => {
-  return pairsWellProducts;
-}
