@@ -35,7 +35,7 @@ function GalleryCarousel({
 
   // ✅ Initialize loading state for all images
   useEffect(() => {
-    setImagesLoaded(Array.from({ length: galleryImages.length }).fill(false));
+    setImagesLoaded(Array.from({ length: galleryImages.length }, () => false));
   }, [galleryImages.length]);
 
   // ✅ Handle image load
