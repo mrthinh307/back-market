@@ -1,3 +1,4 @@
+import { ChevronDownIcon, SlidersHorizontalIcon } from 'lucide-react';
 import {
   Popover,
   PopoverContent,
@@ -11,7 +12,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { ChevronDownIcon, SlidersHorizontalIcon } from 'lucide-react';
 
 // Filter constants
 const FILTER_OPTIONS = [

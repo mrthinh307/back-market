@@ -22,8 +22,8 @@ const TopNavigation: React.FC<TopNavigationProps> = ({
             {topNavItems.map((item, index) => (
               <Link
                 key={index}
-                href={item.href || '#'}
-                className='flex items-center space-x-1 font-semibold hover:underline hover:text-secondary-foreground transition-colors'
+                href={item.href || '/'}
+                className='flex items-center space-x-1 font-semibold hover:underline transition-colors'
               >
                 {item.icon && <item.icon size={14} />}
                 <span>{item.label}</span>

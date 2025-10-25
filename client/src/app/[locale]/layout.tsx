@@ -1,19 +1,19 @@
-import React from 'react';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
 import {
   getMessages,
   getTranslations,
   setRequestLocale,
 } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import React from 'react';
 
-import { routing } from '@/libs/i18n/I18nRouting';
-import '@/styles/global.css';
-import { Toaster } from '@/components/ui/sonner';
-import { AuthProvider } from '@/contexts/AuthContext';
-import { ThemeProvider } from '@/components/providers/theme-provider';
 import ReactQueryProvider from '@/components/providers/ReactQueryProvider';
 import { ServerHealthProvider } from '@/components/providers/ServerHealthProvider';
+import { ThemeProvider } from '@/components/providers/theme-provider';
+import { Toaster } from '@/components/ui/sonner';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { routing } from '@/libs/i18n/I18nRouting';
+import '@/styles/global.css';
 
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>;

@@ -34,6 +34,7 @@ export const SelectionOptionButton = memo<SelectionOptionButtonProps>(
     
     return (
       <button
+        type='button'
         disabled={isDisabled}
         className={`cursor-pointer focus:outline-none rounded-sm relative flex size-full flex-col border border-primary py-3 no-underline transition-colors duration-200 disabled:opacity-50 disabled:pointer-events-none ${
           isSelected

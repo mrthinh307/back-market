@@ -1,10 +1,10 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { useTranslations } from 'next-intl';
-import React, { useState, useMemo } from 'react';
-import { VerifiedIcon } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
+import { VerifiedIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { usePathname } from 'next/navigation';
+import React, { useState, useMemo } from 'react';
 
 import { useScrollDirection } from '@/hooks/useScrollDirection';
 import { fetchProfile } from '@/api/user.api';

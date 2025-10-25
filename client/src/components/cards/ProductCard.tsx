@@ -1,8 +1,8 @@
-import { useLocale } from 'next-intl';
-import Link from 'next/link';
-import Image from 'next/image';
-
 import { StarIcon } from 'lucide-react';
+import { useLocale } from 'next-intl';
+import Image from 'next/image';
+import Link from 'next/link';
+
 import { ProductCardProps } from '@/types/cards.type';
 import { getColorHex } from '@/utils/string';
 
@@ -21,7 +21,7 @@ function ProductCard({
       aria-label={productCard.title}
     >
       <div className={`h-full ${className}`}>
-        <div className='rounded-lg shadow-sm focus-within:shadow-md hover:shadow-md bg-background-secondary h-full border-transparent'>
+        <div className='rounded-lg shadow-sm focus-within:shadow-md hover:shadow-md bg-secondary-background h-full border-transparent'>
           <div className='group relative flex h-full flex-col pt-4 md:pt-10'>
             <div className='p-4 pt-0'>
               <div className='flex'>
@@ -69,7 +69,7 @@ function ProductCard({
                         {productCard.title}
                       </h2>
                       {productCard.description && (
-                        <p className='text-muted text-sm line-clamp-2'>
+                        <p className='text-muted-foreground text-sm line-clamp-2'>
                           {productCard.description}
                         </p>
                       )}
@@ -81,7 +81,7 @@ function ProductCard({
                             {(() => {
                               const stars = productCard.reviewRating
                                 .average as number;
-                              return [...Array(5)].map((_, index) => (
+                              return [...Array.from({ length: 5 })].map((_, index) => (
                                 <StarIcon
                                   key={index}
                                   className={`size-3 text-primary ${index + 1 <= stars ? 'fill-primary' : ''}`}
@@ -100,14 +100,14 @@ function ProductCard({
                       )}
                     <div>
                       {!productCard.description && (
-                        <div className='text-muted text-xs'>Starting at</div>
+                        <div className='text-muted-foreground text-xs'>Starting at</div>
                       )}
                       <div className='flex flex-col gap-[2px]'>
                         <span className='text-base font-semibold overflow-ellipsis'>
                           {productCard.priceWithCurrency}
                         </span>
                         {productCard.newPrice && (
-                          <span className='text-muted text-sm line-through overflow-ellipsis'>
+                          <span className='text-muted-foreground text-sm line-through overflow-ellipsis'>
                             {productCard.newPrice}
                           </span>
                         )}

@@ -1,8 +1,11 @@
+/* eslint-disable react/no-unstable-context-value */
+/* eslint-disable react/no-use-context */
+/* eslint-disable react/no-context-provider */
 'use client';
 
 import * as React from 'react';
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
-import { type VariantProps } from 'class-variance-authority';
+import type { VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/libs/utils';
 import { toggleVariants } from '@/components/ui/toggle';

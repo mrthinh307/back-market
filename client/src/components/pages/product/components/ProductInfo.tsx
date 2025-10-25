@@ -1,14 +1,14 @@
-import React from 'react';
+import { useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import React from 'react';
 
 import { toast } from 'sonner';
 import { StarIcon } from 'lucide-react';
 import { Button } from '../../../ui/button';
 import heartedIcon from '@/public/assets/images/hearted-icon.svg?url';
 import heartIcon from '@/public/assets/images/heart-icon.svg?url';
-import { useLocale } from 'next-intl';
 import { AddToCartButton } from './AddToCartButton';
 
 interface ProductInfoProps {
@@ -64,10 +64,10 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
         {/* Title + Subtitle */}
         <div className='flex justify-between items-start gap-6'>
           <h1 className='mb-2 flex flex-col'>
-            <span className='text-2xl md:text-3xl font-heading font-bold text-secondary leading-10'>
+            <span className='text-2xl md:text-3xl font-heading font-bold text-secondary-foreground leading-10'>
               {title}
             </span>
-            <span className='text-sm md:text-base font-medium text-secondary'>
+            <span className='text-sm md:text-base font-medium text-secondary-foreground'>
               {subtitle}
             </span>
           </h1>
@@ -126,7 +126,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
         <div className='mt-6 flex items-center gap-4'>
           <div className='grow'>
             <span
-              className='text-3xl font-semibold text-secondary'
+              className='text-3xl font-semibold text-secondary-foreground'
               data-qa='productpage-product-price'
               data-test='productpage-product-price'
             >
@@ -137,7 +137,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
               <div className='mt-1 flex items-center gap-2'>
                 <span
                   id='trigger-v-0-5-0-0'
-                  className='text-sm z-[1] text-muted line-through whitespace-nowrap'
+                  className='text-sm z-[1] text-muted-foreground line-through whitespace-nowrap'
                 >
                   {originalPrice}
                 </span>
@@ -198,7 +198,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
             className='h-[16px] w-auto'
           />
         </div>
-        <div className='grow text-secondary'>
+        <div className='grow text-secondary-foreground'>
           <span>Buy now, pay later. </span>
           <Link
             className='affirm-product-modal font-semibold underline'

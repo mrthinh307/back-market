@@ -1,12 +1,13 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 'use client';
-import { useSearchParams } from 'next/navigation';
-import { useLocale } from 'next-intl';
 import { useQuery } from '@tanstack/react-query';
+import { useLocale } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
 
+import { getProductList } from '@/api/product.api';
 import BreadcrumbCustom from '@/components/ui/BreadcumbCustom';
 import { useBreadcrumb } from '@/hooks/useBreadcumb';
 import { usePagination } from '@/hooks/usePagination';
-import { getProductList } from '@/api/product.api';
 import { USE_QUERY_KEY } from '@/constants/use-query-key';
 import { ServiceHighlights } from '../home/components';
 import LoadingPage from '../LoadingPage';
@@ -113,7 +114,7 @@ function ProductListPage({ metadata }: ProductListPageProps) {
       <section className='mb-18'>
         {/* Header */}
         <div className='container'>
-          <div className='flex flex-col justify-center text-secondary mb-4'>
+          <div className='flex flex-col justify-center text-secondary-foreground mb-4'>
             <h1 className='text-3xl xl:text-[56px] xl:leading-[68px] font-heading font-bold'>
               {metadata.pageTitle}
             </h1>

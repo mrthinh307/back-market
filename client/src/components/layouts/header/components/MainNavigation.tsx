@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
 interface MainNavigationProps {
   mainNavItems: Array<{
@@ -26,7 +26,7 @@ const MainNavigation: React.FC<MainNavigationProps> = ({
                 ${
                   item.highlight
                     ? 'text-[#9D3963] dark:text-[#E26B91]'
-                    : 'text-primary after:content-[""] after:absolute after:left-0 after:right-0 after:bottom-[-9px] after:h-[2px] after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform'
+                    : 'text-foreground after:content-[""] after:absolute after:left-0 after:right-0 after:bottom-[-9px] after:h-[2px] after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform'
                 }
               `}
             >

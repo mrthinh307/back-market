@@ -1,6 +1,7 @@
-import React from 'react';
-import { Footer, Header } from '@/components/layouts';
 import { cookies } from 'next/headers';
+import React from 'react';
+
+import { Footer, Header } from '@/components/layouts';
 import { getUserProfile } from '@/libs/server-fetchers/user';
 
 export default async function DefaultLayout({

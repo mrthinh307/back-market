@@ -31,15 +31,16 @@ function ServiceHighlights({
             text: 'App exclusive features',
           },
         ];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const contentSizeNumber = contentSize === 'sm' ? 20 : contentSize === 'md' ? 24 : 28;
   const contentSizeText = contentSize === 'sm' ? 'text-xs' : contentSize === 'md' ? 'text-sm' : 'text-base';
 
   return (
-    <section className={`container mb-14`}>
+    <section className='container mb-14'>
       <div
-        className={`bg-background-secondary rounded-lg grid gap-3 grid-cols-2 md:grid-cols-4 p-3 ${className}`}
+        className={`bg-secondary-background rounded-lg grid gap-3 grid-cols-2 md:grid-cols-4 p-3 ${className}`}
       >
         {displayContent.map((item, index) => (
           <div key={index} className='flex gap-3 items-center justify-start'>

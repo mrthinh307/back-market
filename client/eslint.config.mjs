@@ -64,10 +64,6 @@ export default antfu(
       'no-console': 'off', // Allow console logs
       'style/multiline-ternary': 'off',
       'style/comma-dangle': 'off', // Disable comma dangle rule
-      // 'style/indent': 'off', // Disable indent rule
-      'perfectionist/sort-imports': 'on', // Enable sorting of imports
-      'perfectionist/sort-named-imports': 'on', // Enable sorting of named imports
-      'perfectionist/sort-exports': 'on', // Enable sorting of exports
       'style/jsx-closing-tag-location': 'off', // Disable closing tag location rule
       'style/no-trailing-spaces': 'off', // Disable trailing spaces rule
       'style/arrow-parens': 'off', // Disable arrow parens rule
@@ -78,6 +74,14 @@ export default antfu(
       'react/no-array-index-key': 'off', // Disable array index key rule
       'style/operator-linebreak': 'off', // Disable operator linebreak rule
       'style/jsx-one-expression-per-line': 'off', // Disable one expression per line in JSX
+      'style/quotes': 'off', // Disable quotes rule
+      'style/indent': 'off', // Disable indent rule
+      'style/indent-binary-ops': 'off', // Disable indent binary operators rule
+      'import/consistent-type-specifier-style': 'off', // Disable consistent type specifier style
+      'perfectionist/sort-named-imports': 'off', // Disable sorting named imports
+      'perfectionist/sort-imports': 'off', // Disable sorting imports
+      'perfectionist/sort-type-imports': 'off', // Disable sorting type imports
+      'perfectionist/sort-named-exports': 'off', // Disable sorting exports
     },
   },
 );

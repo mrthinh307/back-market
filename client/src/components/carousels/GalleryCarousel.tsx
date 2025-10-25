@@ -1,8 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useState, useMemo } from 'react';
 
+import Fade from 'embla-carousel-fade';
 import {
   Carousel,
   CarouselContent,
@@ -12,7 +13,6 @@ import {
   CarouselThumbnails,
   type CarouselApi,
 } from '@/components/ui/carousel';
-import Fade from 'embla-carousel-fade';
 import { Skeleton } from '@/components/ui/skeleton';
 
 function GalleryCarousel({
@@ -35,7 +35,7 @@ function GalleryCarousel({
 
   // ✅ Initialize loading state for all images
   useEffect(() => {
-    setImagesLoaded(new Array(galleryImages.length).fill(false));
+    setImagesLoaded(Array.from({ length: galleryImages.length }).fill(false));
   }, [galleryImages.length]);
 
   // ✅ Handle image load

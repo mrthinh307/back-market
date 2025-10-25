@@ -1,3 +1,7 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable unused-imports/no-unused-vars */
+/* eslint-disable jsx-a11y/media-has-caption */
 'use client';
 
 import Image from 'next/image';
@@ -115,7 +119,7 @@ function AdsVideoCard({ className }: { className?: string }) {
           onClick={handleShowDetailVideo}
         >
           <div
-            className={`bg-background-secondary rounded-full absolute left-1/2 top-1/2 content-center size-15 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 ${
+            className={`bg-secondary-background rounded-full absolute left-1/2 top-1/2 content-center size-15 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 ${
               isPlaying ? 'opacity-0' : 'opacity-100'
             }`}
           >

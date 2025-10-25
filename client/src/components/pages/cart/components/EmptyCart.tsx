@@ -10,11 +10,11 @@ function EmptyCart() {
           <div className='flex flex-col gap-6 md:gap-12'>
             <div className='flex flex-col md:flex-row md:items-center pt-6 md:px-6 md:pt-0 lg:px-0'>
               <div className='flex flex-col justify-center md:mb-0 mb-4 md:mr-14'>
-                <p className='text-secondary mb-[2px]'>Hey! Don't miss it.</p>
-                <h2 className='text-3xl font-bold mb-2 text-primary font-heading'>
+                <p className='text-secondary-foreground mb-[2px]'>Hey! Don't miss it.</p>
+                <h2 className='text-3xl font-bold mb-2 font-heading'>
                   Your shopping cart is empty.
                 </h2>
-                <p className='text-secondary'>
+                <p className='text-secondary-foreground'>
                   All these excellent products don't just add themselves to your
                   shopping cart!
                 </p>

@@ -1,7 +1,7 @@
 'use client';
-import Link from 'next/link';
-import { useLocale } from 'next-intl';
 import clsx from 'clsx';
+import { useLocale } from 'next-intl';
+import Link from 'next/link';
 
 import { usePathname } from 'next/navigation';
 import ProtectedRoute from '@/components/providers/ProtectedRoute';
@@ -60,8 +60,8 @@ export default function ProfileSectionLayout({
                         className={clsx(
                           'flex h-full items-center border-none bg-transparent px-4 py-2 text-center no-underline motion-safe:transition motion-safe:duration-200 cursor-pointer overflow-hidden text-ellipsis md:text-[17px] rounded-t-sm relative z-[8]',
                           isActive
-                            ? 'text-foreground font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-foreground after:content-[""]'
-                            : 'text-muted hover:text-foreground hover:bg-input-hover',
+                            ? 'text-foreground font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-primary after:content-[""]'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-input-hover',
                         )}
                       >
                         <span>{tab.label}</span>

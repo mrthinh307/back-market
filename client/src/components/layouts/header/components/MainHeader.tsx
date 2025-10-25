@@ -16,14 +16,15 @@ const MainHeader: React.FC<MainHeaderProps> = ({
   setIsMenuOpen,
   avatarUrl,
 }) => {
-  const locale  = useLocale();
+  const locale = useLocale();
   return (
     <div className='flex flex-col md:justify-center py-4 md:py-2'>
       {/* Mobile Header - Row 1 */}
       <div className='md:hidden flex items-center justify-between px-4 mb-3 relative'>
         {/* Menu Button */}
         <button
-          className='p-2 rounded-full hover:bg-sub-background transition-colors cursor-pointer'
+          type='button'
+          className='p-2 rounded-full transition-colors cursor-pointer'
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <Image

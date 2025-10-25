@@ -1,10 +1,10 @@
 'use client';
-import { ReactNode } from 'react';
-import { Env } from '@/libs/Env';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ReactNode } from 'react';
+import { Env } from '@/libs/Env';
 
-export const queryClient = new QueryClient({
+const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       // Default options for queries (ms)

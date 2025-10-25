@@ -1,8 +1,9 @@
-import React from 'react';
 import Image from 'next/image';
+import React from 'react';
+
 import { Button } from '@/components/ui/button';
-import { ProductVariantDetail } from '@/types/product-selection.type';
 import { Skeleton } from '@/components/ui/skeleton';
+import { ProductVariantDetail } from '@/types/product-selection.type';
 
 interface ProductBundleProps {
   title?: string;
@@ -93,7 +94,7 @@ const ProductBundle: React.FC<ProductBundleProps> = ({
         <h2 className='text-[22px] font-semibold text-foreground mb-4'>
           {title}
         </h2>
-        <div className='bg-background-secondary rounded-xl p-4 md:p-6 lg:p-8 shadow-sm'>
+        <div className='bg-secondary-background rounded-xl p-4 md:p-6 lg:p-8 shadow-sm'>
           {/* Mobile & Tablet layout */}
           <div className='block xl:hidden'>
             <div className='flex flex-col space-y-6'>
@@ -259,7 +260,7 @@ const ProductBundle: React.FC<ProductBundleProps> = ({
 
               <Button onClick={onAddToCart}>Add all to cart</Button>
 
-              <div className='font-duplet text-muted text-sm leading-relaxed'>
+              <div className='font-duplet text-muted-foreground text-sm leading-relaxed'>
                 <span>
                   These items might be sold and delivered by different sellers
                   🚛

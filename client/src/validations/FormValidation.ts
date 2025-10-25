@@ -1,3 +1,4 @@
+/* eslint-disable no-misleading-character-class */
 import { z } from 'zod';
 
 export const emailSchema = z.object({

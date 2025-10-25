@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback, memo, useMemo } from 'react';
 import { useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import React, { useState, useEffect, useCallback, memo, useMemo } from 'react';
 
 import SelectionOptionButton from './SelectionOptionButton';
 
@@ -86,14 +86,14 @@ export const RightSideSelectionSection = memo(
         <div className='opacity-100 transition-opacity duration-500 ease-out'>
           <fieldset role='radiogroup'>
             <legend className='mb-3 flex items-baseline justify-between'>
-              <h2 className='text-[28px] font-heading font-bold text-secondary mb-2 hidden md:block'>
+              <h2 className='text-[28px] font-heading font-bold text-secondary-foreground mb-2 hidden md:block'>
                 <span>{title}</span>
               </h2>
             </legend>
 
             {/* Info button */}
             {showBadge && (
-              <button className='bg-[#d9e4fc] dark:bg-[#1e293b] shadow-md rounded-lg relative no-underline transition-all duration-200 ease-in focus:outline-none cursor-pointer hover:shadow-lg mb-6 flex min-h-[72px] w-full flex-row items-center gap-3 px-4 py-3 md:flex'>
+              <button type='button' className='bg-[#d9e4fc] dark:bg-[#1e293b] shadow-md rounded-lg relative no-underline transition-all duration-200 ease-in focus:outline-none cursor-pointer hover:shadow-lg mb-6 flex min-h-[72px] w-full flex-row items-center gap-3 px-4 py-3 md:flex'>
                 <svg
                   className='h-6 w-6 md:h-8 md:w-8 ml-0'
                   fill='currentColor'

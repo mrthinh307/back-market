@@ -1,5 +1,6 @@
-import React, { memo } from 'react';
 import Image from 'next/image';
+import React, { memo } from 'react';
+
 import { GalleryCarousel } from '@/components/carousels';
 
 const CheckIcon = () => (
@@ -69,19 +70,19 @@ const LeftSideSelectionSection = memo(
                         <div className='flex grow flex-row flex-wrap'>
                           <div className='bg-background rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center'>
                             <CheckIcon />
-                            <span className='ml-1 text-left font-duplet text-foreground'>
+                            <span className='ml-1 text-left font-duplet text-primary'>
                               Light signs of use
                             </span>
                           </div>
                           <div className='bg-background rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center'>
                             <CheckIcon />
-                            <span className='ml-1 text-left font-duplet text-foreground'>
+                            <span className='ml-1 text-left font-duplet text-primary'>
                               Verified parts
                             </span>
                           </div>
                           <div className='bg-background rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center'>
                             <StarIcon />
-                            <span className='ml-1 text-left font-duplet text-foreground'>
+                            <span className='ml-1 text-left font-duplet text-primary'>
                               Battery for daily use
                             </span>
                           </div>

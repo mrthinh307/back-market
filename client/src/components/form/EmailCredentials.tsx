@@ -101,7 +101,7 @@ function EmailCredentials() {
         <div className='my-6'>
           <div className='content-center'>
             <hr className='border-muted border-t grow' />
-            <span className='text-muted mx-4 mb-0.5'>or</span>
+            <span className='text-muted-foreground mx-4 mb-0.5'>or</span>
             <hr className='border-muted border-t grow' />
           </div>
         </div>

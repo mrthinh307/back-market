@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
+
 import AuthFormContainer from '@/components/form/AuthFormContainer';
 import SignUpCredentials from '@/components/form/SignUpCredentials';
 

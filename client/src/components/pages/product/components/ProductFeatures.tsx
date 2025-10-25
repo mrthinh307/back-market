@@ -1,5 +1,6 @@
-import React from 'react';
+/* eslint-disable @next/next/no-img-element */
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import React from 'react';
 
 import { useHorizontalScrollGradientMask } from '@/hooks/useHorizontalScrollGradientMask';
 import { getProductFeatures } from '../seed/temp-data-product';
@@ -240,7 +241,7 @@ const ProductFeatures: React.FC = ({
           return (
             <Component
               key={feature.id}
-              className={`bg-[#ecf0fe] hover:bg-[#c2d3f5] dark:bg-[#1e293b] dark:hover:bg-[#334155] cursor-pointer rounded-lg flex flex-row items-center p-2 motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in w-full`}
+              className='bg-[#ecf0fe] hover:bg-[#c2d3f5] dark:bg-[#1e293b] dark:hover:bg-[#334155] cursor-pointer rounded-lg flex flex-row items-center p-2 motion-safe:transition-colors motion-safe:duration-200 motion-safe:ease-in w-full'
               onClick={feature.onClick}
             >
               <div className='mr-2 flex h-10 w-10 shrink-0 items-center justify-center md:h-12 md:w-12'>

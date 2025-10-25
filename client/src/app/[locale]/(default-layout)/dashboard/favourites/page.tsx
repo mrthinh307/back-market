@@ -1,6 +1,7 @@
+import Image from 'next/image';
+
 import { ProductCard } from '@/components/cards';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 
 function FavouritesPage() {
   const templateProducts = [
@@ -18,18 +19,18 @@ function FavouritesPage() {
     <div className='container'>
       <div className='mb-8 space-y-1 text-center'>
         <h2 className='text-3xl font-heading font-bold'>Favourites</h2>
-        <p className='text-center text-muted mt-2'>
+        <p className='text-center text-muted-foreground mt-2'>
           Your favorite items, all in one place.
         </p>
       </div>
       {!templateProducts.length ? (
-        <div className='bg-background-secondary shadow-sm rounded-lg p-8'>
+        <div className='bg-secondary-background shadow-sm rounded-lg p-8'>
           <div className='flex flex-col md:flex-row md:items-center'>
             <div className='flex flex-col justify-center md:mb-0 mb-4 md:mr-14'>
               <h2 className='mb-2 text-xl font-semibold'>
                 It's pretty hard to believe.
               </h2>
-              <div className='text-secondary'>
+              <div className='text-secondary-foreground'>
                 But it looks like you haven't added any favourites on Back
                 Market yet.
               </div>
@@ -51,7 +52,7 @@ function FavouritesPage() {
         </div>
       ) : (
         <>
-          <div className='mt-1 mb-3 text-muted'>{templateProducts.length} items</div>
+          <div className='mt-1 mb-3 text-muted-foreground'>{templateProducts.length} items</div>
           <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
             {templateProducts.map((product) => (
               <ProductCard key={product.id} productCard={product} />

@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { formatPhoneNumber } from 'react-phone-number-input';
+
 import ProfileCardContainer from './ProfileCardContainer';
 import DeliveryAddressDialog, {
   DeliveryAddressData,
@@ -26,16 +28,20 @@ function DeliveryAddressCard({
   };
 
   const formatDeliveryAddress = (data: DeliveryAddressData) => {
-    const parts = [
-      `Full Name : ${data.fullName?.trim()}`,
-      data.phone && `Phone : ${data.phone?.trim()}`,
-      `City : ${data.city?.trim()}, Việt Nam`,
-      `District : ${data.district?.trim()}`,
-      `Ward : ${data.ward?.trim()}`,
-      `Address Line : ${data.addressLine?.trim()}`,
-    ].filter(Boolean);
-
-    return parts.join('\n');
+    return (
+      <>
+        <div><strong>Full Name:</strong> {data.fullName?.trim()}</div>
+        {data.phone && (
+          <div>
+            <strong>Phone:</strong> {formatPhoneNumber(data.phone.trim())}
+          </div>
+        )}
+        <div><strong>City:</strong> {data.city?.trim()}, Việt Nam</div>
+        <div><strong>District:</strong> {data.district?.trim()}</div>
+        <div><strong>Ward:</strong> {data.ward?.trim()}</div>
+        <div><strong>Address Line:</strong> {data.addressLine?.trim()}</div>
+      </>
+    );
   };
 
   return (
@@ -45,11 +51,11 @@ function DeliveryAddressCard({
         title='Delivery Address'
       >
         {deliveryData ? (
-          <div className='text-secondary whitespace-pre-line leading-7 truncate'>
+          <div className='text-secondary-foreground whitespace-pre-line leading-7 truncate font-heading'>
             {formatDeliveryAddress(deliveryData)}
           </div>
         ) : (
-          <div className='text-muted'>There is no address registered yet.</div>
+          <div className='text-muted-foreground'>There is no address registered yet.</div>
         )}
       </ProfileCardContainer>
 

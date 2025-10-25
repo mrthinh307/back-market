@@ -41,7 +41,7 @@ export default function GlobalErrorComponent({
                 {title}
               </h2>
             </div>
-            <p className='text-secondary'>{message}</p>
+            <p className='text-secondary-foreground'>{message}</p>
             <Image
               src={imageUrl}
               alt={`Error ${statusCode} - ${title}`}

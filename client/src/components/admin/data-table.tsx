@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+ 
 'use client';
 
 import * as React from 'react';
@@ -319,7 +321,7 @@ function DraggableRow({ row }: { row: Row<z.infer<typeof schema>> }) {
       className='relative z-0 data-[dragging=true]:z-10 data-[dragging=true]:opacity-80'
       style={{
         transform: CSS.Transform.toString(transform),
-        transition: transition,
+        transition,
       }}
     >
       {row.getVisibleCells().map((cell) => (
@@ -483,7 +485,7 @@ export function DataTable({
             id={sortableId}
           >
             <Table>
-              <TableHeader className='bg-muted-secondary sticky top-0 z-10'>
+              <TableHeader className='bg-muted sticky top-0 z-10'>
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {

@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -39,7 +39,7 @@ function CartProductCard({
 }: CartProductCardProps) {
   return (
     <div className={`h-full ${className}`}>
-      <div className='rounded-lg shadow-sm bg-background-secondary h-full'>
+      <div className='rounded-lg shadow-sm bg-secondary-background h-full'>
         <div className='p-4 sm:p-6'>
           <div className='flex flex-col gap-4'>
             {/* Image + Title/Condition Row */}
@@ -68,11 +68,11 @@ function CartProductCard({
                       href={`/product/${productCard.id}`}
                       className='hover:underline'
                     >
-                      <h3 className='font-semibold text-base sm:text-lg line-clamp-2 text-primary text-start'>
+                      <h3 className='font-semibold text-base sm:text-lg line-clamp-2 text-start'>
                         {productCard.title}
                       </h3>
                     </Link>
-                    <div className='text-base sm:text-[20px] xl:text-[22px] font-semibold text-primary text-start'>
+                    <div className='text-base sm:text-[20px] xl:text-[22px] font-semibold text-start'>
                       {productCard.priceWithCurrency}
                     </div>
                   </div>
@@ -105,7 +105,7 @@ function CartProductCard({
                 </div>
 
                 {cartProps.deliveryInfo && (
-                  <div className='text-secondary text-sm hidden sm:flex flex-col justify-end'>
+                  <div className='text-secondary-foreground text-sm hidden sm:flex flex-col justify-end'>
                     <span>{cartProps.deliveryInfo}</span>
                     <span>{cartProps.subDeliveryInfo}</span>
                   </div>
@@ -115,7 +115,7 @@ function CartProductCard({
 
             {/* Delivery Information - Mobile */}
             {cartProps.deliveryInfo && (
-              <div className='text-secondary text-sm flex sm:hidden flex-col justify-end flex-1'>
+              <div className='text-secondary-foregroundtext-sm flex sm:hidden flex-col justify-end flex-1'>
                 <span>{cartProps.deliveryInfo}</span>
                 <span>{cartProps.subDeliveryInfo}</span>
               </div>
@@ -127,7 +127,7 @@ function CartProductCard({
                 <select
                   value={cartProps.quantity || 1}
                   onChange={(e) =>
-                    cartProps.onQuantityChange?.(parseInt(e.target.value))
+                    cartProps.onQuantityChange?.(Number.parseInt(e.target.value))
                   }
                   className='border border-border rounded-sm px-2 py-1 w-16 bg-input hover:bg-input-hover focus:bg-input-hover'
                 >

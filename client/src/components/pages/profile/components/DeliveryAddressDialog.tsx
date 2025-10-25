@@ -1,14 +1,15 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
+import { toast } from 'sonner';
 import { z } from 'zod';
+
+import { saveUserAddress } from '@/api/user.api';
 import FormInput from '@/components/form/FormInput';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import { PhoneInput } from '@/components/ui/phone-input';
-import { saveUserAddress } from '@/api/user.api';
-import { toast } from 'sonner';
 import { successToastProps } from '@/libs/toast/toast-props';
 import { deliveryAddressSchema } from '@/validations/FormValidation';
 import {
@@ -306,7 +307,7 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
 
       {/* Dialog */}
       <div
-        className={`relative bg-background-secondary w-full max-w-2xl md:rounded-lg rounded-t-3xl shadow-lg flex flex-col p-5 md:p-6 max-h-[90vh] md:max-h-[95vh] transform transition-transform duration-300 ease-out md:duration-200 ${isSheetVisible ? 'translate-y-0' : 'translate-y-full md:translate-y-0'}`}
+        className={`relative bg-secondary-background w-full max-w-2xl md:rounded-lg rounded-t-3xl shadow-lg flex flex-col p-5 md:p-6 max-h-[90vh] md:max-h-[95vh] transform transition-transform duration-300 ease-out md:duration-200 ${isSheetVisible ? 'translate-y-0' : 'translate-y-full md:translate-y-0'}`}
       >
         {/* Header */}
         <div className='relative mb-5 md:mb-6 pb-4 md:pb-6 border-b border-border flex items-center justify-between flex-shrink-0'>

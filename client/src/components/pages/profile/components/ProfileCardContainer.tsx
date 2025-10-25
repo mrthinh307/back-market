@@ -1,10 +1,20 @@
 import { Button } from '@/components/ui/button';
 
-function ProfileCardContainer({ children, onEditButtonClick, title }: { children?: React.ReactNode, onEditButtonClick: () => void, title: string }) {
+function ProfileCardContainer({
+  children,
+  onEditButtonClick,
+  title,
+}: {
+  children?: React.ReactNode;
+  onEditButtonClick: () => void;
+  title: string;
+}) {
   return (
-    <div className='bg-background-secondary shadow-sm rounded-lg flex gap-4 px-4 py-6'>
+    <div className='bg-secondary-background shadow-sm rounded-lg flex gap-4 px-4 py-6'>
       <div className='flex-1'>
-        <h2 className='pb-3 font-semibold text-[20px] md:text-[22px]'>{title}</h2>
+        <h2 className='pb-3 font-semibold text-[20px] md:text-[22px]'>
+          {title}
+        </h2>
         <div className='flex items-center'>
           {children ? (
             <div>{children}</div>
