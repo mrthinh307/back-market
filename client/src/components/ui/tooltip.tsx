@@ -1,3 +1,4 @@
+/* eslint-disable react/no-context-provider */
 'use client';
 
 import * as React from 'react';
@@ -10,7 +11,7 @@ function TooltipProvider({
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
   return (
-    <TooltipPrimitive
+    <TooltipPrimitive.Provider
       data-slot='tooltip-provider'
       delayDuration={delayDuration}
       {...props}
