@@ -204,7 +204,8 @@ Custom fonts located in `public/fonts/`:
 - `src/locales/ja.json`
 
 ### Usage
-```typescript
+
+```tsx
 import { useTranslations } from 'next-intl';
 
 export default function Component() {

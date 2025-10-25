@@ -244,8 +244,7 @@
   }
 
   .gradient-purple {
-    background: linear-gradient(146deg, #a269e800 7.32%, #ffccfd 87.5%),
-      linear-gradient(180deg, #a269e8, #e2b8f7);
+    background: linear-gradient(146deg, #a269e800 7.32%, #ffccfd 87.5%), linear-gradient(180deg, #a269e8, #e2b8f7);
   }
 
   @keyframes spin-360 {
