@@ -77,7 +77,9 @@ export const useHorizontalScrollGradientMask = () => {
     window.addEventListener('resize', updateScrollState);
     
     return () => {
-      element.removeEventListener('scroll', updateScrollState as EventListener);
+      if (element) {
+        element.removeEventListener('scroll', updateScrollState);
+      }
       window.removeEventListener('resize', updateScrollState);
       // Clean up timeout on unmount
       if (timeoutRef.current) {

@@ -106,7 +106,7 @@ export const RightSideSelectionSection = memo(
                     clipRule='evenodd'
                   />
                 </svg>
-                <div className='text-sm flex-1 text-left text-secondary'>
+                <div className='text-sm flex-1 text-left text-secondary-foreground'>
                   <p className='mb-0'>
                     Refurbishers have restored devices to high quality based on
                     a 25-point inspection. Compare conditions

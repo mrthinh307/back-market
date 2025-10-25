@@ -82,6 +82,7 @@ export default antfu(
       'perfectionist/sort-imports': 'off', // Disable sorting imports
       'perfectionist/sort-type-imports': 'off', // Disable sorting type imports
       'perfectionist/sort-named-exports': 'off', // Disable sorting exports
+      'perfectionist/sort-exports': 'off', // Disable sorting exports
     },
   },
 );
