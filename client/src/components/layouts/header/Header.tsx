@@ -17,7 +17,9 @@ import {
 } from './components';
 import { useAuth } from '@/contexts/AuthContext';
 
-const Header: React.FC<{ avatarUrl?: string | null }> = ({ avatarUrl: serverAvatarUrl }) => {
+const Header: React.FC<{ avatarUrl?: string | null }> = ({
+  avatarUrl: serverAvatarUrl,
+}) => {
   const t = useTranslations('Header');
   const pathname = usePathname();
   const isProductPage = pathname.includes('/product/');
@@ -34,7 +36,8 @@ const Header: React.FC<{ avatarUrl?: string | null }> = ({ avatarUrl: serverAvat
   });
 
   // Use server data if available, otherwise fallback to client data
-  const avatarUrl = serverAvatarUrl || clientUserInfo?.profile?.avatarUrl || null;
+  const avatarUrl =
+    serverAvatarUrl || clientUserInfo?.profile?.avatarUrl || null;
 
   const headerConfig = {
     threshold: 300,

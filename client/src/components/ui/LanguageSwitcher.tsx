@@ -25,7 +25,7 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <div className='flex items-center cursor-pointer'>
           <RectangleFlag
