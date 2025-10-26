@@ -1,9 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useLocale } from 'next-intl';
+
 import SearchBar from '../../../ui/SearchBar';
 import RightSideActions from './RightSideActions';
-import { useLocale } from 'next-intl';
 
 interface MainHeaderProps {
   isMenuOpen: boolean;
@@ -68,6 +69,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
               height={24}
               width={213}
               className='dark:invert'
+              priority
             />
           </Link>
         </div>

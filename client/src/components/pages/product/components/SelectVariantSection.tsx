@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { getRelevantVariants } from '@/api/product-variant.api';
@@ -11,6 +11,8 @@ import { AttributeSelection, SkeletonSection } from './';
 import { useSectionTracking } from '@/hooks/useSectionTracking';
 import GlobalErrorComponent from '../../GlobalErrorComponent';
 
+const STORAGE_KEY = 'variant_section_count';
+
 // Main component - ultra simple with Link navigation
 const SelectVariantSection: React.FC<{
   productVariant: ProductVariantDetail;
@@ -20,6 +22,15 @@ const SelectVariantSection: React.FC<{
     progressPercentage: number,
   ) => void;
 }> = ({ productVariant, onProgressChange }) => {
+  // Get saved section count from localStorage or use default value
+  const getSavedSectionCount = (): number => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? Number.parseInt(saved, 10) : 5;
+    }
+    return 5;
+  };
+
   // Extract data from productVariant
   const { productId, defaultVariantId } = useMemo(
     () => ({
@@ -50,6 +61,13 @@ const SelectVariantSection: React.FC<{
     [relevantVariantsData],
   );
 
+  // Save the section count when data is successfully loaded
+  useEffect(() => {
+    if (availableSections.length > 0 && typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, availableSections.length.toString());
+    }
+  }, [availableSections.length]);
+
   // Setup section tracking
   const { containerRef, registerSection } = useSectionTracking({
     sectionCount: availableSections.length,
@@ -62,7 +80,7 @@ const SelectVariantSection: React.FC<{
     return (
       <div className='flex justify-center'>
         <div className='w-full mb-7 md:space-y-6'>
-          {Array.from({ length: 5 }).map(
+          {Array.from({ length: getSavedSectionCount() }).map(
             (_, index) => (
               <SkeletonSection key={index} />
             ),

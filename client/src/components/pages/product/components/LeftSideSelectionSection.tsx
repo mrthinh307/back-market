@@ -48,6 +48,7 @@ const LeftSideSelectionSection = memo(
                         width={leftImage.width}
                         height={leftImage.height}
                         className='rounded-lg h-auto w-full md:min-w-[337px] md:max-w-[498px] md:rounded-[32px] gradient-purple dark:bg-none'
+                        priority
                       />
                     ) : (
                       <Skeleton className='rounded-lg md:rounded-[32px] w-full min-h-[337px] md:min-h-[498px] relative content-center flex-col gap-3'>
@@ -58,6 +59,7 @@ const LeftSideSelectionSection = memo(
                           height={165}
                           sizes='100vw'
                           className='w-auto'
+                          priority
                         />
                         <p className='content-center text-secondary-foreground'>
                           Opps! Image is being refurbished.

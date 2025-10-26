@@ -711,6 +711,7 @@ function CarouselThumbnails({
                 height={0}
                 sizes='40px'
                 onLoad={() => handleThumbnailLoad(index)}
+                priority={index === 0} // Prioritize first thumbnail
               />
             </div>
           </button>
