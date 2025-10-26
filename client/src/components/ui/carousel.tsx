@@ -1,3 +1,9 @@
+/* eslint-disable react/no-use-context */
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable unicorn/no-new-array */
+/* eslint-disable react/no-unstable-default-props */
+/* eslint-disable react/no-unstable-context-value */
+/* eslint-disable react/no-context-provider */
 'use client';
 
 import * as React from 'react';
@@ -677,6 +683,7 @@ function CarouselThumbnails({
       {images.map((image: string, index: number) => (
         <li key={index} className='flex'>
           <button 
+            type='button'
             className='flex rounded-sm cursor-pointer'
             onClick={() => onThumbnailClick(index)}
           >
@@ -704,6 +711,7 @@ function CarouselThumbnails({
                 height={0}
                 sizes='40px'
                 onLoad={() => handleThumbnailLoad(index)}
+                priority={index === 0} // Prioritize first thumbnail
               />
             </div>
           </button>

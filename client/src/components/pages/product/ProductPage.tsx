@@ -3,11 +3,12 @@ import React, { useState, useCallback, useMemo } from 'react';
 import { useLocale } from 'next-intl';
 import { useQuery } from '@tanstack/react-query';
 
-import { ProductVariantDetail } from '@/types/product-selection.type';
 import { getProductVariantById } from '@/api/product-variant.api';
-import { useBreadcrumb } from '@/hooks/useBreadcumb';
 import { USE_QUERY_KEY } from '@/constants/use-query-key';
 import BreadcumbCustom from '@/components/ui/BreadcumbCustom';
+import { useBreadcrumb } from '@/hooks/useBreadcumb';
+import { useScrollRestoration } from '@/hooks/useScrollRestoration';
+import { ProductVariantDetail } from '@/types/product-selection.type';
 import GalleryCarousel from '../../carousels/GalleryCarousel';
 import GlobalErrorComponent from '../GlobalErrorComponent';
 import LoadingPage from '../LoadingPage';
@@ -91,6 +92,9 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
 
   const { items: displayBreadcrumbItems } = useBreadcrumb(breadcrumbItems);
 
+  // Restore scroll position after variant change
+  useScrollRestoration(isLoading, !!productVariant);
+
   if (isLoading) {
     return <LoadingPage />;
   }
@@ -104,9 +108,7 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
       <GlobalErrorComponent
         statusCode='500'
         title='This product is taking a nap :))'
-        message={
-          'If you’re here, it might be because this product isn’t available right now. Please try again later.'
-        }
+        message='If you’re here, it might be because this product isn’t available right now. Please try again later.'
         buttonText='Try again'
         onButtonClick={() => refetch()}
       />

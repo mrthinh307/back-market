@@ -1,7 +1,6 @@
 export { FilterSection } from './FilterSection';
-export { SortDropdown } from './SortDropdown';
-export { ProductListToolbar } from './ProductListToolbar';
 export { ProductGrid } from './ProductGrid';
+export { ProductListToolbar } from './ProductListToolbar';
 export { ProductPagination } from './ProductPagination';
 export { 
   PromotionalBanner,
@@ -9,3 +8,4 @@ export {
   EarthMonthBanner, 
   BackForumBanner 
 } from './PromotionalBanner';
+export { SortDropdown } from './SortDropdown';

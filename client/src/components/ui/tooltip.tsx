@@ -1,3 +1,4 @@
+/* eslint-disable react/no-context-provider */
 'use client';
 
 import * as React from 'react';

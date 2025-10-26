@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 function ArticleCard({ className }: { className?: string }) {
   return (
-    <Link href={'/'}>
+    <Link href='/'>
       <article
         className={`shadow-sm rounded-lg relative flex cursor-pointer overflow-hidden hover:shadow-lg motion-safe:transition motion-safe:duration-300 motion-safe:ease-in flex-col max-h-[280px] ${className}`}
       >
@@ -15,13 +15,13 @@ function ArticleCard({ className }: { className?: string }) {
           className='object-cover h-[168px] w-full max-h-full max-w-full leading-none'
           alt='article image'
         />
-        <div className='bg-background-secondary flex flex-1 flex-col items-start justify-between p-6'>
+        <div className='bg-secondary-background flex flex-1 flex-col items-start justify-between p-6'>
           <div className='w-full'>
-            <div className='text-xs text-muted'>News</div>
+            <div className='text-xs text-muted-foreground'>News</div>
             <h3 className='line-clamp-2 font-semibold'>
               Back Market has prevented 1 million tonnes of carbon.
             </h3>
-            <p className='text-muted mt-2 text-sm line-clamp-3'></p>
+            <p className='text-muted-foreground mt-2 text-sm line-clamp-3'></p>
           </div>
         </div>
       </article>

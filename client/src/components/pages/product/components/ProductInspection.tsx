@@ -5,8 +5,8 @@ const ProductInspection: React.FC = () => {
   const inspectionData = getProductInspectionData();
 
   return (
-    <div className="md:py-6 w-full">
-      <h2 className="text-[22px] mb-6 px-6 text-center font-semibold text-secondary">
+    <div className="md:pt-6 md:pb-4 w-full">
+      <h2 className="text-[22px] mb-6 px-6 text-center font-semibold text-secondary-foreground">
         All devices are restored professionally based on a 25-point inspection
       </h2>
       <div className="relative w-full overflow-x-auto scrollbar-none gradient-mask-lr-10-90">
@@ -23,7 +23,7 @@ const ProductInspection: React.FC = () => {
                 viewBox={item.iconData.viewBox}
                 width="24"
                 xmlns="http://www.w3.org/2000/svg"
-                className="text-muted-foreground transition-all duration-300 ease-in-out group-hover:text-primary group-hover:scale-110"
+                className="text-muted-foreground transition-all duration-300 ease-in-out group-hover:text-foreground group-hover:scale-110"
               >
                 {item.iconData.paths.map((path, index) => (
                   <path

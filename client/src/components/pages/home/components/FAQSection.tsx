@@ -24,12 +24,12 @@ function FAQSection() {
     {
       question: 'Can I buy a protection plan for my device?',
       answer:
-        "We've got you covered for life's not-so-happy accidents. Our protection plans cover drops, spills and more. We call it BackUp, and you'll see the option to purchase it alongside your device when you're checking out. After all, the longer you're able to use your device, the better it is for the planet.",
+        `We've got you covered for life's not-so-happy accidents. Our protection plans cover drops, spills and more. We call it BackUp, and you'll see the option to purchase it alongside your device when you're checking out. After all, the longer you're able to use your device, the better it is for the planet.`,
     },
   ];
 
   return (
-    <section className='w-full bg-background-secondary mb-14'>
+    <section className='w-full bg-secondary-background mb-14'>
       <div className='px-4 md:px-6 lg:px-8 mx-auto max-w-[720px] py-8 md:py-14'>
         <div className='flex flex-col mb-4'>
           <h2 className='text-[22px] font-semibold text-center md:text-left'>
@@ -43,8 +43,9 @@ function FAQSection() {
                 className='bg-background md:bg-transparent rounded-md md:rounded-none overflow-hidden'
               >
                 <button
+                  type='button'
                   onClick={() => toggleItem(index)}
-                  className='w-full flex items-center justify-between p-4 md:p-6 text-left hover:bg-accent transition-all duration-200 cursor-pointer group'
+                  className='w-full flex items-center justify-between p-4 md:p-6 text-left hover:bg-sub-background transition-all duration-200 cursor-pointer group'
                 >
                   <span className='text-base md:text-xl font-semibold pr-4 transition-colors duration-200 group-hover:text-primary'>
                     {item.question}
@@ -68,7 +69,7 @@ function FAQSection() {
                   {item.answer && (
                     <div className='px-4 md:px-6 pb-4 md:pb-6'>
                       <div className='pt-2 transform transition-transform duration-300 ease-out'>
-                        <p className='text-sm md:text-base text-muted leading-relaxed'>
+                        <p className='text-sm md:text-base text-muted-foreground leading-relaxed'>
                           {item.answer.split('BackUp').map((part, i, arr) => (
                             <span key={i}>
                               {part}

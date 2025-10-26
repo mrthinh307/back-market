@@ -1,12 +1,17 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable unused-imports/no-unused-vars */
 'use client';
 
 import { useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import {
   createContext,
-  useContext,
+  use,
   useState,
   useEffect,
+  useMemo,
+  useCallback,
+  useRef,
   ReactNode,
 } from 'react';
 
@@ -60,9 +65,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const locale = useLocale();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const isAuthCheckInitiated = useRef(false);
 
   // Helper function to check authentication status
-  const checkAuth = async () => {
+  const checkAuth = useCallback(async () => {
+    // Prevent duplicate calls
+    if (isAuthCheckInitiated.current) {
+      return;
+    }
+
+    isAuthCheckInitiated.current = true;
+
     try {
       // Try to refresh token (this will validate cookies on server)
       await refreshToken();
@@ -73,13 +86,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [checkAuth]);
 
-  const login = async (initialEmail: string, password: string) => {
+  const login = useCallback(async (initialEmail: string, password: string) => {
     if (isLoading) {
       return; // Prevent multiple submissions
     }
@@ -108,9 +121,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [isLoading, router, locale]);
 
-  const signup = async (sigupParams: SignUpParams) => {
+  const signup = useCallback(async (sigupParams: SignUpParams) => {
     const { initialEmail, password, firstName, lastName } = sigupParams;
 
     if (isLoading) {
@@ -140,9 +153,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [isLoading, router, locale]);
 
-  const loginWithGoogle = () => {
+  const loginWithGoogle = useCallback(() => {
     if (isLoading) {
       return; // Prevent multiple submissions
     }
@@ -160,10 +173,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [isLoading]);
 
-  //FIXME: Facebook login function
-  const loginWithFacebook = () => {
+  // FIXME: Facebook login function
+  const loginWithFacebook = useCallback(() => {
     if (isLoading) {
       return;
     }
@@ -176,9 +189,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [isLoading]);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     try {
       await logOut();
     } catch (error) {
@@ -187,9 +200,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsAuthenticated(false);
       window.location.href = `/${locale}/email`;
     }
-  };
+  }, [locale]);
 
-  const getMe = async () => {
+  const getMe = useCallback(async () => {
     if (!isAuthenticated) {
       return;
     }
@@ -204,25 +217,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [isAuthenticated]);
+
+  const value = useMemo(
+    () => ({
+      isAuthenticated,
+      isLoading,
+      login,
+      signup,
+      logout,
+      loginWithGoogle,
+      loginWithFacebook,
+      getMe,
+      checkAuth,
+    }),
+    [isAuthenticated, isLoading, login, signup, logout, loginWithGoogle, loginWithFacebook, getMe, checkAuth],
+  );
 
   return (
-    <AuthContext.Provider
-      value={{
-        isAuthenticated,
-        isLoading,
-        login,
-        signup,
-        logout,
-        loginWithGoogle,
-        loginWithFacebook,
-        getMe,
-        checkAuth,
-      }}
-    >
+    <AuthContext value={value}>
       {children}
-    </AuthContext.Provider>
+    </AuthContext>
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => use(AuthContext);

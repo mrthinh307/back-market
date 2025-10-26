@@ -34,7 +34,7 @@ function LoginCredentials({ email: initialEmail }: { email?: string }) {
       <Link
         href={Env.NEXT_PUBLIC_DEV_FACEBOOK_URL}
         target='_blank'
-        className='text-muted font-semibold font-500 underline mb-8'
+        className='text-muted-foreground font-semibold font-500 underline mb-8'
       >
         {t('forgot_password')}
       </Link>

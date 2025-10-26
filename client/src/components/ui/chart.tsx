@@ -1,3 +1,8 @@
+/* eslint-disable ts/no-use-before-define */
+/* eslint-disable react/no-unstable-context-value */
+/* eslint-disable react/no-context-provider */
+/* eslint-disable react-dom/no-dangerously-set-innerhtml */
+/* eslint-disable react/no-use-context */
 'use client';
 
 import * as React from 'react';

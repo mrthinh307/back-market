@@ -1,7 +1,7 @@
 'use client';
 
-import ProfileCardContainer from './ProfileCardContainer';
 import { UserAuth } from '@/types/user.types';
+import ProfileCardContainer from './ProfileCardContainer';
 
 interface UserProfileCardProps {
   userInfo: UserAuth | null;

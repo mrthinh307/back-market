@@ -1,14 +1,23 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useMemo } from 'react';
 
 import {
+  AdsVideoCard,
+  ArticleCard,
+  PressCard,
+  ProductCard,
+  ReviewCard,
+} from '@/components/cards';
+import { BannerCarousel, SlideCarousel } from '@/components/carousels';
+import FormInput from '@/components/form/FormInput';
+import {
+  FAQSection,
   MostWantedSection,
   ProductShowcaseSection,
   ServiceHighlights,
-  FAQSection,
 } from '@/components/pages/home/components';
-import { SlideCarousel, BannerCarousel } from '@/components/carousels';
 import {
   bestCategories,
   bestProducts,
@@ -20,20 +29,11 @@ import {
   topCategories,
   topProducts,
 } from '@/components/pages/home/seed/temp-data';
-import {
-  ProductCard,
-  AdsVideoCard,
-  ReviewCard,
-  ArticleCard,
-  PressCard,
-} from '@/components/cards';
 import { Button } from '@/components/ui/button';
-import FormInput from '@/components/form/FormInput';
 import { CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import { ProductCardProps } from '@/types/cards.type';
-import { mailBoxIcon } from '@/public/assets/images';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { useMemo } from 'react';
+import { mailBoxIcon } from '@/public/assets/images';
+import { ProductCardProps } from '@/types/cards.type';
 
 function HomePage() {
   const isMobile = useIsMobile();
@@ -199,8 +199,8 @@ function HomePage() {
                   access, rectify or delete your data.
                 </p>
                 <Link
-                  href={'/'}
-                  className='underline hover:text-secondary font-semibold'
+                  href='/'
+                  className='underline hover:text-secondary-foreground font-semibold'
                 >
                   For more details, please refer to our privacy policy.
                 </Link>

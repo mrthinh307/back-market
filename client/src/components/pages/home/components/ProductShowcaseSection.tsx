@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { memo, useState } from 'react';
+
 import {
   Carousel,
   CarouselContent,
@@ -32,11 +33,12 @@ const CategoryButton = memo(
   }) => {
     return (
       <button
+        type='button'
         className='w-[72px] content-center flex-col text-center gap-1 cursor-pointer shrink-0'
         onClick={onClick}
       >
         <div
-          className={`bg-background-secondary dark:bg-[#000] h-[48px] w-full rounded-lg border border-transparent hover:border-foreground ${isSelected ? '!border-foreground' : ''}`}
+          className={`bg-secondary-background dark:bg-[#000] h-[48px] w-full rounded-lg border border-transparent hover:border-foreground ${isSelected ? '!border-foreground' : ''}`}
         >
           <Image
             src={category.image}
@@ -73,7 +75,10 @@ function ProductShowcaseSection({
       </div>
       <div className='bg-sub-background md:h-[580px] flex flex-col md:flex-row rounded-lg overflow-hidden'>
         <div className='md:grow-0 md:shrink-0 md:basis-[380px]'>
-          <img
+          <Image
+            width={0}
+            height={0}
+            sizes='100vw'
             src={showcaseImage}
             alt={showcaseTitle}
             className='object-cover w-full h-[200px] md:h-full max-h-full max-w-full leading-none'
@@ -98,7 +103,7 @@ function ProductShowcaseSection({
               loop: false,
               slidesToScroll: isMobile ? 1 : 3,
             }}
-            className={`w-full`}
+            className='w-full'
           >
             <CarouselContent className='pt-3 pb-5'>
               {showcaseProducts.map(

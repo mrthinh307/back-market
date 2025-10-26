@@ -35,8 +35,8 @@ export const CATEGORIES_DATA: Array<CategoryCardProps> = [
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://images.ctfassets.net/mmeshd7gafk1/5GjoGJCqWVngJRShjjG7a/b7d6c965d1a18230836a0c1a904364b4/HP_Category_Laptop_desktop.jpg',
     name: 'MacBook',
     api: {
-      //TODO: Merge categories for MacBook and Macbook M1,...
-      //FIXME: categoryId: [39, 40, 41, 42] => categoryId: '41',
+      // TODO: Merge categories for MacBook and Macbook M1,...
+      // FIXME: categoryId: [39, 40, 41, 42] => categoryId: '41',
       categoryId: '41',
       pageTitle: 'Refurbished Apple MacBooks',
       pageSubtitle:
@@ -109,7 +109,7 @@ export const CATEGORIES_DATA: Array<CategoryCardProps> = [
       'https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://images.ctfassets.net/mmeshd7gafk1/6NskjJVCrZH1ZbtUNVq8BT/2f2ce83d7d5ff35943f04105e97cc3f6/Deals_-_Desktop.jpg',
     name: 'Good deals',
     api: {
-      //TODO: Create a specific category for "Good deals"?
+      // TODO: Create a specific category for "Good deals"?
       categoryId: '0',
       pageTitle: 'Refurbished Products on Sale',
       pageSubtitle:

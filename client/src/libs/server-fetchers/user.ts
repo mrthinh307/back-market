@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { serverFetch } from '@/utils/Helpers';
+import { serverFetchWithCookies } from '@/utils/Helpers';
 import { Env } from '../Env';
 
 export const getUserProfile = async () => {
@@ -8,7 +8,7 @@ export const getUserProfile = async () => {
   
   if (!accessToken) return null;
 
-  const res = await serverFetch(`${Env.NEXT_PUBLIC_API_URL}/users/me`, {
+  const res = await serverFetchWithCookies(`${Env.NEXT_PUBLIC_API_URL}/users/me`, {
     cache: 'no-store',
   });
 
@@ -22,7 +22,7 @@ export const getUserAddress = async () => {
   
   if (!accessToken) return null;
 
-  const res = await serverFetch(`${Env.NEXT_PUBLIC_API_URL}/users/me/address`, {
+  const res = await serverFetchWithCookies(`${Env.NEXT_PUBLIC_API_URL}/users/me/address`, {
     cache: 'no-store',
   });
   

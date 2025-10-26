@@ -1,19 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { useEffect, useState } from 'react';
 
-import { useAuth } from '@/contexts/AuthContext';
-import { useRouterRedirect } from '@/hooks/useRouterRedirect';
-import LoadingPage from '@/components/pages/LoadingPage';
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/admin/app-sidebar';
-import { SiteHeader } from '@/components/admin/site-header';
-import { SectionCards } from '@/components/admin/section-cards';
 import { ChartAreaInteractive } from '@/components/admin/chart-area-interactive';
 import { DataTable } from '@/components/admin/data-table';
+import { SectionCards } from '@/components/admin/section-cards';
+import { SiteHeader } from '@/components/admin/site-header';
+import LoadingPage from '@/components/pages/LoadingPage';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { useAuth } from '@/contexts/AuthContext';
+import { useRouterRedirect } from '@/hooks/useRouterRedirect';
+import { Env } from '@/libs/Env';
 
 import data from './data.json';
-import { Env } from '@/libs/Env';
 
 export default function AdminDashboard() {
   const { isAuthenticated, isLoading, getMe } = useAuth();
@@ -36,8 +37,7 @@ export default function AdminDashboard() {
 
       if (
         !userData ||
-        userData.role.toLowerCase() !==
-          Env.NEXT_PUBLIC_AUTHORITATIVE_ROLE.toLowerCase()
+        userData.role.toLowerCase() !== Env.NEXT_PUBLIC_AUTHORITATIVE_ROLE.toLowerCase()
       ) {
         if (!hasRedirected) {
           setHasRedirected(true);

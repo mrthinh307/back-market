@@ -7,9 +7,9 @@ export interface ScrollDirection {
 }
 
 interface UseScrollDirectionOptions {
-  threshold?: number; // Ngưỡng tối thiểu để bắt đầu ẩn header
-  hideThreshold?: number; // Khoảng cách scroll tối thiểu để trigger hide/show
-  mode?: 'default' | 'strict'; // default: show khi scroll up, strict: chỉ show khi về threshold
+  threshold?: number; // Minimum scroll Y to start detecting
+  hideThreshold?: number; // Minimum scroll distance to trigger hide/show
+  mode?: 'default' | 'strict'; // default: show when scrolling up, strict: only show when back to threshold
 }
 
 export const useScrollDirection = (options: UseScrollDirectionOptions = {}): ScrollDirection => {
@@ -26,7 +26,6 @@ export const useScrollDirection = (options: UseScrollDirectionOptions = {}): Scr
     const updateScrollDirection = () => {
       const currentScrollY = window.scrollY;
       
-      // Nếu ở đầu trang, luôn hiện header
       if (currentScrollY < threshold) {
         setIsHidden(false);
         setScrollY(currentScrollY);
@@ -38,28 +37,22 @@ export const useScrollDirection = (options: UseScrollDirectionOptions = {}): Scr
       const scrollDiff = Math.abs(currentScrollY - lastScrollY);
 
       if (mode === 'strict') {
-        // Strict mode: Chỉ hiển thị header khi scroll về đúng threshold hoặc thấp hơn
         if (currentScrollY <= threshold) {
           setIsHidden(false);
         } else {
-          // Ẩn header khi scroll xuống qua threshold
           setIsHidden(true);
         }
         
-        // Cập nhật direction và lastScrollY
         if (scrollDiff >= hideThreshold) {
           setScrollDirection(direction);
           setLastScrollY(currentScrollY);
         }
       } else {
-        // Default mode: Hiển thị ngay khi scroll lên
         if (direction === 'up' && currentScrollY !== lastScrollY) {
           setScrollDirection(direction);
           setLastScrollY(currentScrollY);
           setIsHidden(false);
-        }
-        // Chỉ ẩn khi scroll xuống đủ xa
-        else if (direction === 'down' && scrollDiff >= hideThreshold && currentScrollY > threshold) {
+        } else if (direction === 'down' && scrollDiff >= hideThreshold && currentScrollY > threshold) {
           setScrollDirection(direction);
           setLastScrollY(currentScrollY);
           setIsHidden(true);

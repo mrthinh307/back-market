@@ -1,9 +1,9 @@
+import { ChevronDownIcon } from 'lucide-react';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { ChevronDownIcon } from 'lucide-react';
 
 // Sort constants
 const SORT_OPTIONS = {
@@ -42,6 +42,7 @@ export function SortDropdown({
         <div className='flex flex-col gap-2'>
           {SORT_OPTIONS.options.map((option) => (
             <button
+              type='button'
               key={option.id}
               onClick={() => handleSortSelect(option.id)}
               className='text-left px-2 py-1 hover:bg-input-hover rounded text-sm transition-colors'

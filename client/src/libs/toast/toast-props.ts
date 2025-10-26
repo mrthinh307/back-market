@@ -1,5 +1,5 @@
 export const errorToastProps = {
-  duration: 3000,
+  duration: 2500,
   richColors: true,
 };
 

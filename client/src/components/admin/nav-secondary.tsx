@@ -1,3 +1,5 @@
+/* eslint-disable ts/no-import-type-side-effects */
+ 
 'use client';
 
 import * as React from 'react';

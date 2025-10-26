@@ -1,14 +1,15 @@
-import { notFound } from 'next/navigation';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import ProductPage from '@/components/pages/product/ProductPage';
-import { isValidUUID } from '@/utils/string';
-import { USE_QUERY_KEY } from '@/constants/use-query-key';
+import { notFound } from 'next/navigation';
 import { cache } from 'react';
+
+import ProductPage from '@/components/pages/product/ProductPage';
+import { USE_QUERY_KEY } from '@/constants/use-query-key';
 import { getProductVariantServer } from '@/libs/server-fetchers/product-variant';
+import { isValidUUID } from '@/utils/string';
 
 type ProductPageParams = {
   params: Promise<{ locale: string; id: string }>;
@@ -65,7 +66,7 @@ export default async function Product({ params }: ProductPageParams) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <main className='bg-background-secondary dark:bg-background'>
+      <main className='bg-secondary-background dark:bg-background'>
         <ProductPage productVariantId={id} />
       </main>
     </HydrationBoundary>

@@ -3,9 +3,9 @@
 import Image from 'next/image';
 import React, { memo, useRef, useState } from 'react';
 
+import clearIcon from '@/public/assets/images/clear-input.svg?url';
 import hidePasswordIcon from '@/public/assets/images/hide-password.svg?url';
 import showPasswordIcon from '@/public/assets/images/show-password.svg?url';
-import clearIcon from '@/public/assets/images/clear-input.svg?url';
 import { Input } from '../ui/input';
 
 type InputProps = {
@@ -75,7 +75,7 @@ const FormInput = ({
         onChange={handleChange}
         autoComplete='off'
         placeholder=' '
-        className={`peer rounded-sm border text-primary w-full h-[48px] min-w-0 relative duration-200 transition-all hover:bg-input-hover dark:hover:bg-input/60 focus:outline-none focus:ring-2 px-3 pt-6 pb-3 !text-base ${
+        className={`peer rounded-sm border text-foreground w-full h-[48px] min-w-0 relative duration-200 transition-all hover:bg-input-hover dark:hover:bg-input/60 focus:outline-none focus:ring-2 px-3 pt-6 pb-3 !text-base ${
           error
             ? 'border-destructive focus:border-destructive focus:ring-red-200'
             : 'border-dark'
@@ -84,8 +84,8 @@ const FormInput = ({
       <label
         className={`absolute left-3 top-3 text-base transition-all duration-200 ease-in-out
                    peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-primary
-                   peer-focus:top-1 peer-focus:text-xs peer-focus:text-muted
-                   peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-muted pointer-events-none ${labelClassName}`}
+                   peer-focus:top-1 peer-focus:text-xs peer-focus:text-muted-foreground
+                   peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-muted-foreground pointer-events-none ${labelClassName}`}
       >
         {label}
       </label>
@@ -131,7 +131,7 @@ const FormInput = ({
       </div>
       {isShowDescription && (
         <p
-          className={`text-sm mt-2 ${error ? 'text-destructive' : 'text-muted'}`}
+          className={`text-sm mt-2 ${error ? 'text-destructive' : 'text-muted-foreground'}`}
         >
           {description}
         </p>

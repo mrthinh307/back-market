@@ -22,7 +22,7 @@ function CartSummarySection({
         <h2 className='relative flex flex-col gap-6 text-[22px] font-semibold'>
           Summary
         </h2>
-        <div className='rounded-lg shadow-sm bg-background-secondary p-6'>
+        <div className='rounded-lg shadow-sm bg-secondary-background p-6'>
           <div className='space-y-6'>
             {cartItems.map((item) => (
               <div key={item.id} className='flex items-start gap-3'>
@@ -56,7 +56,7 @@ function CartSummarySection({
 
                 <div className='flex-1 min-w-0'>
                   <div className='flex justify-between items-start gap-2'>
-                    <p className='text-sm font-semibold text-primary leading-snug truncate'>
+                    <p className='text-sm font-semibold leading-snug truncate'>
                       {item.productVariant.product.name}
                     </p>
                     <p className='text-sm whitespace-nowrap text-primary'>
@@ -66,7 +66,7 @@ function CartSummarySection({
                       ).toFixed(2)}
                     </p>
                   </div>
-                  <div className='flex justify-between text-sm text-muted-foreground mt-1'>
+                  <div className='flex justify-between text-sm text-muted-foreground-foreground mt-1'>
                     <p>Shipping</p>
                     <p>Free</p>
                   </div>
@@ -75,7 +75,7 @@ function CartSummarySection({
             ))}
             <hr className='border-border my-4'></hr>
             <div className='space-y-3'>
-              <div className='flex justify-between text-sm text-muted'>
+              <div className='flex justify-between text-sm text-muted-foreground'>
                 <span>Subtotal</span>
                 <span>$ {subtotal.toFixed(2)}</span>
               </div>
@@ -98,17 +98,17 @@ function CartSummarySection({
                 {isRemoving ? <LoadingSpinner /> : 'Go to shipping'}
               </Button>
 
-              <p className='text-xs text-secondary text-center mt-3 leading-relaxed'>
+              <p className='text-xs text-secondary-foreground text-center mt-3 leading-relaxed'>
                 By confirming this order you accept our
-                <Link href='#' className='underline text-primary font-semibold'>
+                <Link href='/' className='underline font-semibold'>
                   Terms of Use Agreement
                 </Link>
                 ,{' '}
-                <Link href='#' className='underline text-primary font-semibold'>
+                <Link href='/' className='underline font-semibold'>
                   Terms of Sale
                 </Link>
                 , and our{' '}
-                <Link href='#' className='underline text-primary font-semibold'>
+                <Link href='/' className='underline font-semibold'>
                   data protection policy
                 </Link>
                 .

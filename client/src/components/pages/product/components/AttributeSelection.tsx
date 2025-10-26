@@ -1,5 +1,8 @@
 import React, { memo, useMemo } from 'react';
-import { RelevantVariantGroup, ProductVariantDetail } from '@/types/product-selection.type';
+import {
+  RelevantVariantGroup,
+  ProductVariantDetail,
+} from '@/types/product-selection.type';
 import { LeftSideSelectionSection, RightSideSelectionSection } from './';
 
 // Configuration type for attribute sections
@@ -23,7 +26,7 @@ type AttributeConfig = {
 const getAttributeSectionConfig = (
   attributeCode: string,
   attributeName: string,
-  productVariant: ProductVariantDetail
+  productVariant: ProductVariantDetail,
 ): AttributeConfig => {
   const baseConfigs: Record<string, AttributeConfig> = {
     GRADES: {
@@ -38,7 +41,6 @@ const getAttributeSectionConfig = (
       showExampleImageBadge: true,
       gridColumns: 2,
       showBadge: true,
-      className: 'md:py-6',
     },
     BATTERY: {
       title: 'Choose a battery option',
@@ -62,7 +64,8 @@ const getAttributeSectionConfig = (
     },
     COLOR: {
       title: 'Select the color',
-      leftCarouselImages: productVariant.images?.map((img) => img.imageUrl) || [],
+      leftCarouselImages:
+        productVariant.images?.map((img) => img.imageUrl) || [],
       gridColumns: 2,
     },
     DUAL_SIM: {
@@ -77,10 +80,12 @@ const getAttributeSectionConfig = (
     },
   };
 
-  return baseConfigs[attributeCode] || {
-    title: attributeName,
-    gridColumns: 1 as const,
-  };
+  return (
+    baseConfigs[attributeCode] || {
+      title: attributeName,
+      gridColumns: 1 as const,
+    }
+  );
 };
 
 // Universal Selection Component - optimized with memo and useMemo
@@ -93,25 +98,30 @@ const AttributeSelection: React.FC<{
     return getAttributeSectionConfig(
       attributeGroup.attribute.code,
       attributeGroup.attribute.name,
-      productVariant
+      productVariant,
     );
-  }, [attributeGroup.attribute.code, attributeGroup.attribute.name, productVariant]);
+  }, [
+    attributeGroup.attribute.code,
+    attributeGroup.attribute.name,
+    productVariant,
+  ]);
 
   // Memoize options array để tránh re-create mỗi render
-  const options = useMemo(() => 
-    attributeGroup.items.map((item) => ({
-      id: item.variantId,
-      name: item.grade.name,
-      price: item.priceWithCurrency,
-      isGoodDeal: false,
-    })), 
-    [attributeGroup.items]
+  const options = useMemo(
+    () =>
+      attributeGroup.items.map((item) => ({
+        id: item.variantId,
+        name: item.grade.name,
+        price: item.priceWithCurrency,
+        isGoodDeal: false,
+      })),
+    [attributeGroup.items],
   );
 
   // Memoize selectedOption để tránh re-calculate
-  const selectedOption = useMemo(() => 
-    attributeGroup.items.find((item) => item.selected)?.variantId || '',
-    [attributeGroup.items]
+  const selectedOption = useMemo(
+    () => attributeGroup.items.find((item) => item.selected)?.variantId || '',
+    [attributeGroup.items],
   );
 
   return (

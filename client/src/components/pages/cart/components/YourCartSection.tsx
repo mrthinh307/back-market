@@ -60,7 +60,7 @@ function YourCartSection({
                           item.productVariantId,
                           item.productVariant.product.name,
                         ),
-                      isRemoving: isRemoving,
+                      isRemoving,
                     }}
                     className='w-full'
                   />

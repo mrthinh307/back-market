@@ -3,9 +3,9 @@ import Link from 'next/link';
 
 function PressCard({ className }: { className?: string }) {
   return (
-    <Link href={'/'} className='h-full'>
+    <Link href='/' className='h-full'>
       <article
-        className={`bg-background-secondary shadow-sm rounded-lg focus-within:shadow-md relative cursor-pointer overflow-hidden hover:shadow-md motion-safe:transition motion-safe:duration-300 motion-safe:ease-in p-8 h-full ${className}`}
+        className={`bg-secondary-background shadow-sm rounded-lg focus-within:shadow-md relative cursor-pointer overflow-hidden hover:shadow-md motion-safe:transition motion-safe:duration-300 motion-safe:ease-in p-8 h-full ${className}`}
       >
         <div className='content-center flex-col h-full'>
           <div className='flex h-[108px] w-[144px] items-stretch'>
@@ -22,7 +22,7 @@ function PressCard({ className }: { className?: string }) {
             "Back Market – now a certified B Corp, which guarantees certain
             ethical standards."
           </div>
-          <div className='text-sm text-muted mt-2 select-text'>31/07/2025</div>
+          <div className='text-sm text-muted-foreground mt-2 select-text'>31/07/2025</div>
         </div>
       </article>
     </Link>

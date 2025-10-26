@@ -6,7 +6,7 @@ function LoadingPage() {
     <div className='fixed inset-0 flex flex-col z-50 bg-background overflow-y-hidden'>
       <header className='bg-background border-b border-[#dfe1e7] dark:border-gray-600/30 min-h-16 flex justify-start items-center px-8 py-4 flex-shrink-0'>
         <div className='h-[14px] shrink-0'>
-          <Image src={logo} alt='logo' className='h-full w-auto dark:invert' />
+          <Image src={logo} alt='logo' className='h-full w-auto dark:invert' priority />
         </div>
       </header>
       <div className='flex-1 flex flex-col justify-center items-center p-4 overflow-hidden'>

@@ -13,7 +13,7 @@ function BreadcrumbList({ className, ...props }: React.ComponentProps<'ol'>) {
     <ol
       data-slot='breadcrumb-list'
       className={cn(
-        'font-bold flex flex-wrap items-center text-xs md:text-sm break-words gap-1 md:gap-3 text-secondary md:text-primary',
+        'font-bold flex flex-wrap items-center text-xs md:text-sm break-words gap-1 md:gap-3 text-secondary-foreground md:text-foreground',
         className,
       )}
       {...props}
@@ -43,7 +43,7 @@ function BreadcrumbLink({
   return (
     <Comp
       data-slot='breadcrumb-link'
-      className={cn('text-muted md:text-primary hover:text-secondary transition-colors hover:underline', className)}
+      className={cn('text-muted-foreground md:text-foreground hover:text-secondary-foreground transition-colors hover:underline', className)}
       {...props}
     />
   );
@@ -56,7 +56,7 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<'span'>) {
       role='link'
       aria-disabled='true'
       aria-current='page'
-      className={cn('text-muted font-bold md:text-primary md:font-normal', className)}
+      className={cn('text-muted-foreground font-bold md:text-foreground md:font-normal', className)}
       {...props}
     />
   );
@@ -100,10 +100,10 @@ function BreadcrumbEllipsis({
 
 export {
   Breadcrumb,
-  BreadcrumbList,
+  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
+  BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-  BreadcrumbEllipsis,
 };

@@ -60,7 +60,7 @@ httpRequest.interceptors.response.use(
     }
 
     if (status === 403) {
-      //TODO: NEED TO HANDLE 403 ERROR
+      // TODO: NEED TO HANDLE 403 ERROR
     } else if (status === 500) {
       toast.error('Server error', { ...errorToastProps });
     } else if (!status) {

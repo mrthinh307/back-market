@@ -1,13 +1,13 @@
-import { notFound } from 'next/navigation';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import ProductListPage from '@/components/pages/product-list/ProductListPage';
-import { getProductListServer } from '@/libs/server-fetchers/product';
-import { USE_QUERY_KEY } from '@/constants/use-query-key';
+import { notFound } from 'next/navigation';
 import { getCategoryMetadata } from '@/components/pages/product-list/data/categories';
+import ProductListPage from '@/components/pages/product-list/ProductListPage';
+import { USE_QUERY_KEY } from '@/constants/use-query-key';
+import { getProductListServer } from '@/libs/server-fetchers/product';
 
 type ProductListPageParams = {
   params: Promise<{ locale: string }>;

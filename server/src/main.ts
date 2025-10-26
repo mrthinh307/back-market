@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -13,17 +12,13 @@ async function bootstrap() {
       transform: true, // Enable transformation of incoming data
     }),
   );
-  
+
   app.enableCors({
-    origin: (origin, callback) => {
-      if (!origin || origin.includes('localhost')) return callback(null, true);
-
-      if (origin.endsWith('.vercel.app')) return callback(null, true);
-
-      if (origin.endsWith(process.env.DOMAIN_NAME || 'mrthinh.site')) return callback(null, true);
-
-      return callback(new Error('Not allowed by CORS'));
-    },
+    origin: [
+      process.env.FRONTEND_URL, // FE production
+      'https://backmarket.mrthinh.site', // FE production 
+      'http://localhost:3000', // FE dev local
+    ],
     credentials: true,
   });
 

@@ -1,6 +1,6 @@
-import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 
@@ -49,7 +49,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
 
         {/* Close Button */}
         <button
-          className='p-2 rounded-full hover:bg-sub-background cursor-pointer transition-colors'
+          type='button'
+          className='p-2 rounded-full cursor-pointer transition-colors'
           onClick={() => setIsMenuOpen(false)}
         >
           <Image
@@ -66,7 +67,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       <div className='flex-1 overflow-y-auto scrollbar-none bg-white dark:bg-background'>
         {/* Shop Section */}
         <div className='p-6'>
-          <h2 className='text-secondary mb-4'>Shop</h2>
+          <h2 className='text-secondary-foreground mb-4'>Shop</h2>
 
           {/* All main nav items */}
           <div className='flex flex-col'>

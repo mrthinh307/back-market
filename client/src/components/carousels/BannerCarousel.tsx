@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import Image from 'next/image';
-import {
-  CarouselWithAutoplay,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-  CarouselDotsWithProgress,
-  CarouselDots,
-} from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import Fade from 'embla-carousel-fade';
+import Image from 'next/image';
+import React, { useEffect, useMemo, useState } from 'react';
+import {
+  CarouselContent,
+  CarouselDots,
+  CarouselDotsWithProgress,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselWithAutoplay,
+} from '@/components/ui/carousel';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -47,7 +47,7 @@ function BannerCarousel({
 
   // ✅ Initialize loading state for all images
   useEffect(() => {
-    setImagesLoaded(new Array(bannerImages.length).fill(false));
+    setImagesLoaded(Array.from({ length: bannerImages.length }, () => false));
   }, [bannerImages.length]);
 
   // ✅ Handle image load

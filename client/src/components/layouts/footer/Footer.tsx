@@ -97,7 +97,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className='bg-background-secondary'>
+    <footer className='bg-secondary-background'>
       {/* Newsletter Section */}
       <div className='border-b border-border'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
@@ -106,7 +106,7 @@ const Footer: React.FC = () => {
               <h3 className='text-xl lg:text-2xl font-semibold mb-2'>
                 Get £15 off your first order.
               </h3>
-              <p className='text-muted'>
+              <p className='text-muted-foreground'>
                 On orders of £250 or more, when you sign up for emails.
               </p>
             </div>
@@ -142,7 +142,7 @@ const Footer: React.FC = () => {
               </button>
 
               {showLearnMore && (
-                <div className='mt-3 p-4 bg-muted-secondary rounded-sm text-sm'>
+                <div className='mt-3 p-4 bg-muted rounded-sm text-sm'>
                   <p>
                     Terms and conditions apply. Discount valid for new
                     subscribers only. Minimum order value £250. Cannot be
@@ -173,7 +173,7 @@ const Footer: React.FC = () => {
                   <li key={linkIndex}>
                     <Link
                       href={link.href}
-                      className='text-sm text-muted hover:text-foreground transition-colors block'
+                      className='text-sm text-muted-foreground hover:text-foreground transition-colors block'
                     >
                       {link.label}
                     </Link>
@@ -189,28 +189,28 @@ const Footer: React.FC = () => {
                     className='p-2 bg-muted rounded-full hover:bg-muted-foreground transition-colors w-fit'
                     aria-label='Twitter'
                   >
-                    <Twitter className='h-4 w-4 text-background-secondary' />
+                    <Twitter className='h-4 w-4 text-primary-foreground' />
                   </Link>
                   <Link
                     href='#'
                     className='p-2 bg-muted rounded-full hover:bg-muted-foreground transition-colors w-fit'
                     aria-label='LinkedIn'
                   >
-                    <Linkedin className='h-4 w-4 text-background-secondary' />
+                    <Linkedin className='h-4 w-4 text-primary-foreground' />
                   </Link>
                   <Link
                     href='#'
                     className='p-2 bg-muted rounded-full hover:bg-muted-foreground transition-colors w-fit'
                     aria-label='Facebook'
                   >
-                    <Facebook className='h-4 w-4 text-background-secondary' />
+                    <Facebook className='h-4 w-4 text-primary-foreground' />
                   </Link>
                   <Link
                     href='#'
                     className='p-2 bg-muted rounded-full hover:bg-muted-foreground transition-colors w-fit'
                     aria-label='Instagram'
                   >
-                    <Instagram className='h-4 w-4 text-background-secondary' />
+                    <Instagram className='h-4 w-4 text-primary-foreground' />
                   </Link>
                 </div>
               )}
@@ -245,7 +245,7 @@ const Footer: React.FC = () => {
         <div className='mt-12 pt-8 border-t border-border'>
           <div className='flex flex-col md:flex-row md:items-center md:justify-between gap-6'>
             <div className='text-center md:text-left'>
-              <p className='text-sm text-muted font-medium'>
+              <p className='text-sm text-muted-foreground font-medium'>
                 © 2025 Back Market
               </p>
             </div>

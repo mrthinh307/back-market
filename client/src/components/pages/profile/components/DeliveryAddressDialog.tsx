@@ -1,16 +1,17 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
+import { toast } from 'sonner';
+import { z } from 'zod';
+
+import { saveUserAddress } from '@/api/user.api';
 import FormInput from '@/components/form/FormInput';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import { PhoneInput } from '@/components/ui/phone-input';
-import { saveUserAddress } from '@/api/user.api';
-import { toast } from 'sonner';
 import { successToastProps } from '@/libs/toast/toast-props';
 import { deliveryAddressSchema } from '@/validations/FormValidation';
-import { z } from 'zod';
 import {
   Select,
   SelectContent,
@@ -19,6 +20,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useVietnameseAddress } from '@/hooks/useVietnameseAddress';
+import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
 
 interface DeliveryAddressDialogProps {
   isOpen: boolean;
@@ -75,84 +77,52 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [isSheetVisible, setIsSheetVisible] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Lock body scroll when dialog is open
+  useBodyScrollLock(isOpen);
+
+  // Animate sheet when opening
+  useEffect(() => {
+    if (!isOpen) {
+      setIsSheetVisible(false);
+      return;
+    }
+
+    const rafId = requestAnimationFrame(() => {
+      setIsSheetVisible(true);
+    });
+
+    return () => cancelAnimationFrame(rafId);
+  }, [isOpen]);
 
   // Effect to populate dropdowns with initial data
   useEffect(() => {
-    if (!initialData || !cities.length) return;
+    if (!initialData || !cities.length || isInitialized) return;
 
-    // Find city ID by name
-    const foundCity = cities.find((city) => city.Name === initialData.city);
-    if (foundCity) {
-      setSelectedCityId(foundCity.Id);
-      updateDistricts(foundCity.Id);
+    const city = cities.find((c) => c.Name === initialData.city);
+    if (!city) return;
 
-      // Find district ID by name
-      const foundDistrict = foundCity.Districts.find(
-        (district) => district.Name === initialData.district,
-      );
-      if (foundDistrict) {
-        setSelectedDistrictId(foundDistrict.Id);
-        updateWards(foundDistrict.Id);
+    const district = city.Districts.find((d) => d.Name === initialData.district);
+    if (!district) return;
 
-        // Find ward ID by name
-        const foundWard = foundDistrict.Wards.find(
-          (ward) => ward.Name === initialData.ward,
-        );
-        if (foundWard) {
-          setSelectedWardId(foundWard.Id);
-        }
-      }
-    }
-  }, [initialData, cities, updateDistricts, updateWards]);
+    const ward = district.Wards.find((w) => w.Name === initialData.ward);
 
-  // Handlers for address selection
-  const handleCityChange = (cityId: string) => {
-    setSelectedCityId(cityId);
-    setSelectedDistrictId('');
-    setSelectedWardId('');
-    updateDistricts(cityId);
+    // Set all IDs at once
+    setSelectedCityId(city.Id);
+    setSelectedDistrictId(district.Id);
+    setSelectedWardId(ward?.Id || '');
 
-    const cityName = getCityName(cityId);
-    setFormData((prev) => ({
-      ...prev,
-      city: cityName,
-      district: '',
-      ward: '',
-    }));
-    setTouched((prev) => ({ ...prev, city: true }));
-    if (touched.city || cityName.length > 0) {
-      validateField('city', cityName);
-    }
-  };
+    // Update dropdowns
+    updateDistricts(city.Id);
+    updateWards(district.Id, city.Districts);
 
-  const handleDistrictChange = (districtId: string) => {
-    setSelectedDistrictId(districtId);
-    setSelectedWardId('');
-    updateWards(districtId);
+    setIsInitialized(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialData, cities]);
 
-    const districtName = getDistrictName(districtId);
-    setFormData((prev) => ({
-      ...prev,
-      district: districtName,
-      ward: '',
-    }));
-    setTouched((prev) => ({ ...prev, district: true }));
-    if (touched.district || districtName.length > 0) {
-      validateField('district', districtName);
-    }
-  };
-
-  const handleWardChange = (wardId: string) => {
-    setSelectedWardId(wardId);
-
-    const wardName = getWardName(wardId);
-    setFormData((prev) => ({ ...prev, ward: wardName }));
-    setTouched((prev) => ({ ...prev, ward: true }));
-    if (touched.ward || wardName.length > 0) {
-      validateField('ward', wardName);
-    }
-  };
-
+  // Validation helper function
   const validateField = (field: string, value: string) => {
     try {
       deliveryAddressSchema.shape[
@@ -170,10 +140,72 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
     }
   };
 
+  // Handler for city selection
+  const handleCityChange = (cityId: string) => {
+    // Reset dependent fields
+    setSelectedCityId(cityId);
+    setSelectedDistrictId('');
+    setSelectedWardId('');
+    
+    // Update districts based on selected city
+    updateDistricts(cityId);
+
+    // Update form data
+    const cityName = getCityName(cityId);
+    setFormData((prev) => ({
+      ...prev,
+      city: cityName,
+      district: '',
+      ward: '',
+    }));
+    
+    // Mark as touched and validate
+    setTouched((prev) => ({ ...prev, city: true }));
+    validateField('city', cityName);
+  };
+
+  // Handler for district selection
+  const handleDistrictChange = (districtId: string) => {
+    // Reset dependent fields
+    setSelectedDistrictId(districtId);
+    setSelectedWardId('');
+    
+    // Update wards based on selected district
+    updateWards(districtId);
+
+    // Update form data
+    const districtName = getDistrictName(districtId);
+    setFormData((prev) => ({
+      ...prev,
+      district: districtName,
+      ward: '',
+    }));
+    
+    // Mark as touched and validate
+    setTouched((prev) => ({ ...prev, district: true }));
+    validateField('district', districtName);
+  };
+
+  // Handler for ward selection
+  const handleWardChange = (wardId: string) => {
+    setSelectedWardId(wardId);
+
+    // Update form data
+    const wardName = getWardName(wardId);
+    setFormData((prev) => ({ ...prev, ward: wardName }));
+    
+    // Mark as touched and validate
+    setTouched((prev) => ({ ...prev, ward: true }));
+    validateField('ward', wardName);
+  };
+
+  // Handler for text input changes
   const handleInputChange =
     (field: keyof DeliveryAddressData) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
+      
+      // Update form data
       setFormData((prev) => ({
         ...prev,
         [field]: value,
@@ -182,14 +214,13 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
       // Mark field as touched
       setTouched((prev) => ({ ...prev, [field]: true }));
 
-      // Validate field if it's been touched
-      if (touched[field] || value.length > 0) {
-        validateField(field, value);
-      }
+      // Validate field
+      validateField(field, value);
     };
 
+  // Check if form data has changed from initial data
   const isDataChanged = () => {
-    if (!initialData) return true; // If no initial data, it's a new address
+    if (!initialData) return true; // New address
 
     // Compare all relevant fields
     return (
@@ -202,6 +233,7 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
     );
   };
 
+  // Validate all fields before saving
   const validateAllFields = () => {
     try {
       deliveryAddressSchema.parse(formData);
@@ -215,6 +247,8 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
           }
         });
         setErrors(newErrors);
+        
+        // Mark all fields as touched to show errors
         setTouched({
           fullName: true,
           phone: true,
@@ -228,6 +262,7 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
     }
   };
 
+  // Save handler
   const handleSave = async () => {
     // Validate all fields first
     if (!validateAllFields()) {
@@ -244,12 +279,13 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
     setIsSaving(true);
 
     try {
-      // Save only when there are changes
+      // Save address
       const savedAddress = await saveUserAddress(formData);
       toast.success('Address saved successfully!', {
         ...successToastProps,
       });
 
+      // Callback with saved data
       onSave({ ...formData, id: savedAddress.id });
       onClose();
     } catch (error) {
@@ -263,38 +299,39 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className='fixed inset-0 z-50 flex items-center justify-center'>
+    <div className='fixed inset-0 z-50 flex items-end md:items-center justify-center px-0 md:px-4 md:pb-0'>
       {/* Backdrop */}
       <div
         className='absolute inset-0 bg-black/60 dark:bg-black/80'
-        onClick={onClose}
       />
 
       {/* Dialog */}
-      <div className='relative bg-background-secondary rounded-lg p-6 w-full max-w-2xl mx-4 max-h-[95vh] shadow-lg flex flex-col'>
+      <div
+        className={`relative bg-secondary-background w-full max-w-2xl md:rounded-lg rounded-t-3xl shadow-lg flex flex-col p-5 md:p-6 max-h-[90vh] md:max-h-[95vh] transform transition-transform duration-300 ease-out md:duration-200 ${isSheetVisible ? 'translate-y-0' : 'translate-y-full md:translate-y-0'}`}
+      >
         {/* Header */}
-        <div className='relative mb-6 pb-6 border-b border-border flex justify-between flex-shrink-0'>
-          <div className='w-10 h-full'></div>
-          <h2 className='text-lg text-foreground font-normal text-center content-center'>
+        <div className='relative mb-5 md:mb-6 pb-4 md:pb-6 border-b border-border flex items-center justify-between flex-shrink-0'>
+          <div className='w-9 md:w-10' />
+          <h2 className='text-base md:text-lg text-foreground font-medium text-center'>
             Delivery Address
           </h2>
           <Button
             size='icon'
-            className='hover:bg-icon-button-hover bg-transparent transition-colors ease-in'
+            className='hover:bg-icon-button-hover bg-transparent transition-colors ease-in h-9 w-9 md:h-10 md:w-10'
             onClick={onClose}
           >
             <Image
               src='/assets/images/x-icon.svg'
               alt='Close Button'
-              width={24}
-              height={24}
-              className='dark:invert'
+              width={22}
+              height={22}
+              className='dark:invert md:w-6 md:h-6'
             />
           </Button>
         </div>
 
         {/* Form */}
-        <div className='overflow-y-auto flex-1 z-90'>
+        <div className='overflow-y-auto flex-1 z-90 px-1'>
           <FormInput
             label='Full name'
             value={formData.fullName}
@@ -302,12 +339,12 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
             error={touched.fullName && !!errors.fullName}
             description={errors.fullName}
             isShowDescription={touched.fullName && !!errors.fullName}
-            className='mb-4 mt-1 mx-1'
+            className='mb-4 mt-1'
             labelClassName='!text-muted-foreground'
           />
 
           {/* Country - Fixed to Vietnam */}
-          <div className='relative mb-4 mt-1 mx-1'>
+          <div className='relative mb-4 mt-1'>
             <div className='w-full h-12 px-3 py-2 border border-border rounded-sm bg-input flex items-center'>
               <span className='text-muted-foreground'>Country</span>
               <span className='ml-auto text-foreground'>Vietnam</span>
@@ -315,7 +352,7 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
           </div>
 
           {/* City Select */}
-          <div className='mb-4 mt-1 mx-1'>
+          <div className='mb-4 mt-1'>
             <Select
               value={selectedCityId}
               onValueChange={handleCityChange}
@@ -347,7 +384,7 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
           </div>
 
           {/* District Select */}
-          <div className='mb-4 mt-1 mx-1'>
+          <div className='mb-4 mt-1'>
             <Select
               value={selectedDistrictId}
               onValueChange={handleDistrictChange}
@@ -378,7 +415,7 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
           </div>
 
           {/* Ward Select */}
-          <div className='mb-4 mt-1 mx-1'>
+          <div className='mb-4 mt-1'>
             <Select
               value={selectedWardId}
               onValueChange={handleWardChange}
@@ -415,19 +452,17 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
             error={touched.addressLine && !!errors.addressLine}
             description={errors.addressLine}
             isShowDescription={touched.addressLine && !!errors.addressLine}
-            className='mb-4 mt-1 mx-1'
+            className='mb-4 mt-1'
           />
 
           {/* Phone Number */}
-          <div className='relative mb-4 mt-1 mx-1'>
+          <div className='relative mb-4 mt-1'>
             <PhoneInput
               value={formData.phone}
               onChange={(phone) => {
                 setFormData((prev) => ({ ...prev, phone }));
                 setTouched((prev) => ({ ...prev, phone: true }));
-                if (touched.phone || phone.length > 0) {
-                  validateField('phone', phone);
-                }
+                validateField('phone', phone);
               }}
             />
             {touched.phone && errors.phone && (
@@ -435,14 +470,17 @@ const DeliveryAddressDialog: React.FC<DeliveryAddressDialogProps> = ({
             )}
           </div>
 
-          <p className='text-sm text-muted-foreground mt-2 mx-1'>
+          <p className='text-sm text-muted-foreground mt-2'>
             We need it for the delivery, just in case we need to reach you.
           </p>
         </div>
 
         {/* Save Button */}
-        <div className='mt-6 pt-4 border-t border-border flex-shrink-0 mx-1'>
-          <Button onClick={handleSave} className='w-full'>
+        <div className='mt-6 pt-4 border-t border-border flex-shrink-0'>
+          <Button
+            onClick={handleSave}
+            className='w-full h-12 text-sm md:text-base'
+          >
             {isSaving ? <LoadingSpinner /> : 'Save'}
           </Button>
         </div>

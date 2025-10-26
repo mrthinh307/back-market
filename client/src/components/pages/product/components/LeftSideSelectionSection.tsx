@@ -1,6 +1,8 @@
-import React, { memo } from 'react';
 import Image from 'next/image';
+import React, { memo } from 'react';
+
 import { GalleryCarousel } from '@/components/carousels';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const CheckIcon = () => (
   <svg className='h-4 w-4 shrink-0' fill='currentColor' viewBox='0 0 24 24'>
@@ -46,13 +48,23 @@ const LeftSideSelectionSection = memo(
                         width={leftImage.width}
                         height={leftImage.height}
                         className='rounded-lg h-auto w-full md:min-w-[337px] md:max-w-[498px] md:rounded-[32px] gradient-purple dark:bg-none'
+                        priority
                       />
                     ) : (
-                      <div className='flex items-center justify-center w-full md:min-w-[337px] md:min-h-[337px] md:max-w-[498px] md:max-h-[498px] md:rounded-[32px] gradient-purple rounded-lg'>
-                        <p className='text-gray-500'>
+                      <Skeleton className='rounded-lg md:rounded-[32px] w-full min-h-[337px] md:min-h-[498px] relative content-center flex-col gap-3'>
+                        <Image
+                          src='https://front-office.statics.backmarket.com/1e3a09049388d04866818f5b5c255b2f345df671/img/plp/IllustrationBanana.svg'
+                          alt='Aw shucks!'
+                          width={0}
+                          height={165}
+                          sizes='100vw'
+                          className='w-auto'
+                          priority
+                        />
+                        <p className='content-center text-secondary-foreground'>
                           Opps! Image is being refurbished.
                         </p>
-                      </div>
+                      </Skeleton>
                     )}
                     {showExampleImageBadge && (
                       <div className='content-center bg-sub-background absolute right-2 top-2 md:right-3 md:top-3 p-1 rounded'>
@@ -69,19 +81,19 @@ const LeftSideSelectionSection = memo(
                         <div className='flex grow flex-row flex-wrap'>
                           <div className='bg-background rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center'>
                             <CheckIcon />
-                            <span className='ml-1 text-left font-duplet text-foreground'>
+                            <span className='ml-1 text-left font-duplet text-primary'>
                               Light signs of use
                             </span>
                           </div>
                           <div className='bg-background rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center'>
                             <CheckIcon />
-                            <span className='ml-1 text-left font-duplet text-foreground'>
+                            <span className='ml-1 text-left font-duplet text-primary'>
                               Verified parts
                             </span>
                           </div>
                           <div className='bg-background rounded-full text-xs mr-2 mt-2 flex w-fit items-center p-1 pr-2 text-center'>
                             <StarIcon />
-                            <span className='ml-1 text-left font-duplet text-foreground'>
+                            <span className='ml-1 text-left font-duplet text-primary'>
                               Battery for daily use
                             </span>
                           </div>

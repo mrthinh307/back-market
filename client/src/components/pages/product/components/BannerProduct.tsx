@@ -1,5 +1,5 @@
-import { useScrollDirection } from '@/hooks/useScrollDirection';
 import Image from 'next/image';
+import { useScrollDirection } from '@/hooks/useScrollDirection';
 import { AddToCartButton } from './AddToCartButton';
 
 interface ProgressData {
@@ -33,7 +33,7 @@ function BannerProduct({
   return (
     <>
       <div
-        className={`flex bg-background-secondary border-[#dfe1e7] dark:border-[#3b3f45] inset-x-0 z-10 border-solid px-6 top-0 border-b py-3.5 fixed ${isHidden ? 'header-slide-down' : 'header-slide-up'}`}
+        className={`flex bg-secondary-background border-[#dfe1e7] dark:border-[#3b3f45] inset-x-0 z-10 border-solid px-6 top-0 border-b py-3.5 fixed ${isHidden ? 'header-slide-down' : 'header-slide-up'}`}
       >
         <div className='flex justify-center w-full py-[1px]'>
           <div className='container'>
@@ -49,12 +49,12 @@ function BannerProduct({
                   className='mr-1 h-auto max-h-full max-w-full leading-none hidden sm:flex'
                 />
               )}
-              <p className='font-semibold text-secondary flex-wrap pr-6 xl:pr-0 text-xs sm:text-sm lg:text-base'>
+              <p className='font-semibold text-secondary-foreground flex-wrap pr-6 xl:pr-0 text-xs sm:text-sm lg:text-base'>
                 {subtitleText}
               </p>
               <div className='hidden md:flex grow flex-col items-end'>
                 <div className='flex items-center justify-end'>
-                  <span className='text-secondary text-xl lg:text-[22px] xl:text-2xl font-semibold whitespace-nowrap'>
+                  <span className='text-secondary-foreground text-xl lg:text-[22px] xl:text-2xl font-semibold whitespace-nowrap'>
                     {priceWithCurrency}
                   </span>
                 </div>
@@ -82,10 +82,15 @@ function BannerProduct({
           ></div>
         </div>
       </div>
-      <div className='bg-background-secondary py-3 px-6 fixed inset-x-0 bottom-0 flex md:hidden z-10 border-[#dfe1e7] dark:border-[#3b3f45] border-t'>
+      {/* Mobile bottom banner */}
+      <div 
+        className={`bg-secondary-background py-3 px-6 flex md:hidden z-10 border-[#dfe1e7] dark:border-[#3b3f45] border-t fixed bottom-0 left-0 right-0 transition-transform duration-300 ${
+          isHidden ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
         <div className='flex-1 pr-10'>
           <div className='size-full flex items-center justify-start'>
-            <span className='text-secondary text-xl sm:text-2xl font-semibold whitespace-nowrap'>
+            <span className='text-secondary-foreground text-xl sm:text-2xl font-semibold whitespace-nowrap'>
               {priceWithCurrency}
             </span>
           </div>

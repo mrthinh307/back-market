@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-import * as React from 'react';
 import {
   IconCamera,
   IconChartBar,
@@ -18,6 +16,9 @@ import {
   IconSettings,
   IconUsers,
 } from '@tabler/icons-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import * as React from 'react';
 
 import { NavDocuments } from '@/components/admin/nav-documents';
 import { NavMain } from '@/components/admin/nav-main';
@@ -160,7 +161,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className='data-[slot=sidebar-menu-button]:!p-1.5'
             >
-              <a href='#'>
+              <Link href='/'>
                 <Image
                   src='/assets/images/dark-logo.png'
                   width={22}
@@ -171,7 +172,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <span className='text-base font-semibold'>
                   Admin's Workspace
                 </span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

@@ -18,7 +18,7 @@ function SearchBar({ label }: { label?: string }) {
           ✕
         </button>
         <input
-          className='appearance-none bg-transparent outline-none h-10 w-full text-ellipsis placeholder:text-muted'
+          className='appearance-none bg-transparent outline-none h-10 w-full text-ellipsis placeholder:text-muted-foreground'
           placeholder={label || t('search_bar_placeholder')}
           value={query}
           onChange={(e) => setQuery(e.target.value)}

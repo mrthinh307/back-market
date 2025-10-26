@@ -4,9 +4,9 @@ import Link from 'next/link';
 
 function ReviewCard({ className }: { className?: string }) {
   return (
-    <Link href={'/'}>
+    <Link href='/'>
       <div className={`h-full ${className}`}>
-        <div className='bg-background-secondary shadow-sm rounded-lg hover:drop-shadow-lg cursor-pointer h-full'>
+        <div className='bg-secondary-background shadow-sm rounded-lg hover:drop-shadow-lg cursor-pointer h-full'>
           <div className='relative h-[400px]'>
             <Image
               src='https://www.backmarket.co.uk/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D1920/https://reviews.statics.backmarket.com/review-attachment/gUzjqfO4FSFx6cNy5lq4vk91btIdIsE6kc9nIl9RSz60lQ7ts3RQ8W7qxGbDxj1KRJYzJj9dGhz79voFaBsFsFWKtFGk/original.jpeg'
@@ -30,7 +30,7 @@ function ReviewCard({ className }: { className?: string }) {
                 <div className='flex mt-[1px]'>
                   {(() => {
                     const stars = 5 as number;
-                    return [...Array(5)].map((_, index) => (
+                    return [...Array.from({ length: 5 })].map((_, index) => (
                       <StarIcon
                         key={index}
                         className={`size-3 text-white ${index + 1 <= stars ? 'fill-white' : ''}`}

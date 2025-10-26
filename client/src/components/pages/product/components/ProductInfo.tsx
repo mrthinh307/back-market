@@ -1,13 +1,14 @@
-import React from 'react';
+import { useLocale } from 'next-intl';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import React from 'react';
 
 import { toast } from 'sonner';
 import { StarIcon } from 'lucide-react';
 import { Button } from '../../../ui/button';
 import heartedIcon from '@/public/assets/images/hearted-icon.svg?url';
 import heartIcon from '@/public/assets/images/heart-icon.svg?url';
-import { useLocale } from 'next-intl';
 import { AddToCartButton } from './AddToCartButton';
 
 interface ProductInfoProps {
@@ -63,24 +64,26 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
         {/* Title + Subtitle */}
         <div className='flex justify-between items-start gap-6'>
           <h1 className='mb-2 flex flex-col'>
-            <span className='text-2xl md:text-3xl font-heading font-bold text-secondary leading-10'>
+            <span className='text-2xl md:text-3xl font-heading font-bold text-secondary-foreground leading-10'>
               {title}
             </span>
-            <span className='text-sm md:text-base font-medium text-secondary'>
+            <span className='text-sm md:text-base font-medium text-secondary-foreground'>
               {subtitle}
             </span>
           </h1>
 
           <button
-            className='size-[40px] rounded-full content-center md:!hidden hover:!bg-icon-button-hover cursor-pointer dark:!bg-gray-700 dark:hover:!bg-gray-600 transition-colors duration-200'
+            type='button'
+            className='flex shrink-0 size-10 p-2 content-center md:!hidden hover:!bg-icon-button-hover cursor-pointer dark:hover:!bg-gray-600 transition-colors duration-200'
             onClick={handleLikeClick}
           >
             <Image
               src={isLiked ? heartedIcon : heartIcon}
               alt='Heart Icon'
-              width={24}
-              height={24}
-              className={`dark:invert`}
+              width={0}
+              height={0}
+              sizes='100vw'
+              className='dark:invert w-full h-auto'
             />
           </button>
 
@@ -104,7 +107,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
           <div className='flex mt-[1px] gap-0.5'>
             {(() => {
               const stars = rating as number;
-              return [...Array(5)].map((_, index) => (
+              return [...Array.from({ length: 5 })].map((_, index) => (
                 <StarIcon
                   key={index}
                   className={`size-[15px] text-primary ${index + 1 <= stars ? 'fill-primary' : ''}`}
@@ -123,7 +126,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
         <div className='mt-6 flex items-center gap-4'>
           <div className='grow'>
             <span
-              className='text-3xl font-semibold text-secondary'
+              className='text-3xl font-semibold text-secondary-foreground'
               data-qa='productpage-product-price'
               data-test='productpage-product-price'
             >
@@ -134,7 +137,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
               <div className='mt-1 flex items-center gap-2'>
                 <span
                   id='trigger-v-0-5-0-0'
-                  className='text-sm z-[1] text-muted line-through whitespace-nowrap'
+                  className='text-sm z-[1] text-muted-foreground line-through whitespace-nowrap'
                 >
                   {originalPrice}
                 </span>
@@ -195,16 +198,16 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
             className='h-[16px] w-auto'
           />
         </div>
-        <div className='grow text-secondary'>
+        <div className='grow text-secondary-foreground'>
           <span>Buy now, pay later. </span>
-          <a
+          <Link
             className='affirm-product-modal font-semibold underline'
             data-qa='affirm-product-modal'
             data-test='affirm-product-modal'
-            href='#'
+            href='/'
           >
             Learn more
-          </a>
+          </Link>
         </div>
       </div>
     </div>

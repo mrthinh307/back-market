@@ -67,9 +67,9 @@ function SignUpCredentials({ email: initialEmail }: { email?: string }) {
         </label>
       </div>
       <div className='mb-6'>
-        <p className='text-sm text-muted'>
+        <p className='text-sm text-muted-foreground'>
           {t('terms_of_use_description')}{' '}
-          <strong className='text-primary underline'>
+          <strong className='underline'>
             {t('terms_of_use')}
           </strong>
         </p>
@@ -82,10 +82,10 @@ function SignUpCredentials({ email: initialEmail }: { email?: string }) {
       >
         {isLoading ? <LoadingSpinner /> : t('create_account')}
       </Button>
-      <div className='mt-6 text-sm text-muted'>
+      <div className='mt-6 text-sm text-muted-foreground'>
         <p>
           {t('privacy_policy_description')}{' '}
-          <strong className='text-primary underline'>
+          <strong className='underline'>
             {t('privacy_policy')}
           </strong>
         </p>
