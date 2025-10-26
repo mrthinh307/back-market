@@ -2,6 +2,7 @@ import { useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect, useCallback, memo, useMemo } from 'react';
 
+import { saveScrollPosition, clearScrollPosition } from '@/hooks/useScrollRestoration';
 import SelectionOptionButton from './SelectionOptionButton';
 
 const ArrowRightIcon = () => (
@@ -52,12 +53,17 @@ export const RightSideSelectionSection = memo(
         setLoadingOptionId(optionId);
 
         try {
+          // Save current scroll position before navigation
+          saveScrollPosition();
+
           // Navigate to new variant page
           router.push(`/${locale}/product/${optionId}`);
         } catch (error) {
           console.error('Navigation error:', error);
-          // Reset loading state nếu có lỗi
+          // Reset loading state if error occurs
           setLoadingOptionId(null);
+          // Clear saved scroll position on error
+          clearScrollPosition();
         }
       },
       [currentSelectedOption, loadingOptionId, router, locale],

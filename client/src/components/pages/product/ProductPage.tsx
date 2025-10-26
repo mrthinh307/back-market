@@ -7,6 +7,7 @@ import { getProductVariantById } from '@/api/product-variant.api';
 import { USE_QUERY_KEY } from '@/constants/use-query-key';
 import BreadcumbCustom from '@/components/ui/BreadcumbCustom';
 import { useBreadcrumb } from '@/hooks/useBreadcumb';
+import { useScrollRestoration } from '@/hooks/useScrollRestoration';
 import { ProductVariantDetail } from '@/types/product-selection.type';
 import GalleryCarousel from '../../carousels/GalleryCarousel';
 import GlobalErrorComponent from '../GlobalErrorComponent';
@@ -90,6 +91,9 @@ const ProductPage: React.FC<{ productVariantId: string }> = ({
   }, [productVariant, locale]);
 
   const { items: displayBreadcrumbItems } = useBreadcrumb(breadcrumbItems);
+
+  // Restore scroll position after variant change
+  useScrollRestoration(isLoading, !!productVariant);
 
   if (isLoading) {
     return <LoadingPage />;

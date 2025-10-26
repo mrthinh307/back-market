@@ -5,7 +5,7 @@ const ProductInspection: React.FC = () => {
   const inspectionData = getProductInspectionData();
 
   return (
-    <div className="md:py-6 w-full">
+    <div className="md:pt-6 md:pb-4 w-full">
       <h2 className="text-[22px] mb-6 px-6 text-center font-semibold text-secondary-foreground">
         All devices are restored professionally based on a 25-point inspection
       </h2>

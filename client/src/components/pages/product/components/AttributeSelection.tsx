@@ -41,7 +41,6 @@ const getAttributeSectionConfig = (
       showExampleImageBadge: true,
       gridColumns: 2,
       showBadge: true,
-      className: 'md:py-6',
     },
     BATTERY: {
       title: 'Choose a battery option',

@@ -62,9 +62,11 @@ const SelectVariantSection: React.FC<{
     return (
       <div className='flex justify-center'>
         <div className='w-full mb-7 md:space-y-6'>
-          <SkeletonSection />
-          <SkeletonSection />
-          <SkeletonSection />
+          {Array.from({ length: 5 }).map(
+            (_, index) => (
+              <SkeletonSection key={index} />
+            ),
+          )}
         </div>
       </div>
     );
