@@ -11,6 +11,7 @@ import {
   useEffect,
   useMemo,
   useCallback,
+  useRef,
   ReactNode,
 } from 'react';
 
@@ -64,9 +65,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const locale = useLocale();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const isAuthCheckInitiated = useRef(false);
 
   // Helper function to check authentication status
   const checkAuth = useCallback(async () => {
+    // Prevent duplicate calls
+    if (isAuthCheckInitiated.current) {
+      return;
+    }
+
+    isAuthCheckInitiated.current = true;
+
     try {
       // Try to refresh token (this will validate cookies on server)
       await refreshToken();
