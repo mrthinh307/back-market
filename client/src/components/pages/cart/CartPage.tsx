@@ -1,81 +1,28 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-
-import { toast } from 'sonner';
-import { getCartItems } from '@/api/cart.api';
-import { USE_QUERY_KEY } from '@/constants/use-query-key';
-import { useRemoveFromCart } from '@/hooks/useCartMutations';
-import { CartItem } from '@/types/cards.type';
-import { errorToastProps, successToastProps } from '@/libs/toast/toast-props';
-import { YourCartSection, CartSummarySection, EmptyCart } from './components';
+import { EmptyCart } from './components';
+import { CartProductCard, ProductCard } from '@/components/cards';
+import SlideCarousel from '@/components/carousels/SlideCarousel';
+import { CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { useCart } from '@/contexts/CartContext';
+import { useIsMobile } from '@/hooks/use-mobile';
 import LoadingPage from '../LoadingPage';
+import { recommendProducts } from '../home/seed/temp-data';
+import { ServiceHighlights } from '../home/components';
 
 function CartPage() {
-  const removeFromCartMutation = useRemoveFromCart();
-
+  const isMobile = useIsMobile();
   const {
-    data: cartData,
-    isLoading,
+    cartItems,
+    cartData,
     isFetching,
-    error,
-  } = useQuery({
-    queryKey: USE_QUERY_KEY.CART_ITEMS(),
-    queryFn: () => getCartItems(),
-    retry: true,
-    staleTime: 3 * 60 * 1000,
-  });
+    handleRemoveItem,
+    isRemoving,
+  } = useCart();
 
-  const [cartItems, setCartItems] = useState<CartItem[]>(cartData?.items || []);
-
-  useEffect(() => {
-    if (cartData?.items) {
-      setCartItems(cartData.items);
-    }
-  }, [cartData]);
-
-  const handleRemoveItem = async (
-    productVariantId: string,
-    productName: string,
-  ) => {
-    try {
-      await removeFromCartMutation.mutateAsync(productVariantId);
-      toast.success('Item removed from cart successfully!', {
-        description: productName,
-        ...successToastProps,
-      });
-    } catch (error: any) {
-      const errorMessage =
-        error.response?.data?.message ||
-        error.message ||
-        'Failed to remove item';
-      toast.error(errorMessage, {
-        description: productName,
-        ...errorToastProps,
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (!error) return;
-    switch (error.message) {
-      case 'FORBIDDEN':
-        toast.error('You must be logged in to view the cart.', errorToastProps);
-        break;
-      case 'NOT_FOUND':
-        toast.error('Cart not found.', errorToastProps);
-        break;
-      case 'BAD_REQUEST':
-        toast.error('Invalid request.', errorToastProps);
-        break;
-      default:
-        toast.error('An unexpected error occurred.', errorToastProps);
-        break;
-    }
-  }, [error]);
-
-  if (isLoading) return <LoadingPage />;
+  if (isFetching && !cartData) {
+    return <LoadingPage />;
+  }
 
   // Show empty cart only when we have data and it's empty
   // This prevents flashing EmptyCart during refetch
@@ -83,22 +30,82 @@ function CartPage() {
     return <EmptyCart />;
   }
 
-  // If still fetching and no data yet, show loading
-  if (isFetching && !cartData) return <LoadingPage />;
-
   return (
-    <div className='bg-background flex flex-col lg:flex-row h-[calc(100vh-4rem)] overflow-y-auto'>
-      <YourCartSection
-        cartItems={cartItems}
-        onRemoveItem={handleRemoveItem}
-        isRemoving={removeFromCartMutation.isPending}
+    <>
+      <h2 className='text-[22px] mb-3 mt-6 lg:mb-6 lg:mt-0 font-semibold'>
+        Your cart
+      </h2>
+      <div className='relative mb-8 lg:mb-10'>
+        <div className='space-y-4 sm:space-y-6'>
+          {cartItems.map((item) => (
+            <div key={item.id}>
+              <CartProductCard
+                productCard={{
+                  id: item.productVariant.id,
+                  title: item.productVariant.product.name,
+                  image:
+                    item.productVariant.ProductVariantImage[0]?.image ||
+                    '/assets/images/placeholder-image.png',
+                  priceWithCurrency: `$ ${Number(item.productVariant.price).toFixed(2)}`,
+                }}
+                cartProps={{
+                  quantity: item.quantity,
+                  stock: item.productVariant.stock,
+                  deliveryInfo: 'Delivery by: Oct. 16–17 • Free',
+                  subDeliveryInfo:
+                    'Express delivery by Oct. 15–16 • from $ 15.00',
+                  attributes: item.productVariant.attributes.map((attr) => ({
+                    id: attr.attribute.id,
+                    name: attr.attribute.name,
+                    valueId: attr.value.id,
+                    value: attr.value.value,
+                  })),
+                  onRemove: () =>
+                    handleRemoveItem(
+                      item.productVariantId,
+                      item.productVariant.product.name,
+                    ),
+                  isRemoving,
+                }}
+                className='w-full'
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <hr className='border-border my-8 sm:my-10'></hr>
+
+      {/* SECTION: COMPLETE YOUR CART */}
+      <SlideCarousel
+        carouselTitle='Complete your cart:'
+        navigationClassName='!pr-0'
+        desktopSlidesToScroll={3}
+      >
+        <CarouselContent className='pt-3 pb-5'>
+          {recommendProducts.map((product, index) => (
+            <CarouselItem key={index} className='basis-auto'>
+              <ProductCard
+                productCard={product}
+                className='w-[200px] sm:w-60 lg:w-[256px]'
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </SlideCarousel>
+
+      <hr className='border-border my-8 sm:my-10'></hr>
+
+      <h2 className='text-[22px] font-semibold mb-4'>
+        Your benefits with every order:
+      </h2>
+      <ServiceHighlights
+        className='grid-cols-1! sm:grid-cols-2! p-6 -mx-6 lg:-mx-8'
+        contentSize={isMobile ? 'md' : 'lg'}
       />
-      <CartSummarySection
-        cartItems={cartItems}
-        subtotal={cartData.totalPrice}
-        isRemoving={removeFromCartMutation.isPending}
-      />
-    </div>
+
+      <hr className='border-border block lg:hidden'></hr>
+    </>
   );
 }
 

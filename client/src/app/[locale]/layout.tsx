@@ -7,9 +7,11 @@ import {
 import { notFound } from 'next/navigation';
 import React from 'react';
 
-import ReactQueryProvider from '@/components/providers/ReactQueryProvider';
-import { ServerHealthProvider } from '@/components/providers/ServerHealthProvider';
-import { ThemeProvider } from '@/components/providers/theme-provider';
+import {
+  ServerHealthProvider,
+  ReactQueryProvider,
+  ThemeProvider,
+} from '@/providers';
 import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { routing } from '@/libs/i18n/I18nRouting';

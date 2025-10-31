@@ -77,7 +77,7 @@ function CartProductCard({
                     </div>
                   </div>
 
-                  <div className='flex flex-wrap gap-2'>
+                  <div className='flex flex-wrap gap-1'>
                     {cartProps.attributes &&
                       cartProps.attributes.length > 0 && (
                         <>
@@ -115,7 +115,7 @@ function CartProductCard({
 
             {/* Delivery Information - Mobile */}
             {cartProps.deliveryInfo && (
-              <div className='text-secondary-foregroundtext-sm flex sm:hidden flex-col justify-end flex-1'>
+              <div className='text-secondary-foreground text-sm flex sm:hidden flex-col justify-end flex-1'>
                 <span>{cartProps.deliveryInfo}</span>
                 <span>{cartProps.subDeliveryInfo}</span>
               </div>
@@ -139,7 +139,7 @@ function CartProductCard({
                 </select>
 
                 <span
-                  className={`font-semibold ${
+                  className={`font-semibold text-sm md:text-base ${
                     cartProps.stock === 0
                       ? 'text-destructive'
                       : cartProps.stock > 0 && cartProps.stock <= 10

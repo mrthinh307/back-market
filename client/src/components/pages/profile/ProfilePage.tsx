@@ -1,19 +1,21 @@
 'use client';
 
 import DeliveryAddressCard from '@/components/pages/profile/components/DeliveryAddressCard';
-import { DeliveryAddressData } from '@/components/pages/profile/components/DeliveryAddressDialog';
 import UserProfileCard from '@/components/pages/profile/components/UserProfileCard';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
+import { useUserAddress } from '@/hooks/useUserAddress';
 import { UserAuth } from '@/types/user.types';
 
 interface ProfilePageProps {
-  userInfo: UserAuth;
-  deliveryInfo: DeliveryAddressData;
+  userInfo: UserAuth | null;
 }
 
-function ProfilePage({ userInfo, deliveryInfo }: ProfilePageProps) {
+function ProfilePage({ userInfo }: ProfilePageProps) {
   const { isAuthenticated, logout } = useAuth();
+  
+  // Get address from React Query cache (hydrated from SSR)
+  const { data: deliveryInfo } = useUserAddress();
 
   return (
     <>
@@ -30,7 +32,7 @@ function ProfilePage({ userInfo, deliveryInfo }: ProfilePageProps) {
           <UserProfileCard userInfo={userInfo} />
 
           {/* Delivery info */}
-          <DeliveryAddressCard deliveryInfo={deliveryInfo} />
+          <DeliveryAddressCard deliveryInfo={deliveryInfo ?? null} />
 
           {/* Logout button */}
           {isAuthenticated && (

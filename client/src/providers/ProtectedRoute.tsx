@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { useAuth } from '@/contexts/AuthContext';
-import LoadingPage from '../pages/LoadingPage';
+import LoadingPage from '@/components/pages/LoadingPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, isLoading } = useAuth();

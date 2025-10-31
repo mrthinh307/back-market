@@ -2,7 +2,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 
 import { useAuth } from '@/contexts/AuthContext';
@@ -13,10 +13,13 @@ const RightSideActions = ({ avatarUrl }: { avatarUrl?: string | null }) => {
   const t = useTranslations('Header');
   const locale = useLocale();
   const router = useRouter();
+  const pathName = usePathname();
   const { isAuthenticated } = useAuth();
   const { data: cartCount } = useCartCount();
 
   const handleButtonClick = (url: string) => {
+    if (`/${locale}${pathName}` === url) return;
+    
     if (isAuthenticated) {
       router.push(url);
     } else {
@@ -64,7 +67,7 @@ const RightSideActions = ({ avatarUrl }: { avatarUrl?: string | null }) => {
           className='dark:invert'
         />
         {(isAuthenticated && cartCount?.totalItems && cartCount.totalItems > 0) ? (
-          <span className='absolute top-[1px] right-[1px] bg-chart-5 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold border border-[#fff] dark:border-[#000]'>
+          <span className='absolute top-px right-px bg-chart-5 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold border border-white dark:border-[#000000]'>
             {cartCount.totalItems > 99 ? '99+' : cartCount.totalItems}
           </span>
         ) : null}
@@ -72,7 +75,7 @@ const RightSideActions = ({ avatarUrl }: { avatarUrl?: string | null }) => {
 
       {/* Module Toggle Theme */}
       <ModeToggle
-        className='hidden md:flex rounded-full hover:bg-icon-button-hover border-none !bg-transparent'
+        className='hidden md:flex rounded-full hover:bg-icon-button-hover border-none bg-transparent!'
         menuClassName='rounded-sm border-0 dark:border shadow-md p-0 mt-1'
         menuItemClassName='rounded-none leading-6 border-b last:border-0'
       />

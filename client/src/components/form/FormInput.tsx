@@ -20,6 +20,7 @@ type InputProps = {
   className?: string;
   inputClassName?: string;
   labelClassName?: string;
+  iconClassName?: string;
 };
 
 const FormInput = ({
@@ -34,6 +35,7 @@ const FormInput = ({
   className,
   inputClassName,
   labelClassName,
+  iconClassName,
 }: InputProps) => {
   const [internalValue, setInternalValue] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -75,7 +77,7 @@ const FormInput = ({
         onChange={handleChange}
         autoComplete='off'
         placeholder=' '
-        className={`peer rounded-sm border text-foreground w-full h-[48px] min-w-0 relative duration-200 transition-all hover:bg-input-hover dark:hover:bg-input/60 focus:outline-none focus:ring-2 px-3 pt-6 pb-3 !text-base ${
+        className={`peer rounded-sm border text-foreground w-full h-12 min-w-0 relative duration-200 transition-all hover:bg-input-hover dark:hover:bg-input/60 focus:outline-none focus:ring-2 px-3 pt-6 pb-3 text-base! ${
           error
             ? 'border-destructive focus:border-destructive focus:ring-red-200'
             : 'border-dark'
@@ -125,7 +127,14 @@ const FormInput = ({
         )}
         {!value && icon && (
           <div className='input-icon pointer-events-none'>
-            <Image src={icon} alt='Input icon' className='dark:invert' />
+            <Image
+              src={icon}
+              alt='Input icon'
+              width={0}
+              height={0}
+              sizes='100vw'
+              className={`dark:invert ${iconClassName}`}
+            />
           </div>
         )}
       </div>

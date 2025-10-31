@@ -1,9 +1,9 @@
 'use client';
-
 import { useEffect, useState } from 'react';
+
 import GlobalErrorComponent from '@/components/pages/GlobalErrorComponent';
 import { Env } from '@/libs/Env';
-import LoadingPage from '../pages/LoadingPage';
+import LoadingPage from '@/components/pages/LoadingPage';
 
 export function ServerHealthProvider({
   children,
